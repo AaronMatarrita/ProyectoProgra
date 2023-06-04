@@ -5,15 +5,17 @@ import java.awt.event.ActionListener;
 
 import presentation.GUIAdmin;
 import presentation.GUILogin;
+import data.XMLFiles;
 
 public class ControllerLogin implements ActionListener{
 
 	//Declaración de instancias de clases y variables
-	GUILogin guiL;
-
+	private GUILogin guiL;
+	private XMLFiles fXML;
 	public ControllerLogin() {
 		//Inicializo Instancias
 		guiL = new GUILogin();
+		fXML = new XMLFiles();
 		initializerAction();
 	}
 
@@ -28,14 +30,12 @@ public class ControllerLogin implements ActionListener{
 
 			String username = String.valueOf(guiL.getTUser().getText());
 			String password = String.valueOf(guiL.getJPasswordUser().getPassword());
-			//Verificación del usuario administrador por defecto
-			if (username.equals("admin") && password.equals("admin")) {
+			boolean verify = fXML.verify("users.xml", username, password);
+			if (verify == true) {
 				guiL.dispose();
 				new ControllerAdmin();
-			}else if(!username.equals("admin")){
-				guiL.showMessage("Usuario invalido");
-			}else if(!password.equals("admin")){
-				guiL.showMessage("Contraseña invalida");
+			}else{
+				guiL.showMessage("Credenciales incorrectas");
 			}
 		}
 	}
