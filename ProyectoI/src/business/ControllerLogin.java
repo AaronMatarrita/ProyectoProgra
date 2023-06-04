@@ -30,7 +30,7 @@ public class ControllerLogin implements ActionListener{
 
 			String username = String.valueOf(guiL.getTUser().getText());
 			String password = String.valueOf(guiL.getJPasswordUser().getPassword());
-			boolean verify = fXML.verify("users.xml", username, password);
+			boolean verify = fXML.verify("Users.xml", username, password);
 			if (verify == true) {
 				guiL.dispose();
 				new ControllerAdmin();
