@@ -20,7 +20,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 public class UserFrame extends JFrame {
-	
+	//GitHub
     private JPanel panel;
     private JPanel JPInfo;
     private JLabel lTitle;
