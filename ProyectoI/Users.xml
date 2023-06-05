@@ -24,4 +24,10 @@
 		<userType>1</userType>
 		<status>false</status>
 	</person>
+	<person>
+		<user>Emily</user>
+		<password>4321</password>
+		<userType>1</userType>
+		<status>true</status>
+	</person>
 </person>
