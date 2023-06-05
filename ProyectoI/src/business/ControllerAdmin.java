@@ -87,9 +87,16 @@ public class ControllerAdmin implements ActionListener, WindowListener {
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		}else if (uF.getBClear() == e.getSource()) {
 			String user = uF.getTUser().getText();
-			crud.deleteObject("Users.xml", "person", "user", user);
+			if (user.isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Por favor, complete el nombre del usuario a eliminar");return;
+			}else if(!lXMLU.isAlreadyUser(user, "Users.xml")) {
+				JOptionPane.showMessageDialog(null, "No se puede eliminar debido a que no existe");return;}
+			else if(user.equals("admin")) {
+				JOptionPane.showMessageDialog(null, "No se puede eliminar el usuario por defecto");return;}
+			else {
+				crud.deleteObject("Users.xml", "person", "user", user);
+			}
 			JOptionPane.showMessageDialog(null, "Usuario eliminado");
-			guiA.setVisible(true);
 		}
 		
 	}
