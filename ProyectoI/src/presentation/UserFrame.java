@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import javax.swing.ImageIcon;
 
 public class UserFrame extends JFrame {
     private JPanel panel;
@@ -147,6 +148,7 @@ public class UserFrame extends JFrame {
     public JButton getBAddUser() {
         if (bAddUser == null) {
             bAddUser = new JButton("Agregar");
+            bAddUser.setIcon(new ImageIcon(UserFrame.class.getResource("/imagesAdminMain/imagesUser/add-user.png")));
             bAddUser.setBackground(new Color(28, 28, 28));
             bAddUser.setForeground(new Color(255, 255, 255));
             bAddUser.setBounds(190, 230, 130, 40);
@@ -157,6 +159,7 @@ public class UserFrame extends JFrame {
     public JButton getBUpdate() {
         if (bUpdate == null) {
             bUpdate = new JButton("Modificar");
+            bUpdate.setIcon(new ImageIcon(UserFrame.class.getResource("/imagesAdminMain/imagesUser/updateUser.png")));
             bUpdate.setBackground(new Color(28, 28, 28));
             bUpdate.setForeground(new Color(255, 255, 255));
             bUpdate.setBounds(390, 230, 130, 40);
@@ -167,6 +170,7 @@ public class UserFrame extends JFrame {
     public JButton getBClear() {
         if (bClear == null) {
             bClear = new JButton("Eliminar");
+            bClear.setIcon(new ImageIcon(UserFrame.class.getResource("/imagesAdminMain/imagesUser/removeUser.png")));
             bClear.setBackground(new Color(28, 28, 28));
             bClear.setForeground(new Color(255, 255, 255));
             bClear.setBounds(590, 230, 130, 40);

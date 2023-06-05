@@ -18,4 +18,10 @@
 		<userType>1</userType>
 		<status>false</status>
 	</person>
+	<person>
+		<user>admin</user>
+		<password>admin</password>
+		<userType>1</userType>
+		<status>false</status>
+	</person>
 </person>
