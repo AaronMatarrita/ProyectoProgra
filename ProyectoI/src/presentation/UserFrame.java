@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -21,6 +20,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 public class UserFrame extends JFrame {
+	
     private JPanel panel;
     private JPanel JPInfo;
     private JLabel lTitle;
@@ -37,6 +37,7 @@ public class UserFrame extends JFrame {
     private JComboBox<String> cBUserStatus;
 
     public UserFrame() {
+    	setType(Type.UTILITY);
         setForeground(new Color(0, 0, 0));
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

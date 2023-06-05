@@ -2,6 +2,8 @@ package business;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JOptionPane;
 
@@ -11,7 +13,7 @@ import domain.User;
 import presentation.GUIAdmin;
 import presentation.UserFrame;
 
-public class ControllerAdmin implements ActionListener {
+public class ControllerAdmin implements ActionListener, WindowListener {
 
 	// Declaración de instancias de clases y variables
 	private GUIAdmin guiA;
@@ -30,15 +32,18 @@ public class ControllerAdmin implements ActionListener {
 
 	public void initializerAction() {
 		guiA.getBUsers().addActionListener(this);
+		
 	}
 
 	public void actionPerformed(ActionEvent e) {
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		if (guiA.getBUsers() == e.getSource()) {
 			uF = new UserFrame();
+			uF.addWindowListener(this);
 			uF.getBAddUser().addActionListener(this);
 			uF.getBUpdate().addActionListener(this);
 			uF.getBClear().addActionListener(this);
+			guiA.dispose();
 		}
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		if (uF.getBAddUser() == e.getSource()) {
@@ -84,6 +89,31 @@ public class ControllerAdmin implements ActionListener {
 			String user = uF.getTUser().getText();
 			crud.deleteObject("Users.xml", "person", "user", user);
 			JOptionPane.showMessageDialog(null, "Usuario eliminado");
+			guiA.setVisible(true);
 		}
+		
 	}
+	
+	@Override
+	public void windowClosed(WindowEvent e) {
+	    guiA.setVisible(true);
+	}
+
+	@Override
+	public void windowOpened(WindowEvent e) {}
+
+	@Override
+	public void windowClosing(WindowEvent e) {}
+
+	@Override
+	public void windowIconified(WindowEvent e) {}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {}
+
+	@Override
+	public void windowActivated(WindowEvent e) {}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {}
 }
