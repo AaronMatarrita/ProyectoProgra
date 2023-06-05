@@ -5,6 +5,7 @@ import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -18,7 +19,6 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
-import javax.swing.ImageIcon;
 
 public class UserFrame extends JFrame {
     private JPanel panel;
@@ -100,7 +100,7 @@ public class UserFrame extends JFrame {
             lTitle.setHorizontalAlignment(SwingConstants.CENTER);
             lTitle.setForeground(Color.WHITE);
             lTitle.setFont(new Font("Roboto", Font.PLAIN, 30));
-            lTitle.setBounds(270, 11, 492, 50);
+            lTitle.setBounds(320, 10, 293, 50);
         }
         return lTitle;
     }
@@ -148,9 +148,11 @@ public class UserFrame extends JFrame {
     public JButton getBAddUser() {
         if (bAddUser == null) {
             bAddUser = new JButton("Agregar");
+            bAddUser.setFont(new Font("Roboto", Font.PLAIN, 16));
             bAddUser.setIcon(new ImageIcon(UserFrame.class.getResource("/imagesAdminMain/imagesUser/add-user.png")));
             bAddUser.setBackground(new Color(28, 28, 28));
             bAddUser.setForeground(new Color(255, 255, 255));
+            bAddUser.setFocusable(false);
             bAddUser.setBounds(190, 230, 130, 40);
         }
         return bAddUser;
@@ -159,9 +161,11 @@ public class UserFrame extends JFrame {
     public JButton getBUpdate() {
         if (bUpdate == null) {
             bUpdate = new JButton("Modificar");
+            bUpdate.setFont(new Font("Roboto", Font.PLAIN, 16));
             bUpdate.setIcon(new ImageIcon(UserFrame.class.getResource("/imagesAdminMain/imagesUser/updateUser.png")));
             bUpdate.setBackground(new Color(28, 28, 28));
             bUpdate.setForeground(new Color(255, 255, 255));
+            bUpdate.setFocusable(false);
             bUpdate.setBounds(390, 230, 130, 40);
         }
         return bUpdate;
@@ -170,9 +174,11 @@ public class UserFrame extends JFrame {
     public JButton getBClear() {
         if (bClear == null) {
             bClear = new JButton("Eliminar");
+            bClear.setFont(new Font("Roboto", Font.PLAIN, 16));
             bClear.setIcon(new ImageIcon(UserFrame.class.getResource("/imagesAdminMain/imagesUser/removeUser.png")));
             bClear.setBackground(new Color(28, 28, 28));
             bClear.setForeground(new Color(255, 255, 255));
+            bClear.setFocusable(false);
             bClear.setBounds(590, 230, 130, 40);
         }
         return bClear;
@@ -220,12 +226,12 @@ public class UserFrame extends JFrame {
 
     public JComboBox<String> getCBUserStatus() {
         if (cBUserStatus == null) {
-            cBUserStatus = new JComboBox();
+        	String arrayCBUserStatus[] = {"Indefinido", "Activo", "Desactivo"};
+            cBUserStatus = new JComboBox(arrayCBUserStatus);
             cBUserStatus.setBackground(new Color(28, 28, 28));
             cBUserStatus.setForeground(new Color(255, 255, 255));
             cBUserStatus.setFont(new Font("Roboto", Font.PLAIN, 16));
             cBUserStatus.setBorder(BorderFactory.createEmptyBorder());
-            cBUserStatus.setModel(new DefaultComboBoxModel(new String[]{"Activo", "No activo"}));
             cBUserStatus.setBounds(735, 176, 150, 22);
         }
         return cBUserStatus;
@@ -233,6 +239,11 @@ public class UserFrame extends JFrame {
 
     public JScrollPane getJSPTableUsers() {
         JTable jTableUsers = new JTable();
+        jTableUsers.getTableHeader().setFont(new Font("Roboto", Font.BOLD, 16));
+        jTableUsers.getTableHeader().setOpaque(false);
+        jTableUsers.getTableHeader().setBackground(new Color(32, 136, 203));
+        jTableUsers.getTableHeader().setForeground(new Color(255,255,255));
+        jTableUsers.setRowHeight(25);
         jTableUsers.setModel(new DefaultTableModel(
             new Object[][] {
                 {null, null, null, null},
@@ -246,7 +257,7 @@ public class UserFrame extends JFrame {
         ));
 
         JScrollPane jScrollPaneUsers = new JScrollPane(jTableUsers);
-        jScrollPaneUsers.setBounds(10, 300, 964, 167);
+        jScrollPaneUsers.setBounds(10, 350, 964, 125);
 
         // Asignar nombres a las columnas
         TableColumnModel columnModel = jTableUsers.getColumnModel();
@@ -256,5 +267,10 @@ public class UserFrame extends JFrame {
         }
 
         return jScrollPaneUsers;
+    }
+    
+    public void clean() {
+    	getTUser().setText("");
+    	getTPassword().setText("");
     }
 }

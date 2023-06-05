@@ -25,7 +25,7 @@ public class ControllerAdmin implements ActionListener{
 		guiA = new GUIAdmin();
 		crud = new CRUD();
 		xmlFiles = new XMLFiles();
-		
+
 		initializerAction();
 	}
 
@@ -41,28 +41,31 @@ public class ControllerAdmin implements ActionListener{
 			uF.getBAddUser().addActionListener(this);
 			uF.getBUpdate().addActionListener(this);
 			uF.getBClear().addActionListener(this);
-			
 
+			
 		} else if (uF.getBAddUser() == e.getSource()) {
 			String user = uF.getTUser().getText();
 			String password = uF.getTPassword().getText();
-			int userType = (int) uF.getCBUserType().getSelectedItem();
-			Object selectedItem = uF.getCBUserStatus().getSelectedItem();
-			boolean userStatus = false;
+			String StringUserType = (String) uF.getCBUserType().getSelectedItem();
 			
-			if (selectedItem instanceof Boolean) {
-				userStatus = (boolean) selectedItem;
-			} else if (selectedItem instanceof String) {
-				String selectedString = (String) selectedItem;
-				if (selectedString.equals("true")) {
-					userStatus = true;
-				}
-
-				Us = new User(user, password, userType, userStatus);
-				crud.addObject("Users.xml", "person", Us.getDataName(), Us.getData());
-
-				JOptionPane.showMessageDialog(null, "Usuario agregado");
+			int UserType = 2;
+			if(StringUserType == "Administrador") {
+				UserType = 1;
 			}
+			
+			String StringUserStatus = (String) uF.getCBUserStatus().getSelectedItem();
+			boolean UserStatus = false;
+
+			if(StringUserStatus == "Activo") {
+				UserStatus = true;
+			}
+
+			uF.clean();
+			Us = new User(user, password, UserType, UserStatus);
+			crud.addObject("Users.xml", "person", Us.getDataName(), Us.getData());
+
+			JOptionPane.showMessageDialog(null, "Usuario agregado");
+			
 		}else if(uF.getBClear() == e.getSource()) {
 			String user = uF.getTUser().getText();
 			crud.deleteObject("Users.xml", "person", "user", user);
