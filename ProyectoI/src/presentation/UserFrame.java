@@ -33,7 +33,7 @@ public class UserFrame extends JFrame {
     private JButton bClear;
     private JTextField tUser;
     private JTextField tPassword;
-    private JComboBox<Integer> cBUserType;
+    private JComboBox<String> cBUserType;
     private JComboBox<String> cBUserStatus;
 
     public UserFrame() {
@@ -210,23 +210,22 @@ public class UserFrame extends JFrame {
         return tPassword;
     }
 
-    public JComboBox<Integer> getCBUserType() {
+    public JComboBox<String> getCBUserType() {
         if (cBUserType == null) {
-            cBUserType = new JComboBox<>();
+        	String arrayCBUserType[] = {"Indefinido", "Administrador", "Colaborador"};
+        	cBUserType = new JComboBox(arrayCBUserType);
             cBUserType.setBackground(new Color(28, 28, 28));
             cBUserType.setForeground(new Color(255, 255, 255));
             cBUserType.setFont(new Font("Roboto", Font.PLAIN, 16));
             cBUserType.setBorder(BorderFactory.createEmptyBorder());
             cBUserType.setBounds(735, 101, 150, 22);
-            cBUserType.addItem(1);
-            cBUserType.addItem(2);
         }
         return cBUserType;
     }
 
     public JComboBox<String> getCBUserStatus() {
         if (cBUserStatus == null) {
-        	String arrayCBUserStatus[] = {"Indefinido", "Activo", "Desactivo"};
+        	String arrayCBUserStatus[] = {"Indefinido", "Activo", "Inactivo"};
             cBUserStatus = new JComboBox(arrayCBUserStatus);
             cBUserStatus.setBackground(new Color(28, 28, 28));
             cBUserStatus.setForeground(new Color(255, 255, 255));
