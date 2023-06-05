@@ -11,8 +11,6 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 public class XMLFiles {
     public Document document;
@@ -55,70 +53,5 @@ public class XMLFiles {
 			}
 		}
 	}
-    public boolean verify(String address,String usuario, String contraseña) {
-        try {
-			File inputFile = new File(address);
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            
-            Document document = builder.parse(inputFile);
- 
-            Element root = document.getDocumentElement();
-
-            NodeList nodeList = root.getElementsByTagName("person");
-
-            for (int i = 0; i < nodeList.getLength(); i++) {
-                Node node = nodeList.item(i);
-                if (node.getNodeType() == Node.ELEMENT_NODE) {
-                    Element elementoPerson = (Element) node;
-                    
-                    // Obtener el usuario y contraseña del elemento
-                    String usuarioXML = elementoPerson.getElementsByTagName("user").item(0).getTextContent();
-                    String contraseñaXML = elementoPerson.getElementsByTagName("password").item(0).getTextContent();
-
-                    if (usuario.equals(usuarioXML) && contraseña.equals(contraseñaXML)) {
-                        return true;
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-	public String readXMLToString(String address, String elementType) {
-		StringBuilder information = new StringBuilder();
-		
-		try {
-			File inputFile = new File(address);
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(inputFile);
-			doc.getDocumentElement().normalize();
-
-			information.append("\nRaíz de los Elementos:" + doc.getDocumentElement().getNodeName());
-			NodeList nList = doc.getElementsByTagName(elementType);
-			information.append("\n----------------------------");
-
-			for (int indice = 0; indice < nList.getLength(); indice++) {
-				Node nNode = nList.item(indice);
-				information.append("\nDatos: \n").append(nNode.getNodeName());
-
-				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-					Element eElement = (Element) nNode;
-					information.append("\nCedula: ").append(eElement.getAttribute("id"));
-					information.append("\nNombre: ").append(eElement.getElementsByTagName("name").
-							item(0).getTextContent()+"\n");
-					
-					information.append("Edad: ").append(eElement.getElementsByTagName("age").
-							item(0).getTextContent()+"\n");
-					information.append("Género: ").append(eElement.getElementsByTagName("gender").
-							item(0).getTextContent());
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return information.toString();
-	}
+    
 }
