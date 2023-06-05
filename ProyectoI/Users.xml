@@ -13,21 +13,21 @@
 		<status>false</status>
 	</person>
 	<person>
-		<user>AaronMP</user>
-		<password>1234</password>
-		<userType>1</userType>
+		<user>JosePerez</user>
+		<password>123</password>
+		<userType>2</userType>
 		<status>false</status>
 	</person>
 	<person>
-		<user>admin</user>
-		<password>admin</password>
-		<userType>1</userType>
-		<status>false</status>
-	</person>
-	<person>
-		<user>Emily</user>
-		<password>4321</password>
+		<user>LucasHernandez</user>
+		<password>LHxS</password>
 		<userType>1</userType>
 		<status>true</status>
+	</person>
+	<person>
+		<user>xXUserXx</user>
+		<password>8795</password>
+		<userType>2</userType>
+		<status>false</status>
 	</person>
 </person>

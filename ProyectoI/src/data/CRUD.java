@@ -2,12 +2,10 @@ package data;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.StringWriter;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -79,9 +77,15 @@ public class CRUD {
 	                        Node child = children.item(j);
 	                        if (child.getNodeType() == Node.ELEMENT_NODE) {
 	                            sb.append(child.getTextContent().trim());
+	                            sb.append(",");
 	                        }
 	                    }
-	                    return sb.toString().trim();
+	                    String userInfo = sb.toString().trim();
+	                    // Elimina la última coma si existe
+	                    if (userInfo.endsWith(",")) {
+	                        userInfo = userInfo.substring(0, userInfo.length() - 1);
+	                    }
+	                    return userInfo;
 	                }
 	            }
 	        }

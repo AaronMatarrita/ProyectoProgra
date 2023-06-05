@@ -258,7 +258,6 @@ public class UserFrame extends JFrame {
         JScrollPane jScrollPaneUsers = new JScrollPane(jTableUsers);
         jScrollPaneUsers.setBounds(10, 350, 964, 125);
 
-        // Asignar nombres a las columnas
         TableColumnModel columnModel = jTableUsers.getColumnModel();
         for (int i = 0; i < columnModel.getColumnCount(); i++) {
             TableColumn column = columnModel.getColumn(i);

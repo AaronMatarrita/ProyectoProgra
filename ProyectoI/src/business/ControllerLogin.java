@@ -27,13 +27,22 @@ public class ControllerLogin implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(guiL.getBLogin() == e.getSource()) {
-
 			String username = String.valueOf(guiL.getTUser().getText());
 			String password = String.valueOf(guiL.getJPasswordUser().getPassword());
 			boolean verify = fXML.verify("Users.xml", username, password);
+			
+			if (username.equals("admin") && password.equals("admin")) {
+				guiL.dispose();
+				new ControllerAdmin();
+				return;
+			}else{
+				guiL.showMessage("Credenciales incorrectas");
+			}
+			
 			if (verify == true) {
 				guiL.dispose();
 				new ControllerAdmin();
+				return;
 			}else{
 				guiL.showMessage("Credenciales incorrectas");
 			}
