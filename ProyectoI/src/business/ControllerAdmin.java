@@ -7,19 +7,29 @@ import java.awt.event.WindowListener;
 
 import javax.swing.JOptionPane;
 
+
 import data.CRUD;
 import data.LogicXMLUser;
 import domain.User;
+import domain.Brand;
+import domain.AirplaneModel;
 import presentation.GUIAdmin;
 import presentation.UserFrame;
+import presentation.BrandFrame;
+import presentation.ModelFrame;
 
 public class ControllerAdmin implements ActionListener, WindowListener {
 
 	// Declaración de instancias de clases y variables
 	private GUIAdmin guiA;
 	private UserFrame uF;
+	private BrandFrame bF;
+	private ModelFrame mF;
 	private CRUD crud;
 	private User Us;
+	private Brand Br;
+	private AirplaneModel Am;
+	
 	private LogicXMLUser lXMLU;
 
 	public ControllerAdmin() {
@@ -32,10 +42,12 @@ public class ControllerAdmin implements ActionListener, WindowListener {
 
 	public void initializerAction() {
 		guiA.getBUsers().addActionListener(this);
-		
+		guiA.getBBrands().addActionListener(this);
+		guiA.getBModels().addActionListener(this);
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		//USER FRAME*************************
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		if (guiA.getBUsers() == e.getSource()) {
 			uF = new UserFrame();
@@ -98,6 +110,116 @@ public class ControllerAdmin implements ActionListener, WindowListener {
 			}
 			JOptionPane.showMessageDialog(null, "Usuario eliminado");
 		}
+		
+		
+		
+		
+		/*
+		//BRAND FRAME*************************
+		//------------------------------------------------------------------------------------------------------------------------------------------------------------------
+				if (guiA.getBBrands() == e.getSource()) {
+					bF = new BrandFrame();
+					bF.addWindowListener(this);
+					bF.getBAddBrand().addActionListener(this);
+					bF.getBUpdate().addActionListener(this);
+					bF.getBClear().addActionListener(this);
+					guiA.dispose();
+				}
+		//------------------------------------------------------------------------------------------------------------------------------------------------------------------
+				if (bF.getBAddBrand() == e.getSource()) {
+					String brand = bF.getTBrand().getText();
+
+					if (brand.isEmpty() || bF.getTBrand().getText().isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos");
+						return;
+					} else if (lXMLU.isAlreadyUser(brand, "Brands.xml")) {
+						JOptionPane.showMessageDialog(null, "La Marca ya existe");
+						return;
+					} 
+					//No pueden existir marcas con el mismo nombre y no pueden eliminarse marcas que hayan 
+					//sido asociados con algún modelo de avión
+
+					bF.clean();
+					Br = new Brand(brand);
+					crud.addObject("Brands.xml", "person", Br.getDataName(), Br.getData());
+
+					JOptionPane.showMessageDialog(null, "Marca agregada");
+		//------------------------------------------------------------------------------------------------------------------------------------------------------------------
+				} else if (bF.getBUpdate() == e.getSource()) {
+				 //En proceso...
+		//------------------------------------------------------------------------------------------------------------------------------------------------------------------
+				}else if (bF.getBClear() == e.getSource()) {
+					String brand = bF.getTBrand().getText();
+					if (brand.isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Por favor, complete el nombre de la marca a eliminar");return;
+					}else if(!lXMLU.isAlreadyUser(brand, "Brands.xml")) {
+						JOptionPane.showMessageDialog(null, "No se puede eliminar debido a que no existe");return;}
+					else {
+						crud.deleteObject("Brans.xml", "person", "brand", brand);
+					}
+					JOptionPane.showMessageDialog(null, "Marca eliminada");
+				}*/
+				
+				
+				
+				
+				
+				/*
+				//Model FRAME*************************
+				//------------------------------------------------------------------------------------------------------------------------------------------------------------------
+						if (guiA.getBModels() == e.getSource()) {
+							mF = new ModelFrame();
+							mF.addWindowListener(this);
+							mF.getBAddModel().addActionListener(this);
+							mF.getBUpdate().addActionListener(this);
+							mF.getBClear().addActionListener(this);
+							guiA.dispose();
+						}
+				//------------------------------------------------------------------------------------------------------------------------------------------------------------------
+						if (mF.getBAddModel() == e.getSource()) {
+							String model = mF.getTName().getText();
+
+							if (model.isEmpty() ||mF.getTCEjecutive().getText().isEmpty()||mF.getTCTurist().getText().isEmpty()||mF.getTCEco().getText().isEmpty()) {
+								JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos");
+								return;
+							} else if (lXMLU.isAlreadyUser(model, "Models.xml")) {
+								JOptionPane.showMessageDialog(null, "El modelo ya existe");
+								return;
+							}
+
+							int SeatsEje = Integer.parseInt(mF.getTCEjecutive().getText());
+							int SeatsTur = Integer.parseInt(mF.getTCTurist().getText());
+							int SeatsEco = Integer.parseInt(mF.getTCEco().getText());
+							String StringBrandType = (String) mF.getCBrands().getSelectedItem();
+							
+
+							if (StringBrandType.equals("Indefinido") ) {
+								JOptionPane.showMessageDialog(null, "Por favor, seleccione un tipo de usuario");
+								return;
+							}
+
+							mF.clean();
+							Am = new AirplaneModel(model, StringBrandType, SeatsEje ,SeatsTur, SeatsEco );
+							crud.addObject("Models.xml", "person", Am.getDataName(), Am.getData());
+
+							JOptionPane.showMessageDialog(null, "Modelo agregado");
+				//------------------------------------------------------------------------------------------------------------------------------------------------------------------
+						} else if (mF.getBUpdate() == e.getSource()) {
+						 //En proceso...
+				//------------------------------------------------------------------------------------------------------------------------------------------------------------------
+						}else if (mF.getBClear() == e.getSource()) {
+							String model = mF.getTName().getText();
+							if (model.isEmpty()) {
+								JOptionPane.showMessageDialog(null, "Por favor, complete el nombre del modelo a eliminar");return;
+							}else if(!lXMLU.isAlreadyUser(model, "Models.xml")) {
+								JOptionPane.showMessageDialog(null, "No se puede eliminar debido a que no existe");return;}
+							else {
+								crud.deleteObject("Models.xml", "person", "model", model);
+							}
+							JOptionPane.showMessageDialog(null, "Modelo eliminado");
+						}*/
+		
+		
 		
 	}
 	

@@ -2,20 +2,37 @@ package domain;
 
 public class Brand {
 
-	public String Name;
+	private String Brand;
 	
 	public Brand() {}
+
+	public Brand(String Brand) {
+		super();
+		this.Brand = Brand;
+		
+	}
+
+	public String getBrand() {
+		return Brand;
+	}
+
+	public void setBrand(String Brand) {
+		this.Brand = Brand;
+	}
+
 	
-	public Brand(String Name) {
-		this.Name = Name;
+	public String[] getDataName() {
+		String[] dataName = {"brand"};
+		return dataName;
 	}
-
-	public String getName() {
-		return Name;
+	
+	public String[] getData() {
+		String[] data = {Brand};
+		return data;
 	}
-
-	public void setName(String name) {
-		Name = name;
+	
+	@Override
+	public String toString() {
+		return Brand;
 	}
-
 }

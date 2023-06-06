@@ -3,14 +3,14 @@ package domain;
 public class AirplaneModel {
 
 	private String Name;
-	private Brand Brand;
+	private String Brand;
 	private int  BusinessClassSeats;
 	private int  TouristClassSeats;
 	private int  EconomyClassSeats;
 	
 	public AirplaneModel() {}
 
-	public AirplaneModel(String Name, domain.Brand Brand, int BusinessClassSeats, int TouristClassSeats,
+	public AirplaneModel(String Name,String Brand, int BusinessClassSeats, int TouristClassSeats,
 			int EconomyClassSeats) {
 		super();
 		this.Name = Name;
@@ -28,11 +28,11 @@ public class AirplaneModel {
 		this.Name = Name;
 	}
 
-	public Brand getBrand() {
+	public String getBrand() {
 		return Brand;
 	}
 
-	public void setBrand(Brand Brand) {
+	public void setBrand(String Brand) {
 		this.Brand = Brand;
 	}
 
@@ -58,6 +58,16 @@ public class AirplaneModel {
 
 	public void setEconomyClassSeats(int EconomyClassSeats) {
 		this.EconomyClassSeats = EconomyClassSeats;
+	}
+	
+	public String[] getDataName() {
+		String[] dataName = {"model", "brand", "BusinessClassSeats", "TouristClassSeats", "EconomyClassSeats"};
+		return dataName;
+	}
+	
+	public String[] getData() {
+		String[] data = {Name, String.valueOf(Brand) ,String.valueOf(BusinessClassSeats) ,String.valueOf(TouristClassSeats), String.valueOf(EconomyClassSeats)};
+		return data;
 	}
 
 	@Override
