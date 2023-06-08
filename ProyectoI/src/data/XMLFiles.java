@@ -1,7 +1,6 @@
 package data;
 
 import java.io.File;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
@@ -52,6 +51,5 @@ public class XMLFiles {
 				e.printStackTrace();
 			}
 		}
-	}
-    
+	}    
 }

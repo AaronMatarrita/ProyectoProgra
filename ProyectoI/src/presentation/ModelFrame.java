@@ -47,7 +47,7 @@ public class ModelFrame extends JFrame {
         setLocationRelativeTo(null);
         getContentPane().setLayout(null);
         getContentPane().add(getPanel());
-        setVisible(true); // Mover esta línea al final del constructor
+        setVisible(true);
     }
 
     public void showMessage(String message) {
@@ -71,25 +71,25 @@ public class ModelFrame extends JFrame {
             JPInfo.setBounds(0, 0, 984, 544);
             JPInfo.setLayout(null);
 
-            // Labels
+            //JLabels
             JPInfo.add(getLTitle());
             JPInfo.add(getLName());
             JPInfo.add(getLCEjecutive());
             JPInfo.add(getLBrand());
 
-            // Text fields
+            //JTextFields
             JPInfo.add(getTName());
             JPInfo.add(getTCEjecutive());
 
-            // Combo boxes
+            //JComboBoxes
             JPInfo.add(getCBrands());
 
-            // Buttons
+            //JButtons
             JPInfo.add(getBAddModel());
             JPInfo.add(getBUpdate());
             JPInfo.add(getBClear());
 
-            // Table
+            //JTable
             JPInfo.add(getJSPTableUsers());
             JPInfo.add(getLCTurist());
             JPInfo.add(getTCTurist());

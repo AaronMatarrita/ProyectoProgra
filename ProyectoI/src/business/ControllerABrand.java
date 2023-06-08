@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import data.CRUD;
-import data.LogicXMLUser;
+import data.LogicXML;
 import data.XMLFiles;
 import domain.Brand;
 import presentation.BrandFrame;
@@ -16,7 +16,7 @@ public class ControllerABrand implements ActionListener{
 	private BrandFrame bF;
 	private CRUD crud;
 	private Brand Br;
-	private LogicXMLUser lXMLU;
+	private LogicXML lXML;
 	private XMLFiles xmlF;
 
 	private String fileName = "Brands.xml";
@@ -25,7 +25,7 @@ public class ControllerABrand implements ActionListener{
 	public ControllerABrand() {
 		bF = new BrandFrame();
 		crud = new CRUD();
-		lXMLU = new LogicXMLUser();
+		lXML = new LogicXML();
 		xmlF = new XMLFiles();
 		xmlF.createXML(fileName, objectName);
 		initializerAction();
@@ -49,7 +49,7 @@ public class ControllerABrand implements ActionListener{
 			if (brand.isEmpty() || bF.getTBrand().getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Por favor, ingrese el nombre de la marca");
 				return;
-			} else if (lXMLU.isAlreadyInFile(fileName, objectName, "brand" , brand)) {
+			} else if (lXML.isAlreadyInFile(fileName, objectName, "brand" , brand)) {
 				JOptionPane.showMessageDialog(null, "La Marca ya existe");
 				return;
 			} 
@@ -71,7 +71,7 @@ public class ControllerABrand implements ActionListener{
 			if (brand.isEmpty() || bF.getTBrand().getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Por favor, ingrese el nombre de la marca");
 				return;
-			}else if(!lXMLU.isAlreadyInFile(fileName, objectName, "brand" , brand)) {
+			}else if(!lXML.isAlreadyInFile(fileName, objectName, "brand" , brand)) {
 				JOptionPane.showMessageDialog(null, "No se puede eliminar debido a que no existe");return;}
 			else {
 				xmlF.createXML(fileName, objectName);

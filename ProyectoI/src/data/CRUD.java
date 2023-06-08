@@ -81,7 +81,6 @@ public class CRUD {
 	                        }
 	                    }
 	                    String userInfo = sb.toString().trim();
-	                    // Elimina la última coma si existe
 	                    if (userInfo.endsWith(",")) {
 	                        userInfo = userInfo.substring(0, userInfo.length() - 1);
 	                    }

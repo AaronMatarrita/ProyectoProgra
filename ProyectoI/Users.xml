@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<person>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><person>
 	<person>
 		<user>admin</user>
 		<password>admin</password>
@@ -7,27 +6,28 @@
 		<status>true</status>
 	</person>
 	<person>
-		<user>JosePerez</user>
-		<password>123</password>
+		<user>AaronMP</user>
+		<password>Fx7st</password>
+		<userType>1</userType>
+		<status>true</status>
+	</person>
+	<person>
+		<user>PedroG</user>
+		<password>G_S23</password>
 		<userType>2</userType>
-		<status>false</status>
+		<status>true</status>
 	</person>
+	
 	<person>
-		<user>LucasHernandez</user>
-		<password>LHxS</password>
+		<user>JosePeréz</user>
+		<password>sA23c_ks</password>
 		<userType>1</userType>
 		<status>true</status>
 	</person>
 	<person>
-		<user>Luis</user>
-		<password>234</password>
+		<user>Lucia</user>
+		<password>lSte12</password>
 		<userType>1</userType>
 		<status>true</status>
-	</person>
-	<person>
-		<user>Juanito</user>
-		<password>2asd</password>
-		<userType>1</userType>
-		<status>false</status>
 	</person>
 </person>

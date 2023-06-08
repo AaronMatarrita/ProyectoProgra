@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import data.CRUD;
-import data.LogicXMLUser;
+import data.LogicXML;
 import data.XMLFiles;
 import domain.AirplaneModel;
 import presentation.ModelFrame;
@@ -15,7 +15,7 @@ public class ControllerAModel implements ActionListener{
 	private ModelFrame mF;
 	private AirplaneModel Am;
 	private CRUD crud;
-	private LogicXMLUser lXMLU;
+	private LogicXML lXML;
 	private XMLFiles xmlF;
 	
 	private String fileName = "Models.xml";
@@ -24,7 +24,7 @@ public class ControllerAModel implements ActionListener{
 	public ControllerAModel() {
 		mF = new ModelFrame();
 		crud = new CRUD();
-		lXMLU = new LogicXMLUser();
+		lXML = new LogicXML();
 		xmlF = new XMLFiles();
 		xmlF.createXML(fileName, objectName);
 		initializerAction();
@@ -48,7 +48,7 @@ public class ControllerAModel implements ActionListener{
 			if (model.isEmpty() ||mF.getTCEjecutive().getText().isEmpty()||mF.getTCTurist().getText().isEmpty()||mF.getTCEco().getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos");
 				return;
-			} else if (lXMLU.isAlreadyInFile(fileName, objectName, "model", model)) {
+			} else if (lXML.isAlreadyInFile(fileName, objectName, "model", model)) {
 				JOptionPane.showMessageDialog(null, "El modelo ya existe");
 				return;
 			}
@@ -77,7 +77,7 @@ public class ControllerAModel implements ActionListener{
 			String model = mF.getTName().getText();
 			if (model.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Por favor, complete el nombre del modelo a eliminar");return;
-			}else if(!lXMLU.isAlreadyInFile("Models.xml", "models" ,"model", model)) {
+			}else if(!lXML.isAlreadyInFile("Models.xml", "models" ,"model", model)) {
 				JOptionPane.showMessageDialog(null, "No se puede eliminar debido a que no existe");return;}
 			else {
 				crud.deleteObject(fileName, objectName, "model", model);

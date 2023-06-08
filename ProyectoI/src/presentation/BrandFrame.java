@@ -6,7 +6,6 @@ import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -16,8 +15,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 
 public class BrandFrame extends JFrame {
 	//GitHub
@@ -39,7 +36,7 @@ public class BrandFrame extends JFrame {
         setLocationRelativeTo(null);
         getContentPane().setLayout(null);
         getContentPane().add(getPanel());
-        setVisible(true); // Mover esta línea al final del constructor
+        setVisible(true);
     }
 
     public void showMessage(String message) {
@@ -60,22 +57,21 @@ public class BrandFrame extends JFrame {
         if (JPInfo == null) {
             JPInfo = new JPanel();
             JPInfo.setBackground(new Color(63, 37, 170));
-            JPInfo.setBounds(0, 11, 984, 544);
+            JPInfo.setBounds(0, 0, 984, 544);
             JPInfo.setLayout(null);
-
-            // Labels
+          //JLabels
             JPInfo.add(getLTitle());
             JPInfo.add(getLBrand());
 
-            // Text fields
+            //JTextFields
             JPInfo.add(getTBrand());
 
-            // Buttons
+            //JButtons
             JPInfo.add(getBAddBrand());
             JPInfo.add(getBUpdate());
             JPInfo.add(getBClear());
 
-            // Table
+            //JTable
             JPInfo.add(getJSPTableUsers());
         }
         return JPInfo;
