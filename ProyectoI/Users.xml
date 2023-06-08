@@ -24,10 +24,5 @@
 		<userType>1</userType>
 		<status>true</status>
 	</person>
-	<person>
-		<user>Lucia</user>
-		<password>lSte12</password>
-		<userType>1</userType>
-		<status>true</status>
-	</person>
+	
 </person>

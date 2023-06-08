@@ -252,6 +252,7 @@ public class UserFrame extends JFrame {
 		jTableUsers.getTableHeader().setOpaque(false);
 		jTableUsers.getTableHeader().setBackground(new Color(32, 136, 203));
 		jTableUsers.getTableHeader().setForeground(new Color(255, 255, 255));
+		jTableUsers.setEnabled(false);
 		jTableUsers.setRowHeight(25);
 
 		Object[][] data = new Object[users.size()][4];
