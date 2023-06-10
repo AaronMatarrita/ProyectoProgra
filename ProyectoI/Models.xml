@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<models>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><models>
 	<models>
-		<model>Boeing 747</model>
+		<modelName>Boeing 747</modelName>
 		<brand>Administrador</brand>
-		<BusinessClassSeats>100</BusinessClassSeats>
-		<TouristClassSeats>100</TouristClassSeats>
+		<BusinessClassSeats>120</BusinessClassSeats>
+		<TouristClassSeats>80</TouristClassSeats>
 		<EconomyClassSeats>100</EconomyClassSeats>
 	</models>
 </models>

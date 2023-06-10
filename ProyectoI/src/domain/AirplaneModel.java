@@ -61,7 +61,7 @@ public class AirplaneModel {
 	}
 	
 	public String[] getDataName() {
-		String[] dataName = {"model", "brand", "BusinessClassSeats", "TouristClassSeats", "EconomyClassSeats"};
+		String[] dataName = {"modelName", "brand", "BusinessClassSeats", "TouristClassSeats", "EconomyClassSeats"};
 		return dataName;
 	}
 	

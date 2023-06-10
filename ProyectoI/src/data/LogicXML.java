@@ -19,31 +19,40 @@ public class LogicXML {
 
 	//Verificar si un objeto se encuentra en un archivo XML
 	public boolean isAlreadyInFile(String fileName, String elementType, String identifierName, String identifierValue) {
-	    try {
-	        File inputFile = new File(fileName);
-	        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-	        DocumentBuilder builder = factory.newDocumentBuilder();
-	        Document document = builder.parse(inputFile);
-	        document.getDocumentElement().normalize();
+		File inputFile = new File(fileName);
+		if (!inputFile.exists()) {
+			return false;
+		}
 
-	        NodeList nodeList = document.getElementsByTagName(elementType);
-	        for (int i = 0; i < nodeList.getLength(); i++) {
-	            Node node = nodeList.item(i);
-	            if (node.getNodeType() == Node.ELEMENT_NODE) {
-	                Element element = (Element) node;
-	                NodeList identifierList = element.getElementsByTagName(identifierName);
-	                if (identifierList.getLength() > 0) {
-	                    String identifier = identifierList.item(0).getTextContent();
-	                    if (identifierValue.equals(identifier)) {
-	                        return true;
-	                    }
-	                }
-	            }
-	        }
-	    } catch (ParserConfigurationException | SAXException | IOException e) {
-	        e.printStackTrace();
-	    }
+		try {
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Document document = builder.parse(inputFile);
+			document.getDocumentElement().normalize();
 
-	    return false;
+			NodeList nodeList = document.getElementsByTagName(elementType);
+						
+			if (nodeList.getLength() == 0) {
+                return false;
+            }
+			
+			for (int i = 0; i < nodeList.getLength(); i++) {
+				Node node = nodeList.item(i);
+				if (node.getNodeType() == Node.ELEMENT_NODE) {
+					Element element = (Element) node;
+					NodeList identifierList = element.getElementsByTagName(identifierName);
+					if (identifierList.getLength() > 0) {
+						String identifier = identifierList.item(0).getTextContent();
+						if (identifierValue.equals(identifier)) {
+							return true;
+						}
+					}
+				}
+			}
+		} catch (ParserConfigurationException | SAXException | IOException e) {
+			e.printStackTrace();
+		}
+
+		return false;
 	}
 }

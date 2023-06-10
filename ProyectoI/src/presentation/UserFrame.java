@@ -17,14 +17,11 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
-
-import data.LogicXMLUser;
 import domain.User;
 
+@SuppressWarnings("serial")
 public class UserFrame extends JFrame {
-	//GitHub
+	// Etiquetas
 	private JPanel panel;
 	private JPanel JPInfo;
 	private JLabel lTitle;
@@ -32,14 +29,22 @@ public class UserFrame extends JFrame {
 	private JLabel lPassword;
 	private JLabel lUserType;
 	private JLabel lUserStatus;
+	// Botones
 	private JButton bAddUser;
 	private JButton bUpdate;
 	private JButton bClear;
+	// Campos de texto
 	private JTextField tUser;
 	private JTextField tPassword;
-	private JTable jTableUsers;
+	// ComboBoxes
 	private JComboBox<String> cBUserType;
 	private JComboBox<String> cBUserStatus;
+	// Tabla
+	private DefaultTableModel dtmTUsers;
+	private JTable jTableUsers;
+	// Scroll
+	private JScrollPane spTUsers;
+	private Object dataTable[][];
 
 	public UserFrame() {
 		setType(Type.UTILITY);
@@ -74,32 +79,32 @@ public class UserFrame extends JFrame {
 			JPInfo.setBounds(0, 0, 984, 544);
 			JPInfo.setLayout(null);
 
-			//JLabels
+			// JLabels
 			JPInfo.add(getLTitle());
 			JPInfo.add(getLUser());
 			JPInfo.add(getLPassword());
 			JPInfo.add(getLUserType());
 			JPInfo.add(getLUserStatus());
 
-			//JTextFields
+			// JTextFields
 			JPInfo.add(getTUser());
 			JPInfo.add(getTPassword());
 
-			//JComboBoxes
+			// JComboBoxes
 			JPInfo.add(getCBUserType());
 			JPInfo.add(getCBUserStatus());
 
-			//JButtons
+			// JButtons
 			JPInfo.add(getBAddUser());
 			JPInfo.add(getBUpdate());
 			JPInfo.add(getBClear());
 
-			//JTable
-			LogicXMLUser logicXMLUser = new LogicXMLUser();
-			List<User> users = logicXMLUser.readXMLFile("Users.xml");
-			JScrollPane jScrollPaneUsers = getJSPTableUsers(users);
-			jTableUsers = (JTable) jScrollPaneUsers.getViewport().getView();
-			JPInfo.add(jScrollPaneUsers);
+			// JTable
+			setDTMUsers(dataTable, getColumnsName());
+	        setJTableUsers(getDTMUsers());
+	        setSPTableUsers(getJTableUsers());
+	        JPInfo.add(getSPTableUsers());
+			
 		}
 		return JPInfo;
 	}
@@ -159,7 +164,7 @@ public class UserFrame extends JFrame {
 		if (bAddUser == null) {
 			bAddUser = new JButton("Agregar");
 			bAddUser.setFont(new Font("Roboto", Font.PLAIN, 16));
-			bAddUser.setIcon(new ImageIcon(UserFrame.class.getResource("/imagesAdminMain/imagesUser/add-user.png")));
+			bAddUser.setIcon(new ImageIcon(UserFrame.class.getResource("/imagesMain/imagesUser/add-user.png")));
 			bAddUser.setBackground(new Color(28, 28, 28));
 			bAddUser.setForeground(new Color(255, 255, 255));
 			bAddUser.setFocusable(false);
@@ -172,7 +177,7 @@ public class UserFrame extends JFrame {
 		if (bUpdate == null) {
 			bUpdate = new JButton("Modificar");
 			bUpdate.setFont(new Font("Roboto", Font.PLAIN, 16));
-			bUpdate.setIcon(new ImageIcon(UserFrame.class.getResource("/imagesAdminMain/imagesUser/updateUser.png")));
+			bUpdate.setIcon(new ImageIcon(UserFrame.class.getResource("/imagesMain/imagesUser/updateUser.png")));
 			bUpdate.setBackground(new Color(28, 28, 28));
 			bUpdate.setForeground(new Color(255, 255, 255));
 			bUpdate.setFocusable(false);
@@ -185,7 +190,7 @@ public class UserFrame extends JFrame {
 		if (bClear == null) {
 			bClear = new JButton("Eliminar");
 			bClear.setFont(new Font("Roboto", Font.PLAIN, 16));
-			bClear.setIcon(new ImageIcon(UserFrame.class.getResource("/imagesAdminMain/imagesUser/removeUser.png")));
+			bClear.setIcon(new ImageIcon(UserFrame.class.getResource("/imagesMain/imagesUser/removeUser.png")));
 			bClear.setBackground(new Color(28, 28, 28));
 			bClear.setForeground(new Color(255, 255, 255));
 			bClear.setFocusable(false);
@@ -246,59 +251,59 @@ public class UserFrame extends JFrame {
 		return cBUserStatus;
 	}
 
-	public JScrollPane getJSPTableUsers(List<User> users) {
-		JTable jTableUsers = new JTable();
+	public void setDTMUsers(Object data[][], String[] columnsName) {
+		dtmTUsers = new DefaultTableModel(data, columnsName);
+	}
+
+	public DefaultTableModel getDTMUsers() {
+		return dtmTUsers;
+	}
+
+	public void setJTableUsers(DefaultTableModel dtmTUsers) {
+		jTableUsers = new JTable(dtmTUsers);
 		jTableUsers.getTableHeader().setFont(new Font("Roboto", Font.BOLD, 16));
 		jTableUsers.getTableHeader().setOpaque(false);
 		jTableUsers.getTableHeader().setBackground(new Color(32, 136, 203));
 		jTableUsers.getTableHeader().setForeground(new Color(255, 255, 255));
-		jTableUsers.setEnabled(false);
 		jTableUsers.setRowHeight(25);
-
-		Object[][] data = new Object[users.size()][4];
-		for (int i = 0; i < users.size(); i++) {
-			User user = users.get(i);
-
-			String userType = (user.getUserType() == 1) ? "Administrador" : "Colaborador";
-			String userStatus = (user.isStatus()) ? "Activo" : "Inactivo";
-
-			data[i][0] = user.getUser();
-			data[i][1] = user.getPassword();
-			data[i][2] = userType;
-			data[i][3] = userStatus;
-		}
-
-		String[] columnNames = {"Usuario", "Contraseña", "Tipo de Usuario", "Estado"};
-		DefaultTableModel model = new DefaultTableModel(data, columnNames);
-		jTableUsers.setModel(model);
-
-		JScrollPane jScrollPaneUsers = new JScrollPane(jTableUsers);
-		jScrollPaneUsers.setBounds(10, 350, 964, 125);
-
-		TableColumnModel columnModel = jTableUsers.getColumnModel();
-		for (int i = 0; i < columnModel.getColumnCount(); i++) {
-			TableColumn column = columnModel.getColumn(i);
-			column.setHeaderValue(column.getHeaderValue());
-		}
-
-		return jScrollPaneUsers;
+		// No poder editar los valores de la tabla
+		jTableUsers.setEnabled(false);
+		// No poder mover las columnas
+		jTableUsers.getTableHeader().setReorderingAllowed(false);
+		// No poder reducir el tamaño de las columnas
+		jTableUsers.getTableHeader().setResizingAllowed(false);
 	}
 
-	public void updateTable(List<User> users) {
-		DefaultTableModel model = (DefaultTableModel) jTableUsers.getModel();
-		model.setRowCount(0);
+	public JTable getJTableUsers() {
+		return jTableUsers;
+	}
 
-		for (User user : users) {
-			String userType = (user.getUserType() == 1) ? "Administrador" : "Colaborador";
+	public void setSPTableUsers(JTable jTableUsers) {
+		spTUsers = new JScrollPane(jTableUsers);
+		spTUsers.setBounds(10, 350, 964, 125);
+	}
+
+	public JScrollPane getSPTableUsers() {
+		return spTUsers;
+	}
+
+	public String[] getColumnsName() {
+		String columnsName[] = {"Usuario", "Contraseña", "Tipo de usuario", "Estado del usuario"};
+		return columnsName;
+	}
+	
+	public void setJTableData(List<User> users) {
+	    Object[][] data = new Object[users.size()][4];
+	    for (int i = 0; i < users.size(); i++) {
+	        User user = users.get(i);
+	        String userType = (user.getUserType() == 1) ? "Administrador" : "Colaborador";
 			String userStatus = (user.isStatus()) ? "Activo" : "Inactivo";
-			Object[] rowData = {
-					user.getUser(),
-					user.getPassword(),
-					userType,
-					userStatus
-			};
-			model.addRow(rowData);
-		}
+	        data[i][0] = user.getUser();
+	        data[i][1] = user.getPassword();
+	        data[i][2] = userType;
+	        data[i][3] = userStatus;
+	    }
+	    dtmTUsers.setDataVector(data, getColumnsName());
 	}
 
 	public void clean() {

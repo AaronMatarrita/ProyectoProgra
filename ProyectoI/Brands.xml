@@ -1,1 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><brands><brands><brand>Boeing</brand></brands><brands><brand>AirBus</brand></brands><brands><brand>Embraer</brand></brands></brands>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><brands>
+	<brands>
+		<brand>Boeing</brand>
+	</brands>
+	
+	<brands>
+		<brand>Embraer</brand>
+	</brands>
+<brands><brand>AirBus</brand></brands></brands>

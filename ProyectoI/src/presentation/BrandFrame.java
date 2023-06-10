@@ -2,6 +2,7 @@ package presentation;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -16,16 +17,27 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
+import domain.Brand;
+@SuppressWarnings("serial")
 public class BrandFrame extends JFrame {
-	//GitHub
-    private JPanel panel;
-    private JPanel JPInfo;
-    private JLabel lTitle;
-    private JLabel lBrand;
-    private JButton bAddBrand;
-    private JButton bUpdate;
-    private JButton bClear;
-    private JTextField tBrand;
+	//Paneles
+	private JPanel panel;
+	private JPanel JPInfo;
+	//Etiquetas
+	private JLabel lTitle;
+	private JLabel lBrand;
+	//Botones
+	private JButton bAddBrand;
+	private JButton bUpdate;
+	private JButton bClear;
+	//Campos de texto
+	private JTextField tBrand;
+	// Tabla
+	private DefaultTableModel dtmTBrands;
+	private JTable jTableBrands;
+	// Scroll
+	private JScrollPane spTBrands;
+	private Object dataTable[][];
 
     public BrandFrame() {
     	setType(Type.UTILITY);
@@ -59,7 +71,7 @@ public class BrandFrame extends JFrame {
             JPInfo.setBackground(new Color(63, 37, 170));
             JPInfo.setBounds(0, 0, 984, 544);
             JPInfo.setLayout(null);
-          //JLabels
+            //JLabels
             JPInfo.add(getLTitle());
             JPInfo.add(getLBrand());
 
@@ -71,8 +83,11 @@ public class BrandFrame extends JFrame {
             JPInfo.add(getBUpdate());
             JPInfo.add(getBClear());
 
-            //JTable
-            JPInfo.add(getJSPTableUsers());
+            // JTable
+            setDTMBrands(dataTable, getColumnsName());
+            setJTableBrands(getDTMBrands());
+            setSPTableBrands(getJTableBrands());
+            JPInfo.add(getSPTableBrands());
         }
         return JPInfo;
     }
@@ -102,7 +117,7 @@ public class BrandFrame extends JFrame {
         if (bAddBrand == null) {
             bAddBrand = new JButton("Agregar");
             bAddBrand.setFont(new Font("Roboto", Font.PLAIN, 16));
-            bAddBrand.setIcon(new ImageIcon(UserFrame.class.getResource("/imagesAdminMain/imagesUser/add-user.png")));
+            bAddBrand.setIcon(new ImageIcon(BrandFrame.class.getResource("/imagesMain/imagesButtons/add-button.png")));
             bAddBrand.setBackground(new Color(28, 28, 28));
             bAddBrand.setForeground(new Color(255, 255, 255));
             bAddBrand.setFocusable(false);
@@ -115,7 +130,7 @@ public class BrandFrame extends JFrame {
         if (bUpdate == null) {
             bUpdate = new JButton("Modificar");
             bUpdate.setFont(new Font("Roboto", Font.PLAIN, 16));
-            bUpdate.setIcon(new ImageIcon(UserFrame.class.getResource("/imagesAdminMain/imagesUser/updateUser.png")));
+            bUpdate.setIcon(new ImageIcon(BrandFrame.class.getResource("/imagesMain/imagesButtons/update-button.png")));
             bUpdate.setBackground(new Color(28, 28, 28));
             bUpdate.setForeground(new Color(255, 255, 255));
             bUpdate.setFocusable(false);
@@ -128,7 +143,7 @@ public class BrandFrame extends JFrame {
         if (bClear == null) {
             bClear = new JButton("Eliminar");
             bClear.setFont(new Font("Roboto", Font.PLAIN, 16));
-            bClear.setIcon(new ImageIcon(UserFrame.class.getResource("/imagesAdminMain/imagesUser/removeUser.png")));
+            bClear.setIcon(new ImageIcon(BrandFrame.class.getResource("/imagesMain/imagesButtons/delete-button.png")));
             bClear.setBackground(new Color(28, 28, 28));
             bClear.setForeground(new Color(255, 255, 255));
             bClear.setFocusable(false);
@@ -150,34 +165,55 @@ public class BrandFrame extends JFrame {
         return tBrand;
     }
 
-    public JScrollPane getJSPTableUsers() {
-        JTable jTableBrands = new JTable();
-        jTableBrands.getTableHeader().setFont(new Font("Roboto", Font.BOLD, 16));
-        jTableBrands.getTableHeader().setOpaque(false);
-        jTableBrands.getTableHeader().setBackground(new Color(32, 136, 203));
-        jTableBrands.getTableHeader().setForeground(new Color(255,255,255));
-        jTableBrands.setRowHeight(25);
-        jTableBrands.setModel(new DefaultTableModel(
-        	new Object[][] {
-        		{null},
-        		{null},
-        		{null},
-        		{null},
-        	},
-        	new String[] {
-        		"Marcas:"
-        	}
-        ));
+    public void setDTMBrands(Object data[][], String[] columnsName) {
+		dtmTBrands = new DefaultTableModel(data, columnsName);
+	}
 
-        JScrollPane jScrollPaneUsers = new JScrollPane(jTableBrands);
-        jScrollPaneUsers.setBounds(101, 350, 767, 152);
-      // for (int i = 0; i < columnModel.getColumnCount(); i++) {
-        //    TableColumn column = columnModel.getColumn(i);
-         //   column.setHeaderValue(column.getHeaderValue());
-      //  }
+	public DefaultTableModel getDTMBrands() {
+		return dtmTBrands;
+	}
 
-        return jScrollPaneUsers;
-    }
+	public void setJTableBrands(DefaultTableModel dtmTBrands) {
+		jTableBrands = new JTable(dtmTBrands);
+		jTableBrands.getTableHeader().setFont(new Font("Roboto", Font.BOLD, 16));
+		jTableBrands.getTableHeader().setOpaque(false);
+		jTableBrands.getTableHeader().setBackground(new Color(32, 136, 203));
+		jTableBrands.getTableHeader().setForeground(new Color(255, 255, 255));
+		jTableBrands.setRowHeight(25);
+		// No poder editar los valores de la tabla
+		jTableBrands.setEnabled(false);
+		// No poder mover las columnas
+		jTableBrands.getTableHeader().setReorderingAllowed(false);
+		// No poder reducir el tamaño de las columnas
+		jTableBrands.getTableHeader().setResizingAllowed(false);
+	}
+
+	public JTable getJTableBrands() {
+		return jTableBrands;
+	}
+
+	public void setSPTableBrands(JTable jTableBrands) {
+		spTBrands = new JScrollPane(jTableBrands);
+		spTBrands.setBounds(10, 350, 964, 125);
+	}
+
+	public JScrollPane getSPTableBrands() {
+		return spTBrands;
+	}
+
+	public String[] getColumnsName() {
+		String columnsName[] = {"Marcas"};
+		return columnsName;
+	}
+	
+	public void setJTableData(List<Brand> brands) {
+	    Object[][] data = new Object[brands.size()][1];
+	    for (int i = 0; i < brands.size(); i++) {
+	    	Brand brand = brands.get(i);
+	        data[i][0] = brand.getBrand();
+	    }
+	    dtmTBrands.setDataVector(data, getColumnsName());
+	}
     
     public void clean() {
     	getTBrand().setText("");

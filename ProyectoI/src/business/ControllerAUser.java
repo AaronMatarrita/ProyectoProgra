@@ -30,9 +30,14 @@ public class ControllerAUser implements ActionListener {
         xmlF = new XMLFiles();
         logicXMLUser = new LogicXMLUser();
         xmlF.createXML(fileName, objectName);
+        setTableData();
         initializerAction();
+
+    }
+    
+    private void setTableData() {
         List<User> users = logicXMLUser.readXMLFile(fileName);
-        uF.updateTable(users);
+        uF.setJTableData(users);
     }
 
     public void initializerAction() {
@@ -77,12 +82,11 @@ public class ControllerAUser implements ActionListener {
             crud.addObject(fileName, objectName, Us.getDataName(), Us.getData());
 
             JOptionPane.showMessageDialog(null, "Usuario agregado");
-            List<User> users = logicXMLUser.readXMLFile(fileName);
-            uF.updateTable(users);
+            
+            setTableData();
         } else if (uF.getBUpdate() == e.getSource()) {
             // En proceso...
-            List<User> users = logicXMLUser.readXMLFile(fileName);
-            uF.updateTable(users);
+        	 setTableData();
         } else if (uF.getBClear() == e.getSource()) {
             String user = uF.getTUser().getText();
             if (user.isEmpty()) {
@@ -104,8 +108,7 @@ public class ControllerAUser implements ActionListener {
                 crud.deleteObject(fileName, objectName, "user", user);
                 JOptionPane.showMessageDialog(null, "Usuario eliminado");
 
-                List<User> users = logicXMLUser.readXMLFile(fileName);
-                uF.updateTable(users);
+                setTableData();
             }
         }
     }

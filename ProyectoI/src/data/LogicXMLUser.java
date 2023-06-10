@@ -2,7 +2,6 @@ package data;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -17,10 +16,9 @@ import domain.User;
 public class LogicXMLUser {
 
 	public LogicXMLUser() {}	
-	
-	public List<User> readXMLFile(String filename) {
-		List<User> users = new ArrayList<>();
 
+	public ArrayList<User> readXMLFile(String filename) {
+		ArrayList<User> users = new ArrayList<>();
 		try {
 			File file = new File(filename);
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -29,6 +27,11 @@ public class LogicXMLUser {
 			doc.getDocumentElement().normalize();
 
 			NodeList nodeList = doc.getElementsByTagName("person");
+
+			if (nodeList.getLength() == 0) {
+				return users;
+			}
+
 			for (int i = 0; i < nodeList.getLength(); i++) {
 				Node node = nodeList.item(i);
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -46,7 +49,11 @@ public class LogicXMLUser {
 						}
 					}
 					if (!userExists) {
-						User person = new User(user, password, userType, status);
+						User person = new User();
+						person.setUser(user);
+						person.setPassword(password);
+						person.setUserType(userType);
+						person.setStatus(status);
 						users.add(person);
 					}
 				}
@@ -56,5 +63,5 @@ public class LogicXMLUser {
 		}
 		return users;
 	}
-	 
+
 }

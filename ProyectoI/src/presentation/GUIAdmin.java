@@ -91,7 +91,7 @@ public class GUIAdmin extends JFrame
 	public JButton getBUsers() {
 		if (bUsers == null) {
 			bUsers = new JButton("Usuarios");
-			bUsers.setIcon(new ImageIcon(GUIAdmin.class.getResource("/imagesAdminMain/users.png")));
+			bUsers.setIcon(new ImageIcon(GUIAdmin.class.getResource("/imagesMain/users.png")));
 			bUsers.setBorder(null);
 			bUsers.setBackground(new Color(28, 28, 28));
 			bUsers.setFocusable(false);
@@ -104,7 +104,7 @@ public class GUIAdmin extends JFrame
 	public JButton getBBrands() {
 		if (bBrands == null) {
 			bBrands = new JButton("Marcas");
-			bBrands.setIcon(new ImageIcon(GUIAdmin.class.getResource("/imagesAdminMain/brands.png")));
+			bBrands.setIcon(new ImageIcon(GUIAdmin.class.getResource("/imagesMain/brands.png")));
 			bBrands.setForeground(Color.WHITE);
 			bBrands.setFont(new Font("Roboto", Font.PLAIN, 16));
 			bBrands.setFocusable(false);
@@ -117,7 +117,7 @@ public class GUIAdmin extends JFrame
 	public JButton getBModels() {
 		if (bModels == null) {
 			bModels = new JButton("Modelos de aviones");
-			bModels.setIcon(new ImageIcon(GUIAdmin.class.getResource("/imagesAdminMain/airplanes models.png")));
+			bModels.setIcon(new ImageIcon(GUIAdmin.class.getResource("/imagesMain/airplanes models.png")));
 			bModels.setForeground(Color.WHITE);
 			bModels.setFont(new Font("Roboto", Font.PLAIN, 16));
 			bModels.setFocusable(false);
@@ -135,7 +135,7 @@ public class GUIAdmin extends JFrame
 
 				}
 			});
-			bAirlines.setIcon(new ImageIcon(GUIAdmin.class.getResource("/imagesAdminMain/airlines.png")));
+			bAirlines.setIcon(new ImageIcon(GUIAdmin.class.getResource("/imagesMain/airlines.png")));
 			bAirlines.setToolTipText("");
 			bAirlines.setForeground(Color.WHITE);
 			bAirlines.setFont(new Font("Roboto", Font.PLAIN, 16));
@@ -149,7 +149,7 @@ public class GUIAdmin extends JFrame
 	public JButton getBAirplanes() {
 		if (bAirplanes == null) {
 			bAirplanes = new JButton("Aviones");
-			bAirplanes.setIcon(new ImageIcon(GUIAdmin.class.getResource("/imagesAdminMain/airplanes.png")));
+			bAirplanes.setIcon(new ImageIcon(GUIAdmin.class.getResource("/imagesMain/airplanes.png")));
 			bAirplanes.setForeground(Color.WHITE);
 			bAirplanes.setFont(new Font("Roboto", Font.PLAIN, 16));
 			bAirplanes.setFocusable(false);
@@ -162,7 +162,7 @@ public class GUIAdmin extends JFrame
 	public JButton getBFlights() {
 		if (bFlights == null) {
 			bFlights = new JButton("Vuelos");
-			bFlights.setIcon(new ImageIcon(GUIAdmin.class.getResource("/imagesAdminMain/flights.png")));
+			bFlights.setIcon(new ImageIcon(GUIAdmin.class.getResource("/imagesMain/flights.png")));
 			bFlights.setForeground(Color.WHITE);
 			bFlights.setFont(new Font("Roboto", Font.PLAIN, 16));
 			bFlights.setFocusable(false);
@@ -175,7 +175,7 @@ public class GUIAdmin extends JFrame
 	public JButton getBPassengers() {
 		if (bPassengers == null) {
 			bPassengers = new JButton("Pasajeros");
-			bPassengers.setIcon(new ImageIcon(GUIAdmin.class.getResource("/imagesAdminMain/passenger.png")));
+			bPassengers.setIcon(new ImageIcon(GUIAdmin.class.getResource("/imagesMain/passenger.png")));
 			bPassengers.setForeground(Color.WHITE);
 			bPassengers.setFont(new Font("Roboto", Font.PLAIN, 16));
 			bPassengers.setFocusable(false);
@@ -188,7 +188,7 @@ public class GUIAdmin extends JFrame
 	public JButton getBTickets() {
 		if (bTickets == null) {
 			bTickets = new JButton("Tiquetes");
-			bTickets.setIcon(new ImageIcon(GUIAdmin.class.getResource("/imagesAdminMain/tickets.png")));
+			bTickets.setIcon(new ImageIcon(GUIAdmin.class.getResource("/imagesMain/tickets.png")));
 			bTickets.setForeground(Color.WHITE);
 			bTickets.setFont(new Font("Roboto", Font.PLAIN, 16));
 			bTickets.setFocusable(false);

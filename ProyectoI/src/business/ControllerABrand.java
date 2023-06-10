@@ -2,11 +2,13 @@ package business;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import data.CRUD;
 import data.LogicXML;
+import data.LogicXMLBrand;
 import data.XMLFiles;
 import domain.Brand;
 import presentation.BrandFrame;
@@ -17,7 +19,9 @@ public class ControllerABrand implements ActionListener{
 	private CRUD crud;
 	private Brand Br;
 	private LogicXML lXML;
+	private LogicXMLBrand lXMLB;
 	private XMLFiles xmlF;
+	
 
 	private String fileName = "Brands.xml";
 	private String objectName = "brands";
@@ -27,10 +31,17 @@ public class ControllerABrand implements ActionListener{
 		crud = new CRUD();
 		lXML = new LogicXML();
 		xmlF = new XMLFiles();
+		lXMLB = new LogicXMLBrand();
 		xmlF.createXML(fileName, objectName);
+		setTableData();
 		initializerAction();
 	}
-
+	
+	private void setTableData() {
+        List<Brand> brands = lXMLB.readXMLFile(fileName);
+        bF.setJTableData(brands);
+    }
+	
 	public void initializerAction() {
 		//bF.addWindowListener(this);
 		bF.getBAddBrand().addActionListener(this);
@@ -62,9 +73,12 @@ public class ControllerABrand implements ActionListener{
 			crud.addObject(fileName, objectName, Br.getDataName(), Br.getData());
 
 			JOptionPane.showMessageDialog(null, "Marca agregada");
+			
+			setTableData();
 			//------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		}else if(bF.getBUpdate() == e.getSource()) {
 			//En proceso..
+			setTableData();
 			//------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		}else if(bF.getBClear() == e.getSource()){
 			String brand = bF.getTBrand().getText();
@@ -73,12 +87,17 @@ public class ControllerABrand implements ActionListener{
 				return;
 			}else if(!lXML.isAlreadyInFile(fileName, objectName, "brand" , brand)) {
 				JOptionPane.showMessageDialog(null, "No se puede eliminar debido a que no existe");return;}
-			else {
-				xmlF.createXML(fileName, objectName);
-				crud.deleteObject(fileName, objectName, "brand", brand);
-			}
-			JOptionPane.showMessageDialog(null, "Marca eliminada");
-		}
+			
+			 int dialogButton = JOptionPane.YES_NO_OPTION;
+	            int dialogResult = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar el usuario?", "Eliminar", dialogButton);
 
+	            if (dialogResult == JOptionPane.YES_OPTION) {
+	            	xmlF.createXML(fileName, objectName);
+	            	crud.deleteObject(fileName, objectName, "brand", brand);
+
+	            	JOptionPane.showMessageDialog(null, "Marca eliminada");
+	            	setTableData();
+	            }
+		}
 	}
 }

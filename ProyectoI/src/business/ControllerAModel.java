@@ -2,10 +2,13 @@ package business;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 import data.CRUD;
 import data.LogicXML;
+import data.LogicXMLModel;
 import data.XMLFiles;
 import domain.AirplaneModel;
 import presentation.ModelFrame;
@@ -17,38 +20,46 @@ public class ControllerAModel implements ActionListener{
 	private CRUD crud;
 	private LogicXML lXML;
 	private XMLFiles xmlF;
-	
+	private LogicXMLModel lXMLM;
+
 	private String fileName = "Models.xml";
 	private String objectName = "models";
-	
-	public ControllerAModel() {
+
+	public ControllerAModel()
+	{
 		mF = new ModelFrame();
 		crud = new CRUD();
 		lXML = new LogicXML();
 		xmlF = new XMLFiles();
+		lXMLM = new LogicXMLModel();
+
 		xmlF.createXML(fileName, objectName);
 		initializerAction();
+		setTableData();
 	}
-	
+
+	private void setTableData() {
+		ArrayList<AirplaneModel> models = lXMLM.readXMLFile(fileName);
+		mF.setJTableData(models);
+	}
+
 	public void initializerAction() {
-		mF = new ModelFrame();
-		//mF.addWindowListener(this);
 		mF.getBAddModel().addActionListener(this);
 		mF.getBUpdate().addActionListener(this);
 		mF.getBClear().addActionListener(this);
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-			//------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		//------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		if (mF.getBAddModel() == e.getSource()) {
 			String model = mF.getTName().getText();
 
 			if (model.isEmpty() ||mF.getTCEjecutive().getText().isEmpty()||mF.getTCTurist().getText().isEmpty()||mF.getTCEco().getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos");
 				return;
-			} else if (lXML.isAlreadyInFile(fileName, objectName, "model", model)) {
+			} else if (lXML.isAlreadyInFile(fileName, objectName, "modelName", model)) {
 				JOptionPane.showMessageDialog(null, "El modelo ya existe");
 				return;
 			}
@@ -69,20 +80,28 @@ public class ControllerAModel implements ActionListener{
 			crud.addObject(fileName, objectName, Am.getDataName(), Am.getData());
 
 			JOptionPane.showMessageDialog(null, "Modelo agregado");
+
+			setTableData();
 			//------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		} else if (mF.getBUpdate() == e.getSource()) {
 			//En proceso...
+			setTableData();
 			//------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		}else if (mF.getBClear() == e.getSource()) {
 			String model = mF.getTName().getText();
 			if (model.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Por favor, complete el nombre del modelo a eliminar");return;
-			}else if(!lXML.isAlreadyInFile("Models.xml", "models" ,"model", model)) {
+			}else if(!lXML.isAlreadyInFile("Models.xml", "models" ,"modelName", model)) {
 				JOptionPane.showMessageDialog(null, "No se puede eliminar debido a que no existe");return;}
-			else {
-				crud.deleteObject(fileName, objectName, "model", model);
+
+			int dialogButton = JOptionPane.YES_NO_OPTION;
+			int dialogResult = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar el modelo?", "Eliminar", dialogButton);
+
+			if (dialogResult == JOptionPane.YES_OPTION) {
+				crud.deleteObject(fileName, objectName, "modelName", model);
+				JOptionPane.showMessageDialog(null, "Modelo eliminado");
+				setTableData();
 			}
-			JOptionPane.showMessageDialog(null, "Modelo eliminado");
 		}
 	}
 }
