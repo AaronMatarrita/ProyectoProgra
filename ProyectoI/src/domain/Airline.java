@@ -29,6 +29,16 @@ public class Airline {
 		this.Country = Country;
 	}
 	
+	public String[] getDataName() {
+		String[] dataName = {"Name", "Country"};
+		return dataName;
+	}
+	
+	public String[] getData() {
+		String[] data = {Name, Country};
+		return data;
+	}
+	
 	public String toString() {
 		return Name + "," + Country;
 	}

@@ -43,6 +43,7 @@ public class LogicXMLUser {
 
 					boolean userExists = false;
 					for (User existingUser : users) {
+						
 						if (existingUser.getUser().equals(user)) {
 							userExists = true;
 							break;

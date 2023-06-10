@@ -6,4 +6,4 @@
 		<TouristClassSeats>80</TouristClassSeats>
 		<EconomyClassSeats>100</EconomyClassSeats>
 	</models>
-</models>
+<models><modelName>700Boeing </modelName><brand>Administrador</brand><BusinessClassSeats>50</BusinessClassSeats><TouristClassSeats>40</TouristClassSeats><EconomyClassSeats>15</EconomyClassSeats></models></models>

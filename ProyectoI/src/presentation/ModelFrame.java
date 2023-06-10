@@ -49,6 +49,8 @@ public class ModelFrame extends JFrame {
 	// Scroll
 	private JScrollPane spTAirplaneModels;
 	private Object dataTable[][];
+	
+	
 	public ModelFrame() {
 		setType(Type.UTILITY);
 		setForeground(new Color(0, 0, 0));

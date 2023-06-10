@@ -19,6 +19,8 @@ public class ControllerAdmin implements ActionListener{
 		guiA.getBUsers().addActionListener(this);
 		guiA.getBBrands().addActionListener(this);
 		guiA.getBModels().addActionListener(this);
+		guiA.getBAirlines().addActionListener(this);
+		guiA.getBFlights().addActionListener(this);
 		
 	}
 
@@ -35,5 +37,13 @@ public class ControllerAdmin implements ActionListener{
 		if(guiA.getBModels() == e.getSource()) {
 			new ControllerAModel();
 		}
+		//------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		if(guiA.getBAirlines() == e.getSource()) {
+			new ControllerAAirline();
+		}
+		if(guiA.getBFlights() == e.getSource()) {
+			new ControllerAFlights();
+		}
+		
 	}
 }

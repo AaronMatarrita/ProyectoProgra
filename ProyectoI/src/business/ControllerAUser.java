@@ -16,10 +16,13 @@ import presentation.UserFrame;
 public class ControllerAUser implements ActionListener {
     private User Us;
     private UserFrame uF;
+    
     private CRUD crud;
     private LogicXML lXML;
+    
     private XMLFiles xmlF;
     private LogicXMLUser logicXMLUser;
+    
     private String fileName = "Users.xml";
     private String objectName = "person";
 

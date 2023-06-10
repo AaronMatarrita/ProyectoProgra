@@ -1,30 +1,32 @@
 package domain;
 
-import java.time.LocalDateTime;
-
 public class Flights {
 
 	private int FlightNumber;
     private String DepartureCity;
-    private LocalDateTime DepartureDateTime;
+    private String DepartureTime;
+    private String DepartureDate;
     private String ArrivalCity;
-    private LocalDateTime ArrivalDateTime;
-    private Airplane Airplane;
+    private String ArrivalTime;
+    private String ArrivalDate;
+    private String Airplane;
     private double BusinessClassSeatsPrice;
     private double TouristClassSeatsPrice;
     private double EconomyClassSeatsPrice;
     
     public Flights() {}
     
-    public Flights(int FlightNumber, String DepartureCity, LocalDateTime DepartureDateTime, 
-            String ArrivalCity, LocalDateTime ArrivalDateTime, Airplane Airplane, 
+    public Flights(int FlightNumber, String DepartureCity, String DepartureDate,String DepartureTime, 
+            String ArrivalCity, String ArrivalDate,String ArrivalTime, String Airplane, 
             double BusinessClassSeatsPrice, double TouristClassSeatsPrice, double EconomyClassSeatsPrice) {
     	super();
         this.FlightNumber = FlightNumber;
         this.DepartureCity = DepartureCity;
-        this.DepartureDateTime = DepartureDateTime;
+        this.DepartureDate = DepartureDate;
+        this.DepartureTime = DepartureTime;
         this.ArrivalCity = ArrivalCity;
-        this.ArrivalDateTime = ArrivalDateTime;
+        this.ArrivalDate = ArrivalDate;
+        this.ArrivalTime = ArrivalTime;
         this.Airplane = Airplane;
         this.BusinessClassSeatsPrice = BusinessClassSeatsPrice;
         this.TouristClassSeatsPrice = TouristClassSeatsPrice;
@@ -47,12 +49,19 @@ public class Flights {
 		DepartureCity = departureCity;
 	}
 
-	public LocalDateTime getDepartureDateTime() {
-		return DepartureDateTime;
+	public String getDepartureTime() {
+		return DepartureTime;
 	}
 
-	public void setDepartureDateTime(LocalDateTime departureDateTime) {
-		DepartureDateTime = departureDateTime;
+	public void setDepartureTime(String departureTime) {
+		DepartureTime = departureTime;
+	}
+	public String getDepartureDate() {
+		return DepartureDate;
+	}
+
+	public void setDepartureDate(String departureDate) {
+		DepartureDate = departureDate;
 	}
 
 	public String getArrivalCity() {
@@ -63,19 +72,27 @@ public class Flights {
 		ArrivalCity = arrivalCity;
 	}
 
-	public LocalDateTime getArrivalDateTime() {
-		return ArrivalDateTime;
+	public String getArrivalTime() {
+		return ArrivalTime;
+	}
+	
+	public String getArrivalDate() {
+		return ArrivalDate;
 	}
 
-	public void setArrivalDateTime(LocalDateTime arrivalDateTime) {
-		ArrivalDateTime = arrivalDateTime;
+	public void setArrivalDate(String arrivalDate) {
+		ArrivalDate = arrivalDate;
+	}
+	
+	public void setArrivalTime(String arrivalTime) {
+		ArrivalTime = arrivalTime;
 	}
 
-	public Airplane getAirplane() {
+	public String getAirplane() {
 		return Airplane;
 	}
 
-	public void setAirplane(Airplane airplane) {
+	public void setAirplane(String airplane) {
 		Airplane = airplane;
 	}
 
@@ -97,6 +114,21 @@ public class Flights {
 
 	public double getEconomyClassSeatsPrice() {
 		return EconomyClassSeatsPrice;
+	}
+	
+
+	public String[] getDataName() {
+		String[] dataName = {"FlightNumber", "DepartureCity", "DepartureDate","DepartureTime", "ArrivalCity"
+				,"ArrivalDate","ArrivalTime","Airplane","BusinessClassSeatsPrice","TouristClassSeatsPrice","EconomyClassSeatsPrice"};
+		return dataName;
+	}
+
+	public String[] getData() {
+		String[] data = {String.valueOf(FlightNumber), DepartureCity, DepartureDate,DepartureTime, ArrivalCity
+			,ArrivalDate,ArrivalTime,Airplane,String.valueOf(BusinessClassSeatsPrice),
+			String.valueOf(TouristClassSeatsPrice),String.valueOf(EconomyClassSeatsPrice)};
+			
+		return data;
 	}
 
 	public void setEconomyClassSeatsPrice(double economyClassSeatsPrice) {
