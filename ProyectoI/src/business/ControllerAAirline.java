@@ -56,7 +56,7 @@ public class ControllerAAirline implements ActionListener {
             if (airline.isEmpty() || aF.getTCountry().getText().isEmpty() ) {
                 JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos");
                 return;
-            } else if (lXML.isAlreadyInFile(fileName,objectName, "airline", airline)) {
+            } else if (lXML.isAlreadyInFile(fileName,objectName, "name", airline)) {
                 JOptionPane.showMessageDialog(null, "La Aerolinea ya existe");
                 return;
             } 
@@ -82,13 +82,13 @@ public class ControllerAAirline implements ActionListener {
             if (airline.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Por favor, complete el nombre de la Aerolinea a eliminar");
                 return;
-            } else if (!lXML.isAlreadyInFile(fileName, objectName	, "airline", airline)) {
+            } else if (!lXML.isAlreadyInFile(fileName, objectName	, "name", airline)) {
                 JOptionPane.showMessageDialog(null, "No se puede eliminar debido a que no existe");
                 return;
             }//No pueden existir aerolíneas con el mismo nombre y no pueden eliminarse aerolíneas que 
             //estén asociadas a un avión
                 aF.clean();
-                crud.deleteObject(fileName, objectName, "airline", airline);
+                crud.deleteObject(fileName, objectName, "name", airline);
                 JOptionPane.showMessageDialog(null, "Aerolinea eliminada");
                 setTableData();
 

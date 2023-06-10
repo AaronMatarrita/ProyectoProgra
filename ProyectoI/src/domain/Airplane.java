@@ -3,14 +3,16 @@ package domain;
 public class Airplane {
 
 	private String Id;
-	private Airline Airline;
-	private AirplaneModel AirplaneModel;
+	private String Year;
+	private String Airline;
+	private String AirplaneModel;
 	
 	public Airplane() {}
 
-	public Airplane(String Id, domain.Airline Airline, domain.AirplaneModel AirplaneModel) {
+	public Airplane(String Id,String Year, String Airline, String AirplaneModel) {
 		super();
 		this.Id = Id;
+		this.Year = Year;
 		this.Airline = Airline;
 		this.AirplaneModel = AirplaneModel;
 	}
@@ -22,25 +24,45 @@ public class Airplane {
 	public void setId(String Id) {
 		this.Id = Id;
 	}
+	
 
-	public Airline getAirline() {
+	public String getYear() {
+		return Year;
+	}
+
+	public void setYear(String year) {
+		Year = year;
+	}
+
+	public String getAirline() {
 		return Airline;
 	}
 
-	public void setAirline(Airline Airline) {
+	public void setAirline(String Airline) {
 		this.Airline = Airline;
 	}
 
-	public AirplaneModel getAirplaneModel() {
+	public String getAirplaneModel() {
 		return AirplaneModel;
 	}
 
-	public void setAirplaneModel(AirplaneModel AirplaneModel) {
+	public void setAirplaneModel(String AirplaneModel) {
 		this.AirplaneModel = AirplaneModel;
+	}
+	
+	public String[] getDataName() {
+		String[] dataName = {"id", "year", "airline", "model"};
+		return dataName;
+	}
+	
+	public String[] getData() {
+		String[] data = {Id, Year, Airline, AirplaneModel};
+		return data;
 	}
 
 	@Override
 	public String toString() {
-		return Id + "," + Airline + "," + AirplaneModel;
+		return Id +","+ Year +"," + Airline + "," + AirplaneModel;
 	}
+
 }

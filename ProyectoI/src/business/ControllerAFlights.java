@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import data.CRUD;
 import data.LogicXML;
 import data.LogicXMLFlights;
+import data.LogicXMLUser;
 import data.XMLFiles;
 import domain.Flights;
 import presentation.FlightsFrame;
@@ -29,10 +30,10 @@ public class ControllerAFlights implements ActionListener{
 
 	public ControllerAFlights() {
 		fF = new FlightsFrame();
-		Fl = new Flights();
 		crud = new CRUD();
 		lXML = new LogicXML();
 		xmlF = new XMLFiles();
+		logicXMLFlights = new LogicXMLFlights();
 		xmlF.createXML(fileName, objectName);
 		setTableData();
 		initializerAction();
@@ -67,15 +68,14 @@ public class ControllerAFlights implements ActionListener{
 			String priceTUR = fF.getTPriceTUR().getText();
 			String priceECO = fF.getTPriceECO().getText();
 			String airplane = fF.getTAirplane().getText();
-			JOptionPane.showMessageDialog(null, flightNumber);
-			System.out.println("si?");
+			JOptionPane.showMessageDialog(null, "El numero de vuelo es :"+flightNumber);
 
 			if (exitCity.isEmpty() || exitDate.isEmpty() || exitTime.isEmpty() ||
 				enterCity.isEmpty()|| enterDate.isEmpty()|| enterTime.isEmpty()||
 				priceEJE.isEmpty() || priceECO.isEmpty() || airplane.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos");
 				return;
-			} else if (lXML.isAlreadyInFile(fileName, objectName, "flightNumber" , flightNumber)) {
+			} else if (lXML.isAlreadyInFile(fileName, objectName, "FlightNumber" , flightNumber)) {
 				JOptionPane.showMessageDialog(null, "El vuelo ya existe");
 				return;
 			} 
@@ -105,13 +105,13 @@ public class ControllerAFlights implements ActionListener{
 			if (flightNumber.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Por favor, ingrese el codigo de vuelo");
 				return;
-			}else if(!lXML.isAlreadyInFile(fileName, objectName, "flightNumber" ,flightNumber)) {
+			}else if(!lXML.isAlreadyInFile(fileName, objectName, "FlightNumber" ,flightNumber)) {
 				JOptionPane.showMessageDialog(null, "No se puede eliminar debido a que no existe");return;}
 			else {
 				xmlF.createXML(fileName, objectName);
-				crud.deleteObject(fileName, objectName, "flightNumber", flightNumber);
+				crud.deleteObject(fileName, objectName, "FlightNumber", flightNumber);
 			}
-			JOptionPane.showMessageDialog(null, "Vuelo eliminada");
+			JOptionPane.showMessageDialog(null, "Vuelo eliminado");
 			setTableData();
 		}
 
