@@ -17,6 +17,7 @@ import javax.swing.JSeparator;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 
+@SuppressWarnings("serial")
 public class GUILogin extends JFrame {
 
 	private JPanel contentPane;

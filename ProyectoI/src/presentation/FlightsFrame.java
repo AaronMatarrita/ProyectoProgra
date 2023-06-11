@@ -8,7 +8,6 @@ import java.util.Random;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,11 +17,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
-
 import domain.Flights;
-import domain.User;
 
 @SuppressWarnings("serial")
 public class FlightsFrame extends JFrame {
@@ -380,10 +375,10 @@ public class FlightsFrame extends JFrame {
 		return columnsName;
 	}
 	
-	public void setJTableData(List<Flights> Flights) {
-	    Object[][] data = new Object[Flights.size()][11];
-	    for (int i = 0; i < Flights.size(); i++) {
-	        Flights flight = Flights.get(i);
+	public void setJTableData(List<Flights> flights) {
+	    Object[][] data = new Object[flights.size()][11];
+	    for (int i = 0; i < flights.size(); i++) {
+	        Flights flight = flights.get(i);
 
 	        data[i][0] = flight.getFlightNumber();
 	        data[i][1] = flight.getDepartureCity();
@@ -396,10 +391,10 @@ public class FlightsFrame extends JFrame {
 	        data[i][8] = flight.getBusinessClassSeatsPrice();
 	        data[i][9] = flight.getTouristClassSeatsPrice();
 	        data[i][10] = flight.getEconomyClassSeatsPrice();
-	        
 	    }
 	    dtmTFlights.setDataVector(data, getColumnsName());
 	}
+
 	
 	public void clean() {
 		getTEnterCity().setText("");

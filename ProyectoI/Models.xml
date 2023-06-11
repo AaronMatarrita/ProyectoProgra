@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><models>
-	<models>
-		<modelName>Boeing 747</modelName>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><models><models>
+		<modelName>700Boeing </modelName>
 		<brand>Administrador</brand>
-		<BusinessClassSeats>120</BusinessClassSeats>
-		<TouristClassSeats>80</TouristClassSeats>
-		<EconomyClassSeats>100</EconomyClassSeats>
-	</models>
-<models><modelName>700Boeing </modelName><brand>Administrador</brand><BusinessClassSeats>50</BusinessClassSeats><TouristClassSeats>40</TouristClassSeats><EconomyClassSeats>15</EconomyClassSeats></models></models>
+		<BusinessClassSeats>50</BusinessClassSeats>
+		<TouristClassSeats>40</TouristClassSeats>
+		<EconomyClassSeats>15</EconomyClassSeats>
+	</models></models>

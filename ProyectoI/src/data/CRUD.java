@@ -97,36 +97,49 @@ public class CRUD {
 	
 	//---------------------Método para eliminar un objeto del XML--------------------
 	public String deleteObject(String fileName, String elementType, String identifierName, String identifierValue) {
-		try {
-			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-			DocumentBuilder db = dbf.newDocumentBuilder();
-			Document doc = db.parse(new File(fileName));
-			doc.getDocumentElement().normalize();
+	    try {
+	        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+	        DocumentBuilder db = dbf.newDocumentBuilder();
+	        Document doc = db.parse(new File(fileName));
+	        doc.getDocumentElement().normalize();
 
-			NodeList nodeList = doc.getElementsByTagName(elementType);
+	        NodeList nodeList = doc.getElementsByTagName(elementType);
 
-			for (int i = 0; i < nodeList.getLength(); i++) {
-				Node node = nodeList.item(i);
-				if (node.getNodeType() == Node.ELEMENT_NODE) {
-					Element element = (Element) node;
-					Element identifierElement = (Element) element.getElementsByTagName(identifierName).item(0);
-					if (identifierElement != null) {
-						String value = identifierElement.getTextContent();
-						if (value.equals(identifierValue)) {
-							element.getParentNode().removeChild(element);
-							TransformerFactory transformerFactory = TransformerFactory.newInstance();
-							Transformer transformer = transformerFactory.newTransformer();
-							DOMSource source = new DOMSource(doc);
-							StreamResult result = new StreamResult(new File(fileName));
-							transformer.transform(source, result);
-							return "Registro eliminado";
-						}
-					}
-				}
-			}
-		} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
-			e.printStackTrace();
-		}
-		return "Registro no encontrado";
+	        Document newDoc = db.newDocument();
+	        Element rootElement = newDoc.createElement(doc.getDocumentElement().getNodeName());
+	        newDoc.appendChild(rootElement);
+
+	        boolean elementDeleted = false;
+
+	        for (int i = 0; i < nodeList.getLength(); i++) {
+	            Node node = nodeList.item(i);
+	            if (node.getNodeType() == Node.ELEMENT_NODE) {
+	                Element element = (Element) node;
+	                Element identifierElement = (Element) element.getElementsByTagName(identifierName).item(0);
+	                if (identifierElement != null) {
+	                    String value = identifierElement.getTextContent();
+	                    if (value.equals(identifierValue)) {
+	                        elementDeleted = true;
+	                    } else {
+	                        Node importedNode = newDoc.importNode(element, true);
+	                        rootElement.appendChild(importedNode);
+	                    }
+	                }
+	            }
+	        }
+
+	        if (elementDeleted) {
+	            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+	            Transformer transformer = transformerFactory.newTransformer();
+	            DOMSource source = new DOMSource(newDoc);
+	            StreamResult result = new StreamResult(new File(fileName));
+	            transformer.transform(source, result);
+	            return "Registro eliminado";
+	        }
+
+	    } catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
+	        e.printStackTrace();
+	    }
+	    return "Registro no encontrado";
 	}
 }

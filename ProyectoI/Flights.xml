@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flights>
+	<flights>
+		<FlightNumber>174</FlightNumber>
+		<DepartureCity>sa</DepartureCity>
+		<DepartureDate>1</DepartureDate>
+		<DepartureTime>1</DepartureTime>
+		<ArrivalCity>sa</ArrivalCity>
+		<ArrivalDate>1</ArrivalDate>
+		<ArrivalTime>1</ArrivalTime>
+		<Airplane>11</Airplane>
+		<BusinessClassSeatsPrice>1.0</BusinessClassSeatsPrice>
+		<TouristClassSeatsPrice>1.0</TouristClassSeatsPrice>
+		<EconomyClassSeatsPrice>1.0</EconomyClassSeatsPrice>
+	</flights>
+	<flights>
+		<FlightNumber>481</FlightNumber>
+		<DepartureCity>A</DepartureCity>
+		<DepartureDate>1</DepartureDate>
+		<DepartureTime>12</DepartureTime>
+		<ArrivalCity>A</ArrivalCity>
+		<ArrivalDate>1</ArrivalDate>
+		<ArrivalTime>12</ArrivalTime>
+		<Airplane>S</Airplane>
+		<BusinessClassSeatsPrice>1.0</BusinessClassSeatsPrice>
+		<TouristClassSeatsPrice>1.0</TouristClassSeatsPrice>
+		<EconomyClassSeatsPrice>1.0</EconomyClassSeatsPrice>
+	</flights>
+</flights>

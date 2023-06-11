@@ -7,7 +7,6 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,13 +16,10 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 
 import domain.Airline;
 
-
-
+@SuppressWarnings("serial")
 public class AirlineFrame extends JFrame {
 	//Paneles
     private JPanel panel;
@@ -241,11 +237,10 @@ public class AirlineFrame extends JFrame {
 		return columnsName;
 	}
 
-	public void setJTableData(List<Airline> Airline) {
-	    Object[][] data = new Object[Airline.size()][2];
-	    for (int i = 0; i < Airline.size(); i++) {
-	        Airline airline = Airline.get(i);
-
+	public void setJTableData(List<Airline> airlines) {
+	    Object[][] data = new Object[airlines.size()][2];
+	    for (int i = 0; i < airlines.size(); i++) {
+	        Airline airline = airlines.get(i);
 	        data[i][0] = airline.getName();
 	        data[i][1] = airline.getCountry();
 	    }
