@@ -216,7 +216,6 @@ public class BrandFrame extends JFrame {
 	}
     
     public void clean() {
-    	getTBrand().setText("");
-
+    	getTBrand().setText(" ");
     }
 }

@@ -21,6 +21,10 @@ public class LogicXMLAirline {
 	    ArrayList<Airline> airlines = new ArrayList<>();
 	    try {
 	        File file = new File(filename);
+	        if (!file.exists()) {
+	            return airlines;
+	        }
+
 	        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 	        DocumentBuilder builder = factory.newDocumentBuilder();
 	        Document doc = builder.parse(file);
@@ -36,21 +40,26 @@ public class LogicXMLAirline {
 	            Node node = nodeList.item(i);
 	            if (node.getNodeType() == Node.ELEMENT_NODE) {
 	                Element element = (Element) node;
-	                String name = element.getElementsByTagName("Name").item(0).getTextContent();
-	                String country = element.getElementsByTagName("Country").item(0).getTextContent();
+	                NodeList nameList = element.getElementsByTagName("Name");
+	                NodeList countryList = element.getElementsByTagName("Country");
 
-	                boolean airlineExists = false;
-	                for (Airline existingAirline : airlines) {
-	                    if (existingAirline.getName().equals(name)) {
-	                        airlineExists = true;
-	                        break;
+	                if (nameList.getLength() > 0 && countryList.getLength() > 0) {
+	                    String name = nameList.item(0).getTextContent();
+	                    String country = countryList.item(0).getTextContent();
+
+	                    boolean airlineExists = false;
+	                    for (Airline existingAirline : airlines) {
+	                        if (existingAirline.getName().equals(name)) {
+	                            airlineExists = true;
+	                            break;
+	                        }
 	                    }
-	                }
-	                if (!airlineExists) {
-	                    Airline airline = new Airline();
-	                    airline.setName(name);
-	                    airline.setCountry(country);
-	                    airlines.add(airline);
+	                    if (!airlineExists) {
+	                        Airline airline = new Airline();
+	                        airline.setName(name);
+	                        airline.setCountry(country);
+	                        airlines.add(airline);
+	                    }
 	                }
 	            }
 	        }

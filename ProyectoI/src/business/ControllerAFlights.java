@@ -56,7 +56,7 @@ public class ControllerAFlights implements ActionListener{
 		// TODO Auto-generated method stub
 			//------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		if (fF.getBAddFlights() == e.getSource()) {
-			String flightNumber = fF.getTFlightNumber();
+			String flightNumber = fF.getTRandomFlightNumber();
 			String exitCity = fF.getTExitCity().getText();
 			String exitDate = fF.getTExitDate().getText();
 			String exitTime = fF.getTExitTime().getText();
@@ -99,7 +99,7 @@ public class ControllerAFlights implements ActionListener{
 			//------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		}else if(fF.getBClear() == e.getSource()){
 			
-			String flightNumber = fF.getTFlightNumber();
+			String flightNumber =  String.valueOf(fF.getTFlightNum());
 			
 			if (flightNumber.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Por favor, ingrese el codigo de vuelo");

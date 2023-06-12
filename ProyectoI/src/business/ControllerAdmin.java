@@ -23,6 +23,7 @@ public class ControllerAdmin implements ActionListener{
 		guiA.getBAirplanes().addActionListener(this);
 		guiA.getBFlights().addActionListener(this);
 		guiA.getBPassengers().addActionListener(this);
+		guiA.getBTickets().addActionListener(this);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -54,6 +55,9 @@ public class ControllerAdmin implements ActionListener{
 		if(guiA.getBPassengers() == e.getSource()) {
 			new ControllerAPassenger();
 		}
-		
+		//------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		if(guiA.getBTickets() == e.getSource()) {
+			new ControllerATicket();
+		}
 	}
 }

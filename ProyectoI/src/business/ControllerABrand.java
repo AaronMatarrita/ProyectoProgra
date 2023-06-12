@@ -94,7 +94,7 @@ public class ControllerABrand implements ActionListener{
 	            if (dialogResult == JOptionPane.YES_OPTION) {
 	            	xmlF.createXML(fileName, objectName);
 	            	crud.deleteObject(fileName, objectName, "brand", brand);
-
+	            	bF.clean();
 	            	JOptionPane.showMessageDialog(null, "Marca eliminada");
 	            	setTableData();
 	            }

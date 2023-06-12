@@ -22,33 +22,33 @@ import domain.Flights;
 @SuppressWarnings("serial")
 public class FlightsFrame extends JFrame {
 	//Etiquetas
-    private JPanel panel;
-    private JPanel JPInfo;
-    private JLabel lTitle;
-    private JLabel lExitCity;
-    private JLabel lExitTime;
-    private JLabel lExitDate;
-    private JLabel lEnterTime;
-    private JLabel lEnterDate;
-    private JLabel lEnterCity;
-    private JLabel lAirplane;
-    //Botones
-    private JButton bAddFlights;
-    private JButton bUpdate;
-    private JButton bClear;
-    //Campos de Texto
-    private JTextField tExitCity;
-    private JTextField tExitTime;
-    private JTextField tExitDate;
-    private JTextField tEnterTime;
-    private JTextField tEnterDate;
-    private JTextField tAirplane;
-    private JTextField tEnterCity;
-    //Tabla
-    private DefaultTableModel dtmTFlights;
-    private JTable jTableFlights;
-    //Scroll
-    private JScrollPane spTFlights;
+	private JPanel panel;
+	private JPanel JPInfo;
+	private JLabel lTitle;
+	private JLabel lExitCity;
+	private JLabel lExitTime;
+	private JLabel lExitDate;
+	private JLabel lEnterTime;
+	private JLabel lEnterDate;
+	private JLabel lEnterCity;
+	private JLabel lAirplane;
+	//Botones
+	private JButton bAddFlights;
+	private JButton bUpdate;
+	private JButton bClear;
+	//Campos de Texto
+	private JTextField tExitCity;
+	private JTextField tExitTime;
+	private JTextField tExitDate;
+	private JTextField tEnterTime;
+	private JTextField tEnterDate;
+	private JTextField tAirplane;
+	private JTextField tEnterCity;
+	//Tabla
+	private DefaultTableModel dtmTFlights;
+	private JTable jTableFlights;
+	//Scroll
+	private JScrollPane spTFlights;
 	private Object dataTable[][];
 	private JTextField tPriceEJE;
 	private JLabel lpriceEJE;
@@ -56,157 +56,162 @@ public class FlightsFrame extends JFrame {
 	private JTextField tPriceTUR;
 	private JTextField tPriceECO;
 	private JLabel lPriceECO;
+	private JLabel lFlightNumber;
+	private JTextField tFlightNum;
 
-    public FlightsFrame() {
-    	setType(Type.UTILITY);
-        setForeground(new Color(0, 0, 0));
-        setResizable(false);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 1000, 583);
-        setLocationRelativeTo(null);
-        getContentPane().setLayout(null);
-        getContentPane().add(getPanel());
-        setVisible(true);
-    }
 
-    public void showMessage(String message) {
-        JOptionPane.showMessageDialog(null, message);
-    }
+	public FlightsFrame() {
+		setType(Type.UTILITY);
+		setForeground(new Color(0, 0, 0));
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 1000, 583);
+		setLocationRelativeTo(null);
+		getContentPane().setLayout(null);
+		getContentPane().add(getPanel());
+		setVisible(true);
+	}
 
-    public JPanel getPanel() {
-        if (panel == null) {
-            panel = new JPanel();
-            panel.setBounds(0, 0, 984, 586);
-            panel.setLayout(null);
-            panel.add(getJPInfo());
-        }
-        return panel;
-    }
+	public void showMessage(String message) {
+		JOptionPane.showMessageDialog(null, message);
+	}
 
-    public JPanel getJPInfo() {
-        if (JPInfo == null) {
-            JPInfo = new JPanel();
-            JPInfo.setBackground(new Color(63, 37, 170));
-            JPInfo.setBounds(0, 0, 984, 544);
-            JPInfo.setLayout(null);
-          //JLabels
-            JPInfo.add(getLTitle());
-            JPInfo.add(getLExitCity());
-            JPInfo.add(getLExitDate());
-        	JPInfo.add(getLEnterDate());
+	public JPanel getPanel() {
+		if (panel == null) {
+			panel = new JPanel();
+			panel.setBounds(0, 0, 984, 586);
+			panel.setLayout(null);
+			panel.add(getJPInfo());
+		}
+		return panel;
+	}
+
+	public JPanel getJPInfo() {
+		if (JPInfo == null) {
+			JPInfo = new JPanel();
+			JPInfo.setBackground(new Color(63, 37, 170));
+			JPInfo.setBounds(0, 0, 984, 544);
+			JPInfo.setLayout(null);
+			//JLabels
+			JPInfo.add(getLTitle());
+			JPInfo.add(getLExitCity());
+			JPInfo.add(getLExitDate());
+			JPInfo.add(getLEnterDate());
 			JPInfo.add(getLEnterCity());
 			JPInfo.add(getLExitTime());
 			JPInfo.add(getLAirplane());
 			JPInfo.add(getLEnterTime());
-            //JTextFields
-            JPInfo.add(getTExitCity());
-            JPInfo.add(getTExitTime());
+			//JTextFields
+			JPInfo.add(getTExitCity());
+			JPInfo.add(getTExitTime());
 			JPInfo.add(getTExitDate());
 			JPInfo.add(getTEnterTime());
 			JPInfo.add(getTEnterDate());
 			JPInfo.add(getTEnterCity());
 			JPInfo.add(getTAirplane());
-            //JButtons
-            JPInfo.add(getBAddFlights());
-            JPInfo.add(getBUpdate());
-            JPInfo.add(getBClear());
+			//JButtons
+			JPInfo.add(getBAddFlights());
+			JPInfo.add(getBUpdate());
+			JPInfo.add(getBClear());
 
-            //JTable
-            setDTMFlights(dataTable, getColumnsName());
-	        setJTableFlights(getDTMFlights());
-	        setSPTableFlights(getJTableFlights());
-	        JPInfo.add(getSPTableFlights());
-	        JPInfo.add(getTPriceEJE());
-	        JPInfo.add(getLpriceEJE());
-	        JPInfo.add(getLPriceTUR());
-	        JPInfo.add(getTPriceTUR());
-	        JPInfo.add(getTPriceECO());
-	        JPInfo.add(getLPriceECO());
-			
-			
-        }
-        return JPInfo;
-    }
+			//JTable
+			setDTMFlights(dataTable, getColumnsName());
+			setJTableFlights(getDTMFlights());
+			setSPTableFlights(getJTableFlights());
+			JPInfo.add(getSPTableFlights());
+			JPInfo.add(getTPriceEJE());
+			JPInfo.add(getLpriceEJE());
+			JPInfo.add(getLPriceTUR());
+			JPInfo.add(getTPriceTUR());
+			JPInfo.add(getTPriceECO());
+			JPInfo.add(getLPriceECO());
+			JPInfo.add(getLFlightNumber());
+			JPInfo.add(getTFlightNum());
 
-    public JLabel getLTitle() {
-        if (lTitle == null) {
-            lTitle = new JLabel("Gestión de vuelos");
-            lTitle.setHorizontalAlignment(SwingConstants.CENTER);
-            lTitle.setForeground(Color.WHITE);
-            lTitle.setFont(new Font("Roboto", Font.PLAIN, 30));
-            lTitle.setBounds(320, 10, 350, 50);
-        }
-        return lTitle;
-    }
 
-    public JLabel getLExitCity() {
-        if (lExitCity == null) {
-            lExitCity = new JLabel("Ciudad de salida:");
-            lExitCity.setForeground(new Color(255, 255, 255));
-            lExitCity.setFont(new Font("Roboto", Font.PLAIN, 16));
-            lExitCity.setBounds(49, 71, 130, 20);
-        }
-        return lExitCity;
-    }
+		}
+		return JPInfo;
+	}
 
-    public JButton getBAddFlights() {
-        if (bAddFlights == null) {
-            bAddFlights = new JButton("Agregar");
-            bAddFlights.setFont(new Font("Roboto", Font.PLAIN, 16));
-            bAddFlights.setIcon(new ImageIcon(FlightsFrame.class.getResource("/imagesMain/imagesButtons/add-button.png")));
-            bAddFlights.setBackground(new Color(28, 28, 28));
-            bAddFlights.setForeground(new Color(255, 255, 255));
-            bAddFlights.setFocusable(false);
-            bAddFlights.setBounds(190, 230, 130, 40);
-        }
-        return bAddFlights;
-    }
+	public JLabel getLTitle() {
+		if (lTitle == null) {
+			lTitle = new JLabel("Gestión de vuelos");
+			lTitle.setHorizontalAlignment(SwingConstants.CENTER);
+			lTitle.setForeground(Color.WHITE);
+			lTitle.setFont(new Font("Roboto", Font.PLAIN, 30));
+			lTitle.setBounds(320, 10, 350, 50);
+		}
+		return lTitle;
+	}
 
-    public JButton getBUpdate() {
-        if (bUpdate == null) {
-            bUpdate = new JButton("Modificar");
-            bUpdate.setFont(new Font("Roboto", Font.PLAIN, 16));
-            bUpdate.setIcon(new ImageIcon(FlightsFrame.class.getResource("/imagesMain/imagesButtons/update-button.png")));
-            bUpdate.setBackground(new Color(28, 28, 28));
-            bUpdate.setForeground(new Color(255, 255, 255));
-            bUpdate.setFocusable(false);
-            bUpdate.setBounds(390, 230, 130, 40);
-        }
-        return bUpdate;
-    }
+	public JLabel getLExitCity() {
+		if (lExitCity == null) {
+			lExitCity = new JLabel("Ciudad de salida:");
+			lExitCity.setForeground(new Color(255, 255, 255));
+			lExitCity.setFont(new Font("Roboto", Font.PLAIN, 16));
+			lExitCity.setBounds(10, 150, 150, 20);
+		}
+		return lExitCity;
+	}
 
-    public JButton getBClear() {
-        if (bClear == null) {
-            bClear = new JButton("Eliminar");
-            bClear.setFont(new Font("Roboto", Font.PLAIN, 16));
-            bClear.setIcon(new ImageIcon(FlightsFrame.class.getResource("/imagesMain/imagesButtons/delete-button.png")));
-            bClear.setBackground(new Color(28, 28, 28));
-            bClear.setForeground(new Color(255, 255, 255));
-            bClear.setFocusable(false);
-            bClear.setBounds(590, 230, 130, 40);
-        }
-        return bClear;
-    }
+	public JButton getBAddFlights() {
+		if (bAddFlights == null) {
+			bAddFlights = new JButton("Agregar");
+			bAddFlights.setFont(new Font("Roboto", Font.PLAIN, 16));
+			bAddFlights.setIcon(new ImageIcon(FlightsFrame.class.getResource("/imagesMain/imagesButtons/add-button.png")));
+			bAddFlights.setBackground(new Color(28, 28, 28));
+			bAddFlights.setForeground(new Color(255, 255, 255));
+			bAddFlights.setFocusable(false);
+			bAddFlights.setBounds(240, 330, 130, 40);
+		}
+		return bAddFlights;
+	}
 
-    public JTextField getTExitCity() {
-        if (tExitCity == null) {
-            tExitCity = new JTextField();
-            tExitCity.setBackground(new Color(28, 28, 28));
-            tExitCity.setForeground(new Color(255, 255, 255));
-            tExitCity.setFont(new Font("Roboto", Font.PLAIN, 16));
+	public JButton getBUpdate() {
+		if (bUpdate == null) {
+			bUpdate = new JButton("Modificar");
+			bUpdate.setFont(new Font("Roboto", Font.PLAIN, 16));
+			bUpdate.setIcon(new ImageIcon(FlightsFrame.class.getResource("/imagesMain/imagesButtons/update-button.png")));
+			bUpdate.setBackground(new Color(28, 28, 28));
+			bUpdate.setForeground(new Color(255, 255, 255));
+			bUpdate.setFocusable(false);
+			bUpdate.setBounds(440, 330, 130, 40);
+		}
+		return bUpdate;
+	}
+
+	public JButton getBClear() {
+		if (bClear == null) {
+			bClear = new JButton("Eliminar");
+			bClear.setFont(new Font("Roboto", Font.PLAIN, 16));
+			bClear.setIcon(new ImageIcon(FlightsFrame.class.getResource("/imagesMain/imagesButtons/delete-button.png")));
+			bClear.setBackground(new Color(28, 28, 28));
+			bClear.setForeground(new Color(255, 255, 255));
+			bClear.setFocusable(false);
+			bClear.setBounds(640, 330, 130, 40);
+		}
+		return bClear;
+	}
+
+	public JTextField getTExitCity() {
+		if (tExitCity == null) {
+			tExitCity = new JTextField();
+			tExitCity.setBackground(new Color(28, 28, 28));
+			tExitCity.setForeground(new Color(255, 255, 255));
+			tExitCity.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tExitCity.setBorder(BorderFactory.createEmptyBorder());
-            tExitCity.setBounds(185, 71, 150, 20);
-            tExitCity.setColumns(10);
-        }
-        return tExitCity;
-    }
-    
+			tExitCity.setBounds(170, 150, 150, 20);
+			tExitCity.setColumns(10);
+		}
+		return tExitCity;
+	}
+
 	public JLabel getLExitTime() {
 		if (lExitTime == null) {
 			lExitTime = new JLabel("Hora de salida:");
 			lExitTime.setForeground(Color.WHITE);
 			lExitTime.setFont(new Font("Dialog", Font.PLAIN, 16));
-			lExitTime.setBounds(65, 107, 106, 20);
+			lExitTime.setBounds(10, 200, 150, 20);
 		}
 		return lExitTime;
 	}
@@ -218,7 +223,7 @@ public class FlightsFrame extends JFrame {
 			tExitTime.setColumns(10);
 			tExitTime.setBorder(BorderFactory.createEmptyBorder());
 			tExitTime.setBackground(new Color(28, 28, 28));
-			tExitTime.setBounds(185, 107, 150, 20);
+			tExitTime.setBounds(170, 200, 150, 20);
 		}
 		return tExitTime;
 	}
@@ -230,7 +235,7 @@ public class FlightsFrame extends JFrame {
 			tExitDate.setColumns(10);
 			tExitDate.setBorder(BorderFactory.createEmptyBorder());
 			tExitDate.setBackground(new Color(28, 28, 28));
-			tExitDate.setBounds(185, 142, 150, 20);
+			tExitDate.setBounds(170, 250, 150, 20);
 		}
 		return tExitDate;
 	}
@@ -239,7 +244,7 @@ public class FlightsFrame extends JFrame {
 			lExitDate = new JLabel("Fecha de salida:");
 			lExitDate.setForeground(Color.WHITE);
 			lExitDate.setFont(new Font("Dialog", Font.PLAIN, 16));
-			lExitDate.setBounds(56, 142, 130, 20);
+			lExitDate.setBounds(10, 250, 150, 20);
 		}
 		return lExitDate;
 	}
@@ -248,7 +253,7 @@ public class FlightsFrame extends JFrame {
 			lEnterTime = new JLabel("Hora de llegada:");
 			lEnterTime.setForeground(Color.WHITE);
 			lEnterTime.setFont(new Font("Dialog", Font.PLAIN, 16));
-			lEnterTime.setBounds(375, 107, 130, 20);
+			lEnterTime.setBounds(340, 200, 150, 20);
 		}
 		return lEnterTime;
 	}
@@ -260,7 +265,7 @@ public class FlightsFrame extends JFrame {
 			tEnterTime.setColumns(10);
 			tEnterTime.setBorder(BorderFactory.createEmptyBorder());
 			tEnterTime.setBackground(new Color(28, 28, 28));
-			tEnterTime.setBounds(502, 107, 150, 20);
+			tEnterTime.setBounds(500, 200, 150, 20);
 		}
 		return tEnterTime;
 	}
@@ -272,7 +277,7 @@ public class FlightsFrame extends JFrame {
 			tEnterDate.setColumns(10);
 			tEnterDate.setBorder(BorderFactory.createEmptyBorder());
 			tEnterDate.setBackground(new Color(28, 28, 28));
-			tEnterDate.setBounds(502, 142, 150, 20);
+			tEnterDate.setBounds(500, 250, 150, 20);
 		}
 		return tEnterDate;
 	}
@@ -281,7 +286,7 @@ public class FlightsFrame extends JFrame {
 			lEnterDate = new JLabel("Fecha de llegada:");
 			lEnterDate.setForeground(Color.WHITE);
 			lEnterDate.setFont(new Font("Dialog", Font.PLAIN, 16));
-			lEnterDate.setBounds(363, 142, 140, 20);
+			lEnterDate.setBounds(340, 250, 150, 20);
 		}
 		return lEnterDate;
 	}
@@ -290,7 +295,7 @@ public class FlightsFrame extends JFrame {
 			lEnterCity = new JLabel("Ciudad de llegada:");
 			lEnterCity.setForeground(Color.WHITE);
 			lEnterCity.setFont(new Font("Dialog", Font.PLAIN, 16));
-			lEnterCity.setBounds(357, 71, 150, 20);
+			lEnterCity.setBounds(340, 150, 150, 20);
 		}
 		return lEnterCity;
 	}
@@ -302,7 +307,7 @@ public class FlightsFrame extends JFrame {
 			tEnterCity.setColumns(10);
 			tEnterCity.setBorder(BorderFactory.createEmptyBorder());
 			tEnterCity.setBackground(new Color(28, 28, 28));
-			tEnterCity.setBounds(502, 71, 150, 20);
+			tEnterCity.setBounds(500, 150, 150, 20);
 		}
 		return tEnterCity;
 	}
@@ -311,7 +316,7 @@ public class FlightsFrame extends JFrame {
 			lAirplane = new JLabel("Avion:");
 			lAirplane.setForeground(Color.WHITE);
 			lAirplane.setFont(new Font("Dialog", Font.PLAIN, 16));
-			lAirplane.setBounds(340, 183, 59, 20);
+			lAirplane.setBounds(340, 100, 150, 20);
 		}
 		return lAirplane;
 	}
@@ -323,17 +328,18 @@ public class FlightsFrame extends JFrame {
 			tAirplane.setColumns(10);
 			tAirplane.setBorder(BorderFactory.createEmptyBorder());
 			tAirplane.setBackground(new Color(28, 28, 28));
-			tAirplane.setBounds(409, 183, 150, 20);
+			tAirplane.setBounds(500, 100, 150, 20);
 		}
 		return tAirplane;
 	}
-	
-	public String getTFlightNumber() {
-        Random random = new Random();
-        int randomNumber = random.nextInt(900) + 100;
-    return String.valueOf(randomNumber);
+
+	public String getTRandomFlightNumber() {
+		Random random = new Random();
+		int randomNumber = random.nextInt(900) + 100;
+		tFlightNum.setText(getTRandomFlightNumber());
+		return String.valueOf(randomNumber);
 	}
-	
+
 	public void setDTMFlights(Object data[][], String[] columnsName) {
 		dtmTFlights = new DefaultTableModel(data, columnsName);
 	}
@@ -363,7 +369,7 @@ public class FlightsFrame extends JFrame {
 
 	public void setSPTableFlights(JTable jTableFlights) {
 		spTFlights = new JScrollPane(jTableFlights);
-		spTFlights.setBounds(10, 350, 964, 125);
+		spTFlights.setBounds(10, 408, 964, 125);
 	}
 
 	public JScrollPane getSPTableFlights() {
@@ -374,28 +380,28 @@ public class FlightsFrame extends JFrame {
 		String columnsName[] = {"Numero de Vuelo", "Ciudad de salida", "Fecha de salida","Hora de salida", "Ciudad de llegada", "Fecha de llegada", "Hora de llegada", "Avion","Monto Ejecutivos", "Monto Turistas","Monto Economico"};                                                                            
 		return columnsName;
 	}
-	
-	public void setJTableData(List<Flights> flights) {
-	    Object[][] data = new Object[flights.size()][11];
-	    for (int i = 0; i < flights.size(); i++) {
-	        Flights flight = flights.get(i);
 
-	        data[i][0] = flight.getFlightNumber();
-	        data[i][1] = flight.getDepartureCity();
-	        data[i][2] = flight.getDepartureDate();
-	        data[i][3] = flight.getDepartureTime();
-	        data[i][4] = flight.getArrivalCity();
-	        data[i][5] = flight.getArrivalDate();
-	        data[i][6] = flight.getArrivalTime();
-	        data[i][7] = flight.getAirplane();
-	        data[i][8] = flight.getBusinessClassSeatsPrice();
-	        data[i][9] = flight.getTouristClassSeatsPrice();
-	        data[i][10] = flight.getEconomyClassSeatsPrice();
-	    }
-	    dtmTFlights.setDataVector(data, getColumnsName());
+	public void setJTableData(List<Flights> flights) {
+		Object[][] data = new Object[flights.size()][11];
+		for (int i = 0; i < flights.size(); i++) {
+			Flights flight = flights.get(i);
+
+			data[i][0] = flight.getFlightNumber();
+			data[i][1] = flight.getDepartureCity();
+			data[i][2] = flight.getDepartureDate();
+			data[i][3] = flight.getDepartureTime();
+			data[i][4] = flight.getArrivalCity();
+			data[i][5] = flight.getArrivalDate();
+			data[i][6] = flight.getArrivalTime();
+			data[i][7] = flight.getAirplane();
+			data[i][8] = flight.getBusinessClassSeatsPrice();
+			data[i][9] = flight.getTouristClassSeatsPrice();
+			data[i][10] = flight.getEconomyClassSeatsPrice();
+		}
+		dtmTFlights.setDataVector(data, getColumnsName());
 	}
 
-	
+
 	public void clean() {
 		getTEnterCity().setText("");
 		getTEnterDate().setText("");
@@ -404,12 +410,12 @@ public class FlightsFrame extends JFrame {
 		getTPriceTUR().setText("");
 		getTPriceECO().setText("");
 		getTAirplane().setText("");
-    	getTExitCity().setText("");
-    	getTExitDate().setText("");
-    	getTExitTime().setText("");
-    	
+		getTExitCity().setText("");
+		getTExitDate().setText("");
+		getTExitTime().setText("");
 
-    }
+
+	}
 	public JTextField getTPriceEJE() {
 		if (tPriceEJE == null) {
 			tPriceEJE = new JTextField();
@@ -418,25 +424,25 @@ public class FlightsFrame extends JFrame {
 			tPriceEJE.setColumns(10);
 			tPriceEJE.setBorder(BorderFactory.createEmptyBorder());
 			tPriceEJE.setBackground(new Color(28, 28, 28));
-			tPriceEJE.setBounds(739, 71, 150, 20);
+			tPriceEJE.setBounds(824, 100, 150, 20);
 		}
 		return tPriceEJE;
 	}
 	public JLabel getLpriceEJE() {
 		if (lpriceEJE == null) {
-			lpriceEJE = new JLabel("Monto Asientos Ejecutivos");
+			lpriceEJE = new JLabel("Asientos Ejecutivos:");
 			lpriceEJE.setForeground(Color.WHITE);
 			lpriceEJE.setFont(new Font("Dialog", Font.PLAIN, 16));
-			lpriceEJE.setBounds(723, 46, 183, 20);
+			lpriceEJE.setBounds(660, 100, 150, 20);
 		}
 		return lpriceEJE;
 	}
 	public JLabel getLPriceTUR() {
 		if (lPriceTUR == null) {
-			lPriceTUR = new JLabel("Monto Asientos Turistas");
+			lPriceTUR = new JLabel("Asientos Turistas:");
 			lPriceTUR.setForeground(Color.WHITE);
 			lPriceTUR.setFont(new Font("Dialog", Font.PLAIN, 16));
-			lPriceTUR.setBounds(729, 102, 197, 20);
+			lPriceTUR.setBounds(660, 150, 150, 20);
 		}
 		return lPriceTUR;
 	}
@@ -448,7 +454,7 @@ public class FlightsFrame extends JFrame {
 			tPriceTUR.setColumns(10);
 			tPriceTUR.setBorder(BorderFactory.createEmptyBorder());
 			tPriceTUR.setBackground(new Color(28, 28, 28));
-			tPriceTUR.setBounds(739, 133, 150, 20);
+			tPriceTUR.setBounds(825, 150, 150, 20);
 		}
 		return tPriceTUR;
 	}
@@ -460,17 +466,38 @@ public class FlightsFrame extends JFrame {
 			tPriceECO.setColumns(10);
 			tPriceECO.setBorder(BorderFactory.createEmptyBorder());
 			tPriceECO.setBackground(new Color(28, 28, 28));
-			tPriceECO.setBounds(739, 195, 150, 20);
+			tPriceECO.setBounds(824, 200, 150, 20);
 		}
 		return tPriceECO;
 	}
 	public JLabel getLPriceECO() {
 		if (lPriceECO == null) {
-			lPriceECO = new JLabel("Monto Asientos Economicos");
+			lPriceECO = new JLabel("Asientos Economicos:");
 			lPriceECO.setForeground(Color.WHITE);
 			lPriceECO.setFont(new Font("Dialog", Font.PLAIN, 16));
-			lPriceECO.setBounds(712, 164, 214, 20);
+			lPriceECO.setBounds(660, 200, 160, 20);
 		}
 		return lPriceECO;
+	}
+	public JLabel getLFlightNumber() {
+		if (lFlightNumber == null) {
+			lFlightNumber = new JLabel("Número de vuelo:");
+			lFlightNumber.setForeground(Color.WHITE);
+			lFlightNumber.setFont(new Font("Dialog", Font.PLAIN, 16));
+			lFlightNumber.setBounds(10, 100, 150, 20);
+		}
+		return lFlightNumber;
+	}
+	public JTextField getTFlightNum() {
+		if (tFlightNum == null) {
+			tFlightNum = new JTextField();
+			tFlightNum.setForeground(Color.WHITE);
+			tFlightNum.setFont(new Font("Dialog", Font.PLAIN, 16));
+			tFlightNum.setColumns(10);
+			tFlightNum.setBorder(BorderFactory.createEmptyBorder());
+			tFlightNum.setBackground(new Color(28, 28, 28));
+			tFlightNum.setBounds(170, 100, 150, 20);
+		}
+		return tFlightNum;
 	}
 }
