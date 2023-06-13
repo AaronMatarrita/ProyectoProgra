@@ -2,6 +2,7 @@ package presentation;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -27,7 +28,7 @@ public class ModelFrame extends JFrame {
 	private JPanel JPInfo;
 	//Etiquetas
 	private JLabel lTitle;
-	private JLabel lName;
+	private JLabel lModel;
 	private JLabel lCEjecutive;
 	private JLabel lBrand;
 	private JLabel lCTurist;
@@ -37,7 +38,7 @@ public class ModelFrame extends JFrame {
 	private JButton bUpdate;
 	private JButton bClear;
 	//Campos de texto
-	private JTextField tName;
+	private JTextField tModel;
 	private JTextField tCEjecutive;
 	private JTextField tCTurist;
 	private JTextField tCEco;
@@ -86,12 +87,12 @@ public class ModelFrame extends JFrame {
 
 			//JLabels
 			JPInfo.add(getLTitle());
-			JPInfo.add(getLName());
+			JPInfo.add(getLModel());
 			JPInfo.add(getLCEjecutive());
 			JPInfo.add(getLBrand());
 
 			//JTextFields
-			JPInfo.add(getTName());
+			JPInfo.add(getTModel());
 			JPInfo.add(getTCEjecutive());
 			JPInfo.add(getLCTurist());
 			JPInfo.add(getTCTurist());
@@ -121,27 +122,27 @@ public class ModelFrame extends JFrame {
 			lTitle.setHorizontalAlignment(SwingConstants.CENTER);
 			lTitle.setForeground(Color.WHITE);
 			lTitle.setFont(new Font("Roboto", Font.PLAIN, 30));
-			lTitle.setBounds(320, 10, 293, 50);
+			lTitle.setBounds(320, 10, 350, 50);
 		}
 		return lTitle;
 	}
 
-	public JLabel getLName() {
-		if (lName == null) {
-			lName = new JLabel("Nombre:");
-			lName.setForeground(new Color(255, 255, 255));
-			lName.setFont(new Font("Roboto", Font.PLAIN, 16));
-			lName.setBounds(200, 85, 100, 20);
+	public JLabel getLModel() {
+		if (lModel == null) {
+			lModel = new JLabel("Modelo:");
+			lModel.setForeground(new Color(255, 255, 255));
+			lModel.setFont(new Font("Roboto", Font.PLAIN, 16));
+			lModel.setBounds(10, 100, 150, 20);
 		}
-		return lName;
+		return lModel;
 	}
 
 	public JLabel getLCEjecutive() {
 		if (lCEjecutive == null) {
-			lCEjecutive = new JLabel("Cantidad asientos clase Ejecutiva:");
+			lCEjecutive = new JLabel("Asientos Ejecutivos:");
 			lCEjecutive.setForeground(Color.WHITE);
 			lCEjecutive.setFont(new Font("Roboto", Font.PLAIN, 16));
-			lCEjecutive.setBounds(22, 108, 243, 32);
+			lCEjecutive.setBounds(10, 150, 150, 20);
 		}
 		return lCEjecutive;
 	}
@@ -151,27 +152,27 @@ public class ModelFrame extends JFrame {
 			lBrand = new JLabel("Marca del Avion:");
 			lBrand.setForeground(Color.WHITE);
 			lBrand.setFont(new Font("Roboto", Font.PLAIN, 16));
-			lBrand.setBounds(489, 131, 130, 20);
+			lBrand.setBounds(654, 100, 130, 20);
 		}
 		return lBrand;
 	}
 
 	public JLabel getLCTurist() {
 		if (lCTurist == null) {
-			lCTurist = new JLabel("Cantidad asientos clase Turista:");
+			lCTurist = new JLabel("Asientos Turistas:");
 			lCTurist.setForeground(Color.WHITE);
-			lCTurist.setFont(new Font("Dialog", Font.PLAIN, 16));
-			lCTurist.setBounds(32, 139, 223, 32);
+			lCTurist.setFont(new Font("Roboto", Font.PLAIN, 16));
+			lCTurist.setBounds(10, 200, 150, 20);
 		}
 		return lCTurist;
 	}
 
 	public JLabel getLCEco() {
 		if (lCEco == null) {
-			lCEco = new JLabel("Cantidad asientos clase Economica:");
+			lCEco = new JLabel("Asientos Economicos:");
 			lCEco.setForeground(Color.WHITE);
-			lCEco.setFont(new Font("Dialog", Font.PLAIN, 16));
-			lCEco.setBounds(10, 170, 278, 32);
+			lCEco.setFont(new Font("Roboto", Font.PLAIN, 16));
+			lCEco.setBounds(654, 150, 160, 20);
 		}
 		return lCEco;
 	}
@@ -184,7 +185,7 @@ public class ModelFrame extends JFrame {
 			bAddModel.setBackground(new Color(28, 28, 28));
 			bAddModel.setForeground(new Color(255, 255, 255));
 			bAddModel.setFocusable(false);
-			bAddModel.setBounds(190, 230, 130, 40);
+			bAddModel.setBounds(240, 330, 130, 40);
 		}
 		return bAddModel;
 	}
@@ -197,7 +198,7 @@ public class ModelFrame extends JFrame {
 			bUpdate.setBackground(new Color(28, 28, 28));
 			bUpdate.setForeground(new Color(255, 255, 255));
 			bUpdate.setFocusable(false);
-			bUpdate.setBounds(390, 230, 130, 40);
+			bUpdate.setBounds(440, 330, 130, 40);
 		}
 		return bUpdate;
 	}
@@ -210,22 +211,22 @@ public class ModelFrame extends JFrame {
 			bClear.setBackground(new Color(28, 28, 28));
 			bClear.setForeground(new Color(255, 255, 255));
 			bClear.setFocusable(false);
-			bClear.setBounds(590, 230, 130, 40);
+			bClear.setBounds(640, 330, 130, 40);
 		}
 		return bClear;
 	}
 
-	public JTextField getTName() {
-		if (tName == null) {
-			tName = new JTextField();
-			tName.setBackground(new Color(28, 28, 28));
-			tName.setForeground(new Color(255, 255, 255));
-			tName.setFont(new Font("Roboto", Font.PLAIN, 16));
-			tName.setBorder(BorderFactory.createEmptyBorder());
-			tName.setBounds(283, 83, 150, 20);
-			tName.setColumns(10);
+	public JTextField getTModel() {
+		if (tModel == null) {
+			tModel = new JTextField();
+			tModel.setBackground(new Color(28, 28, 28));
+			tModel.setForeground(new Color(255, 255, 255));
+			tModel.setFont(new Font("Roboto", Font.PLAIN, 16));
+			tModel.setBorder(BorderFactory.createEmptyBorder());
+			tModel.setBounds(170, 100, 150, 20);
+			tModel.setColumns(10);
 		}
-		return tName;
+		return tModel;
 	}
 
 	public JTextField getTCEjecutive() {
@@ -236,7 +237,7 @@ public class ModelFrame extends JFrame {
 			tCEjecutive.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tCEjecutive.setBorder(BorderFactory.createEmptyBorder());
 			tCEjecutive.setColumns(10);
-			tCEjecutive.setBounds(283, 114, 150, 20);
+			tCEjecutive.setBounds(170, 150, 150, 20);
 		}
 		return tCEjecutive;
 	}
@@ -246,11 +247,11 @@ public class ModelFrame extends JFrame {
 		if (tCTurist == null) {
 			tCTurist = new JTextField();
 			tCTurist.setForeground(Color.WHITE);
-			tCTurist.setFont(new Font("Dialog", Font.PLAIN, 16));
+			tCTurist.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tCTurist.setColumns(10);
 			tCTurist.setBorder(BorderFactory.createEmptyBorder());
 			tCTurist.setBackground(new Color(28, 28, 28));
-			tCTurist.setBounds(283, 145, 150, 20);
+			tCTurist.setBounds(170, 200, 150, 20);
 		}
 		return tCTurist;
 	}
@@ -259,28 +260,35 @@ public class ModelFrame extends JFrame {
 		if (tCEco == null) {
 			tCEco = new JTextField();
 			tCEco.setForeground(Color.WHITE);
-			tCEco.setFont(new Font("Dialog", Font.PLAIN, 16));
+			tCEco.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tCEco.setColumns(10);
 			tCEco.setBorder(BorderFactory.createEmptyBorder());
 			tCEco.setBackground(new Color(28, 28, 28));
-			tCEco.setBounds(283, 176, 150, 20);
+			tCEco.setBounds(824, 150, 150, 20);
 		}
 		return tCEco;
 	}
-
+	
+	
 	public JComboBox<String> getCBrands() {
 		if (cBrands == null) {
-			String arrayCBAirplaneModelType[] = {"Indefinido", "Administrador", "Colaborador"};
-			cBrands = new JComboBox(arrayCBAirplaneModelType);
+			cBrands = new JComboBox<String>();
 			cBrands.setBackground(new Color(28, 28, 28));
 			cBrands.setForeground(new Color(255, 255, 255));
 			cBrands.setFont(new Font("Roboto", Font.PLAIN, 16));
 			cBrands.setBorder(BorderFactory.createEmptyBorder());
-			cBrands.setBounds(629, 130, 150, 22);
+			cBrands.setBounds(824, 100, 150, 20);
 		}
 		return cBrands;
 	}
 
+	public void fillBrandComboBox(ArrayList<String> brands) {
+		cBrands.addItem("Indefinido");
+	    for (String brand : brands) {
+	        cBrands.addItem(brand);
+	    }
+	}
+	
 	public void setDTMAirplaneModels(Object data[][], String[] columnsName) {
 		dtmTAirplaneModels = new DefaultTableModel(data, columnsName);
 	}
@@ -310,7 +318,7 @@ public class ModelFrame extends JFrame {
 
 	public void setSPTableAirplaneModels(JTable jTableAirplaneModels) {
 		spTAirplaneModels = new JScrollPane(jTableAirplaneModels);
-		spTAirplaneModels.setBounds(10, 350, 964, 125);
+		spTAirplaneModels.setBounds(10, 400, 964, 133);
 	}
 
 	public JScrollPane getSPTableAirplaneModels() {
@@ -337,7 +345,7 @@ public class ModelFrame extends JFrame {
 	}
 
 	public void clean() {
-		getTName().setText("");
+		getTModel().setText("");
 		getTCEjecutive().setText("");
 		getTCEco().setText("");
 		getTCTurist().setText("");

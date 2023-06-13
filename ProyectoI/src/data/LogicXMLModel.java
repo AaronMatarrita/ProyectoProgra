@@ -17,14 +17,14 @@ import org.xml.sax.SAXException;
 import domain.AirplaneModel;
 
 public class LogicXMLModel {
-
+	//------------------------------------------------------------------
+	//Método para obtener una lista de tipo AirplaneModel
 	public ArrayList<AirplaneModel> readXMLFile(String filename) {
 		ArrayList<AirplaneModel> airplaneModels = new ArrayList<>();
 		File file = new File(filename);
 		if (!file.exists()) {
 			return airplaneModels;
-		}else {
-
+		} else {
 			try {
 				DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 				DocumentBuilder builder = factory.newDocumentBuilder();
@@ -33,35 +33,43 @@ public class LogicXMLModel {
 
 				NodeList nodeList = doc.getElementsByTagName("models");
 				if (nodeList.getLength() == 0) {
-                    return airplaneModels;
-                }
+					return airplaneModels;
+				}
 
 				for (int i = 0; i < nodeList.getLength(); i++) {
 					Node node = nodeList.item(i);
 					if (node != null && node.getNodeType() == Node.ELEMENT_NODE) {
 						Element element = (Element) node;
-						String modelName = element.getElementsByTagName("modelName").item(0).getTextContent();
-						String brand = element.getElementsByTagName("brand").item(0).getTextContent();
-						int businessClassSeats = Integer.parseInt(element.getElementsByTagName("BusinessClassSeats").item(0).getTextContent());
-						int touristClassSeats = Integer.parseInt(element.getElementsByTagName("TouristClassSeats").item(0).getTextContent());
-						int economyClassSeats = Integer.parseInt(element.getElementsByTagName("EconomyClassSeats").item(0).getTextContent());
 
-						AirplaneModel airplaneModel = new AirplaneModel();
-						airplaneModel.setName(modelName);
-						airplaneModel.setBrand(brand);
-						airplaneModel.setBusinessClassSeats(businessClassSeats);
-						airplaneModel.setTouristClassSeats(touristClassSeats);
-						airplaneModel.setEconomyClassSeats(economyClassSeats);
+						Node modelNameNode = element.getElementsByTagName("modelName").item(0);
+						Node brandNode = element.getElementsByTagName("brand").item(0);
+						Node businessClassSeatsNode = element.getElementsByTagName("BusinessClassSeats").item(0);
+						Node touristClassSeatsNode = element.getElementsByTagName("TouristClassSeats").item(0);
+						Node economyClassSeatsNode = element.getElementsByTagName("EconomyClassSeats").item(0);
 
-						boolean modelExists = false;
-						for (AirplaneModel existingModel : airplaneModels) {
-							if (existingModel.getName().equals(modelName)) {
-								modelExists = true;
-								break;
+						if (modelNameNode != null && brandNode != null && businessClassSeatsNode != null && touristClassSeatsNode != null && economyClassSeatsNode != null) {
+							String modelName = modelNameNode.getTextContent();
+							String brand = brandNode.getTextContent();
+							int businessClassSeats = Integer.parseInt(businessClassSeatsNode.getTextContent());
+							int touristClassSeats = Integer.parseInt(touristClassSeatsNode.getTextContent());
+							int economyClassSeats = Integer.parseInt(economyClassSeatsNode.getTextContent());
+
+							boolean modelExists = false;
+							for (AirplaneModel existingModel : airplaneModels) {
+								if (existingModel.getName().equals(modelName)) {
+									modelExists = true;
+									break;
+								}
 							}
-						}
-						if (!modelExists) {
-							airplaneModels.add(airplaneModel);
+							if (!modelExists) {
+								AirplaneModel airplaneModel = new AirplaneModel();
+								airplaneModel.setName(modelName);
+								airplaneModel.setBrand(brand);
+								airplaneModel.setBusinessClassSeats(businessClassSeats);
+								airplaneModel.setTouristClassSeats(touristClassSeats);
+								airplaneModel.setEconomyClassSeats(economyClassSeats);
+								airplaneModels.add(airplaneModel);
+							}
 						}
 					}
 				}
@@ -70,5 +78,15 @@ public class LogicXMLModel {
 			}
 		}
 		return airplaneModels;
+	}
+	//------------------------------------------------------------------
+	//Método para obtener una lista de TIPO String con los modelos
+	public ArrayList<String> getAirplaneModels(String filename) {
+	    ArrayList<String> models = new ArrayList<>();
+	    ArrayList<AirplaneModel> airplaneModels = readXMLFile(filename);
+	    for (AirplaneModel model : airplaneModels) {
+	        models.add(model.getName());
+	    }
+	    return models;
 	}
 }

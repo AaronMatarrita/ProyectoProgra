@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<person>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><person>
 	<person>
 		<user>admin</user>
 		<password>admin</password>
@@ -18,12 +17,7 @@
 		<userType>2</userType>
 		<status>true</status>
 	</person>
-	<person>
-		<user>JosePeréz</user>
-		<password>sA23c_ks</password>
-		<userType>1</userType>
-		<status>true</status>
-	</person>
+	
 	<person>
 		<user>Juan</user>
 		<password>JaX12</password>

@@ -1,10 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<models>
-	<models>
-		<modelName>Boeing121</modelName>
-		<brand>Administrador</brand>
-		<BusinessClassSeats>120</BusinessClassSeats>
-		<TouristClassSeats>120</TouristClassSeats>
-		<EconomyClassSeats>120</EconomyClassSeats>
-	</models>
-</models>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><models><models><modelName>880</modelName><brand>Boeing</brand><BusinessClassSeats>120</BusinessClassSeats><TouristClassSeats>120</TouristClassSeats><EconomyClassSeats>120</EconomyClassSeats></models></models>

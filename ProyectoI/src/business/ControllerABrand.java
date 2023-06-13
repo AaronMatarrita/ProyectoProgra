@@ -21,7 +21,7 @@ public class ControllerABrand implements ActionListener{
 	private LogicXML lXML;
 	private LogicXMLBrand lXMLB;
 	private XMLFiles xmlF;
-	
+
 
 	private String fileName = "Brands.xml";
 	private String objectName = "brands";
@@ -36,12 +36,12 @@ public class ControllerABrand implements ActionListener{
 		setTableData();
 		initializerAction();
 	}
-	
+
 	private void setTableData() {
-        List<Brand> brands = lXMLB.readXMLFile(fileName);
-        bF.setJTableData(brands);
-    }
-	
+		List<Brand> brands = lXMLB.readXMLFile(fileName);
+		bF.setJTableData(brands);
+	}
+
 	public void initializerAction() {
 		//bF.addWindowListener(this);
 		bF.getBAddBrand().addActionListener(this);
@@ -53,7 +53,7 @@ public class ControllerABrand implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-			//------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		//------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		if (bF.getBAddBrand() == e.getSource()) {
 			String brand = bF.getTBrand().getText();
 
@@ -64,7 +64,6 @@ public class ControllerABrand implements ActionListener{
 				JOptionPane.showMessageDialog(null, "La Marca ya existe");
 				return;
 			} 
-
 			//No pueden existir marcas con el mismo nombre y no pueden eliminarse marcas que hayan 
 			//sido asociados con algún modelo de avión
 
@@ -73,7 +72,7 @@ public class ControllerABrand implements ActionListener{
 			crud.addObject(fileName, objectName, Br.getDataName(), Br.getData());
 
 			JOptionPane.showMessageDialog(null, "Marca agregada");
-			
+
 			setTableData();
 			//------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		}else if(bF.getBUpdate() == e.getSource()) {
@@ -85,19 +84,22 @@ public class ControllerABrand implements ActionListener{
 			if (brand.isEmpty() || bF.getTBrand().getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Por favor, ingrese el nombre de la marca");
 				return;
+			}else if(lXML.isAlreadyInFile("Models.xml", "models", "brand" , brand)) {
+				JOptionPane.showMessageDialog(null, "La Marca no se puede eliminar debido a que esta asociada a un modelo de avión");
+				return;
 			}else if(!lXML.isAlreadyInFile(fileName, objectName, "brand" , brand)) {
 				JOptionPane.showMessageDialog(null, "No se puede eliminar debido a que no existe");return;}
-			
-			 int dialogButton = JOptionPane.YES_NO_OPTION;
-	            int dialogResult = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar el usuario?", "Eliminar", dialogButton);
 
-	            if (dialogResult == JOptionPane.YES_OPTION) {
-	            	xmlF.createXML(fileName, objectName);
-	            	crud.deleteObject(fileName, objectName, "brand", brand);
-	            	bF.clean();
-	            	JOptionPane.showMessageDialog(null, "Marca eliminada");
-	            	setTableData();
-	            }
+			int dialogButton = JOptionPane.YES_NO_OPTION;
+			int dialogResult = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar la marca?", "Eliminar", dialogButton);
+
+			if (dialogResult == JOptionPane.YES_OPTION) {
+				xmlF.createXML(fileName, objectName);
+				crud.deleteObject(fileName, objectName, "brand", brand);
+				bF.clean();
+				JOptionPane.showMessageDialog(null, "Marca eliminada");
+				setTableData();
+			}
 		}
 	}
 }

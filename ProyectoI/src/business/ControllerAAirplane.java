@@ -8,7 +8,9 @@ import javax.swing.JOptionPane;
 
 import data.CRUD;
 import data.LogicXML;
+import data.LogicXMLAirline;
 import data.LogicXMLAirplane;
+import data.LogicXMLModel;
 import data.XMLFiles;
 import domain.Airplane;
 import presentation.AirplaneFrame;
@@ -22,6 +24,8 @@ public class ControllerAAirplane implements ActionListener {
     
     private XMLFiles xmlF;
     private LogicXMLAirplane logicXMLAirplane;
+    private LogicXMLModel lXMLM;
+    private LogicXMLAirline lXMLA;
     
     private String fileName = "Airplanes.xml";
     private String objectName = "airplanes";
@@ -31,11 +35,14 @@ public class ControllerAAirplane implements ActionListener {
         crud = new CRUD();
         lXML = new LogicXML();
         xmlF = new XMLFiles();
+        lXMLM = new LogicXMLModel();
+        lXMLA = new LogicXMLAirline();
         logicXMLAirplane = new LogicXMLAirplane();
         xmlF.createXML(fileName, objectName);
         setTableData();
         initializerAction();
-
+        aF.fillModelComboBox(lXMLM.getAirplaneModels("Models.xml"));
+        aF.fillAirlineComboBox(lXMLA.getAirlineList("Airlines.xml"));
     }
     
     private void setTableData() {
@@ -89,6 +96,9 @@ public class ControllerAAirplane implements ActionListener {
             String id = aF.getTId().getText();
             if (id.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Por favor, complete la matricula a eliminar");
+                return;
+            } else if (lXML.isAlreadyInFile("Flights.xml" , "flights", "Airplane", id)) {
+                JOptionPane.showMessageDialog(null, "El avión no se puede eliminar debido a que esta asociado con un vuelo");
                 return;
             } else if (!lXML.isAlreadyInFile(fileName , objectName, "id", id)) {
                 JOptionPane.showMessageDialog(null, "No se puede eliminar debido a que no existe");

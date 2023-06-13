@@ -16,7 +16,8 @@ import domain.Airline;
 public class LogicXMLAirline {
 
 	public LogicXMLAirline() {}	
-
+	//------------------------------------------------------------------
+	//Método para obtener una lista de TIPO Airline
 	public ArrayList<Airline> readXMLFile(String filename) {
 	    ArrayList<Airline> airlines = new ArrayList<>();
 	    try {
@@ -67,5 +68,15 @@ public class LogicXMLAirline {
 	        e.printStackTrace();
 	    }
 	    return airlines;
+	}
+	//------------------------------------------------------------------
+	//Método para obtener una lista de TIPO String con las aerolíneas
+	public ArrayList<String> getAirlineList(String filename) {
+	    ArrayList<String> airlineList = new ArrayList<>();
+	    ArrayList<Airline> airlines = readXMLFile(filename);
+	    for (Airline airline : airlines) {
+	        airlineList.add(airline.getName());
+	    }
+	    return airlineList;
 	}
 }

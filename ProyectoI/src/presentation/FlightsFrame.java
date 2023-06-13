@@ -2,6 +2,7 @@ package presentation;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -18,6 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import domain.Flights;
+import javax.swing.JComboBox;
 
 @SuppressWarnings("serial")
 public class FlightsFrame extends JFrame {
@@ -42,7 +44,6 @@ public class FlightsFrame extends JFrame {
 	private JTextField tExitDate;
 	private JTextField tEnterTime;
 	private JTextField tEnterDate;
-	private JTextField tAirplane;
 	private JTextField tEnterCity;
 	//Tabla
 	private DefaultTableModel dtmTFlights;
@@ -58,6 +59,7 @@ public class FlightsFrame extends JFrame {
 	private JLabel lPriceECO;
 	private JLabel lFlightNumber;
 	private JTextField tFlightNum;
+	private JComboBox<String> CBAirplane;
 
 
 	public FlightsFrame() {
@@ -108,7 +110,6 @@ public class FlightsFrame extends JFrame {
 			JPInfo.add(getTEnterTime());
 			JPInfo.add(getTEnterDate());
 			JPInfo.add(getTEnterCity());
-			JPInfo.add(getTAirplane());
 			//JButtons
 			JPInfo.add(getBAddFlights());
 			JPInfo.add(getBUpdate());
@@ -127,6 +128,7 @@ public class FlightsFrame extends JFrame {
 			JPInfo.add(getLPriceECO());
 			JPInfo.add(getLFlightNumber());
 			JPInfo.add(getTFlightNum());
+			JPInfo.add(getCBAirplane());
 
 
 		}
@@ -210,7 +212,7 @@ public class FlightsFrame extends JFrame {
 		if (lExitTime == null) {
 			lExitTime = new JLabel("Hora de salida:");
 			lExitTime.setForeground(Color.WHITE);
-			lExitTime.setFont(new Font("Dialog", Font.PLAIN, 16));
+			lExitTime.setFont(new Font("Roboto", Font.PLAIN, 16));
 			lExitTime.setBounds(10, 200, 150, 20);
 		}
 		return lExitTime;
@@ -219,7 +221,7 @@ public class FlightsFrame extends JFrame {
 		if (tExitTime == null) {
 			tExitTime = new JTextField();
 			tExitTime.setForeground(Color.WHITE);
-			tExitTime.setFont(new Font("Dialog", Font.PLAIN, 16));
+			tExitTime.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tExitTime.setColumns(10);
 			tExitTime.setBorder(BorderFactory.createEmptyBorder());
 			tExitTime.setBackground(new Color(28, 28, 28));
@@ -231,7 +233,7 @@ public class FlightsFrame extends JFrame {
 		if (tExitDate == null) {
 			tExitDate = new JTextField();
 			tExitDate.setForeground(Color.WHITE);
-			tExitDate.setFont(new Font("Dialog", Font.PLAIN, 16));
+			tExitDate.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tExitDate.setColumns(10);
 			tExitDate.setBorder(BorderFactory.createEmptyBorder());
 			tExitDate.setBackground(new Color(28, 28, 28));
@@ -243,7 +245,7 @@ public class FlightsFrame extends JFrame {
 		if (lExitDate == null) {
 			lExitDate = new JLabel("Fecha de salida:");
 			lExitDate.setForeground(Color.WHITE);
-			lExitDate.setFont(new Font("Dialog", Font.PLAIN, 16));
+			lExitDate.setFont(new Font("Roboto", Font.PLAIN, 16));
 			lExitDate.setBounds(10, 250, 150, 20);
 		}
 		return lExitDate;
@@ -252,7 +254,7 @@ public class FlightsFrame extends JFrame {
 		if (lEnterTime == null) {
 			lEnterTime = new JLabel("Hora de llegada:");
 			lEnterTime.setForeground(Color.WHITE);
-			lEnterTime.setFont(new Font("Dialog", Font.PLAIN, 16));
+			lEnterTime.setFont(new Font("Roboto", Font.PLAIN, 16));
 			lEnterTime.setBounds(340, 200, 150, 20);
 		}
 		return lEnterTime;
@@ -261,7 +263,7 @@ public class FlightsFrame extends JFrame {
 		if (tEnterTime == null) {
 			tEnterTime = new JTextField();
 			tEnterTime.setForeground(Color.WHITE);
-			tEnterTime.setFont(new Font("Dialog", Font.PLAIN, 16));
+			tEnterTime.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tEnterTime.setColumns(10);
 			tEnterTime.setBorder(BorderFactory.createEmptyBorder());
 			tEnterTime.setBackground(new Color(28, 28, 28));
@@ -273,7 +275,7 @@ public class FlightsFrame extends JFrame {
 		if (tEnterDate == null) {
 			tEnterDate = new JTextField();
 			tEnterDate.setForeground(Color.WHITE);
-			tEnterDate.setFont(new Font("Dialog", Font.PLAIN, 16));
+			tEnterDate.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tEnterDate.setColumns(10);
 			tEnterDate.setBorder(BorderFactory.createEmptyBorder());
 			tEnterDate.setBackground(new Color(28, 28, 28));
@@ -285,7 +287,7 @@ public class FlightsFrame extends JFrame {
 		if (lEnterDate == null) {
 			lEnterDate = new JLabel("Fecha de llegada:");
 			lEnterDate.setForeground(Color.WHITE);
-			lEnterDate.setFont(new Font("Dialog", Font.PLAIN, 16));
+			lEnterDate.setFont(new Font("Roboto", Font.PLAIN, 16));
 			lEnterDate.setBounds(340, 250, 150, 20);
 		}
 		return lEnterDate;
@@ -294,7 +296,7 @@ public class FlightsFrame extends JFrame {
 		if (lEnterCity == null) {
 			lEnterCity = new JLabel("Ciudad de llegada:");
 			lEnterCity.setForeground(Color.WHITE);
-			lEnterCity.setFont(new Font("Dialog", Font.PLAIN, 16));
+			lEnterCity.setFont(new Font("Roboto", Font.PLAIN, 16));
 			lEnterCity.setBounds(340, 150, 150, 20);
 		}
 		return lEnterCity;
@@ -303,7 +305,7 @@ public class FlightsFrame extends JFrame {
 		if (tEnterCity == null) {
 			tEnterCity = new JTextField();
 			tEnterCity.setForeground(Color.WHITE);
-			tEnterCity.setFont(new Font("Dialog", Font.PLAIN, 16));
+			tEnterCity.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tEnterCity.setColumns(10);
 			tEnterCity.setBorder(BorderFactory.createEmptyBorder());
 			tEnterCity.setBackground(new Color(28, 28, 28));
@@ -315,22 +317,10 @@ public class FlightsFrame extends JFrame {
 		if (lAirplane == null) {
 			lAirplane = new JLabel("Avion:");
 			lAirplane.setForeground(Color.WHITE);
-			lAirplane.setFont(new Font("Dialog", Font.PLAIN, 16));
+			lAirplane.setFont(new Font("Roboto", Font.PLAIN, 16));
 			lAirplane.setBounds(340, 100, 150, 20);
 		}
 		return lAirplane;
-	}
-	public JTextField getTAirplane() {
-		if (tAirplane == null) {
-			tAirplane = new JTextField();
-			tAirplane.setForeground(Color.WHITE);
-			tAirplane.setFont(new Font("Dialog", Font.PLAIN, 16));
-			tAirplane.setColumns(10);
-			tAirplane.setBorder(BorderFactory.createEmptyBorder());
-			tAirplane.setBackground(new Color(28, 28, 28));
-			tAirplane.setBounds(500, 100, 150, 20);
-		}
-		return tAirplane;
 	}
 
 	public String getTRandomFlightNumber() {
@@ -369,7 +359,7 @@ public class FlightsFrame extends JFrame {
 
 	public void setSPTableFlights(JTable jTableFlights) {
 		spTFlights = new JScrollPane(jTableFlights);
-		spTFlights.setBounds(10, 408, 964, 125);
+		spTFlights.setBounds(10, 400, 964, 133);
 	}
 
 	public JScrollPane getSPTableFlights() {
@@ -400,27 +390,11 @@ public class FlightsFrame extends JFrame {
 		}
 		dtmTFlights.setDataVector(data, getColumnsName());
 	}
-
-
-	public void clean() {
-		getTEnterCity().setText("");
-		getTEnterDate().setText("");
-		getTEnterTime().setText("");
-		getTPriceEJE().setText("");
-		getTPriceTUR().setText("");
-		getTPriceECO().setText("");
-		getTAirplane().setText("");
-		getTExitCity().setText("");
-		getTExitDate().setText("");
-		getTExitTime().setText("");
-
-
-	}
 	public JTextField getTPriceEJE() {
 		if (tPriceEJE == null) {
 			tPriceEJE = new JTextField();
 			tPriceEJE.setForeground(Color.WHITE);
-			tPriceEJE.setFont(new Font("Dialog", Font.PLAIN, 16));
+			tPriceEJE.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tPriceEJE.setColumns(10);
 			tPriceEJE.setBorder(BorderFactory.createEmptyBorder());
 			tPriceEJE.setBackground(new Color(28, 28, 28));
@@ -432,7 +406,7 @@ public class FlightsFrame extends JFrame {
 		if (lpriceEJE == null) {
 			lpriceEJE = new JLabel("Asientos Ejecutivos:");
 			lpriceEJE.setForeground(Color.WHITE);
-			lpriceEJE.setFont(new Font("Dialog", Font.PLAIN, 16));
+			lpriceEJE.setFont(new Font("Roboto", Font.PLAIN, 16));
 			lpriceEJE.setBounds(660, 100, 150, 20);
 		}
 		return lpriceEJE;
@@ -441,7 +415,7 @@ public class FlightsFrame extends JFrame {
 		if (lPriceTUR == null) {
 			lPriceTUR = new JLabel("Asientos Turistas:");
 			lPriceTUR.setForeground(Color.WHITE);
-			lPriceTUR.setFont(new Font("Dialog", Font.PLAIN, 16));
+			lPriceTUR.setFont(new Font("Roboto", Font.PLAIN, 16));
 			lPriceTUR.setBounds(660, 150, 150, 20);
 		}
 		return lPriceTUR;
@@ -450,7 +424,7 @@ public class FlightsFrame extends JFrame {
 		if (tPriceTUR == null) {
 			tPriceTUR = new JTextField();
 			tPriceTUR.setForeground(Color.WHITE);
-			tPriceTUR.setFont(new Font("Dialog", Font.PLAIN, 16));
+			tPriceTUR.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tPriceTUR.setColumns(10);
 			tPriceTUR.setBorder(BorderFactory.createEmptyBorder());
 			tPriceTUR.setBackground(new Color(28, 28, 28));
@@ -462,7 +436,7 @@ public class FlightsFrame extends JFrame {
 		if (tPriceECO == null) {
 			tPriceECO = new JTextField();
 			tPriceECO.setForeground(Color.WHITE);
-			tPriceECO.setFont(new Font("Dialog", Font.PLAIN, 16));
+			tPriceECO.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tPriceECO.setColumns(10);
 			tPriceECO.setBorder(BorderFactory.createEmptyBorder());
 			tPriceECO.setBackground(new Color(28, 28, 28));
@@ -474,7 +448,7 @@ public class FlightsFrame extends JFrame {
 		if (lPriceECO == null) {
 			lPriceECO = new JLabel("Asientos Economicos:");
 			lPriceECO.setForeground(Color.WHITE);
-			lPriceECO.setFont(new Font("Dialog", Font.PLAIN, 16));
+			lPriceECO.setFont(new Font("Roboto", Font.PLAIN, 16));
 			lPriceECO.setBounds(660, 200, 160, 20);
 		}
 		return lPriceECO;
@@ -483,7 +457,7 @@ public class FlightsFrame extends JFrame {
 		if (lFlightNumber == null) {
 			lFlightNumber = new JLabel("Número de vuelo:");
 			lFlightNumber.setForeground(Color.WHITE);
-			lFlightNumber.setFont(new Font("Dialog", Font.PLAIN, 16));
+			lFlightNumber.setFont(new Font("Roboto", Font.PLAIN, 16));
 			lFlightNumber.setBounds(10, 100, 150, 20);
 		}
 		return lFlightNumber;
@@ -492,12 +466,42 @@ public class FlightsFrame extends JFrame {
 		if (tFlightNum == null) {
 			tFlightNum = new JTextField();
 			tFlightNum.setForeground(Color.WHITE);
-			tFlightNum.setFont(new Font("Dialog", Font.PLAIN, 16));
+			tFlightNum.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tFlightNum.setColumns(10);
 			tFlightNum.setBorder(BorderFactory.createEmptyBorder());
 			tFlightNum.setBackground(new Color(28, 28, 28));
 			tFlightNum.setBounds(170, 100, 150, 20);
 		}
 		return tFlightNum;
+	}
+	public JComboBox<String> getCBAirplane() {
+		if (CBAirplane == null) {
+			CBAirplane = new JComboBox<String>();
+			CBAirplane.setBackground(new Color(28, 28, 28));
+			CBAirplane.setForeground(new Color(255, 255, 255));
+			CBAirplane.setFont(new Font("Roboto", Font.PLAIN, 16));
+			CBAirplane.setBorder(BorderFactory.createEmptyBorder());
+			CBAirplane.setBounds(500, 100, 150, 20);
+		}
+		return CBAirplane;
+	}
+	
+	public void fillAirplaneComboBox(ArrayList<String> airplanes) {
+		CBAirplane.addItem("Indefinido");
+		for(String airplane : airplanes) {
+			CBAirplane.addItem(airplane);
+		}
+	}
+	public void clean() {
+		getTEnterCity().setText("");
+		getTEnterDate().setText("");
+		getTEnterTime().setText("");
+		getTPriceEJE().setText("");
+		getTPriceTUR().setText("");
+		getTPriceECO().setText("");
+		getCBAirplane().setSelectedItem("Indefinido");
+		getTExitCity().setText("");
+		getTExitDate().setText("");
+		getTExitTime().setText("");
 	}
 }

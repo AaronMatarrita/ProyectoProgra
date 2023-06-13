@@ -2,6 +2,7 @@ package presentation;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -125,7 +126,7 @@ public class AirplaneFrame extends JFrame {
 			lId = new JLabel("Matricula:");
 			lId.setForeground(new Color(255, 255, 255));
 			lId.setFont(new Font("Roboto", Font.PLAIN, 16));
-			lId.setBounds(81, 100, 100, 20);
+			lId.setBounds(10, 129, 150, 20);
 		}
 		return lId;
 	}
@@ -135,7 +136,7 @@ public class AirplaneFrame extends JFrame {
 			lYear = new JLabel("Año:");
 			lYear.setForeground(Color.WHITE);
 			lYear.setFont(new Font("Roboto", Font.PLAIN, 16));
-			lYear.setBounds(81, 175, 100, 20);
+			lYear.setBounds(10, 229, 150, 20);
 		}
 		return lYear;
 	}
@@ -145,7 +146,7 @@ public class AirplaneFrame extends JFrame {
 			lAirline = new JLabel("Aerolinea:");
 			lAirline.setForeground(Color.WHITE);
 			lAirline.setFont(new Font("Roboto", Font.PLAIN, 16));
-			lAirline.setBounds(595, 100, 130, 20);
+			lAirline.setBounds(664, 129, 150, 20);
 		}
 		return lAirline;
 	}
@@ -155,7 +156,7 @@ public class AirplaneFrame extends JFrame {
 			lModel = new JLabel("Modelo:");
 			lModel.setForeground(Color.WHITE);
 			lModel.setFont(new Font("Roboto", Font.PLAIN, 16));
-			lModel.setBounds(595, 175, 135, 20);
+			lModel.setBounds(664, 229, 150, 20);
 		}
 		return lModel;
 	}
@@ -168,7 +169,7 @@ public class AirplaneFrame extends JFrame {
 			bAddAirplane.setBackground(new Color(28, 28, 28));
 			bAddAirplane.setForeground(new Color(255, 255, 255));
 			bAddAirplane.setFocusable(false);
-			bAddAirplane.setBounds(190, 230, 130, 40);
+			bAddAirplane.setBounds(240, 330, 130, 40);
 		}
 		return bAddAirplane;
 	}
@@ -181,7 +182,7 @@ public class AirplaneFrame extends JFrame {
 			bUpdate.setBackground(new Color(28, 28, 28));
 			bUpdate.setForeground(new Color(255, 255, 255));
 			bUpdate.setFocusable(false);
-			bUpdate.setBounds(390, 230, 130, 40);
+			bUpdate.setBounds(440, 330, 130, 40);
 		}
 		return bUpdate;
 	}
@@ -194,7 +195,7 @@ public class AirplaneFrame extends JFrame {
 			bClear.setBackground(new Color(28, 28, 28));
 			bClear.setForeground(new Color(255, 255, 255));
 			bClear.setFocusable(false);
-			bClear.setBounds(590, 230, 130, 40);
+			bClear.setBounds(640, 330, 130, 40);
 		}
 		return bClear;
 	}
@@ -206,7 +207,7 @@ public class AirplaneFrame extends JFrame {
 			tId.setForeground(new Color(255, 255, 255));
 			tId.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tId.setBorder(BorderFactory.createEmptyBorder());
-			tId.setBounds(171, 100, 150, 20);
+			tId.setBounds(170, 129, 150, 20);
 			tId.setColumns(10);
 		}
 		return tId;
@@ -220,37 +221,50 @@ public class AirplaneFrame extends JFrame {
 			tYear.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tYear.setBorder(BorderFactory.createEmptyBorder());
 			tYear.setColumns(10);
-			tYear.setBounds(171, 175, 150, 20);
+			tYear.setBounds(170, 229, 150, 20);
 		}
 		return tYear;
 	}
 
 	public JComboBox<String> getCBAirline() {
 		if (cBAirline == null) {
-			String arrayCBAirplaneType[] = {"Indefinido", "Aerolinea1", "Aerolinea2"};
-			cBAirline = new JComboBox(arrayCBAirplaneType);
+			cBAirline = new JComboBox<String>();
 			cBAirline.setBackground(new Color(28, 28, 28));
 			cBAirline.setForeground(new Color(255, 255, 255));
 			cBAirline.setFont(new Font("Roboto", Font.PLAIN, 16));
 			cBAirline.setBorder(BorderFactory.createEmptyBorder());
-			cBAirline.setBounds(735, 101, 150, 22);
+			cBAirline.setBounds(824, 129, 150, 20);
 		}
 		return cBAirline;
 	}
 
+	
+	public void fillAirlineComboBox(ArrayList<String> airlines) {
+		cBAirline.addItem("Indefinido");
+		for(String airline : airlines) {
+			cBAirline.addItem(airline);
+		}
+	}
+	
 	public JComboBox<String> getCBModel() {
 		if (cBModel == null) {
-			String arrayCBAirplaneStatus[] = {"Indefinido", "Activo", "Inactivo"};
-			cBModel = new JComboBox(arrayCBAirplaneStatus);
+			cBModel = new JComboBox<String>();
 			cBModel.setBackground(new Color(28, 28, 28));
 			cBModel.setForeground(new Color(255, 255, 255));
 			cBModel.setFont(new Font("Roboto", Font.PLAIN, 16));
 			cBModel.setBorder(BorderFactory.createEmptyBorder());
-			cBModel.setBounds(735, 176, 150, 22);
+			cBModel.setBounds(824, 229, 150, 20);
 		}
 		return cBModel;
 	}
 
+	public void fillModelComboBox(ArrayList<String> models) {
+		cBModel.addItem("Indefinido");
+		for(String model : models) {
+			cBModel.addItem(model);
+		}
+	}
+	
 	public void setDTMAirplanes(Object data[][], String[] columnsName) {
 		dtmTAirplanes = new DefaultTableModel(data, columnsName);
 	}
@@ -280,7 +294,7 @@ public class AirplaneFrame extends JFrame {
 
 	public void setSPTableAirplanes(JTable jTableAirplanes) {
 		spTAirplanes = new JScrollPane(jTableAirplanes);
-		spTAirplanes.setBounds(10, 350, 964, 125);
+		spTAirplanes.setBounds(10, 400, 964, 133);
 	}
 
 	public JScrollPane getSPTableAirplanes() {

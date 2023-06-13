@@ -16,7 +16,8 @@ import domain.Airplane;
 public class LogicXMLAirplane {
 
 	public LogicXMLAirplane() {}	
-
+	//------------------------------------------------------------------
+	//Método para obtener una lista de TIPO Airplane
 	public ArrayList<Airplane> readXMLFile(String filename) {
 	    ArrayList<Airplane> airplanes = new ArrayList<>();
 	    File file = new File(filename);
@@ -73,5 +74,15 @@ public class LogicXMLAirplane {
 	        }
 	        return airplanes;
 	    }
+	}
+	//------------------------------------------------------------------
+	//Método para obtener una lista de TIPO String con los modelos
+	public ArrayList<String> getAirplaneList(String filename) {
+	    ArrayList<String> airplaneList = new ArrayList<>();
+	    ArrayList<Airplane> airplanes = readXMLFile(filename);
+	    for (Airplane airplane : airplanes) {
+	        airplaneList.add(airplane.getId());
+	    }
+	    return airplaneList;
 	}
 }

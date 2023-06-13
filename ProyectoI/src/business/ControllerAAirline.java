@@ -82,10 +82,16 @@ public class ControllerAAirline implements ActionListener {
             if (airline.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Por favor, complete el nombre de la Aerolinea a eliminar");
                 return;
-            } else if (!lXML.isAlreadyInFile(fileName, objectName	, "Name", airline)) {
+            } else if (lXML.isAlreadyInFile("Airplanes.xml", "airplanes", "airline", airline))
+            {
+                JOptionPane.showMessageDialog(null, "La aerolínea no se puede eliminar debido a que esta asociada con un avión");
+                return;
+            } else if (!lXML.isAlreadyInFile(fileName, objectName	, "Name", airline))
+            {
                 JOptionPane.showMessageDialog(null, "No se puede eliminar debido a que no existe");
                 return;
-            }//No pueden existir aerolíneas con el mismo nombre y no pueden eliminarse aerolíneas que 
+            }
+            //No pueden existir aerolíneas con el mismo nombre y no pueden eliminarse aerolíneas que 
             //estén asociadas a un avión
                 aF.clean();
                 crud.deleteObject(fileName, objectName, "Name", airline);

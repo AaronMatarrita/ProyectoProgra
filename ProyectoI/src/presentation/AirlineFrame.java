@@ -116,7 +116,7 @@ public class AirlineFrame extends JFrame {
             lAirline = new JLabel("Nombre de la Aerolinea:");
             lAirline.setForeground(new Color(255, 255, 255));
             lAirline.setFont(new Font("Roboto", Font.PLAIN, 16));
-            lAirline.setBounds(108, 142, 224, 20);
+            lAirline.setBounds(130, 189, 180, 20);
         }
         return lAirline;
     }
@@ -129,7 +129,7 @@ public class AirlineFrame extends JFrame {
             bAddAirline.setBackground(new Color(28, 28, 28));
             bAddAirline.setForeground(new Color(255, 255, 255));
             bAddAirline.setFocusable(false);
-            bAddAirline.setBounds(190, 230, 130, 40);
+            bAddAirline.setBounds(240, 330, 130, 40);
         }
         return bAddAirline;
     }
@@ -142,7 +142,7 @@ public class AirlineFrame extends JFrame {
             bUpdate.setBackground(new Color(28, 28, 28));
             bUpdate.setForeground(new Color(255, 255, 255));
             bUpdate.setFocusable(false);
-            bUpdate.setBounds(390, 230, 130, 40);
+            bUpdate.setBounds(440, 330, 130, 40);
         }
         return bUpdate;
     }
@@ -155,7 +155,7 @@ public class AirlineFrame extends JFrame {
             bClear.setBackground(new Color(28, 28, 28));
             bClear.setForeground(new Color(255, 255, 255));
             bClear.setFocusable(false);
-            bClear.setBounds(590, 230, 130, 40);
+            bClear.setBounds(640, 330, 130, 40);
         }
         return bClear;
     }
@@ -167,7 +167,7 @@ public class AirlineFrame extends JFrame {
             tAirline.setForeground(new Color(255, 255, 255));
             tAirline.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tAirline.setBorder(BorderFactory.createEmptyBorder());
-            tAirline.setBounds(287, 142, 150, 20);
+            tAirline.setBounds(320, 190, 150, 20);
             tAirline.setColumns(10);
         }
         return tAirline;
@@ -179,8 +179,8 @@ public class AirlineFrame extends JFrame {
 		if (lCountry == null) {
 			lCountry = new JLabel("Centro de Operaciones:");
 			lCountry.setForeground(Color.WHITE);
-			lCountry.setFont(new Font("Dialog", Font.PLAIN, 16));
-			lCountry.setBounds(482, 142, 173, 20);
+			lCountry.setFont(new Font("Roboto", Font.PLAIN, 16));
+			lCountry.setBounds(550, 189, 180, 20);
 		}
 		return lCountry;
 	}
@@ -188,11 +188,11 @@ public class AirlineFrame extends JFrame {
 		if (tCountry == null) {
 			tCountry = new JTextField();
 			tCountry.setForeground(Color.WHITE);
-			tCountry.setFont(new Font("Dialog", Font.PLAIN, 16));
+			tCountry.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tCountry.setColumns(10);
 			tCountry.setBorder(BorderFactory.createEmptyBorder());
 			tCountry.setBackground(new Color(28, 28, 28));
-			tCountry.setBounds(668, 142, 156, 20);
+			tCountry.setBounds(740, 189, 150, 20);
 		}
 		return tCountry;
 	}
@@ -225,7 +225,7 @@ public class AirlineFrame extends JFrame {
 
 	public void setSPTableAirline(JTable jTableAirline) {
 		spTAirline = new JScrollPane(jTableAirline);
-		spTAirline.setBounds(10, 350, 964, 125);
+		spTAirline.setBounds(10, 400, 964, 133);
 	}
 
 	public JScrollPane getSPTableAirline() {

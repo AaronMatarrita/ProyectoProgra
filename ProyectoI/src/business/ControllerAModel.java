@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 import data.CRUD;
 import data.LogicXML;
+import data.LogicXMLBrand;
 import data.LogicXMLModel;
 import data.XMLFiles;
 import domain.AirplaneModel;
@@ -21,10 +22,9 @@ public class ControllerAModel implements ActionListener{
 	private LogicXML lXML;
 	private XMLFiles xmlF;
 	private LogicXMLModel lXMLM;
-
+	private LogicXMLBrand lXMLB;
 	private String fileName = "Models.xml";
 	private String objectName = "models";
-
 	public ControllerAModel()
 	{
 		mF = new ModelFrame();
@@ -32,10 +32,12 @@ public class ControllerAModel implements ActionListener{
 		lXML = new LogicXML();
 		xmlF = new XMLFiles();
 		lXMLM = new LogicXMLModel();
-
+		lXMLB = new LogicXMLBrand();
+		lXMLB.readBrandsFromXML("Brands.xml");
 		xmlF.createXML(fileName, objectName);
 		initializerAction();
 		setTableData();
+		mF.fillBrandComboBox(lXMLB.readBrandsFromXML("Brands.xml"));
 	}
 
 	private void setTableData() {
@@ -53,8 +55,9 @@ public class ControllerAModel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		//------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 		if (mF.getBAddModel() == e.getSource()) {
-			String model = mF.getTName().getText();
+			String model = mF.getTModel().getText();
 
 			if (model.isEmpty() ||mF.getTCEjecutive().getText().isEmpty()||mF.getTCTurist().getText().isEmpty()||mF.getTCEco().getText().isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos");
@@ -88,12 +91,22 @@ public class ControllerAModel implements ActionListener{
 			setTableData();
 			//------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		}else if (mF.getBClear() == e.getSource()) {
-			String model = mF.getTName().getText();
+			String model = mF.getTModel().getText();
 			if (model.isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Por favor, complete el nombre del modelo a eliminar");return;
-			}else if(!lXML.isAlreadyInFile("Models.xml", "models" ,"modelName", model)) {
-				JOptionPane.showMessageDialog(null, "No se puede eliminar debido a que no existe");return;}
-
+				JOptionPane.showMessageDialog(null, "Por favor, complete el nombre del modelo a eliminar");
+				return;
+			}else if(lXML.isAlreadyInFile("Airplanes.xml", "airplanes" ,"model", model)) 
+			{
+				JOptionPane.showMessageDialog(null, "El modelo no se puede eliminar debido a que esta asociado con un avión");
+				return;
+			
+				
+			}else if(!lXML.isAlreadyInFile("Models.xml", "models" ,"modelName", model)) 
+			{
+				JOptionPane.showMessageDialog(null, "No se puede eliminar debido a que no existe");
+				return;
+			
+			}
 			int dialogButton = JOptionPane.YES_NO_OPTION;
 			int dialogResult = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar el modelo?", "Eliminar", dialogButton);
 

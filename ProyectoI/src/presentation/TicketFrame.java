@@ -114,7 +114,7 @@ public class TicketFrame extends JFrame {
             lTitle.setHorizontalAlignment(SwingConstants.CENTER);
             lTitle.setForeground(Color.WHITE);
             lTitle.setFont(new Font("Roboto", Font.PLAIN, 30));
-            lTitle.setBounds(320, 33, 350, 50);
+            lTitle.setBounds(320, 30, 350, 50);
         }
         return lTitle;
     }
@@ -124,7 +124,7 @@ public class TicketFrame extends JFrame {
             lTicketNumber = new JLabel("Número de tiquete:");
             lTicketNumber.setForeground(new Color(255, 255, 255));
             lTicketNumber.setFont(new Font("Roboto", Font.PLAIN, 16));
-            lTicketNumber.setBounds(320, 122, 150, 20);
+            lTicketNumber.setBounds(320, 120, 150, 20);
         }
         return lTicketNumber;
     }
@@ -137,7 +137,7 @@ public class TicketFrame extends JFrame {
             bAddFlights.setBackground(new Color(28, 28, 28));
             bAddFlights.setForeground(new Color(255, 255, 255));
             bAddFlights.setFocusable(false);
-            bAddFlights.setBounds(220, 303, 130, 40);
+            bAddFlights.setBounds(220, 320, 130, 40);
         }
         return bAddFlights;
     }
@@ -150,7 +150,7 @@ public class TicketFrame extends JFrame {
             bUpdate.setBackground(new Color(28, 28, 28));
             bUpdate.setForeground(new Color(255, 255, 255));
             bUpdate.setFocusable(false);
-            bUpdate.setBounds(420, 303, 130, 40);
+            bUpdate.setBounds(420, 320, 130, 40);
         }
         return bUpdate;
     }
@@ -163,7 +163,7 @@ public class TicketFrame extends JFrame {
             bClear.setBackground(new Color(28, 28, 28));
             bClear.setForeground(new Color(255, 255, 255));
             bClear.setFocusable(false);
-            bClear.setBounds(620, 303, 130, 40);
+            bClear.setBounds(620, 320, 130, 40);
         }
         return bClear;
     }
@@ -175,7 +175,7 @@ public class TicketFrame extends JFrame {
             tTicketNumber.setForeground(new Color(255, 255, 255));
             tTicketNumber.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tTicketNumber.setBorder(BorderFactory.createEmptyBorder());
-            tTicketNumber.setBounds(520, 123, 150, 20);
+            tTicketNumber.setBounds(520, 120, 150, 20);
             tTicketNumber.setColumns(10);
         }
         return tTicketNumber;
@@ -185,7 +185,7 @@ public class TicketFrame extends JFrame {
 			lPassport = new JLabel("Pasaporte:");
 			lPassport.setForeground(Color.WHITE);
 			lPassport.setFont(new Font("Dialog", Font.PLAIN, 16));
-			lPassport.setBounds(320, 173, 150, 20);
+			lPassport.setBounds(320, 180, 150, 20);
 		}
 		return lPassport;
 	}
@@ -197,7 +197,7 @@ public class TicketFrame extends JFrame {
 			tPassport.setColumns(10);
 			tPassport.setBorder(BorderFactory.createEmptyBorder());
 			tPassport.setBackground(new Color(28, 28, 28));
-			tPassport.setBounds(520, 173, 150, 20);
+			tPassport.setBounds(520, 180, 150, 20);
 		}
 		return tPassport;
 	}
@@ -231,7 +231,7 @@ public class TicketFrame extends JFrame {
 
 	public void setSPTableFlights(JTable jTableFlights) {
 		spTFlights = new JScrollPane(jTableFlights);
-		spTFlights.setBounds(10, 373, 964, 125);
+		spTFlights.setBounds(10, 380, 964, 118);
 	}
 
 	public JScrollPane getSPTableFlights() {
@@ -269,7 +269,7 @@ public class TicketFrame extends JFrame {
 			tFlightNumber.setColumns(10);
 			tFlightNumber.setBorder(BorderFactory.createEmptyBorder());
 			tFlightNumber.setBackground(new Color(28, 28, 28));
-			tFlightNumber.setBounds(520, 223, 150, 20);
+			tFlightNumber.setBounds(520, 240, 150, 20);
 		}
 		return tFlightNumber;
 	}
@@ -278,7 +278,7 @@ public class TicketFrame extends JFrame {
 			lFlightNumber = new JLabel("Número de vuelo:");
 			lFlightNumber.setForeground(Color.WHITE);
 			lFlightNumber.setFont(new Font("Dialog", Font.PLAIN, 16));
-			lFlightNumber.setBounds(320, 223, 150, 20);
+			lFlightNumber.setBounds(320, 240, 150, 20);
 		}
 		return lFlightNumber;
 	}

@@ -121,7 +121,7 @@ public class PassengerFrame extends JFrame {
 			lTitle.setHorizontalAlignment(SwingConstants.CENTER);
 			lTitle.setForeground(Color.WHITE);
 			lTitle.setFont(new Font("Roboto", Font.PLAIN, 30));
-			lTitle.setBounds(371, 11, 293, 50);
+			lTitle.setBounds(320, 10, 350, 50);
 			lTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 			lTitle.setAlignmentY(Component.CENTER_ALIGNMENT);
 
@@ -134,7 +134,7 @@ public class PassengerFrame extends JFrame {
 			lPassport = new JLabel("Número de pasaporte:");
 			lPassport.setForeground(new Color(255, 255, 255));
 			lPassport.setFont(new Font("Roboto", Font.PLAIN, 16));
-			lPassport.setBounds(10, 120, 170, 20);
+			lPassport.setBounds(10, 150, 170, 20);
 		}
 		return lPassport;
 	}
@@ -144,7 +144,7 @@ public class PassengerFrame extends JFrame {
 			lName = new JLabel("Nombre:");
 			lName.setForeground(Color.WHITE);
 			lName.setFont(new Font("Roboto", Font.PLAIN, 16));
-			lName.setBounds(10, 151, 100, 20);
+			lName.setBounds(10, 200, 170, 20);
 		}
 		return lName;
 	}
@@ -154,7 +154,7 @@ public class PassengerFrame extends JFrame {
 			lLastname = new JLabel("Apellidos:");
 			lLastname.setForeground(Color.WHITE);
 			lLastname.setFont(new Font("Roboto", Font.PLAIN, 16));
-			lLastname.setBounds(10, 182, 130, 20);
+			lLastname.setBounds(10, 250, 160, 20);
 		}
 		return lLastname;
 	}
@@ -164,7 +164,7 @@ public class PassengerFrame extends JFrame {
 			lDateOfBirth = new JLabel("Fecha de nacimiento:");
 			lDateOfBirth.setForeground(Color.WHITE);
 			lDateOfBirth.setFont(new Font("Roboto", Font.PLAIN, 16));
-			lDateOfBirth.setBounds(624, 120, 170, 20);
+			lDateOfBirth.setBounds(624, 150, 170, 20);
 		}
 		return lDateOfBirth;
 	}
@@ -177,7 +177,7 @@ public class PassengerFrame extends JFrame {
 			bAddPassenger.setBackground(new Color(28, 28, 28));
 			bAddPassenger.setForeground(new Color(255, 255, 255));
 			bAddPassenger.setFocusable(false);
-			bAddPassenger.setBounds(190, 260, 130, 40);
+			bAddPassenger.setBounds(240, 330, 130, 40);
 		}
 		return bAddPassenger;
 	}
@@ -190,7 +190,7 @@ public class PassengerFrame extends JFrame {
 			bUpdate.setBackground(new Color(28, 28, 28));
 			bUpdate.setForeground(new Color(255, 255, 255));
 			bUpdate.setFocusable(false);
-			bUpdate.setBounds(410, 260, 130, 40);
+			bUpdate.setBounds(440, 330, 130, 40);
 		}
 		return bUpdate;
 	}
@@ -203,7 +203,7 @@ public class PassengerFrame extends JFrame {
 			bClear.setBackground(new Color(28, 28, 28));
 			bClear.setForeground(new Color(255, 255, 255));
 			bClear.setFocusable(false);
-			bClear.setBounds(624, 260, 130, 40);
+			bClear.setBounds(640, 330, 130, 40);
 		}
 		return bClear;
 	}
@@ -215,7 +215,7 @@ public class PassengerFrame extends JFrame {
 			tPassport.setForeground(new Color(255, 255, 255));
 			tPassport.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tPassport.setBorder(BorderFactory.createEmptyBorder());
-			tPassport.setBounds(190, 120, 170, 20);
+			tPassport.setBounds(190, 150, 170, 20);
 			tPassport.setColumns(10);
 		}
 		return tPassport;
@@ -229,7 +229,7 @@ public class PassengerFrame extends JFrame {
 			tName.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tName.setBorder(BorderFactory.createEmptyBorder());
 			tName.setColumns(10);
-			tName.setBounds(191, 150, 170, 20);
+			tName.setBounds(191, 200, 170, 20);
 		}
 		return tName;
 	}
@@ -263,7 +263,7 @@ public class PassengerFrame extends JFrame {
 
 	public void setSPTablePassengers(JTable jTablePassengers) {
 		spTPassengers = new JScrollPane(jTablePassengers);
-		spTPassengers.setBounds(10, 350, 964, 183);
+		spTPassengers.setBounds(10, 400, 964, 133);
 	}
 
 	public JScrollPane getSPTablePassengers() {
@@ -297,7 +297,7 @@ public class PassengerFrame extends JFrame {
 			tLastname.setColumns(10);
 			tLastname.setBorder(BorderFactory.createEmptyBorder());
 			tLastname.setBackground(new Color(28, 28, 28));
-			tLastname.setBounds(191, 183, 170, 20);
+			tLastname.setBounds(191, 250, 170, 20);
 		}
 		return tLastname;
 	}
@@ -309,7 +309,7 @@ public class PassengerFrame extends JFrame {
 			tDateOfBirth.setColumns(10);
 			tDateOfBirth.setBorder(BorderFactory.createEmptyBorder());
 			tDateOfBirth.setBackground(new Color(28, 28, 28));
-			tDateOfBirth.setBounds(804, 121, 170, 20);
+			tDateOfBirth.setBounds(804, 150, 170, 20);
 		}
 		return tDateOfBirth;
 	}
@@ -318,7 +318,7 @@ public class PassengerFrame extends JFrame {
 			lEmain = new JLabel("Correo electrónico:");
 			lEmain.setForeground(Color.WHITE);
 			lEmain.setFont(new Font("Roboto", Font.PLAIN, 16));
-			lEmain.setBounds(624, 151, 170, 20);
+			lEmain.setBounds(624, 200, 170, 20);
 		}
 		return lEmain;
 	}
@@ -330,7 +330,7 @@ public class PassengerFrame extends JFrame {
 			tEmail.setColumns(10);
 			tEmail.setBorder(BorderFactory.createEmptyBorder());
 			tEmail.setBackground(new Color(28, 28, 28));
-			tEmail.setBounds(804, 152, 170, 20);
+			tEmail.setBounds(804, 200, 170, 20);
 		}
 		return tEmail;
 	}
@@ -339,7 +339,7 @@ public class PassengerFrame extends JFrame {
 			lPhoneNumber = new JLabel("Teléfono:");
 			lPhoneNumber.setForeground(Color.WHITE);
 			lPhoneNumber.setFont(new Font("Roboto", Font.PLAIN, 16));
-			lPhoneNumber.setBounds(624, 181, 170, 20);
+			lPhoneNumber.setBounds(624, 250, 170, 20);
 		}
 		return lPhoneNumber;
 	}
@@ -351,7 +351,7 @@ public class PassengerFrame extends JFrame {
 			tPhoneNumber.setColumns(10);
 			tPhoneNumber.setBorder(BorderFactory.createEmptyBorder());
 			tPhoneNumber.setBackground(new Color(28, 28, 28));
-			tPhoneNumber.setBounds(804, 182, 170, 20);
+			tPhoneNumber.setBounds(804, 250, 170, 20);
 		}
 		return tPhoneNumber;
 	}

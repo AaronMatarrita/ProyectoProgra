@@ -7,6 +7,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -103,25 +104,19 @@ public class CRUD {
 	        Document doc = db.parse(new File(fileName));
 	        doc.getDocumentElement().normalize();
 
-	        Document newDoc = db.newDocument();
-	        Element rootElement = newDoc.createElement(doc.getDocumentElement().getNodeName());
-	        newDoc.appendChild(rootElement);
-
 	        NodeList nodeList = doc.getElementsByTagName(elementType);
 
 	        boolean objectDeleted = false;
 
-	        for (int i = 0; i < nodeList.getLength(); i++) {
+	        for (int i = nodeList.getLength() - 1; i >= 0; i--) {
 	            Node node = nodeList.item(i);
 	            if (node.getNodeType() == Node.ELEMENT_NODE) {
 	                Element element = (Element) node;
 	                Element identifierElement = (Element) element.getElementsByTagName(identifierName).item(0);
 	                if (identifierElement != null) {
 	                    String value = identifierElement.getTextContent();
-	                    if (!value.equals(identifierValue)) {
-	                        Element newElement = (Element) newDoc.importNode(element, true);
-	                        rootElement.appendChild(newElement);
-	                    } else {
+	                    if (value.equals(identifierValue)) {
+	                        element.getParentNode().removeChild(element);
 	                        objectDeleted = true;
 	                    }
 	                }
@@ -131,14 +126,22 @@ public class CRUD {
 	        if (objectDeleted) {
 	            TransformerFactory transformerFactory = TransformerFactory.newInstance();
 	            Transformer transformer = transformerFactory.newTransformer();
-	            DOMSource source = new DOMSource(newDoc);
+	            DOMSource source = new DOMSource(doc);
 	            StreamResult result = new StreamResult(new File(fileName));
 	            transformer.transform(source, result);
 	            return "Registro eliminado";
 	        } else {
 	            return "Registro no encontrado";
 	        }
-	    } catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
+	    } catch (ParserConfigurationException e) {
+	        e.printStackTrace();
+	    } catch (SAXException e) {
+	        e.printStackTrace();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    } catch (TransformerConfigurationException e) {
+	        e.printStackTrace();
+	    } catch (TransformerException e) {
 	        e.printStackTrace();
 	    }
 	    return "Error al eliminar el registro";

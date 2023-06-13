@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 import data.CRUD;
 import data.LogicXML;
+import data.LogicXMLAirplane;
 import data.LogicXMLFlights;
 import data.XMLFiles;
 import domain.Flights;
@@ -23,7 +24,8 @@ public class ControllerAFlights implements ActionListener{
 	
 	private XMLFiles xmlF;
 	private LogicXMLFlights logicXMLFlights;
-
+	private LogicXMLAirplane lXMLA;
+	
 	private String fileName = "Flights.xml";
 	private String objectName = "flights";
 
@@ -31,11 +33,13 @@ public class ControllerAFlights implements ActionListener{
 		fF = new FlightsFrame();
 		crud = new CRUD();
 		lXML = new LogicXML();
+		lXMLA = new LogicXMLAirplane();
 		xmlF = new XMLFiles();
 		logicXMLFlights = new LogicXMLFlights();
 		xmlF.createXML(fileName, objectName);
 		setTableData();
 		initializerAction();
+		fF.fillAirplaneComboBox(lXMLA.getAirplaneList("Airplanes.xml"));
 	}
 	
 	private void setTableData() {
@@ -66,7 +70,7 @@ public class ControllerAFlights implements ActionListener{
 			String priceEJE = fF.getTPriceEJE().getText();
 			String priceTUR = fF.getTPriceTUR().getText();
 			String priceECO = fF.getTPriceECO().getText();
-			String airplane = fF.getTAirplane().getText();
+			String airplane = (String) fF.getCBAirplane().getSelectedItem();
 			JOptionPane.showMessageDialog(null, "El numero de vuelo es :"+flightNumber);
 
 			if (exitCity.isEmpty() || exitDate.isEmpty() || exitTime.isEmpty() ||
