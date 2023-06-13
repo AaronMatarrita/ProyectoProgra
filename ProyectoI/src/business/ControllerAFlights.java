@@ -99,7 +99,7 @@ public class ControllerAFlights implements ActionListener{
 			//------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		}else if(fF.getBClear() == e.getSource()){
 			
-			String flightNumber =  String.valueOf(fF.getTFlightNum());
+			String flightNumber =  String.valueOf(fF.getTFlightNum().getText());
 			
 			if (flightNumber.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Por favor, ingrese el codigo de vuelo");

@@ -34,7 +34,7 @@ public class LogicXMLUser {
 
 			for (int i = 0; i < nodeList.getLength(); i++) {
 				Node node = nodeList.item(i);
-				if (node.getNodeType() == Node.ELEMENT_NODE) {
+				if (node != null && node.getNodeType() == Node.ELEMENT_NODE) {
 					Element element = (Element) node;
 					String user = element.getElementsByTagName("user").item(0).getTextContent();
 					String password = element.getElementsByTagName("password").item(0).getTextContent();

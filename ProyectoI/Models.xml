@@ -1,26 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <models>
 	<models>
-		<models>
-			<modelName>AS</modelName>
-			<brand>Administrador</brand>
-			<BusinessClassSeats>21</BusinessClassSeats>
-			<TouristClassSeats>12</TouristClassSeats>
-			<EconomyClassSeats>21</EconomyClassSeats>
-		</models>
-		<models>
-			<modelName>312</modelName>
-			<brand>Colaborador</brand>
-			<BusinessClassSeats>3</BusinessClassSeats>
-			<TouristClassSeats>3</TouristClassSeats>
-			<EconomyClassSeats>3</EconomyClassSeats>
-		</models>
-	</models>
-	<models>
-		<modelName>AS</modelName>
+		<modelName>Boeing121</modelName>
 		<brand>Administrador</brand>
-		<BusinessClassSeats>21</BusinessClassSeats>
-		<TouristClassSeats>12</TouristClassSeats>
-		<EconomyClassSeats>21</EconomyClassSeats>
+		<BusinessClassSeats>120</BusinessClassSeats>
+		<TouristClassSeats>120</TouristClassSeats>
+		<EconomyClassSeats>120</EconomyClassSeats>
 	</models>
 </models>

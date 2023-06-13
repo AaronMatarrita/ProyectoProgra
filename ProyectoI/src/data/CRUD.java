@@ -103,13 +103,13 @@ public class CRUD {
 	        Document doc = db.parse(new File(fileName));
 	        doc.getDocumentElement().normalize();
 
-	        NodeList nodeList = doc.getElementsByTagName(elementType);
-
 	        Document newDoc = db.newDocument();
 	        Element rootElement = newDoc.createElement(doc.getDocumentElement().getNodeName());
 	        newDoc.appendChild(rootElement);
 
-	        boolean elementDeleted = false;
+	        NodeList nodeList = doc.getElementsByTagName(elementType);
+
+	        boolean objectDeleted = false;
 
 	        for (int i = 0; i < nodeList.getLength(); i++) {
 	            Node node = nodeList.item(i);
@@ -118,28 +118,29 @@ public class CRUD {
 	                Element identifierElement = (Element) element.getElementsByTagName(identifierName).item(0);
 	                if (identifierElement != null) {
 	                    String value = identifierElement.getTextContent();
-	                    if (value.equals(identifierValue)) {
-	                        elementDeleted = true;
+	                    if (!value.equals(identifierValue)) {
+	                        Element newElement = (Element) newDoc.importNode(element, true);
+	                        rootElement.appendChild(newElement);
 	                    } else {
-	                        Node importedNode = newDoc.importNode(element, true);
-	                        rootElement.appendChild(importedNode);
+	                        objectDeleted = true;
 	                    }
 	                }
 	            }
 	        }
 
-	        if (elementDeleted) {
+	        if (objectDeleted) {
 	            TransformerFactory transformerFactory = TransformerFactory.newInstance();
 	            Transformer transformer = transformerFactory.newTransformer();
 	            DOMSource source = new DOMSource(newDoc);
 	            StreamResult result = new StreamResult(new File(fileName));
 	            transformer.transform(source, result);
 	            return "Registro eliminado";
+	        } else {
+	            return "Registro no encontrado";
 	        }
-
 	    } catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
 	        e.printStackTrace();
 	    }
-	    return "Registro no encontrado";
+	    return "Error al eliminar el registro";
 	}
 }

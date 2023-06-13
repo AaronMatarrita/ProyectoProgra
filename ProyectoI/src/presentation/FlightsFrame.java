@@ -336,7 +336,6 @@ public class FlightsFrame extends JFrame {
 	public String getTRandomFlightNumber() {
 		Random random = new Random();
 		int randomNumber = random.nextInt(900) + 100;
-		tFlightNum.setText(getTRandomFlightNumber());
 		return String.valueOf(randomNumber);
 	}
 
@@ -361,6 +360,7 @@ public class FlightsFrame extends JFrame {
 		jTableFlights.getTableHeader().setReorderingAllowed(false);
 		// No poder reducir el tamaño de las columnas
 		jTableFlights.getTableHeader().setResizingAllowed(false);
+		
 	}
 
 	public JTable getJTableFlights() {
