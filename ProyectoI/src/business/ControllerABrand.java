@@ -26,8 +26,8 @@ public class ControllerABrand implements ActionListener{
 	private String fileName = "Brands.xml";
 	private String objectName = "brands";
 
-	public ControllerABrand() {
-		bF = new BrandFrame();
+	public ControllerABrand(String userType) {
+		bF = new BrandFrame(userType);
 		crud = new CRUD();
 		lXML = new LogicXML();
 		xmlF = new XMLFiles();

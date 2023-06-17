@@ -25,8 +25,8 @@ public class ControllerATicket implements ActionListener{
 	private Tickets ticket;
 	private CRUD crud;
 
-	public ControllerATicket() {
-		tF = new TicketFrame();
+	public ControllerATicket(String userType) {
+		tF = new TicketFrame(userType);
 		lXML = new LogicXML();
 		lXMLT = new LogicXMLTicket();
 		crud = new CRUD();

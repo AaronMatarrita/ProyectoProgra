@@ -25,9 +25,9 @@ public class ControllerAUser implements ActionListener {
     
     private String fileName = "Users.xml";
     private String objectName = "person";
-
-    public ControllerAUser() {
-        uF = new UserFrame();
+  
+    public ControllerAUser(String userType) {
+        uF = new UserFrame(userType);
         crud = new CRUD();
         lXML = new LogicXML();
         xmlF = new XMLFiles();

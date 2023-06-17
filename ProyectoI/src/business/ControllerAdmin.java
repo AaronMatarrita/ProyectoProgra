@@ -8,8 +8,10 @@ public class ControllerAdmin implements ActionListener{
 
 	// Declaración de instancias de clases y variables
 	private GUIAdmin guiA;
+	private String userType;
 
-	public ControllerAdmin() {
+	public ControllerAdmin(String userType) {
+		this.userType = userType;
 		// Inicializo Instancias
 		guiA = new GUIAdmin();
 		initializerAction();
@@ -29,35 +31,35 @@ public class ControllerAdmin implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		//------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		if (guiA.getBUsers() == e.getSource()) {
-			new ControllerAUser();	
+			new ControllerAUser(userType);	
 		} 
 		//------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		if(guiA.getBBrands() == e.getSource()) {
-			new ControllerABrand();
+			new ControllerABrand(userType);
 		}
 		//------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		if(guiA.getBModels() == e.getSource()) {
-			new ControllerAModel();
+			new ControllerAModel(userType);
 		}
 		//------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		if(guiA.getBAirlines() == e.getSource()) {
-			new ControllerAAirline();
+			new ControllerAAirline(userType);
 		}
 		//------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		if(guiA.getBAirplanes() == e.getSource()) {
-			new ControllerAAirplane();
+			new ControllerAAirplane(userType);
 		}
 		//------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		if(guiA.getBFlights() == e.getSource()) {
-			new ControllerAFlights();
+			new ControllerAFlights(userType);
 		}
 		//------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		if(guiA.getBPassengers() == e.getSource()) {
-			new ControllerAPassenger();
+			new ControllerAPassenger(userType);
 		}
 		//------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		if(guiA.getBTickets() == e.getSource()) {
-			new ControllerATicket();
+			new ControllerATicket(userType);
 		}
 	}
 }

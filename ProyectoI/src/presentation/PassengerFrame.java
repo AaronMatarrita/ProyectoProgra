@@ -22,6 +22,7 @@ import domain.Passenger;
 
 @SuppressWarnings("serial")
 public class PassengerFrame extends JFrame {
+	private String userType;
 	// Etiquetas
 	private JPanel panel;
 	private JPanel JPInfo;
@@ -50,7 +51,8 @@ public class PassengerFrame extends JFrame {
 	private JLabel lPhoneNumber;
 	private JTextField tPhoneNumber;
 
-	public PassengerFrame() {
+	public PassengerFrame(String userType) {
+		this.userType = userType;
 		setType(Type.UTILITY);
 		setForeground(new Color(0, 0, 0));
 		setResizable(false);
@@ -98,7 +100,11 @@ public class PassengerFrame extends JFrame {
 			JPInfo.add(getBAddPassenger());
 			JPInfo.add(getBUpdate());
 			JPInfo.add(getBClear());
-
+			if(userType.equals("2"))//Usuario de tipo *Colaborador* 
+			{
+				bClear.setVisible(false);
+				bUpdate.setVisible(false);
+			}
 			// JTable
 			setDTMPassengers(dataTable, getColumnsName());
 			setJTablePassengers(getDTMPassengers());
@@ -177,7 +183,7 @@ public class PassengerFrame extends JFrame {
 			bAddPassenger.setBackground(new Color(28, 28, 28));
 			bAddPassenger.setForeground(new Color(255, 255, 255));
 			bAddPassenger.setFocusable(false);
-			bAddPassenger.setBounds(240, 330, 130, 40);
+			bAddPassenger.setBounds(440, 330, 130, 40);
 		}
 		return bAddPassenger;
 	}
@@ -190,7 +196,7 @@ public class PassengerFrame extends JFrame {
 			bUpdate.setBackground(new Color(28, 28, 28));
 			bUpdate.setForeground(new Color(255, 255, 255));
 			bUpdate.setFocusable(false);
-			bUpdate.setBounds(440, 330, 130, 40);
+			bUpdate.setBounds(240, 330, 130, 40);
 		}
 		return bUpdate;
 	}

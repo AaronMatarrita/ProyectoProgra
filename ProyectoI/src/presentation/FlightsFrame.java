@@ -23,6 +23,7 @@ import javax.swing.JComboBox;
 
 @SuppressWarnings("serial")
 public class FlightsFrame extends JFrame {
+	private String userType;
 	//Etiquetas
 	private JPanel panel;
 	private JPanel JPInfo;
@@ -62,7 +63,8 @@ public class FlightsFrame extends JFrame {
 	private JComboBox<String> CBAirplane;
 
 
-	public FlightsFrame() {
+	public FlightsFrame(String userType) {
+		this.userType = userType;
 		setType(Type.UTILITY);
 		setForeground(new Color(0, 0, 0));
 		setResizable(false);
@@ -114,7 +116,11 @@ public class FlightsFrame extends JFrame {
 			JPInfo.add(getBAddFlights());
 			JPInfo.add(getBUpdate());
 			JPInfo.add(getBClear());
-
+			if(userType.equals("2"))//Usuario de tipo *Colaborador* 
+			{
+				bClear.setVisible(false);
+				bUpdate.setVisible(false);
+			}
 			//JTable
 			setDTMFlights(dataTable, getColumnsName());
 			setJTableFlights(getDTMFlights());
@@ -164,7 +170,7 @@ public class FlightsFrame extends JFrame {
 			bAddFlights.setBackground(new Color(28, 28, 28));
 			bAddFlights.setForeground(new Color(255, 255, 255));
 			bAddFlights.setFocusable(false);
-			bAddFlights.setBounds(240, 330, 130, 40);
+			bAddFlights.setBounds(440, 330, 130, 40);
 		}
 		return bAddFlights;
 	}
@@ -177,7 +183,7 @@ public class FlightsFrame extends JFrame {
 			bUpdate.setBackground(new Color(28, 28, 28));
 			bUpdate.setForeground(new Color(255, 255, 255));
 			bUpdate.setFocusable(false);
-			bUpdate.setBounds(440, 330, 130, 40);
+			bUpdate.setBounds(240, 330, 130, 40);
 		}
 		return bUpdate;
 	}
@@ -262,6 +268,7 @@ public class FlightsFrame extends JFrame {
 	public JTextField getTEnterTime() {
 		if (tEnterTime == null) {
 			tEnterTime = new JTextField();
+			tEnterTime.setToolTipText("Formato 24 horas (hour : minutes) (xx:xx)");
 			tEnterTime.setForeground(Color.WHITE);
 			tEnterTime.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tEnterTime.setColumns(10);

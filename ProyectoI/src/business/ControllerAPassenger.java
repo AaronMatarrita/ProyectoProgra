@@ -23,8 +23,8 @@ public class ControllerAPassenger implements ActionListener{
 	private String fileName = "Passengers.xml";
 	private String objectName = "person";
 
-	public ControllerAPassenger() {
-		pF = new PassengerFrame();
+	public ControllerAPassenger(String userType) {
+		pF = new PassengerFrame(userType);
 		crud = new CRUD();
 		lXML = new LogicXML();
 		lXMLP = new LogicXMLPassenger();

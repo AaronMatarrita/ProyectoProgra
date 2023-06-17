@@ -26,8 +26,8 @@ public class ControllerAAirline implements ActionListener {
     private String fileName = "Airlines.xml";
     private String objectName = "airlines";
 
-    public ControllerAAirline() {
-        aF = new AirlineFrame();
+    public ControllerAAirline(String userType) {
+        aF = new AirlineFrame(userType);
         crud = new CRUD();
         lXML = new LogicXML();
         xmlF = new XMLFiles();

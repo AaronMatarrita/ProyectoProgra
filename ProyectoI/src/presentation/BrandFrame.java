@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import domain.Brand;
 @SuppressWarnings("serial")
 public class BrandFrame extends JFrame {
+	private String userType;
 	//Paneles
 	private JPanel panel;
 	private JPanel JPInfo;
@@ -39,7 +40,8 @@ public class BrandFrame extends JFrame {
 	private JScrollPane spTBrands;
 	private Object dataTable[][];
 
-    public BrandFrame() {
+    public BrandFrame(String userType) {
+    	this.userType = userType;
     	setType(Type.UTILITY);
         setForeground(new Color(0, 0, 0));
         setResizable(false);
@@ -83,6 +85,12 @@ public class BrandFrame extends JFrame {
             JPInfo.add(getBUpdate());
             JPInfo.add(getBClear());
 
+            if(userType.equals("2"))//Usuario de tipo *Colaborador* 
+			{
+				bClear.setVisible(false);
+				bUpdate.setVisible(false);
+			}
+            
             // JTable
             setDTMBrands(dataTable, getColumnsName());
             setJTableBrands(getDTMBrands());
@@ -108,7 +116,7 @@ public class BrandFrame extends JFrame {
             lBrand = new JLabel("Nombre:");
             lBrand.setForeground(new Color(255, 255, 255));
             lBrand.setFont(new Font("Roboto", Font.PLAIN, 16));
-            lBrand.setBounds(366, 142, 100, 20);
+            lBrand.setBounds(320, 200, 150, 20);
         }
         return lBrand;
     }
@@ -121,7 +129,7 @@ public class BrandFrame extends JFrame {
             bAddBrand.setBackground(new Color(28, 28, 28));
             bAddBrand.setForeground(new Color(255, 255, 255));
             bAddBrand.setFocusable(false);
-            bAddBrand.setBounds(190, 230, 130, 40);
+            bAddBrand.setBounds(440, 330, 130, 40);
         }
         return bAddBrand;
     }
@@ -134,7 +142,7 @@ public class BrandFrame extends JFrame {
             bUpdate.setBackground(new Color(28, 28, 28));
             bUpdate.setForeground(new Color(255, 255, 255));
             bUpdate.setFocusable(false);
-            bUpdate.setBounds(390, 230, 130, 40);
+            bUpdate.setBounds(240, 330, 130, 40);
         }
         return bUpdate;
     }
@@ -147,7 +155,7 @@ public class BrandFrame extends JFrame {
             bClear.setBackground(new Color(28, 28, 28));
             bClear.setForeground(new Color(255, 255, 255));
             bClear.setFocusable(false);
-            bClear.setBounds(590, 230, 130, 40);
+            bClear.setBounds(640, 330, 130, 40);
         }
         return bClear;
     }
@@ -159,7 +167,7 @@ public class BrandFrame extends JFrame {
             tBrand.setForeground(new Color(255, 255, 255));
             tBrand.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tBrand.setBorder(BorderFactory.createEmptyBorder());
-            tBrand.setBounds(436, 142, 150, 20);
+            tBrand.setBounds(480, 200, 150, 20);
             tBrand.setColumns(10);
         }
         return tBrand;
@@ -194,7 +202,7 @@ public class BrandFrame extends JFrame {
 
 	public void setSPTableBrands(JTable jTableBrands) {
 		spTBrands = new JScrollPane(jTableBrands);
-		spTBrands.setBounds(10, 350, 964, 125);
+		spTBrands.setBounds(10, 400, 964, 133);
 	}
 
 	public JScrollPane getSPTableBrands() {

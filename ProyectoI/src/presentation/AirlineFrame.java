@@ -21,6 +21,7 @@ import domain.Airline;
 
 @SuppressWarnings("serial")
 public class AirlineFrame extends JFrame {
+	private String userType;
 	//Paneles
     private JPanel panel;
     private JPanel JPInfo;
@@ -44,7 +45,8 @@ public class AirlineFrame extends JFrame {
     
     
 
-    public AirlineFrame() {
+    public AirlineFrame(String userType) {
+    	this.userType = userType;
     	setType(Type.UTILITY);
         setForeground(new Color(0, 0, 0));
         setResizable(false);
@@ -87,6 +89,12 @@ public class AirlineFrame extends JFrame {
             JPInfo.add(getBAddAirline());
             JPInfo.add(getBUpdate());
             JPInfo.add(getBClear());
+            
+            if(userType.equals("2"))//Usuario de tipo *Colaborador* 
+			{
+				bClear.setVisible(false);
+				bUpdate.setVisible(false);
+			}
             //JTable
             setDTMAirline(dataTable, getColumnsName());
 			setJTableAirline(getDTMAirline());
@@ -129,7 +137,7 @@ public class AirlineFrame extends JFrame {
             bAddAirline.setBackground(new Color(28, 28, 28));
             bAddAirline.setForeground(new Color(255, 255, 255));
             bAddAirline.setFocusable(false);
-            bAddAirline.setBounds(240, 330, 130, 40);
+            bAddAirline.setBounds(440, 330, 130, 40);
         }
         return bAddAirline;
     }
@@ -142,7 +150,7 @@ public class AirlineFrame extends JFrame {
             bUpdate.setBackground(new Color(28, 28, 28));
             bUpdate.setForeground(new Color(255, 255, 255));
             bUpdate.setFocusable(false);
-            bUpdate.setBounds(440, 330, 130, 40);
+            bUpdate.setBounds(240, 330, 130, 40);
         }
         return bUpdate;
     }

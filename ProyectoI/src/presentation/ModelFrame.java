@@ -23,6 +23,7 @@ import domain.AirplaneModel;
 
 @SuppressWarnings("serial")
 public class ModelFrame extends JFrame {
+	private String userType;
 	//Paneles
 	private JPanel panel;
 	private JPanel JPInfo;
@@ -52,7 +53,8 @@ public class ModelFrame extends JFrame {
 	private Object dataTable[][];
 	
 	
-	public ModelFrame() {
+	public ModelFrame(String userType) {
+		this.userType = userType;
 		setType(Type.UTILITY);
 		setForeground(new Color(0, 0, 0));
 		setResizable(false);
@@ -107,6 +109,13 @@ public class ModelFrame extends JFrame {
 			JPInfo.add(getBUpdate());
 			JPInfo.add(getBClear());
 
+			if(userType.equals("2"))//Usuario de tipo *Colaborador* 
+			{
+				bClear.setVisible(false);
+				bUpdate.setVisible(false);
+			}
+			
+			
 			// JTable
 			setDTMAirplaneModels(dataTable, getColumnsName());
 			setJTableAirplaneModels(getDTMAirplaneModels());
@@ -185,7 +194,7 @@ public class ModelFrame extends JFrame {
 			bAddModel.setBackground(new Color(28, 28, 28));
 			bAddModel.setForeground(new Color(255, 255, 255));
 			bAddModel.setFocusable(false);
-			bAddModel.setBounds(240, 330, 130, 40);
+			bAddModel.setBounds(440, 330, 130, 40);
 		}
 		return bAddModel;
 	}
@@ -198,7 +207,7 @@ public class ModelFrame extends JFrame {
 			bUpdate.setBackground(new Color(28, 28, 28));
 			bUpdate.setForeground(new Color(255, 255, 255));
 			bUpdate.setFocusable(false);
-			bUpdate.setBounds(440, 330, 130, 40);
+			bUpdate.setBounds(240, 330, 130, 40);
 		}
 		return bUpdate;
 	}

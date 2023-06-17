@@ -25,9 +25,10 @@ public class ControllerAModel implements ActionListener{
 	private LogicXMLBrand lXMLB;
 	private String fileName = "Models.xml";
 	private String objectName = "models";
-	public ControllerAModel()
+	
+	public ControllerAModel(String userType)
 	{
-		mF = new ModelFrame();
+		mF = new ModelFrame(userType);
 		crud = new CRUD();
 		lXML = new LogicXML();
 		xmlF = new XMLFiles();

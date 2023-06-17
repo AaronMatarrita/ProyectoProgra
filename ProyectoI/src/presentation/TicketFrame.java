@@ -23,6 +23,7 @@ import domain.Tickets;
 
 @SuppressWarnings("serial")
 public class TicketFrame extends JFrame {
+	private String userType;
 	//Etiquetas
     private JPanel panel;
     private JPanel JPInfo;
@@ -50,7 +51,8 @@ public class TicketFrame extends JFrame {
 	private JMenuItem menuItem;
 	private JMenuItem bDownloadPDF;
 
-    public TicketFrame() {
+    public TicketFrame(String userType) {
+    	this.userType = userType;
     	setType(Type.UTILITY);
         setForeground(new Color(0, 0, 0));
         setResizable(false);
@@ -94,7 +96,11 @@ public class TicketFrame extends JFrame {
             JPInfo.add(getBAddTickets());
             JPInfo.add(getBUpdate());
             JPInfo.add(getBClear());
-
+            if(userType.equals("2"))//Usuario de tipo *Colaborador* 
+			{
+				bClear.setVisible(false);
+				bUpdate.setVisible(false);
+			}
             //JTable
             setDTMFlights(dataTable, getColumnsName());
 	        setJTableFlights(getDTMFlights());
@@ -137,7 +143,7 @@ public class TicketFrame extends JFrame {
             bAddFlights.setBackground(new Color(28, 28, 28));
             bAddFlights.setForeground(new Color(255, 255, 255));
             bAddFlights.setFocusable(false);
-            bAddFlights.setBounds(220, 320, 130, 40);
+            bAddFlights.setBounds(420, 320, 130, 40);
         }
         return bAddFlights;
     }
@@ -150,7 +156,7 @@ public class TicketFrame extends JFrame {
             bUpdate.setBackground(new Color(28, 28, 28));
             bUpdate.setForeground(new Color(255, 255, 255));
             bUpdate.setFocusable(false);
-            bUpdate.setBounds(420, 320, 130, 40);
+            bUpdate.setBounds(220, 320, 130, 40);
         }
         return bUpdate;
     }

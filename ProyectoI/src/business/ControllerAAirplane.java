@@ -30,8 +30,8 @@ public class ControllerAAirplane implements ActionListener {
     private String fileName = "Airplanes.xml";
     private String objectName = "airplanes";
 
-    public ControllerAAirplane() {
-        aF = new AirplaneFrame();
+    public ControllerAAirplane(String userType) {
+        aF = new AirplaneFrame(userType);
         crud = new CRUD();
         lXML = new LogicXML();
         xmlF = new XMLFiles();

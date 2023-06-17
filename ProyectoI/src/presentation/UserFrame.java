@@ -21,6 +21,7 @@ import domain.User;
 
 @SuppressWarnings("serial")
 public class UserFrame extends JFrame {
+	private String userType;
 	// Etiquetas
 	private JPanel panel;
 	private JPanel JPInfo;
@@ -46,7 +47,8 @@ public class UserFrame extends JFrame {
 	private JScrollPane spTUsers;
 	private Object dataTable[][];
 
-	public UserFrame() {
+	public UserFrame(String userType) {
+		this.userType = userType;
 		setType(Type.UTILITY);
 		setForeground(new Color(0, 0, 0));
 		setResizable(false);
@@ -99,6 +101,12 @@ public class UserFrame extends JFrame {
 			JPInfo.add(getBUpdate());
 			JPInfo.add(getBClear());
 
+			if(userType.equals("2"))//Usuario de tipo *Colaborador* 
+			{
+				bClear.setVisible(false);
+				bUpdate.setVisible(false);
+			}
+			
 			// JTable
 			setDTMUsers(dataTable, getColumnsName());
 	        setJTableUsers(getDTMUsers());
@@ -115,7 +123,7 @@ public class UserFrame extends JFrame {
 			lTitle.setHorizontalAlignment(SwingConstants.CENTER);
 			lTitle.setForeground(Color.WHITE);
 			lTitle.setFont(new Font("Roboto", Font.PLAIN, 30));
-			lTitle.setBounds(320, 10, 293, 50);
+			lTitle.setBounds(320, 10, 350, 50);
 		}
 		return lTitle;
 	}
@@ -125,7 +133,7 @@ public class UserFrame extends JFrame {
 			lUser = new JLabel("Usuario:");
 			lUser.setForeground(new Color(255, 255, 255));
 			lUser.setFont(new Font("Roboto", Font.PLAIN, 16));
-			lUser.setBounds(81, 100, 100, 20);
+			lUser.setBounds(10, 130, 150, 20);
 		}
 		return lUser;
 	}
@@ -135,7 +143,7 @@ public class UserFrame extends JFrame {
 			lPassword = new JLabel("Contraseña:");
 			lPassword.setForeground(Color.WHITE);
 			lPassword.setFont(new Font("Roboto", Font.PLAIN, 16));
-			lPassword.setBounds(81, 175, 100, 20);
+			lPassword.setBounds(10, 230, 150, 20);
 		}
 		return lPassword;
 	}
@@ -145,7 +153,7 @@ public class UserFrame extends JFrame {
 			lUserType = new JLabel("Tipo de usuario:");
 			lUserType.setForeground(Color.WHITE);
 			lUserType.setFont(new Font("Roboto", Font.PLAIN, 16));
-			lUserType.setBounds(595, 100, 130, 20);
+			lUserType.setBounds(664, 130, 150, 20);
 		}
 		return lUserType;
 	}
@@ -155,7 +163,7 @@ public class UserFrame extends JFrame {
 			lUserStatus = new JLabel("Estado del usuario:");
 			lUserStatus.setForeground(Color.WHITE);
 			lUserStatus.setFont(new Font("Roboto", Font.PLAIN, 16));
-			lUserStatus.setBounds(595, 175, 135, 20);
+			lUserStatus.setBounds(664, 230, 150, 20);
 		}
 		return lUserStatus;
 	}
@@ -168,7 +176,7 @@ public class UserFrame extends JFrame {
 			bAddUser.setBackground(new Color(28, 28, 28));
 			bAddUser.setForeground(new Color(255, 255, 255));
 			bAddUser.setFocusable(false);
-			bAddUser.setBounds(190, 230, 130, 40);
+			bAddUser.setBounds(440, 330, 130, 40);
 		}
 		return bAddUser;
 	}
@@ -181,7 +189,7 @@ public class UserFrame extends JFrame {
 			bUpdate.setBackground(new Color(28, 28, 28));
 			bUpdate.setForeground(new Color(255, 255, 255));
 			bUpdate.setFocusable(false);
-			bUpdate.setBounds(390, 230, 130, 40);
+			bUpdate.setBounds(240, 330, 130, 40);
 		}
 		return bUpdate;
 	}
@@ -194,7 +202,7 @@ public class UserFrame extends JFrame {
 			bClear.setBackground(new Color(28, 28, 28));
 			bClear.setForeground(new Color(255, 255, 255));
 			bClear.setFocusable(false);
-			bClear.setBounds(590, 230, 130, 40);
+			bClear.setBounds(640, 330, 130, 40);
 		}
 		return bClear;
 	}
@@ -206,7 +214,7 @@ public class UserFrame extends JFrame {
 			tUser.setForeground(new Color(255, 255, 255));
 			tUser.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tUser.setBorder(BorderFactory.createEmptyBorder());
-			tUser.setBounds(171, 100, 150, 20);
+			tUser.setBounds(170, 130, 150, 20);
 			tUser.setColumns(10);
 		}
 		return tUser;
@@ -220,7 +228,7 @@ public class UserFrame extends JFrame {
 			tPassword.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tPassword.setBorder(BorderFactory.createEmptyBorder());
 			tPassword.setColumns(10);
-			tPassword.setBounds(171, 175, 150, 20);
+			tPassword.setBounds(170, 230, 150, 20);
 		}
 		return tPassword;
 	}
@@ -233,7 +241,7 @@ public class UserFrame extends JFrame {
 			cBUserType.setForeground(new Color(255, 255, 255));
 			cBUserType.setFont(new Font("Roboto", Font.PLAIN, 16));
 			cBUserType.setBorder(BorderFactory.createEmptyBorder());
-			cBUserType.setBounds(735, 101, 150, 22);
+			cBUserType.setBounds(824, 130, 150, 22);
 		}
 		return cBUserType;
 	}
@@ -246,7 +254,7 @@ public class UserFrame extends JFrame {
 			cBUserStatus.setForeground(new Color(255, 255, 255));
 			cBUserStatus.setFont(new Font("Roboto", Font.PLAIN, 16));
 			cBUserStatus.setBorder(BorderFactory.createEmptyBorder());
-			cBUserStatus.setBounds(735, 176, 150, 22);
+			cBUserStatus.setBounds(824, 230, 150, 22);
 		}
 		return cBUserStatus;
 	}
@@ -280,7 +288,7 @@ public class UserFrame extends JFrame {
 
 	public void setSPTableUsers(JTable jTableUsers) {
 		spTUsers = new JScrollPane(jTableUsers);
-		spTUsers.setBounds(10, 350, 964, 125);
+		spTUsers.setBounds(10, 400, 964, 125);
 	}
 
 	public JScrollPane getSPTableUsers() {

@@ -1,16 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<flights>
-	<flights>
-		<FlightNumber>337</FlightNumber>
-		<DepartureCity>San Jose</DepartureCity>
-		<DepartureDate>2</DepartureDate>
-		<DepartureTime>4</DepartureTime>
-		<ArrivalCity>San Jose</ArrivalCity>
-		<ArrivalDate>2</ArrivalDate>
-		<ArrivalTime>4</ArrivalTime>
-		<Airplane>123</Airplane>
-		<BusinessClassSeatsPrice>120.0</BusinessClassSeatsPrice>
-		<TouristClassSeatsPrice>120.0</TouristClassSeatsPrice>
-		<EconomyClassSeatsPrice>120.0</EconomyClassSeatsPrice>
-	</flights>
-</flights>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><flights>
+	
+<flights><FlightNumber>256</FlightNumber><DepartureCity>San Jose</DepartureCity><DepartureDate>12</DepartureDate><DepartureTime>08:10</DepartureTime><ArrivalCity>San Jose</ArrivalCity><ArrivalDate>12</ArrivalDate><ArrivalTime>12:00</ArrivalTime><Airplane>123</Airplane><BusinessClassSeatsPrice>120.0</BusinessClassSeatsPrice><TouristClassSeatsPrice>120.0</TouristClassSeatsPrice><EconomyClassSeatsPrice>120.0</EconomyClassSeatsPrice></flights></flights>
