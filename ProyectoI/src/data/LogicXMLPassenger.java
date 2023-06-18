@@ -72,4 +72,16 @@ public class LogicXMLPassenger {
 			return passengers;
 		}
 	}
+	
+	public Passenger getPassengerFromXML(String fileName, String objectName, String attributeName, String attributeValue) {
+	    ArrayList<Passenger> passengers = readXMLFile(fileName);
+
+	    for (Passenger passenger : passengers) {
+	        if (passenger.getPassport().equals(attributeValue)) {
+	            return passenger;
+	        }
+	    }
+	    Passenger p = new Passenger();
+	    return p;
+	}
 }

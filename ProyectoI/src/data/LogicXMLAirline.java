@@ -19,64 +19,74 @@ public class LogicXMLAirline {
 	//------------------------------------------------------------------
 	//Método para obtener una lista de TIPO Airline
 	public ArrayList<Airline> readXMLFile(String filename) {
-	    ArrayList<Airline> airlines = new ArrayList<>();
-	    try {
-	        File file = new File(filename);
-	        if (!file.exists()) {
-	            return airlines;
-	        }
+		ArrayList<Airline> airlines = new ArrayList<>();
+		try {
+			File file = new File(filename);
+			if (!file.exists()) {
+				return airlines;
+			}
 
-	        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-	        DocumentBuilder builder = factory.newDocumentBuilder();
-	        Document doc = builder.parse(file);
-	        doc.getDocumentElement().normalize();
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Document doc = builder.parse(file);
+			doc.getDocumentElement().normalize();
 
-	        NodeList nodeList = doc.getElementsByTagName("airlines");
+			NodeList nodeList = doc.getElementsByTagName("airlines");
 
-	        if (nodeList.getLength() == 0) {
-	            return airlines;
-	        }
+			if (nodeList.getLength() == 0) {
+				return airlines;
+			}
 
-	        for (int i = 0; i < nodeList.getLength(); i++) {
-	            Node node = nodeList.item(i);
-	            if (node.getNodeType() == Node.ELEMENT_NODE) {
-	                Element element = (Element) node;
-	                NodeList nameList = element.getElementsByTagName("Name");
-	                NodeList countryList = element.getElementsByTagName("Country");
+			for (int i = 0; i < nodeList.getLength(); i++) {
+				Node node = nodeList.item(i);
+				if (node.getNodeType() == Node.ELEMENT_NODE) {
+					Element element = (Element) node;
+					NodeList nameList = element.getElementsByTagName("Name");
+					NodeList countryList = element.getElementsByTagName("Country");
 
-	                if (nameList.getLength() > 0 && countryList.getLength() > 0) {
-	                    String name = nameList.item(0).getTextContent();
-	                    String country = countryList.item(0).getTextContent();
+					if (nameList.getLength() > 0 && countryList.getLength() > 0) {
+						String name = nameList.item(0).getTextContent();
+						String country = countryList.item(0).getTextContent();
 
-	                    boolean airlineExists = false;
-	                    for (Airline existingAirline : airlines) {
-	                        if (existingAirline.getName().equals(name)) {
-	                            airlineExists = true;
-	                            break;
-	                        }
-	                    }
-	                    if (!airlineExists) {
-	                        Airline airline = new Airline();
-	                        airline.setName(name);
-	                        airline.setCountry(country);
-	                        airlines.add(airline);
-	                    }
-	                }
-	            }
-	        }
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-	    return airlines;
+						boolean airlineExists = false;
+						for (Airline existingAirline : airlines) {
+							if (existingAirline.getName().equals(name)) {
+								airlineExists = true;
+								break;
+							}
+						}
+						if (!airlineExists) {
+							Airline airline = new Airline();
+							airline.setName(name);
+							airline.setCountry(country);
+							airlines.add(airline);
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return airlines;
 	}
 	//------------------------------------------------------------------
 	//Método para obtener una lista de TIPO String con las aerolíneas
 	public ArrayList<String> getAirlineList(String filename) {
-	    ArrayList<String> airlineList = new ArrayList<>();
-	    ArrayList<Airline> airlines = readXMLFile(filename);
-	    for (Airline airline : airlines) {
-	        airlineList.add(airline.getName());
-	    }
-	    return airlineList;
+		ArrayList<String> airlineList = new ArrayList<>();
+		ArrayList<Airline> airlines = readXMLFile(filename);
+		for (Airline airline : airlines) {
+			airlineList.add(airline.getName());
+		}
+		return airlineList;
+	}
+	//Método para obtener la aerolinea con el nombre a busar en el xml
+	public Airline getAirlineFromFile(String fileName, String objectName, String attributeName, String attributeValue) {
+		ArrayList<Airline> airlines = readXMLFile(fileName);
+		for(Airline airline : airlines) {
+			if(airline.getName().equals(attributeValue)) {
+				return airline;
+			}
+		}
+		return null;
 	}
 }

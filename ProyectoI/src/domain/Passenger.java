@@ -22,6 +22,8 @@ public class Passenger {
 		PhoneNumber = phoneNumber;
 	}
 
+	public Passenger() {}
+
 	public String getPassport() {return Passport;}
 
 	public String getName() {return Name;}

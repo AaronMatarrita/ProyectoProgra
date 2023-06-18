@@ -64,5 +64,16 @@ public class LogicXMLUser {
 		}
 		return users;
 	}
+	
+	public User getUserFromFile(String fileName, String objectName, String attributeName, String attributeValue) {
+	    ArrayList<User> users = readXMLFile(fileName);
 
+	    for (User user : users) {
+	        if (user.getUser().equals(attributeValue)) {
+	            return user;
+	        }
+	    }
+	    
+	    return null;
+	}
 }

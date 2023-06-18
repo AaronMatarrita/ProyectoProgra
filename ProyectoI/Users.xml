@@ -6,8 +6,8 @@
 		<status>true</status>
 	</person>
 	<person>
-		<user>AaronMP</user>
-		<password>Fx7st</password>
+		<user>Aaron</user>
+		<password>1234</password>
 		<userType>1</userType>
 		<status>true</status>
 	</person>
@@ -17,11 +17,16 @@
 		<userType>2</userType>
 		<status>true</status>
 	</person>
-	
 	<person>
-		<user>Juan</user>
-		<password>JaX12</password>
-		<userType>1</userType>
+		<user>Joselu</user>
+		<password>322</password>
+		<userType>2</userType>
+		<status>false</status>
+	</person>
+	<person>
+		<user>Matihas</user>
+		<password>asd</password>
+		<userType>2</userType>
 		<status>true</status>
 	</person>
 </person>

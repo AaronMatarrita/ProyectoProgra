@@ -7,7 +7,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -58,92 +57,128 @@ public class CRUD {
 	}
 	//---------------------Método para buscar un objeto en el XML---------------------
 	public String readObject(String fileName, String elementType, String identifierName, String identifierValue) {
-	    try {
-	        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-	        DocumentBuilder db = dbf.newDocumentBuilder();
-	        Document doc = db.parse(new File(fileName));
-	        doc.getDocumentElement().normalize();
+		try {
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			Document doc = db.parse(new File(fileName));
+			doc.getDocumentElement().normalize();
 
-	        NodeList nodeList = doc.getElementsByTagName(elementType);
+			NodeList nodeList = doc.getElementsByTagName(elementType);
 
-	        for (int i = 0; i < nodeList.getLength(); i++) {
-	            Node node = nodeList.item(i);
-	            if (node.getNodeType() == Node.ELEMENT_NODE) {
-	                Element element = (Element) node;
-	                String value = element.getElementsByTagName(identifierName).item(0).getTextContent();
-	                if (value.equals(identifierValue)) {
-	                    StringBuilder sb = new StringBuilder();
-	                    NodeList children = element.getChildNodes();
-	                    for (int j = 0; j < children.getLength(); j++) {
-	                        Node child = children.item(j);
-	                        if (child.getNodeType() == Node.ELEMENT_NODE) {
-	                            sb.append(child.getTextContent().trim());
-	                            sb.append(",");
-	                        }
-	                    }
-	                    String userInfo = sb.toString().trim();
-	                    if (userInfo.endsWith(",")) {
-	                        userInfo = userInfo.substring(0, userInfo.length() - 1);
-	                    }
-	                    return userInfo;
-	                }
-	            }
-	        }
-	    } catch (ParserConfigurationException | SAXException | IOException e) {
-	        e.printStackTrace();
-	    }
-	    return null;
+			for (int i = 0; i < nodeList.getLength(); i++) {
+				Node node = nodeList.item(i);
+				if (node.getNodeType() == Node.ELEMENT_NODE) {
+					Element element = (Element) node;
+					String value = element.getElementsByTagName(identifierName).item(0).getTextContent();
+					if (value.equals(identifierValue)) {
+						StringBuilder sb = new StringBuilder();
+						NodeList children = element.getChildNodes();
+						for (int j = 0; j < children.getLength(); j++) {
+							Node child = children.item(j);
+							if (child.getNodeType() == Node.ELEMENT_NODE) {
+								sb.append(child.getTextContent().trim());
+								sb.append(",");
+							}
+						}
+						String userInfo = sb.toString().trim();
+						if (userInfo.endsWith(",")) {
+							userInfo = userInfo.substring(0, userInfo.length() - 1);
+						}
+						return userInfo;
+					}
+				}
+			}
+		} catch (ParserConfigurationException | SAXException | IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	//---------------------Método para actualizar un objeto del XML------------------
-	
-	//---------------------Método para eliminar un objeto del XML--------------------
-	public String deleteObject(String fileName, String elementType, String identifierName, String identifierValue) {
-	    try {
-	        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-	        DocumentBuilder db = dbf.newDocumentBuilder();
-	        Document doc = db.parse(new File(fileName));
-	        doc.getDocumentElement().normalize();
+	public void updateObject(String fileName, String elementType, String identifierName, String identifierValue,
+			String[] dataName, String[] newData) {
+		try {
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			Document doc = db.parse(new File(fileName));
+			doc.getDocumentElement().normalize();
 
-	        NodeList nodeList = doc.getElementsByTagName(elementType);
+			NodeList nodeList = doc.getElementsByTagName(elementType);
 
-	        boolean objectDeleted = false;
+			for (int i = 0; i < nodeList.getLength(); i++) {
+				Node node = nodeList.item(i);
+				if (node.getNodeType() == Node.ELEMENT_NODE) {
+					Element element = (Element) node;
+					Element identifierElement = (Element) element.getElementsByTagName(identifierName).item(0);
+					if (identifierElement != null) {
+						String value = identifierElement.getTextContent();
+						if (value.equals(identifierValue)) {
 
-	        for (int i = nodeList.getLength() - 1; i >= 0; i--) {
-	            Node node = nodeList.item(i);
-	            if (node.getNodeType() == Node.ELEMENT_NODE) {
-	                Element element = (Element) node;
-	                Element identifierElement = (Element) element.getElementsByTagName(identifierName).item(0);
-	                if (identifierElement != null) {
-	                    String value = identifierElement.getTextContent();
-	                    if (value.equals(identifierValue)) {
-	                        element.getParentNode().removeChild(element);
-	                        objectDeleted = true;
-	                    }
-	                }
-	            }
-	        }
+							for (int j = 0; j < dataName.length; j++) {
+								Element dataElement = (Element) element.getElementsByTagName(dataName[j]).item(0);
+								if (dataElement != null) {
+									dataElement.setTextContent(newData[j]);
+								}
+							}
 
-	        if (objectDeleted) {
-	            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-	            Transformer transformer = transformerFactory.newTransformer();
-	            DOMSource source = new DOMSource(doc);
-	            StreamResult result = new StreamResult(new File(fileName));
-	            transformer.transform(source, result);
-	            return "Registro eliminado";
-	        } else {
-	            return "Registro no encontrado";
-	        }
-	    } catch (ParserConfigurationException e) {
+							TransformerFactory transformerFactory = TransformerFactory.newInstance();
+							Transformer transformer = transformerFactory.newTransformer();
+							DOMSource source = new DOMSource(doc);
+							StreamResult result = new StreamResult(new File(fileName));
+							transformer.transform(source, result);
+
+							System.out.println("Registro modificado");
+							return;
+						}
+					}
+				}
+			}
+
+			System.out.println("Registro no encontrado");
+		} catch (Exception e) {
 	        e.printStackTrace();
-	    } catch (SAXException e) {
-	        e.printStackTrace();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    } catch (TransformerConfigurationException e) {
-	        e.printStackTrace();
-	    } catch (TransformerException e) {
-	        e.printStackTrace();
+	        System.out.println("Error al modificar el registro");
 	    }
-	    return "Error al eliminar el registro";
+	}
+	//---------------------Método para eliminar un objeto del XML--------------------
+	public void deleteObject(String fileName, String elementType, String identifierName, String identifierValue) {
+		try {
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			Document doc = db.parse(new File(fileName));
+			doc.getDocumentElement().normalize();
+
+			NodeList nodeList = doc.getElementsByTagName(elementType);
+
+			boolean objectDeleted = false;
+
+			for (int i = nodeList.getLength() - 1; i >= 0; i--) {
+				Node node = nodeList.item(i);
+				if (node.getNodeType() == Node.ELEMENT_NODE) {
+					Element element = (Element) node;
+					Element identifierElement = (Element) element.getElementsByTagName(identifierName).item(0);
+					if (identifierElement != null) {
+						String value = identifierElement.getTextContent();
+						if (value.equals(identifierValue)) {
+							element.getParentNode().removeChild(element);
+							objectDeleted = true;
+						}
+					}
+				}
+			}
+
+			if (objectDeleted) {
+				TransformerFactory transformerFactory = TransformerFactory.newInstance();
+				Transformer transformer = transformerFactory.newTransformer();
+				DOMSource source = new DOMSource(doc);
+				StreamResult result = new StreamResult(new File(fileName));
+				transformer.transform(source, result);
+				System.out.println("Registro eliminado");
+			} else {
+				System.out.println("Registro no encontrado");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error al eliminar el registro");
+		}
 	}
 }

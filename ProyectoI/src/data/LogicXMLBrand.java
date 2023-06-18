@@ -64,6 +64,16 @@ public class LogicXMLBrand {
 			return brands;
 		}
 	}
+	//Método para obtener la marca con el nombre especifico
+	public Brand getBrandFromXML(String fileName, String objectName, String attributeName, String attributeValue) {
+		ArrayList<Brand> brands = readXMLFile(fileName);
+		for(Brand brand : brands) {
+			if(brand.getBrand().equals(attributeValue)) {
+				return brand;
+			}
+		}
+		return null;
+	}
 	//------------------------------------------------------------------
 		//Método para obtener una lista de TIPO String con las marcas
 	public ArrayList<String> readBrandsFromXML(String fileName) {
