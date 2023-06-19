@@ -41,14 +41,16 @@ public ArrayList<Tickets> readXMLFile(String filename) {
 						Node ticketNumberNode = element.getElementsByTagName("TicketNumber").item(0);
 						Node passportNode = element.getElementsByTagName("Passport").item(0);
 						Node flightNumberNode = element.getElementsByTagName("FlightNumber").item(0);
+						Node tickettypeNode = element.getElementsByTagName("TicketType").item(0);
 
 						// Verificar si los nodos existen antes de obtener su contenido
 						String ticketNumber = (ticketNumberNode != null) ? ticketNumberNode.getTextContent() : "";
 						String passport = (passportNode != null) ? passportNode.getTextContent() : "";
 						String flightNumber = (flightNumberNode != null) ? flightNumberNode.getTextContent() : "";
-
+						String tickettype = (tickettypeNode != null) ? tickettypeNode.getTextContent() : "";
+						
 						// Verificar si alguno de los campos requeridos está vacío
-						if (ticketNumber.isEmpty() || passport.isEmpty() || flightNumber.isEmpty()) {
+						if (ticketNumber.isEmpty() || passport.isEmpty() || flightNumber.isEmpty()|| tickettype.isEmpty()) {
 							continue; // Saltar este elemento y pasar al siguiente
 						}
 
@@ -60,7 +62,7 @@ public ArrayList<Tickets> readXMLFile(String filename) {
 							}
 						}
 						if (!passengerExists) {
-							Tickets ticket = new Tickets(Integer.parseInt(ticketNumber), passport, Integer.parseInt(flightNumber));
+							Tickets ticket = new Tickets(Integer.parseInt(ticketNumber), passport, Integer.parseInt(flightNumber),tickettype);
 							ticketsList.add(ticket);
 						}
 					}

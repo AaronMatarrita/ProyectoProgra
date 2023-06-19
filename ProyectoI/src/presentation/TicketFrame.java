@@ -1,5 +1,6 @@
 package presentation;
 
+
 import java.awt.Color;
 import java.awt.Font;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -19,11 +21,15 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
+
+import business.ControllerTicketsHistory;
 import domain.Tickets;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
 @SuppressWarnings("serial")
 public class TicketFrame extends JFrame {
-	private String userType;
 	//Etiquetas
     private JPanel panel;
     private JPanel JPInfo;
@@ -50,6 +56,10 @@ public class TicketFrame extends JFrame {
 	private JMenu MNHelp;
 	private JMenuItem menuItem;
 	private JMenuItem bDownloadPDF;
+	private JLabel lTicketType;
+	private JComboBox cBTicketType;
+	private JMenuItem bShowTickets;
+	private String userType;
 
     public TicketFrame(String userType) {
     	this.userType = userType;
@@ -62,7 +72,7 @@ public class TicketFrame extends JFrame {
         getContentPane().setLayout(null);
         getContentPane().add(getPanel());
         setVisible(true);
-    }
+   }
 
     public void showMessage(String message) {
         JOptionPane.showMessageDialog(null, message);
@@ -101,6 +111,7 @@ public class TicketFrame extends JFrame {
 				bClear.setVisible(false);
 				bUpdate.setVisible(false);
 			}
+
             //JTable
             setDTMFlights(dataTable, getColumnsName());
 	        setJTableFlights(getDTMFlights());
@@ -108,6 +119,8 @@ public class TicketFrame extends JFrame {
 	        JPInfo.add(getSPTableFlights());
 	        JPInfo.add(getTFlightNumber());
 	        JPInfo.add(getLFlightNumber());
+	        JPInfo.add(getLTicketType());
+	        JPInfo.add(getCBTicketType());
 			
 			
         }
@@ -130,7 +143,7 @@ public class TicketFrame extends JFrame {
             lTicketNumber = new JLabel("Número de tiquete:");
             lTicketNumber.setForeground(new Color(255, 255, 255));
             lTicketNumber.setFont(new Font("Roboto", Font.PLAIN, 16));
-            lTicketNumber.setBounds(320, 120, 150, 20);
+            lTicketNumber.setBounds(86, 133, 150, 20);
         }
         return lTicketNumber;
     }
@@ -138,12 +151,16 @@ public class TicketFrame extends JFrame {
     public JButton getBAddTickets() {
         if (bAddFlights == null) {
             bAddFlights = new JButton("Agregar");
+            bAddFlights.addActionListener(new ActionListener() {
+            	public void actionPerformed(ActionEvent e) {
+            	}
+            });
             bAddFlights.setFont(new Font("Roboto", Font.PLAIN, 16));
             bAddFlights.setIcon(new ImageIcon(FlightsFrame.class.getResource("/imagesMain/imagesButtons/add-button.png")));
             bAddFlights.setBackground(new Color(28, 28, 28));
             bAddFlights.setForeground(new Color(255, 255, 255));
             bAddFlights.setFocusable(false);
-            bAddFlights.setBounds(420, 320, 130, 40);
+            bAddFlights.setBounds(220, 320, 130, 40);
         }
         return bAddFlights;
     }
@@ -156,7 +173,7 @@ public class TicketFrame extends JFrame {
             bUpdate.setBackground(new Color(28, 28, 28));
             bUpdate.setForeground(new Color(255, 255, 255));
             bUpdate.setFocusable(false);
-            bUpdate.setBounds(220, 320, 130, 40);
+            bUpdate.setBounds(420, 320, 130, 40);
         }
         return bUpdate;
     }
@@ -181,7 +198,7 @@ public class TicketFrame extends JFrame {
             tTicketNumber.setForeground(new Color(255, 255, 255));
             tTicketNumber.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tTicketNumber.setBorder(BorderFactory.createEmptyBorder());
-            tTicketNumber.setBounds(520, 120, 150, 20);
+            tTicketNumber.setBounds(286, 133, 150, 20);
             tTicketNumber.setColumns(10);
         }
         return tTicketNumber;
@@ -191,7 +208,7 @@ public class TicketFrame extends JFrame {
 			lPassport = new JLabel("Pasaporte:");
 			lPassport.setForeground(Color.WHITE);
 			lPassport.setFont(new Font("Dialog", Font.PLAIN, 16));
-			lPassport.setBounds(320, 180, 150, 20);
+			lPassport.setBounds(86, 193, 150, 20);
 		}
 		return lPassport;
 	}
@@ -203,7 +220,7 @@ public class TicketFrame extends JFrame {
 			tPassport.setColumns(10);
 			tPassport.setBorder(BorderFactory.createEmptyBorder());
 			tPassport.setBackground(new Color(28, 28, 28));
-			tPassport.setBounds(520, 180, 150, 20);
+			tPassport.setBounds(286, 193, 150, 20);
 		}
 		return tPassport;
 	}
@@ -245,18 +262,19 @@ public class TicketFrame extends JFrame {
 	}
 
 	public String[] getColumnsName() {
-		String columnsName[] = {"Numero de tiquete", "Pasaporte", "Número de vuelo"};
+		String columnsName[] = {"Numero de tiquete", "Pasaporte", "Número de vuelo", "Tipo de tiquete"};
 		return columnsName;
 	}
 	
 	public void setJTableData(List<Tickets> tickets) {
-	    Object[][] data = new Object[tickets.size()][3];
+	    Object[][] data = new Object[tickets.size()][4];
 	    for (int i = 0; i < tickets.size(); i++) {
 	        Tickets ticket = tickets.get(i);
 
 	        data[i][0] = ticket.getTicketNumber();
 	        data[i][1] = ticket.getPassport();
 	        data[i][2] = ticket.getFlightNumber();
+	        data[i][3] = ticket.getTickettype();
 	    }
 	    dtmTFlights.setDataVector(data, getColumnsName());
 	}
@@ -275,7 +293,7 @@ public class TicketFrame extends JFrame {
 			tFlightNumber.setColumns(10);
 			tFlightNumber.setBorder(BorderFactory.createEmptyBorder());
 			tFlightNumber.setBackground(new Color(28, 28, 28));
-			tFlightNumber.setBounds(520, 240, 150, 20);
+			tFlightNumber.setBounds(731, 193, 150, 20);
 		}
 		return tFlightNumber;
 	}
@@ -284,7 +302,7 @@ public class TicketFrame extends JFrame {
 			lFlightNumber = new JLabel("Número de vuelo:");
 			lFlightNumber.setForeground(Color.WHITE);
 			lFlightNumber.setFont(new Font("Dialog", Font.PLAIN, 16));
-			lFlightNumber.setBounds(320, 240, 150, 20);
+			lFlightNumber.setBounds(571, 193, 150, 20);
 		}
 		return lFlightNumber;
 	}
@@ -307,6 +325,7 @@ public class TicketFrame extends JFrame {
 			mnFile.setFocusable(false);
 			mnFile.setForeground(new Color(255, 255, 255));
 			mnFile.add(getBDownloadPDF());
+			mnFile.add(getBShowTickets());
 		}
 		return mnFile;
 	}
@@ -328,11 +347,53 @@ public class TicketFrame extends JFrame {
 	public JMenuItem getBDownloadPDF() {
 		bDownloadPDF = new JMenuItem("Save ticket");
 		bDownloadPDF.setForeground(new Color(255, 255, 255));
-		bDownloadPDF.setIcon(new ImageIcon(TicketFrame.class.getResource("/imagestTickets/downloadPDF.png")));
+		bDownloadPDF.setIcon(new ImageIcon(TicketFrame.class.getResource("/imagesMain/tickets.png")));
 		bDownloadPDF.setFont(new Font("Roboto", Font.PLAIN, 12));
 		bDownloadPDF.setBackground(new Color(28, 28, 28));
 		bDownloadPDF.setBorder(null);
 		bDownloadPDF.setFocusable(false);
 	    return bDownloadPDF;
+	}
+	public JLabel getLTicketType() {
+		if (lTicketType == null) {
+			lTicketType = new JLabel("Tipo de Ticket:");
+			lTicketType.setForeground(Color.WHITE);
+			lTicketType.setFont(new Font("Dialog", Font.PLAIN, 16));
+			lTicketType.setBounds(580, 133, 130, 20);
+		}
+		return lTicketType;
+	}
+	public JComboBox<String> getCBTicketType() {
+		if (cBTicketType == null) {
+			String arrayCBTicketType[] = {"Indefinido", "Ejecutivo", "Turista","Economico"};
+			cBTicketType = new JComboBox(arrayCBTicketType);
+			cBTicketType.setForeground(Color.WHITE);
+			cBTicketType.setFont(new Font("Dialog", Font.PLAIN, 16));
+			cBTicketType.setBorder(BorderFactory.createEmptyBorder());
+			cBTicketType.setBackground(new Color(28, 28, 28));
+			cBTicketType.setBounds(731, 132, 150, 22);
+		}
+		return cBTicketType;
+	}
+	
+	
+	public JMenuItem getBShowTickets() {
+		if (bShowTickets == null) {
+			bShowTickets = new JMenuItem("Show Tickets");
+			bShowTickets.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					new ControllerTicketsHistory();
+					
+				}
+			});
+			bShowTickets.setIcon(new ImageIcon(TicketFrame.class.getResource("/imagesMain/tickets.png")));
+			bShowTickets.setForeground(Color.WHITE);
+			bShowTickets.setFont(new Font("Dialog", Font.PLAIN, 12));
+			bShowTickets.setFocusable(false);
+			bShowTickets.setBorder(null);
+			bShowTickets.setBackground(new Color(28, 28, 28));
+		}
+		return bShowTickets;
 	}
 }

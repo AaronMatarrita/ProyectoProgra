@@ -50,22 +50,27 @@ public class ControllerATicket implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+
 		if(tF.getBAddTickets() == e.getSource()) {
 			String passport = tF.getTPassport().getText();
 			String ticketNumber = tF.getTTicketNumber().getText();
 			String flightNumber = tF.getTFlightNumber().getText();
+			String ticketType = (String) tF.getCBTicketType().getSelectedItem();
 
-			if (passport.isEmpty() || ticketNumber.isEmpty() || flightNumber.isEmpty()) {
+			if (passport.isEmpty() || ticketNumber.isEmpty() || flightNumber.isEmpty()||ticketType.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos");
 				return;
 			} else if (lXML.isAlreadyInFile(fileName, objectName, "id", passport)) {
-				JOptionPane.showMessageDialog(null, "El avion ya existe");
+				JOptionPane.showMessageDialog(null, "El Tiquete ya existe");
 				return;
-			}
+			}	else if (ticketType.equals("Indefinido")) {
+                JOptionPane.showMessageDialog(null, "Por favor, seleccione el estado del usuario");
+                return;
+            }
 			tF.clean();
-			ticket  = new Tickets(Integer.parseInt(ticketNumber), passport, Integer.parseInt(flightNumber));
+			ticket  = new Tickets(Integer.parseInt(ticketNumber), passport, Integer.parseInt(flightNumber),ticketType);
 			crud.addObject(fileName, objectName, ticket.getDataName(), ticket.getData());
-			JOptionPane.showMessageDialog(null, "Avion agregado");
+			JOptionPane.showMessageDialog(null, "Tiquete agregado");
 			setTableData();
 		}else if(tF.getBUpdate() == e.getSource()) {
 			//En proceso...
@@ -81,12 +86,12 @@ public class ControllerATicket implements ActionListener{
 				return;
 			}
 			int dialogButton = JOptionPane.YES_NO_OPTION;
-			int dialogResult = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar el avion?", "Eliminar", dialogButton);
+			int dialogResult = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar el tiquete?", "Eliminar", dialogButton);
 
 			if (dialogResult == JOptionPane.YES_OPTION) {
 				tF.clean();
 				crud.deleteObject(fileName, objectName, "TicketNumber", ticket);
-				JOptionPane.showMessageDialog(null, "Avion eliminado");
+				JOptionPane.showMessageDialog(null, "Tiquete eliminado");
 			}
 			setTableData();
 		}

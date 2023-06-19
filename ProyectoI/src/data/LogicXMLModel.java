@@ -79,6 +79,7 @@ public class LogicXMLModel {
 		}
 		return airplaneModels;
 	}
+	//------------------------------------------------------------------
 	//Método para obtener un modelo en especifico
 	public AirplaneModel getAirplaneModelFromXML(String fileName, String objectName, String attributeName, String attributeValue) {
 	    ArrayList<AirplaneModel> airplaneModels = readXMLFile(fileName);
@@ -89,7 +90,6 @@ public class LogicXMLModel {
 	    }
 	    return null;
 	}
-	//------------------------------------------------------------------
 	//Método para obtener una lista de TIPO String con los modelos
 	public ArrayList<String> getAirplaneModels(String filename) {
 	    ArrayList<String> models = new ArrayList<>();
