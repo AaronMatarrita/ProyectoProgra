@@ -40,6 +40,7 @@ public class ControllerAAirplane implements ActionListener {
 		lXMLA = new LogicXMLAirline();
 		logicXMLAirplane = new LogicXMLAirplane();
 		xmlF.createXML(fileName, objectName);
+		
 		pM = new PopUpMessages();
 		setTableData();
 		aF.fillModelComboBox(lXMLM.getAirplaneModels("Models.xml"));

@@ -14,6 +14,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import domain.Airplane;
 import domain.Tickets;
 
 public class LogicXMLTicket {
@@ -75,4 +76,16 @@ public ArrayList<Tickets> readXMLFile(String filename) {
 		}
 		return ticketsList;
 	}
+	//Método para obtener un Ticket en especifico
+		public Tickets getTicketFromXML(String fileName, String objectName, String attributeName, String attributeValue) {
+		    ArrayList<Tickets> tickets = readXMLFile(fileName);
+		    
+		    for (Tickets ticket : tickets) {
+		    	int number= ticket.getTicketNumber();
+		        if (String.valueOf(number).equals(attributeValue)) {
+		            return ticket;
+		        }
+		    }
+		    return null;
+		}
 }

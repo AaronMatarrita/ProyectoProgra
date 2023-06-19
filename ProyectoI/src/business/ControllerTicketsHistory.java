@@ -21,8 +21,6 @@ import presentation.ShowTicketsFrame;
 //import logicsxml
 import data.LogicXMLPassenger;
 
-
-
 public class ControllerTicketsHistory implements ActionListener{
 	private String fileName = "HistoricTickets.xml";
 	private String objectName = "HistoricTickets";
@@ -39,11 +37,6 @@ public class ControllerTicketsHistory implements ActionListener{
 	private TicketFrame tF;
 	private ShowTicketsFrame sF;
 	
-	
-	
-	
-	
-
 	public ControllerTicketsHistory() {
 		sF = new ShowTicketsFrame();
 		//tF = new TicketFrame();
