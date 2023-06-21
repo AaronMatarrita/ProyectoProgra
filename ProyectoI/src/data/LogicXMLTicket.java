@@ -14,13 +14,13 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import domain.Airplane;
 import domain.Tickets;
 
 public class LogicXMLTicket {
-public ArrayList<Tickets> readXMLFile(String filename) {
+	public ArrayList<Tickets> readXMLFile(String filename) {
 		ArrayList<Tickets> ticketsList = new ArrayList<>();
 		File file = new File(filename);
+		
 		if (!file.exists()) {
 			return ticketsList;
 		} else {
@@ -37,34 +37,32 @@ public ArrayList<Tickets> readXMLFile(String filename) {
 
 				for (int i = 0; i < nodeList.getLength(); i++) {
 					Node node = nodeList.item(i);
-					if (node != null && node.getNodeType() == Node.ELEMENT_NODE) {
+					if (node.getNodeType() == Node.ELEMENT_NODE) {
 						Element element = (Element) node;
+
 						Node ticketNumberNode = element.getElementsByTagName("TicketNumber").item(0);
 						Node passportNode = element.getElementsByTagName("Passport").item(0);
 						Node flightNumberNode = element.getElementsByTagName("FlightNumber").item(0);
 						Node tickettypeNode = element.getElementsByTagName("TicketType").item(0);
 
-						// Verificar si los nodos existen antes de obtener su contenido
-						String ticketNumber = (ticketNumberNode != null) ? ticketNumberNode.getTextContent() : "";
-						String passport = (passportNode != null) ? passportNode.getTextContent() : "";
-						String flightNumber = (flightNumberNode != null) ? flightNumberNode.getTextContent() : "";
-						String tickettype = (tickettypeNode != null) ? tickettypeNode.getTextContent() : "";
-						
-						// Verificar si alguno de los campos requeridos está vacío
-						if (ticketNumber.isEmpty() || passport.isEmpty() || flightNumber.isEmpty()|| tickettype.isEmpty()) {
-							continue; // Saltar este elemento y pasar al siguiente
-						}
-
-						boolean passengerExists = false;
-						for (Tickets existingTicket : ticketsList) {
-							if (existingTicket.getPassport().equals(passport)) {
-								passengerExists = true;
-								break;
+						if(ticketNumberNode != null && passportNode != null && flightNumberNode != null && tickettypeNode != null) {
+							
+							String ticketNumber = element.getElementsByTagName("TicketNumber").item(0).getTextContent();
+							String passport = element.getElementsByTagName("Passport").item(0).getTextContent();
+							String flightNumber = element.getElementsByTagName("FlightNumber").item(0).getTextContent();
+							String tickettype = element.getElementsByTagName("TicketType").item(0).getTextContent();
+							
+							boolean ticketExists = false;
+							for (Tickets existingTicket : ticketsList) {
+								if (existingTicket.getTicketNumber() == Integer.parseInt(ticketNumber)) {
+									ticketExists = true;
+									break;
+								}
 							}
-						}
-						if (!passengerExists) {
-							Tickets ticket = new Tickets(Integer.parseInt(ticketNumber), passport, Integer.parseInt(flightNumber),tickettype);
-							ticketsList.add(ticket);
+							if (!ticketExists) {
+								Tickets ticket = new Tickets(Integer.parseInt(ticketNumber), passport, Integer.parseInt(flightNumber),tickettype);
+								ticketsList.add(ticket);
+							}
 						}
 					}
 				}
@@ -77,15 +75,15 @@ public ArrayList<Tickets> readXMLFile(String filename) {
 		return ticketsList;
 	}
 	//Método para obtener un Ticket en especifico
-		public Tickets getTicketFromXML(String fileName, String objectName, String attributeName, String attributeValue) {
-		    ArrayList<Tickets> tickets = readXMLFile(fileName);
-		    
-		    for (Tickets ticket : tickets) {
-		    	int number= ticket.getTicketNumber();
-		        if (String.valueOf(number).equals(attributeValue)) {
-		            return ticket;
-		        }
-		    }
-		    return null;
+	public Tickets getTicketFromXML(String fileName, String objectName, String attributeName, String attributeValue) {
+		ArrayList<Tickets> tickets = readXMLFile(fileName);
+
+		for (Tickets ticket : tickets) {
+			int number= ticket.getTicketNumber();
+			if (String.valueOf(number).equals(attributeValue)) {
+				return ticket;
+			}
 		}
+		return null;
+	}
 }

@@ -10,7 +10,6 @@ import data.CRUD;
 import data.LogicXML;
 import data.LogicXMLTicket;
 import data.XMLFiles;
-import domain.Airplane;
 import domain.Tickets;
 import presentation.PopUpMessages;
 import presentation.TicketFrame;
