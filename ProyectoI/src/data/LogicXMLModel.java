@@ -81,7 +81,7 @@ public class LogicXMLModel {
 	}
 	//------------------------------------------------------------------
 	//Método para obtener un modelo en especifico
-	public AirplaneModel getAirplaneModelFromXML(String fileName, String objectName, String attributeName, String attributeValue) {
+	public AirplaneModel getAirplaneModelFromXML(String fileName, String attributeValue) {
 	    ArrayList<AirplaneModel> airplaneModels = readXMLFile(fileName);
 	    for (AirplaneModel airplaneModel : airplaneModels) {
 	        if (airplaneModel.getName().equals(attributeValue)) {

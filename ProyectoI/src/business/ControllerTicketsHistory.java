@@ -3,23 +3,21 @@ package business;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import data.CRUD;
 import data.LogicXML;
+//import logicsxml
+import data.LogicXMLPassenger;
 import data.LogicXMLTicket;
 import data.XMLFiles;
 import domain.Passenger;
-//import objetos
-import domain.Tickets;
+import domain.Ticket;
 import domain.TicketsHistory;
+import presentation.ShowTicketsFrame;
 //import frames
 import presentation.TicketFrame;
-import presentation.ShowTicketsFrame;
-//import logicsxml
-import data.LogicXMLPassenger;
 
 public class ControllerTicketsHistory implements ActionListener{
 	private String fileName = "HistoricTickets.xml";
@@ -31,7 +29,7 @@ public class ControllerTicketsHistory implements ActionListener{
 	private LogicXMLTicket lXMLT;
 	private LogicXMLPassenger lXMLP;
 	//objetos
-	private Tickets ticket;
+	private Ticket ticket;
 	private TicketsHistory Hticks;
 	//frames
 	private TicketFrame tF;
@@ -58,11 +56,11 @@ public class ControllerTicketsHistory implements ActionListener{
 	public void initializerAction() {
 
 		ArrayList<String> numberTickets = new ArrayList<>();
-		ArrayList<Tickets> tickets = lXMLT.readXMLFile("Tickets.xml");
+		ArrayList<Ticket> tickets = lXMLT.readXMLFile("Tickets.xml");
 		ArrayList<String> passport = new ArrayList<>();
 		ArrayList<Passenger> passenger = new ArrayList<>();
 		int i=0;
-		for(Tickets ticket : tickets) {
+		for(Ticket ticket : tickets) {
 			
 			numberTickets.add(String.valueOf(ticket.getTicketNumber()));
 			passport.add(ticket.getPassport());

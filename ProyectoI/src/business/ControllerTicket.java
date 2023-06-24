@@ -2,19 +2,21 @@ package business;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
-
-import javax.swing.JOptionPane;
+import java.util.ArrayList;
 
 import data.CRUD;
 import data.LogicXML;
+import data.LogicXMLAirline;
+import data.LogicXMLPassenger;
 import data.LogicXMLTicket;
 import data.XMLFiles;
-import domain.Tickets;
+import domain.Airline;
+import domain.Passenger;
+import domain.Ticket;
 import presentation.PopUpMessages;
 import presentation.TicketFrame;
 
-public class ControllerATicket implements ActionListener{
+public class ControllerTicket implements ActionListener{
 
 	private String fileName = "Tickets.xml";
 	private String objectName = "Tickets";
@@ -22,56 +24,65 @@ public class ControllerATicket implements ActionListener{
 	private XMLFiles xmlF;
 	private TicketFrame tF;
 	private LogicXML lXML;
+	private LogicXMLPassenger lXMLP;
 	private LogicXMLTicket lXMLT;
-	private Tickets ticket;
+	private LogicXMLAirline logAirline;
+	private Ticket ticket;
 	private CRUD crud;
-	
 	private PopUpMessages pM;
+	private ArrayList<Ticket> tickets = new ArrayList<Ticket>();
 
-	public ControllerATicket(String userType) {
+	public ControllerTicket(String userType) {
 		tF = new TicketFrame(userType);
 		crud = new CRUD();
 		lXML = new LogicXML();
 		xmlF = new XMLFiles();
 		lXMLT = new LogicXMLTicket();
+		logAirline = new LogicXMLAirline();
+		lXMLP = new LogicXMLPassenger();
 		xmlF.createXML(fileName, objectName);
-		
+
 		pM = new PopUpMessages();
-		setTableData();
-		//aF.fillModelComboBox(lXMLM.getAirplaneModels("Models.xml"));
-		//aF.fillAirlineComboBox(lXMLA.getAirlineList("Airlines.xml"));
 		initializer();
 	}
-
+	//-------------------------------------------------------------------------------------------------------------------------
 	private void setTableData() {
-		List<Tickets> users = lXMLT.readXMLFile(fileName);
-		tF.setJTableData(users);
+		String ticketNumber = tF.getTTicketNumber().getText();
+		if(ticketNumber.isEmpty()) {
+			tickets = lXMLT.readXMLFile(fileName);
+		}else {
+			tickets.clear();
+			Ticket searchedTicket = lXMLT.getTicketFromXML(fileName, ticketNumber);
+			if(searchedTicket != null) {
+				tickets.add(searchedTicket);
+			}
+		}
+		tF.setJTableData(tickets);
 	}
-
+	//-------------------------------------------------------------------------------------------------------------------------
 	public void initializer() {
 		tF.getBAddTickets().addActionListener(this);
 		tF.getBUpdate().addActionListener(this);
 		tF.getBClear().addActionListener(this);
+		tF.getBSearch().addActionListener(this);
+		tF.getBDownloadPDF().addActionListener(this);
 	}
-	
+	//-------------------------------------------------------------------------------------------------------------------------
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-
-		if(tF.getBAddTickets() == e.getSource()) 
-		{
+		if(tF.getBAddTickets() == e.getSource()) {
 			addTickets();
-			
-		}else if(tF.getBUpdate() == e.getSource()) 
-		{
+		}else if(tF.getBUpdate() == e.getSource()) {
 			updateTickets(); 
 			setTableData();
-		}else if(tF.getBClear() == e.getSource()) 
-		{
+		}else if(tF.getBClear() == e.getSource()) {
 			deleteTickets();
-			
+		}else if(tF.getBSearch() == e.getSource()) {
+			searchTickets();
+		}else if(tF.getBDownloadPDF() == e.getSource()) {
+			downloadTicket();
 		}
-
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
 	private void addTickets() {
@@ -81,25 +92,29 @@ public class ControllerATicket implements ActionListener{
 		String ticketType = (String) tF.getCBTicketType().getSelectedItem();
 
 		if (passport.isEmpty() || ticketNumber.isEmpty() || flightNumber.isEmpty()||ticketType.isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos");
+			pM.showMessage("Por favor, complete todos los campos");
 			return;
 		} else if (lXML.isAlreadyInFile(fileName, objectName, "id", passport)) {
-			JOptionPane.showMessageDialog(null, "El Tiquete ya existe");
+			pM.showMessage("El Tiquete ya existe");
 			return;
 		}	else if (ticketType.equals("Indefinido")) {
-            JOptionPane.showMessageDialog(null, "Por favor, seleccione el estado del usuario");
-            return;
-        }
+			pM.showMessage("Por favor, seleccione el estado del usuario");
+			return;
+		}
 		tF.clean();
-		ticket  = new Tickets(Integer.parseInt(ticketNumber), passport, Integer.parseInt(flightNumber),ticketType);
+		ticket  = new Ticket(Integer.parseInt(ticketNumber), passport, Integer.parseInt(flightNumber),ticketType);
 		crud.addObject(fileName, objectName, ticket.getDataName(), ticket.getData());
-		JOptionPane.showMessageDialog(null, "Tiquete agregado");
+		pM.showMessage("Tiquete agregado");
+		setTableData();
+	}
+	//-------------------------------------------------------------------------------------------------------------------------
+	private void searchTickets() {
 		setTableData();
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
 	private void updateTickets() {
 		String numberTicket = tF.getTTicketNumber().getText();
-		Tickets currentTicket = lXMLT.getTicketFromXML(fileName, objectName, "TicketNumber", numberTicket);
+		Ticket currentTicket = lXMLT.getTicketFromXML(fileName, numberTicket);
 
 		if (numberTicket.isEmpty()) {
 			pM.showMessage( "Por favor, ingrese el numero de ticket a modificar");
@@ -128,7 +143,6 @@ public class ControllerATicket implements ActionListener{
 				newFlightNumber = pM.getData("Ingrese el nuevo numero de vuelo:");
 			}
 		}
-
 		if (newTicketType.equals("Indefinido")) {
 			if (pM.showConfirmationDialog("¿Desea modificar el tipo de ticket?", "Modificar")) {
 				pM.showMessage("Por favor, seleccione el tipo de ticket");
@@ -140,7 +154,6 @@ public class ControllerATicket implements ActionListener{
 				newTicketType = currentTicket.getTickettype();
 			}
 		}
-
 		String[] newData = { newTicket, newPassport, newFlightNumber, newTicketType };
 		crud.updateObject(fileName, objectName, "TicketNumber", numberTicket, currentTicket.getDataName(), newData);
 		tF.clean();
@@ -150,23 +163,28 @@ public class ControllerATicket implements ActionListener{
 	//-------------------------------------------------------------------------------------------------------------------------
 	private void deleteTickets() {
 		String ticket = tF.getTTicketNumber().getText();
-
 		if (ticket.isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Por favor, ingrese el número de tiquete a eliminar");
+			pM.showMessage("Por favor, ingrese el número de tiquete a eliminar");
 			return;
 		} else if (!lXML.isAlreadyInFile(fileName , objectName, "TicketNumber", ticket)) {
-			JOptionPane.showMessageDialog(null, "No se puede eliminar debido a que no existe");
+			pM.showMessage( "No se puede eliminar debido a que no existe");
 			return;
 		}
-		int dialogButton = JOptionPane.YES_NO_OPTION;
-		int dialogResult = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar el tiquete?", "Eliminar", dialogButton);
-
-		if (dialogResult == JOptionPane.YES_OPTION) {
+		if (pM.showConfirmationDialog("¿Está seguro de eliminar el tiquete?", "Eliminar" )) {
 			tF.clean();
 			crud.deleteObject(fileName, objectName, "TicketNumber", ticket);
-			JOptionPane.showMessageDialog(null, "Tiquete eliminado");
+			pM.showMessage("Tiquete eliminado");
+			setTableData();
 		}
-		setTableData();
 	}
-	
+	//-------------------------------------------------------------------------------------------------------------------------
+	private void downloadTicket() {
+		String ticketNumber = tF.getTTicketNumber().getText();
+		String passport = tF.getTPassport().getText();
+		String flightNumber = tF.getTFlightNumber().getText();
+		String ticketType = (String) tF.getCBTicketType().getSelectedItem();
+//		
+//		Passenger p = lXMLP.getPassengerFromXML("Passengers.xml", passport);
+//		Airline a = logAirline.getAirlineFromFile("Airlines.xml", )
+	}
 }

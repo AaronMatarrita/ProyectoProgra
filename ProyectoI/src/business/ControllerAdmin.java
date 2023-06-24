@@ -59,7 +59,7 @@ public class ControllerAdmin implements ActionListener{
 		}
 		//------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		if(guiA.getBTickets() == e.getSource()) {
-			new ControllerATicket(userType);
+			new ControllerTicket(userType);
 		}
 	}
 }

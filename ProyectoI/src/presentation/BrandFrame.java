@@ -39,6 +39,7 @@ public class BrandFrame extends JFrame {
 	// Scroll
 	private JScrollPane spTBrands;
 	private Object dataTable[][];
+	private JButton bSearch;
 
     public BrandFrame(String userType) {
     	this.userType = userType;
@@ -96,6 +97,7 @@ public class BrandFrame extends JFrame {
             setJTableBrands(getDTMBrands());
             setSPTableBrands(getJTableBrands());
             JPInfo.add(getSPTableBrands());
+            JPInfo.add(getBSearch());
         }
         return JPInfo;
     }
@@ -129,7 +131,7 @@ public class BrandFrame extends JFrame {
             bAddBrand.setBackground(new Color(28, 28, 28));
             bAddBrand.setForeground(new Color(255, 255, 255));
             bAddBrand.setFocusable(false);
-            bAddBrand.setBounds(440, 330, 130, 40);
+            bAddBrand.setBounds(350, 330, 140, 40);
         }
         return bAddBrand;
     }
@@ -142,7 +144,7 @@ public class BrandFrame extends JFrame {
             bUpdate.setBackground(new Color(28, 28, 28));
             bUpdate.setForeground(new Color(255, 255, 255));
             bUpdate.setFocusable(false);
-            bUpdate.setBounds(240, 330, 130, 40);
+            bUpdate.setBounds(150, 330, 140, 40);
         }
         return bUpdate;
     }
@@ -155,7 +157,7 @@ public class BrandFrame extends JFrame {
             bClear.setBackground(new Color(28, 28, 28));
             bClear.setForeground(new Color(255, 255, 255));
             bClear.setFocusable(false);
-            bClear.setBounds(640, 330, 130, 40);
+            bClear.setBounds(750, 330, 140, 40);
         }
         return bClear;
     }
@@ -226,4 +228,16 @@ public class BrandFrame extends JFrame {
     public void clean() {
     	getTBrand().setText("");
     }
+	public JButton getBSearch() {
+		if (bSearch == null) {
+			bSearch = new JButton("Consultar");
+			bSearch.setIcon(new ImageIcon(BrandFrame.class.getResource("/imagesMain/imagesButtons/search-button.png")));
+			bSearch.setForeground(Color.WHITE);
+			bSearch.setFont(new Font("Roboto", Font.PLAIN, 16));
+			bSearch.setFocusable(false);
+			bSearch.setBackground(new Color(28, 28, 28));
+			bSearch.setBounds(550, 330, 140, 40);
+		}
+		return bSearch;
+	}
 }

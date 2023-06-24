@@ -2,12 +2,12 @@ package business;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
+import java.util.ArrayList;
 
 import data.CRUD;
 import data.LogicXML;
-import data.XMLFiles;
 import data.LogicXMLAirline;
+import data.XMLFiles;
 import domain.Airline;
 import presentation.AirlineFrame;
 import presentation.PopUpMessages;
@@ -25,6 +25,8 @@ public class ControllerAAirline implements ActionListener {
 	private String fileName = "Airlines.xml";
 	private String objectName = "airlines";
 
+	private ArrayList<Airline> airlines = new ArrayList<Airline>();
+	
 	private PopUpMessages pM;
 
 	public ControllerAAirline(String userType) {
@@ -35,19 +37,14 @@ public class ControllerAAirline implements ActionListener {
 		logicXMLAirline = new LogicXMLAirline();
 		pM = new PopUpMessages();
 		xmlF.createXML(fileName, objectName);
-		setTableData();
 		initializerAction();
-	}
-
-	private void setTableData() {
-		List<Airline> airlines = logicXMLAirline.readXMLFile(fileName);
-		aF.setJTableData(airlines);
 	}
 
 	public void initializerAction() {
 		aF.getBAddAirline().addActionListener(this);
 		aF.getBClear().addActionListener(this);
 		aF.getBUpdate().addActionListener(this);
+		aF.getBSearch().addActionListener(this);
 	}
 
 	@Override
@@ -62,9 +59,25 @@ public class ControllerAAirline implements ActionListener {
 		} else if (aF.getBClear() == e.getSource())
 		{
 			deleteAirline();
+		}else if(aF.getBSearch() == e.getSource()) {
+			searchAirline();
 		}
 	}
 
+	private void setTableData() {
+		String airline = aF.getTAirline().getText().trim();
+		if(airline.isEmpty()) {
+			airlines = logicXMLAirline.readXMLFile(fileName);
+		}else {
+			airlines.clear();
+			Airline searchedAirline = logicXMLAirline.getAirlineFromFile(fileName, airline);
+			if(searchedAirline != null) {
+				airlines.add(searchedAirline);
+			}
+		}
+		aF.setJTableData(airlines);
+	}
+	
 	private void addAirline() {
 		String airline = aF.getTAirline().getText();
 
@@ -83,14 +96,17 @@ public class ControllerAAirline implements ActionListener {
 		aF.clean();
 		Ar = new Airline(airline, country);
 		crud.addObject(fileName, objectName, Ar.getDataName(), Ar.getData());
-
-		pM.showMessage( "Aerolinea agregada");
 		setTableData();
+		pM.showMessage( "Aerolínea agregada");
 	}
 
+	private void searchAirline() {
+		setTableData();
+	}
+	
 	private void updateAirline() {
 		String airlineName = aF.getTAirline().getText();
-		Airline  airline = logicXMLAirline.getAirlineFromFile(fileName, objectName, "user", airlineName);
+		Airline  airline = logicXMLAirline.getAirlineFromFile(fileName, airlineName);
 
 		String newAirlineName = airlineName;
 
@@ -98,7 +114,7 @@ public class ControllerAAirline implements ActionListener {
 			pM.showMessage("Por favor, ingrese el nombre de la aerolínea a modificar");
 			return;
 		} else if (!lXML.isAlreadyInFile(fileName,objectName, "Name", airlineName)) {
-			pM.showMessage("La Aerolinea no existe");
+			pM.showMessage("La Aerolínea no existe");
 			return;
 		}
 
@@ -120,6 +136,7 @@ public class ControllerAAirline implements ActionListener {
 		String[] newData = {newAirlineName, newCountry};
 		crud.updateObject(fileName, objectName, "Name", airlineName , airline.getDataName(), newData);
 		setTableData();
+		pM.showMessage("Aerolínea modificada");
 	}
 
 	private void deleteAirline() {
@@ -142,8 +159,8 @@ public class ControllerAAirline implements ActionListener {
 		if(pM.showConfirmationDialog("¿Está seguro de eliminar la aerolínea?", "Eliminar")) {
 			aF.clean();
 			crud.deleteObject(fileName, objectName, "Name", airline);
-			pM.showMessage("Aerolinea eliminada");
 			setTableData();
+			pM.showMessage("Aerolínea eliminada");
 		}
 	}
 }

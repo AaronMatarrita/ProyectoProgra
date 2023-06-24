@@ -24,6 +24,8 @@ public class ControllerABrand implements ActionListener{
 	private String fileName = "Brands.xml";
 	private String objectName = "brands";
 
+	private ArrayList<Brand> brands = new ArrayList<Brand>();
+	
 	private PopUpMessages pM;
 
 	public ControllerABrand(String userType) {
@@ -34,12 +36,20 @@ public class ControllerABrand implements ActionListener{
 		lXMLB = new LogicXMLBrand();
 		xmlF.createXML(fileName, objectName);
 		pM = new PopUpMessages();
-		setTableData();
 		initializerAction();
 	}
 
 	private void setTableData() {
-		ArrayList<Brand> brands = lXMLB.readXMLFile(fileName);
+		String brand = bF.getTBrand().getText().trim();
+		if(brand.isEmpty()) {
+			brands = lXMLB.readXMLFile(fileName);
+		}else {
+			brands.clear();
+			Brand searchedBrand = lXMLB.getBrandFromXML(fileName, brand);
+			if(searchedBrand != null) {
+				brands.add(searchedBrand);
+			}
+		}
 		bF.setJTableData(brands);
 	}
 
@@ -48,6 +58,7 @@ public class ControllerABrand implements ActionListener{
 		bF.getBAddBrand().addActionListener(this);
 		bF.getBUpdate().addActionListener(this);
 		bF.getBClear().addActionListener(this);
+		bF.getBSearch().addActionListener(this);
 	}
 
 
@@ -64,6 +75,8 @@ public class ControllerABrand implements ActionListener{
 		}else if(bF.getBClear() == e.getSource())
 		{
 			deleteBrand();
+		}else if(bF.getBSearch() == e.getSource()) {
+			searchBrand();
 		}
 	}
 
@@ -83,15 +96,17 @@ public class ControllerABrand implements ActionListener{
 		bF.clean();
 		Br = new Brand(brand);
 		crud.addObject(fileName, objectName, Br.getDataName(), Br.getData());
-
-		pM.showMessage("Marca agregada");
-
 		setTableData();
+		pM.showMessage("Marca agregada");
 	}
 
+	private void searchBrand() {
+		setTableData();
+	}
+	
 	private void updateBrand() {
 		String brandName = bF.getTBrand().getText();
-		Brand currentBrand = lXMLB.getBrandFromXML(fileName, fileName, "brand", brandName);
+		Brand currentBrand = lXMLB.getBrandFromXML(fileName, brandName);
 		String newBrand = brandName;
 		if (brandName.isEmpty() || bF.getTBrand().getText().isEmpty()) {
 			pM.showMessage("Por favor, ingrese el nombre de la marca");
@@ -101,7 +116,6 @@ public class ControllerABrand implements ActionListener{
 			return;
 		} 
 		
-
 		if(pM.showConfirmationDialog("Desea modificar el nombre de la marca?", "Modificar")) {
 			newBrand = pM.getData("Ingrese el nuevo nombre de la marca:");
 		}else {
@@ -112,9 +126,8 @@ public class ControllerABrand implements ActionListener{
 		crud.updateObject(fileName, objectName, "brand", brandName, currentBrand.getDataName(), newData);
 		
 		bF.clean();
-		pM.showMessage("Marca agregada");
-
 		setTableData();
+		pM.showMessage("Marca agregada");
 	}
 
 	private void deleteBrand() {
@@ -132,8 +145,8 @@ public class ControllerABrand implements ActionListener{
 			xmlF.createXML(fileName, objectName);
 			crud.deleteObject(fileName, objectName, "brand", brand);
 			bF.clean();
-			pM.showMessage("Marca eliminada");
 			setTableData();
+			pM.showMessage("Marca eliminada");
 		}
 	}
 }

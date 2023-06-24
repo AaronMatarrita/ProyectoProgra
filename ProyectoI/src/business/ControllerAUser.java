@@ -2,7 +2,7 @@ package business;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -30,6 +30,8 @@ public class ControllerAUser implements ActionListener {
 	private String fileName = "Users.xml";
 	private String objectName = "person";
 
+	private ArrayList<User> users = new ArrayList<User>();
+
 	public ControllerAUser(String userType) {
 		uF = new UserFrame(userType);
 		crud = new CRUD();
@@ -38,12 +40,20 @@ public class ControllerAUser implements ActionListener {
 		logU = new LogicXMLUser();
 		pM = new PopUpMessages();
 		xmlF.createXML(fileName, objectName);
-		setTableData();
 		initializerAction();
 	}
 
 	private void setTableData() {
-		List<User> users = logU.readXMLFile(fileName);
+		String user = uF.getTUser().getText().trim();//.trim() elimina espacios inicio o final
+		if (user.isEmpty()) {
+			users = logU.readXMLFile(fileName);
+		} else {
+			users.clear();
+			User searchedUser = logU.getUserFromFile(fileName, user);
+			if (searchedUser != null) {
+				users.add(searchedUser);
+			}
+		}
 		uF.setJTableData(users);
 	}
 
@@ -51,6 +61,7 @@ public class ControllerAUser implements ActionListener {
 		uF.getBAddUser().addActionListener(this);
 		uF.getBUpdate().addActionListener(this);
 		uF.getBClear().addActionListener(this);
+		uF.getBSearch().addActionListener(this);
 	}
 
 	@Override
@@ -63,6 +74,8 @@ public class ControllerAUser implements ActionListener {
 			updateUser();
 		} else if (uF.getBClear() == e.getSource()) {
 			deleteUser();
+		}else if(uF.getBSearch() == e.getSource()) {
+			searchUser();
 		}
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
@@ -98,15 +111,17 @@ public class ControllerAUser implements ActionListener {
 		uF.clean();
 		Us = new User(user, password, UserType, UserStatus);
 		crud.addObject(fileName, objectName, Us.getDataName(), Us.getData());
-
 		pM.showMessage("Usuario agregado");
-
+		setTableData();
+	}
+	//-------------------------------------------------------------------------------------------------------------------------
+	private void searchUser() {
 		setTableData();
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
 	private void updateUser() {
 		String user = uF.getTUser().getText();
-		User currentUser = logU.getUserFromFile(fileName, objectName, "user", user);
+		User currentUser = logU.getUserFromFile(fileName, user);
 
 		String newUser = user;
 		if (user.isEmpty()) {
@@ -168,10 +183,8 @@ public class ControllerAUser implements ActionListener {
 
 		crud.updateObject(fileName, objectName, "user", user, currentUser.getDataName(), newData);
 		uF.clean();
-
 		pM.showMessage("Usuario modificado");
 		setTableData();
-
 	}
 
 	//-------------------------------------------------------------------------------------------------------------------------
@@ -193,9 +206,8 @@ public class ControllerAUser implements ActionListener {
 		if (pM.showConfirmationDialog("¿Está seguro de eliminar el usuario?", "Eliminar")) {
 			uF.clean();
 			crud.deleteObject(fileName, objectName, "user", user);
-			pM.showMessage("Usuario eliminado");
-
 			setTableData();
+			pM.showMessage("Usuario eliminado");
 		}
 	}
 }

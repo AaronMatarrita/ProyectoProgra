@@ -26,7 +26,8 @@ public class ControllerAModel implements ActionListener{
 	private PopUpMessages pM;
 	private String fileName = "Models.xml";
 	private String objectName = "models";
-
+	private ArrayList<AirplaneModel> models = new ArrayList<AirplaneModel>();
+	
 	public ControllerAModel(String userType)
 	{
 		mF = new ModelFrame(userType);
@@ -39,12 +40,20 @@ public class ControllerAModel implements ActionListener{
 		lXMLB.readBrandsFromXML("Brands.xml");
 		xmlF.createXML(fileName, objectName);
 		initializerAction();
-		setTableData();
 		mF.fillBrandComboBox(lXMLB.readBrandsFromXML("Brands.xml"));
 	}
 
 	private void setTableData() {
-		ArrayList<AirplaneModel> models = lXMLM.readXMLFile(fileName);
+		String model = mF.getTModel().getText().trim();
+		if(model.isEmpty()) {
+			models = lXMLM.readXMLFile(fileName);
+		}else {
+			models.clear();
+			AirplaneModel searchedModel = lXMLM.getAirplaneModelFromXML(fileName, model);
+			if(searchedModel != null) {
+				models.add(searchedModel);
+			}
+		}
 		mF.setJTableData(models);
 	}
 
@@ -52,6 +61,7 @@ public class ControllerAModel implements ActionListener{
 		mF.getBAddModel().addActionListener(this);
 		mF.getBUpdate().addActionListener(this);
 		mF.getBClear().addActionListener(this);
+		mF.getBSearch().addActionListener(this);
 	}
 
 	@Override
@@ -69,6 +79,8 @@ public class ControllerAModel implements ActionListener{
 		}else if (mF.getBClear() == e.getSource())
 		{
 			deleteModel();
+		}else if(mF.getBSearch() == e.getSource()) {
+			searchModel();
 		}
 	}
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -97,15 +109,17 @@ public class ControllerAModel implements ActionListener{
 		mF.clean();
 		Am = new AirplaneModel(model, StringBrandType, SeatsEje ,SeatsTur, SeatsEco );
 		crud.addObject(fileName, objectName, Am.getDataName(), Am.getData());
-
+		setTableData();
 		pM.showMessage("Modelo agregado");
-
+	}
+	//------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	private void searchModel() {
 		setTableData();
 	}
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	private void updateModel() {
 		String model = mF.getTModel().getText();
-		AirplaneModel currentModel = lXMLM.getAirplaneModelFromXML(fileName, objectName, "modelName", model);
+		AirplaneModel currentModel = lXMLM.getAirplaneModelFromXML(fileName, model);
 
 		String newModel = model;
 		if (model.isEmpty()) {
@@ -164,8 +178,8 @@ public class ControllerAModel implements ActionListener{
 
 		String[] newData = {newModel, newBrandType, newSeatsEje, newSeatsTur, newSeatsEco};
 		crud.updateObject(fileName, objectName, "modelName", model, currentModel.getDataName(), newData);
-		mF.clean();
 		setTableData();
+		mF.clean();
 	}
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	private void deleteModel() {
@@ -188,8 +202,8 @@ public class ControllerAModel implements ActionListener{
 
 		if (pM.showConfirmationDialog("¿Está seguro de eliminar el modelo?", "Eliminar")) {
 			crud.deleteObject(fileName, objectName, "modelName", model);
-			pM.showMessage("Modelo eliminado");
 			setTableData();
+			pM.showMessage("Modelo eliminado");
 		}
 	}
 }

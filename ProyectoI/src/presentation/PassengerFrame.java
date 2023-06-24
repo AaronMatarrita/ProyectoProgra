@@ -50,6 +50,7 @@ public class PassengerFrame extends JFrame {
 	private JTextField tEmail;
 	private JLabel lPhoneNumber;
 	private JTextField tPhoneNumber;
+	private JButton bSearch;
 
 	public PassengerFrame(String userType) {
 		this.userType = userType;
@@ -116,6 +117,7 @@ public class PassengerFrame extends JFrame {
 			JPInfo.add(getTEmail());
 			JPInfo.add(getLPhoneNumber());
 			JPInfo.add(getTPhoneNumber());
+			JPInfo.add(getBSearch());
 
 		}
 		return JPInfo;
@@ -183,7 +185,7 @@ public class PassengerFrame extends JFrame {
 			bAddPassenger.setBackground(new Color(28, 28, 28));
 			bAddPassenger.setForeground(new Color(255, 255, 255));
 			bAddPassenger.setFocusable(false);
-			bAddPassenger.setBounds(440, 330, 130, 40);
+			bAddPassenger.setBounds(350, 330, 140, 40);
 		}
 		return bAddPassenger;
 	}
@@ -196,7 +198,7 @@ public class PassengerFrame extends JFrame {
 			bUpdate.setBackground(new Color(28, 28, 28));
 			bUpdate.setForeground(new Color(255, 255, 255));
 			bUpdate.setFocusable(false);
-			bUpdate.setBounds(240, 330, 130, 40);
+			bUpdate.setBounds(150, 330, 140, 40);
 		}
 		return bUpdate;
 	}
@@ -209,7 +211,7 @@ public class PassengerFrame extends JFrame {
 			bClear.setBackground(new Color(28, 28, 28));
 			bClear.setForeground(new Color(255, 255, 255));
 			bClear.setFocusable(false);
-			bClear.setBounds(640, 330, 130, 40);
+			bClear.setBounds(750, 330, 140, 40);
 		}
 		return bClear;
 	}
@@ -369,5 +371,17 @@ public class PassengerFrame extends JFrame {
 		getTDateOfBirth().setText("");
 		getTEmail().setText("");
 		getTPhoneNumber().setText("");
+	}
+	public JButton getBSearch() {
+		if (bSearch == null) {
+			bSearch = new JButton("Consultar");
+			bSearch.setIcon(new ImageIcon(PassengerFrame.class.getResource("/imagesMain/imagesButtons/search-button.png")));
+			bSearch.setForeground(Color.WHITE);
+			bSearch.setFont(new Font("Roboto", Font.PLAIN, 16));
+			bSearch.setFocusable(false);
+			bSearch.setBackground(new Color(28, 28, 28));
+			bSearch.setBounds(550, 330, 140, 40);
+		}
+		return bSearch;
 	}
 }

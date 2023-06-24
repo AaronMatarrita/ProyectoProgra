@@ -7,9 +7,9 @@
 	</person>
 	<person>
 		<user>Aaron</user>
-		<password>1234</password>
+		<password>123</password>
 		<userType>1</userType>
-		<status>true</status>
+		<status>false</status>
 	</person>
 	<person>
 		<user>PedroG</user>
@@ -19,9 +19,9 @@
 	</person>
 	<person>
 		<user>Joselu</user>
-		<password>322</password>
-		<userType>2</userType>
-		<status>false</status>
+		<password>444</password>
+		<userType>1</userType>
+		<status>true</status>
 	</person>
 	<person>
 		<user>Mathias</user>
@@ -29,4 +29,4 @@
 		<userType>2</userType>
 		<status>true</status>
 	</person>
-<person><user> </user><password> </password><userType>1</userType><status>true</status></person></person>
+</person>

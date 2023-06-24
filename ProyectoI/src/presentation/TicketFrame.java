@@ -3,12 +3,14 @@ package presentation;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.util.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -23,10 +25,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import business.ControllerTicketsHistory;
-import domain.Tickets;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JComboBox;
+import domain.Ticket;
 
 @SuppressWarnings("serial")
 public class TicketFrame extends JFrame {
@@ -57,9 +56,10 @@ public class TicketFrame extends JFrame {
 	private JMenuItem menuItem;
 	private JMenuItem bDownloadPDF;
 	private JLabel lTicketType;
-	private JComboBox cBTicketType;
+	private JComboBox<String> cBTicketType;
 	private JMenuItem bShowTickets;
 	private String userType;
+	private JButton bSearch;
 
     public TicketFrame(String userType) {
     	this.userType = userType;
@@ -121,6 +121,7 @@ public class TicketFrame extends JFrame {
 	        JPInfo.add(getLFlightNumber());
 	        JPInfo.add(getLTicketType());
 	        JPInfo.add(getCBTicketType());
+	        JPInfo.add(getBSearch());
 			
 			
         }
@@ -160,7 +161,7 @@ public class TicketFrame extends JFrame {
             bAddFlights.setBackground(new Color(28, 28, 28));
             bAddFlights.setForeground(new Color(255, 255, 255));
             bAddFlights.setFocusable(false);
-            bAddFlights.setBounds(220, 320, 130, 40);
+            bAddFlights.setBounds(150, 320, 140, 40);
         }
         return bAddFlights;
     }
@@ -173,7 +174,7 @@ public class TicketFrame extends JFrame {
             bUpdate.setBackground(new Color(28, 28, 28));
             bUpdate.setForeground(new Color(255, 255, 255));
             bUpdate.setFocusable(false);
-            bUpdate.setBounds(420, 320, 130, 40);
+            bUpdate.setBounds(350, 320, 140, 40);
         }
         return bUpdate;
     }
@@ -186,7 +187,7 @@ public class TicketFrame extends JFrame {
             bClear.setBackground(new Color(28, 28, 28));
             bClear.setForeground(new Color(255, 255, 255));
             bClear.setFocusable(false);
-            bClear.setBounds(620, 320, 130, 40);
+            bClear.setBounds(750, 320, 140, 40);
         }
         return bClear;
     }
@@ -266,10 +267,10 @@ public class TicketFrame extends JFrame {
 		return columnsName;
 	}
 	
-	public void setJTableData(List<Tickets> tickets) {
+	public void setJTableData(ArrayList<Ticket> tickets) {
 	    Object[][] data = new Object[tickets.size()][4];
 	    for (int i = 0; i < tickets.size(); i++) {
-	        Tickets ticket = tickets.get(i);
+	    	Ticket ticket = tickets.get(i);
 
 	        data[i][0] = ticket.getTicketNumber();
 	        data[i][1] = ticket.getPassport();
@@ -395,5 +396,17 @@ public class TicketFrame extends JFrame {
 			bShowTickets.setBackground(new Color(28, 28, 28));
 		}
 		return bShowTickets;
+	}
+	public JButton getBSearch() {
+		if (bSearch == null) {
+			bSearch = new JButton("Consultar");
+			bSearch.setIcon(new ImageIcon(TicketFrame.class.getResource("/imagesMain/imagesButtons/search-button.png")));
+			bSearch.setForeground(Color.WHITE);
+			bSearch.setFont(new Font("Roboto", Font.PLAIN, 16));
+			bSearch.setFocusable(false);
+			bSearch.setBackground(new Color(28, 28, 28));
+			bSearch.setBounds(550, 320, 140, 40);
+		}
+		return bSearch;
 	}
 }

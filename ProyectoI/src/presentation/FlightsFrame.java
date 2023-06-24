@@ -3,12 +3,10 @@ package presentation;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,8 +16,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
-import domain.Flights;
-import javax.swing.JComboBox;
+
+import domain.Flight;
 
 @SuppressWarnings("serial")
 public class FlightsFrame extends JFrame {
@@ -61,6 +59,7 @@ public class FlightsFrame extends JFrame {
 	private JLabel lFlightNumber;
 	private JTextField tFlightNum;
 	private JComboBox<String> CBAirplane;
+	private JButton bSearch;
 
 
 	public FlightsFrame(String userType) {
@@ -135,6 +134,7 @@ public class FlightsFrame extends JFrame {
 			JPInfo.add(getLFlightNumber());
 			JPInfo.add(getTFlightNum());
 			JPInfo.add(getCBAirplane());
+			JPInfo.add(getBSearch());
 
 
 		}
@@ -170,7 +170,7 @@ public class FlightsFrame extends JFrame {
 			bAddFlights.setBackground(new Color(28, 28, 28));
 			bAddFlights.setForeground(new Color(255, 255, 255));
 			bAddFlights.setFocusable(false);
-			bAddFlights.setBounds(440, 330, 130, 40);
+			bAddFlights.setBounds(350, 330, 140, 40);
 		}
 		return bAddFlights;
 	}
@@ -183,7 +183,7 @@ public class FlightsFrame extends JFrame {
 			bUpdate.setBackground(new Color(28, 28, 28));
 			bUpdate.setForeground(new Color(255, 255, 255));
 			bUpdate.setFocusable(false);
-			bUpdate.setBounds(240, 330, 130, 40);
+			bUpdate.setBounds(150, 330, 140, 40);
 		}
 		return bUpdate;
 	}
@@ -196,9 +196,22 @@ public class FlightsFrame extends JFrame {
 			bClear.setBackground(new Color(28, 28, 28));
 			bClear.setForeground(new Color(255, 255, 255));
 			bClear.setFocusable(false);
-			bClear.setBounds(640, 330, 130, 40);
+			bClear.setBounds(750, 330, 140, 40);
 		}
 		return bClear;
+	}
+	
+	public JButton getBSearch() {
+		if (bSearch == null) {
+			bSearch = new JButton("Consultar");
+			bSearch.setIcon(new ImageIcon(FlightsFrame.class.getResource("/imagesMain/imagesButtons/search-button.png")));
+			bSearch.setForeground(Color.WHITE);
+			bSearch.setFont(new Font("Roboto", Font.PLAIN, 16));
+			bSearch.setFocusable(false);
+			bSearch.setBackground(new Color(28, 28, 28));
+			bSearch.setBounds(550, 330, 140, 40);
+		}
+		return bSearch;
 	}
 
 	public JTextField getTExitCity() {
@@ -226,6 +239,7 @@ public class FlightsFrame extends JFrame {
 	public JTextField getTExitTime() {
 		if (tExitTime == null) {
 			tExitTime = new JTextField();
+			tExitTime.setToolTipText("Formato 24 horas (hour : minutes) (xx:xx)");
 			tExitTime.setForeground(Color.WHITE);
 			tExitTime.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tExitTime.setColumns(10);
@@ -238,6 +252,7 @@ public class FlightsFrame extends JFrame {
 	public JTextField getTExitDate() {
 		if (tExitDate == null) {
 			tExitDate = new JTextField();
+			tExitDate.setToolTipText("Formato (dd/MM/yyyy)");
 			tExitDate.setForeground(Color.WHITE);
 			tExitDate.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tExitDate.setColumns(10);
@@ -281,6 +296,7 @@ public class FlightsFrame extends JFrame {
 	public JTextField getTEnterDate() {
 		if (tEnterDate == null) {
 			tEnterDate = new JTextField();
+			tEnterDate.setToolTipText("Formato (dd/MM/yyyy)");
 			tEnterDate.setForeground(Color.WHITE);
 			tEnterDate.setFont(new Font("Roboto", Font.PLAIN, 16));
 			tEnterDate.setColumns(10);
@@ -330,12 +346,6 @@ public class FlightsFrame extends JFrame {
 		return lAirplane;
 	}
 
-	public String getTRandomFlightNumber() {
-		Random random = new Random();
-		int randomNumber = random.nextInt(900) + 100;
-		return String.valueOf(randomNumber);
-	}
-
 	public void setDTMFlights(Object data[][], String[] columnsName) {
 		dtmTFlights = new DefaultTableModel(data, columnsName);
 	}
@@ -378,10 +388,10 @@ public class FlightsFrame extends JFrame {
 		return columnsName;
 	}
 
-	public void setJTableData(List<Flights> flights) {
+	public void setJTableData(ArrayList<Flight> flights) {
 		Object[][] data = new Object[flights.size()][11];
 		for (int i = 0; i < flights.size(); i++) {
-			Flights flight = flights.get(i);
+			Flight flight = flights.get(i);
 
 			data[i][0] = flight.getFlightNumber();
 			data[i][1] = flight.getDepartureCity();
@@ -411,7 +421,7 @@ public class FlightsFrame extends JFrame {
 	}
 	public JLabel getLpriceEJE() {
 		if (lpriceEJE == null) {
-			lpriceEJE = new JLabel("Asientos Ejecutivos:");
+			lpriceEJE = new JLabel("Precio A. Ejecutivos:");
 			lpriceEJE.setForeground(Color.WHITE);
 			lpriceEJE.setFont(new Font("Roboto", Font.PLAIN, 16));
 			lpriceEJE.setBounds(660, 100, 150, 20);
@@ -420,7 +430,7 @@ public class FlightsFrame extends JFrame {
 	}
 	public JLabel getLPriceTUR() {
 		if (lPriceTUR == null) {
-			lPriceTUR = new JLabel("Asientos Turistas:");
+			lPriceTUR = new JLabel("Precio A. Turistas:");
 			lPriceTUR.setForeground(Color.WHITE);
 			lPriceTUR.setFont(new Font("Roboto", Font.PLAIN, 16));
 			lPriceTUR.setBounds(660, 150, 150, 20);
@@ -453,7 +463,7 @@ public class FlightsFrame extends JFrame {
 	}
 	public JLabel getLPriceECO() {
 		if (lPriceECO == null) {
-			lPriceECO = new JLabel("Asientos Economicos:");
+			lPriceECO = new JLabel("Precio A. Economicos:");
 			lPriceECO.setForeground(Color.WHITE);
 			lPriceECO.setFont(new Font("Roboto", Font.PLAIN, 16));
 			lPriceECO.setBounds(660, 200, 160, 20);

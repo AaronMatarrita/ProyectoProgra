@@ -47,6 +47,7 @@ public class AirplaneFrame extends JFrame {
 	// Scroll
 	private JScrollPane spTAirplanes;
 	private Object dataTable[][];
+	private JButton bSearch;
 
 	public AirplaneFrame(String userType) {
 		this.userType = userType;
@@ -113,6 +114,7 @@ public class AirplaneFrame extends JFrame {
 	        setJTableAirplanes(getDTMAirplanes());
 	        setSPTableAirplanes(getJTableAirplanes());
 	        JPInfo.add(getSPTableAirplanes());
+	        JPInfo.add(getBSearch());
 			
 		}
 		return JPInfo;
@@ -177,7 +179,7 @@ public class AirplaneFrame extends JFrame {
 			bAddAirplane.setBackground(new Color(28, 28, 28));
 			bAddAirplane.setForeground(new Color(255, 255, 255));
 			bAddAirplane.setFocusable(false);
-			bAddAirplane.setBounds(440, 330, 130, 40);
+			bAddAirplane.setBounds(350, 330, 140, 40);
 		}
 		return bAddAirplane;
 	}
@@ -190,7 +192,7 @@ public class AirplaneFrame extends JFrame {
 			bUpdate.setBackground(new Color(28, 28, 28));
 			bUpdate.setForeground(new Color(255, 255, 255));
 			bUpdate.setFocusable(false);
-			bUpdate.setBounds(240, 330, 130, 40);
+			bUpdate.setBounds(150, 330, 140, 40);
 		}
 		return bUpdate;
 	}
@@ -203,7 +205,7 @@ public class AirplaneFrame extends JFrame {
 			bClear.setBackground(new Color(28, 28, 28));
 			bClear.setForeground(new Color(255, 255, 255));
 			bClear.setFocusable(false);
-			bClear.setBounds(640, 330, 130, 40);
+			bClear.setBounds(750, 330, 140, 40);
 		}
 		return bClear;
 	}
@@ -333,5 +335,17 @@ public class AirplaneFrame extends JFrame {
 		getTYear().setText("");
 		getCBAirline().setSelectedItem("Indefinido");
 		getCBModel().setSelectedItem("Indefinido");
+	}
+	public JButton getBSearch() {
+		if (bSearch == null) {
+			bSearch = new JButton("Consultar");
+			bSearch.setIcon(new ImageIcon(AirplaneFrame.class.getResource("/imagesMain/imagesButtons/search-button.png")));
+			bSearch.setForeground(Color.WHITE);
+			bSearch.setFont(new Font("Roboto", Font.PLAIN, 16));
+			bSearch.setFocusable(false);
+			bSearch.setBackground(new Color(28, 28, 28));
+			bSearch.setBounds(550, 330, 140, 40);
+		}
+		return bSearch;
 	}
 }

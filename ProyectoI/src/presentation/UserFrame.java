@@ -46,6 +46,7 @@ public class UserFrame extends JFrame {
 	// Scroll
 	private JScrollPane spTUsers;
 	private Object dataTable[][];
+	private JButton bSearch;
 
 	public UserFrame(String userType) {
 		this.userType = userType;
@@ -112,6 +113,7 @@ public class UserFrame extends JFrame {
 	        setJTableUsers(getDTMUsers());
 	        setSPTableUsers(getJTableUsers());
 	        JPInfo.add(getSPTableUsers());
+	        JPInfo.add(getBSearch());
 			
 		}
 		return JPInfo;
@@ -176,7 +178,7 @@ public class UserFrame extends JFrame {
 			bAddUser.setBackground(new Color(28, 28, 28));
 			bAddUser.setForeground(new Color(255, 255, 255));
 			bAddUser.setFocusable(false);
-			bAddUser.setBounds(440, 330, 130, 40);
+			bAddUser.setBounds(350, 330, 140, 40);
 		}
 		return bAddUser;
 	}
@@ -189,7 +191,7 @@ public class UserFrame extends JFrame {
 			bUpdate.setBackground(new Color(28, 28, 28));
 			bUpdate.setForeground(new Color(255, 255, 255));
 			bUpdate.setFocusable(false);
-			bUpdate.setBounds(240, 330, 130, 40);
+			bUpdate.setBounds(150, 330, 140, 40);
 		}
 		return bUpdate;
 	}
@@ -202,7 +204,7 @@ public class UserFrame extends JFrame {
 			bClear.setBackground(new Color(28, 28, 28));
 			bClear.setForeground(new Color(255, 255, 255));
 			bClear.setFocusable(false);
-			bClear.setBounds(640, 330, 130, 40);
+			bClear.setBounds(750, 330, 140, 40);
 		}
 		return bClear;
 	}
@@ -319,5 +321,17 @@ public class UserFrame extends JFrame {
 		getTPassword().setText("");
 		getCBUserType().setSelectedItem("Indefinido");
 		getCBUserStatus().setSelectedItem("Indefinido");
+	}
+	public JButton getBSearch() {
+		if (bSearch == null) {
+			bSearch = new JButton("Consultar");
+			bSearch.setIcon(new ImageIcon(UserFrame.class.getResource("/imagesMain/imagesUser/SearchUser.png")));
+			bSearch.setForeground(Color.WHITE);
+			bSearch.setFont(new Font("Roboto", Font.PLAIN, 16));
+			bSearch.setFocusable(false);
+			bSearch.setBackground(new Color(28, 28, 28));
+			bSearch.setBounds(550, 330, 140, 40);
+		}
+		return bSearch;
 	}
 }

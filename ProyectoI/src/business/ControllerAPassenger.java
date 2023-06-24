@@ -22,6 +22,7 @@ public class ControllerAPassenger implements ActionListener{
 	private String fileName = "Passengers.xml";
 	private String objectName = "person";
 	private PopUpMessages pM;
+	private ArrayList<Passenger> passengers = new ArrayList<Passenger>();
 
 	public ControllerAPassenger(String userType) {
 		pF = new PassengerFrame(userType);
@@ -31,13 +32,20 @@ public class ControllerAPassenger implements ActionListener{
 		xmlF = new XMLFiles();
 		pM = new PopUpMessages();
 		xmlF.createXML(fileName, objectName);
-		setTableData();
 		initializerAction();
-
 	}
 
 	private void setTableData() {
-		ArrayList<Passenger> passengers = lXMLP.readXMLFile(fileName);
+		String passport = pF.getTPassport().getText().trim();
+		if(passport.isEmpty()) {
+			passengers = lXMLP.readXMLFile(fileName);
+		}else {
+			passengers.clear();
+			Passenger searchedPassenger = lXMLP.getPassengerFromXML(fileName, passport);
+			if(searchedPassenger != null) {
+				passengers.add(searchedPassenger);
+			}
+		}
 		pF.setJTableData(passengers);
 	}
 
@@ -45,6 +53,7 @@ public class ControllerAPassenger implements ActionListener{
 		pF.getBAddPassenger().addActionListener(this);
 		pF.getBUpdate().addActionListener(this);
 		pF.getBClear().addActionListener(this);
+		pF.getBSearch().addActionListener(this);
 	}
 
 	@Override
@@ -58,6 +67,8 @@ public class ControllerAPassenger implements ActionListener{
 		} else if (pF.getBClear() == e.getSource())
 		{
 			deletePassenger();
+		}else if(pF.getBSearch() == e.getSource()) {
+			searchPassenger();
 		}
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
@@ -83,15 +94,17 @@ public class ControllerAPassenger implements ActionListener{
 		pF.clean();
 		passenger = new Passenger(passport, name, lastname, dateOB, email, phoneNumber);
 		crud.addObject(fileName, objectName, passenger.getDataName(), passenger.getData());
-
+		setTableData();
 		pM.showMessage("Usuario agregado");
-
+	}
+	//-------------------------------------------------------------------------------------------------------------------------
+	private void searchPassenger() {
 		setTableData();
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
 	private void updatePassenger() {
 		String passport = pF.getTPassport().getText();
-		Passenger currentPassenger = lXMLP.getPassengerFromXML(fileName, objectName, "Passport", passport);
+		Passenger currentPassenger = lXMLP.getPassengerFromXML(fileName, passport);
 
 		String newPassport = passport; 
 
@@ -165,10 +178,8 @@ public class ControllerAPassenger implements ActionListener{
 		String[] newData = {newPassport, newName, newLastname, newDateOB, newEmail, newPhoneNumber};
 		crud.updateObject(fileName, objectName, "Passport", passport, currentPassenger.getDataName(), newData);
 		pF.clean();
-		pM.showMessage("Usuario agregado");
-
 		setTableData();
-
+		pM.showMessage("Usuario agregado");
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
 	private void deletePassenger() {
@@ -183,8 +194,8 @@ public class ControllerAPassenger implements ActionListener{
 		if(pM.showConfirmationDialog("¿Está seguro de eliminar el usuario?", "Eliminar")){
 			pF.clean();
 			crud.deleteObject(fileName, objectName, "Passport", passport);
-			pM.showMessage("Pasajero eliminado");
 			setTableData();
+			pM.showMessage("Pasajero eliminado");
 		}
 	}
 }

@@ -2,7 +2,7 @@ package business;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
+import java.util.ArrayList;
 
 import data.CRUD;
 import data.LogicXML;
@@ -30,6 +30,8 @@ public class ControllerAAirplane implements ActionListener {
 	private String objectName = "airplanes";
 
 	private PopUpMessages pM;
+	
+	private ArrayList<Airplane> airplanes = new ArrayList<Airplane>();
 
 	public ControllerAAirplane(String userType) {
 		aF = new AirplaneFrame(userType);
@@ -42,14 +44,22 @@ public class ControllerAAirplane implements ActionListener {
 		xmlF.createXML(fileName, objectName);
 		
 		pM = new PopUpMessages();
-		setTableData();
 		aF.fillModelComboBox(lXMLM.getAirplaneModels("Models.xml"));
 		aF.fillAirlineComboBox(lXMLA.getAirlineList("Airlines.xml"));
 		initializerAction();
 	}
 
 	private void setTableData() {
-		List<Airplane> airplanes = logicXMLAirplane.readXMLFile(fileName);
+		String id = aF.getTId().getText().trim();//.trim() elimina espacios inicio o final
+		if (id.isEmpty()) {
+			airplanes = logicXMLAirplane.readXMLFile(fileName);
+		} else {
+			airplanes.clear();
+			Airplane searchedAirplane = logicXMLAirplane.getAirplaneFromXML(fileName, id);
+			if (searchedAirplane != null) {
+				airplanes.add(searchedAirplane);
+			}
+		}
 		aF.setJTableData(airplanes);
 	}
 
@@ -57,6 +67,7 @@ public class ControllerAAirplane implements ActionListener {
 		aF.getBAddAirplane().addActionListener(this);
 		aF.getBUpdate().addActionListener(this);
 		aF.getBClear().addActionListener(this);
+		aF.getBSearch().addActionListener(this);
 	}
 
 	@Override
@@ -70,6 +81,8 @@ public class ControllerAAirplane implements ActionListener {
 		} else if (aF.getBClear() == e.getSource()) 
 		{
 			deleteAirplane();
+		}else if(aF.getBSearch() == e.getSource()) {
+			searchAirplane();
 		}
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
@@ -83,8 +96,6 @@ public class ControllerAAirplane implements ActionListener {
 			pM.showMessage("El avion ya existe");
 			return;
 		} //no pueden eliminarse aviones que estén registrados en vuelos.
-
-
 		String year = aF.getTYear().getText();
 		String airline = (String) aF.getCBAirline().getSelectedItem();
 		String model = (String) aF.getCBModel().getSelectedItem();
@@ -100,14 +111,17 @@ public class ControllerAAirplane implements ActionListener {
 		aF.clean();
 		Ai = new Airplane(id, year, airline, model);
 		crud.addObject(fileName, objectName, Ai.getDataName(), Ai.getData());
+		setTableData();
 		pM.showMessage( "Avion agregado");
-
+	}
+	
+	private void searchAirplane() {
 		setTableData();
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
 	private void updateAirplane() {
 		String id = aF.getTId().getText();
-		Airplane currentAirplane = logicXMLAirplane.getAirplaneFromXML(fileName, objectName, "id", id);
+		Airplane currentAirplane = logicXMLAirplane.getAirplaneFromXML(fileName, id);
 
 		if (id.isEmpty()) {
 			pM.showMessage( "Por favor, ingrese el nombre del avión a modificar");
@@ -158,8 +172,8 @@ public class ControllerAAirplane implements ActionListener {
 		String[] newData = { newAirplane, newYear, newAirline, newModel };
 		crud.updateObject(fileName, objectName, "id", id, currentAirplane.getDataName(), newData);
 		aF.clean();
-		pM.showMessage("Avión modificado");
 		setTableData();
+		pM.showMessage("Avión modificado");
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
 	private void deleteAirplane() {
@@ -179,8 +193,8 @@ public class ControllerAAirplane implements ActionListener {
 		if(pM.showConfirmationDialog("¿Está seguro de eliminar el avion?", "Eliminar")){	
 			aF.clean();
 			crud.deleteObject(fileName, objectName, "id", id);
-			pM.showMessage("Avion eliminado");
 			setTableData();
+			pM.showMessage("Avion eliminado");
 		}
 	}
 }

@@ -13,12 +13,13 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import domain.Ticket;
 
-import domain.Tickets;
 
 public class LogicXMLTicket {
-	public ArrayList<Tickets> readXMLFile(String filename) {
-		ArrayList<Tickets> ticketsList = new ArrayList<>();
+	//Obtener un arrayList con de los tiquetes
+	public ArrayList<Ticket> readXMLFile(String filename) {
+		ArrayList<Ticket> ticketsList = new ArrayList<>();
 		File file = new File(filename);
 		
 		if (!file.exists()) {
@@ -53,14 +54,14 @@ public class LogicXMLTicket {
 							String tickettype = element.getElementsByTagName("TicketType").item(0).getTextContent();
 							
 							boolean ticketExists = false;
-							for (Tickets existingTicket : ticketsList) {
+							for (Ticket existingTicket : ticketsList) {
 								if (existingTicket.getTicketNumber() == Integer.parseInt(ticketNumber)) {
 									ticketExists = true;
 									break;
 								}
 							}
 							if (!ticketExists) {
-								Tickets ticket = new Tickets(Integer.parseInt(ticketNumber), passport, Integer.parseInt(flightNumber),tickettype);
+								Ticket ticket = new Ticket(Integer.parseInt(ticketNumber), passport, Integer.parseInt(flightNumber),tickettype);
 								ticketsList.add(ticket);
 							}
 						}
@@ -75,10 +76,10 @@ public class LogicXMLTicket {
 		return ticketsList;
 	}
 	//Método para obtener un Ticket en especifico
-	public Tickets getTicketFromXML(String fileName, String objectName, String attributeName, String attributeValue) {
-		ArrayList<Tickets> tickets = readXMLFile(fileName);
+	public Ticket getTicketFromXML(String fileName, String attributeValue) {
+		ArrayList<Ticket> tickets = readXMLFile(fileName);
 
-		for (Tickets ticket : tickets) {
+		for (Ticket ticket : tickets) {
 			int number= ticket.getTicketNumber();
 			if (String.valueOf(number).equals(attributeValue)) {
 				return ticket;

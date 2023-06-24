@@ -42,6 +42,7 @@ public class AirlineFrame extends JFrame {
     //Scroll
     private JScrollPane spTAirline;
 	private Object dataTable[][];
+	private JButton bSearch;
     
     
 
@@ -100,6 +101,7 @@ public class AirlineFrame extends JFrame {
 			setJTableAirline(getDTMAirline());
 			setSPTableAirline(getJTableAirline());
 			JPInfo.add(getSPTableAirline());
+			JPInfo.add(getBSearch());
 		
             
 			
@@ -137,7 +139,7 @@ public class AirlineFrame extends JFrame {
             bAddAirline.setBackground(new Color(28, 28, 28));
             bAddAirline.setForeground(new Color(255, 255, 255));
             bAddAirline.setFocusable(false);
-            bAddAirline.setBounds(440, 330, 130, 40);
+            bAddAirline.setBounds(350, 330, 140, 40);
         }
         return bAddAirline;
     }
@@ -150,7 +152,7 @@ public class AirlineFrame extends JFrame {
             bUpdate.setBackground(new Color(28, 28, 28));
             bUpdate.setForeground(new Color(255, 255, 255));
             bUpdate.setFocusable(false);
-            bUpdate.setBounds(240, 330, 130, 40);
+            bUpdate.setBounds(150, 330, 140, 40);
         }
         return bUpdate;
     }
@@ -163,7 +165,7 @@ public class AirlineFrame extends JFrame {
             bClear.setBackground(new Color(28, 28, 28));
             bClear.setForeground(new Color(255, 255, 255));
             bClear.setFocusable(false);
-            bClear.setBounds(640, 330, 130, 40);
+            bClear.setBounds(750, 330, 140, 40);
         }
         return bClear;
     }
@@ -259,4 +261,16 @@ public class AirlineFrame extends JFrame {
     	getTAirline().setText("");
     	getTCountry().setText("");
     }
+	public JButton getBSearch() {
+		if (bSearch == null) {
+			bSearch = new JButton("Consultar");
+			bSearch.setIcon(new ImageIcon(AirlineFrame.class.getResource("/imagesMain/imagesButtons/search-button.png")));
+			bSearch.setForeground(Color.WHITE);
+			bSearch.setFont(new Font("Roboto", Font.PLAIN, 16));
+			bSearch.setFocusable(false);
+			bSearch.setBackground(new Color(28, 28, 28));
+			bSearch.setBounds(550, 330, 140, 40);
+		}
+		return bSearch;
+	}
 }

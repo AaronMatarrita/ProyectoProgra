@@ -72,71 +72,67 @@ public class LogicXMLPassenger {
 			return passengers;
 		}
 	}
-	
-	public Passenger getPassengerFromXML(String fileName, String objectName, String attributeName, String attributeValue) {
-	    ArrayList<Passenger> passengers = readXMLFile(fileName);
 
-	    for (Passenger passenger : passengers) {
-	        if (passenger.getPassport().equals(attributeValue)) {
-	            return passenger;
-	        }
-	    }
-	    Passenger p = new Passenger();
-	    return p;
+	public Passenger getPassengerFromXML(String fileName, String attributeValue) {
+		ArrayList<Passenger> passengers = readXMLFile(fileName);
+
+		for (Passenger passenger : passengers) {
+			if (passenger.getPassport().equals(attributeValue)) {
+				return passenger;
+			}
+		}
+		return null;
 	}
-	
+
 	public ArrayList<Passenger> searchPassenger(String passportNumber) {
 		File file = new File("Passengers.xml");
 		ArrayList<Passenger> passengers = new ArrayList<>();
 		if (!file.exists()) {
 			return passengers;
 		} else {
-	    try {
-	        // Cargar el archivo XML
-	        
-	        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-	        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-	        Document doc = dBuilder.parse(file);
-	        
-	        doc.getDocumentElement().normalize();
+			try {
+				// Cargar el archivo XML
 
-	        // Obtener la lista de nodos 'person'
-	        NodeList passengerList = doc.getElementsByTagName("person");
-	        if (passengerList.getLength() == 0) {
-				return passengers;
+				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+				DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+				Document doc = dBuilder.parse(file);
+
+				doc.getDocumentElement().normalize();
+
+				// Obtener la lista de nodos 'person'
+				NodeList passengerList = doc.getElementsByTagName("person");
+				if (passengerList.getLength() == 0) {
+					return passengers;
+				}
+				// Recorrer los nodos 'person'
+				for (int i = 0; i < passengerList.getLength(); i++) {
+					Node personNode = passengerList.item(i);
+					if (personNode.getNodeType() == Node.ELEMENT_NODE) {
+						Element personElement = (Element) personNode;
+
+						// Obtener el elemento 'Passport' dentro del nodo 'person'
+						String passport = personElement.getElementsByTagName("Passport").item(0).getTextContent();
+
+						// Comprobar si el número de pasaporte coincide
+						if (passport.startsWith(passportNumber)) {
+							// Obtener los datos del pasajero
+							String name = personElement.getElementsByTagName("Name").item(0).getTextContent();
+							String lastname = personElement.getElementsByTagName("Lastname").item(0).getTextContent();
+							String dateOfBirth = personElement.getElementsByTagName("Dateofbirth").item(0).getTextContent();
+							String email = personElement.getElementsByTagName("Email").item(0).getTextContent();
+							String phoneNumber = personElement.getElementsByTagName("PhoneNumber").item(0).getTextContent();
+
+
+							Passenger passenger = new Passenger(passport, name, lastname, dateOfBirth, email, phoneNumber);
+							passengers.add(passenger);
+
+						}
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-	        // Recorrer los nodos 'person'
-	        for (int i = 0; i < passengerList.getLength(); i++) {
-	            Node personNode = passengerList.item(i);
-	            if (personNode.getNodeType() == Node.ELEMENT_NODE) {
-	                Element personElement = (Element) personNode;
-
-	                // Obtener el elemento 'Passport' dentro del nodo 'person'
-	                String passport = personElement.getElementsByTagName("Passport").item(0).getTextContent();
-
-	                // Comprobar si el número de pasaporte coincide
-	                if (passport.startsWith(passportNumber)) {
-	                    // Obtener los datos del pasajero
-	                    String name = personElement.getElementsByTagName("Name").item(0).getTextContent();
-	                    String lastname = personElement.getElementsByTagName("Lastname").item(0).getTextContent();
-	                    String dateOfBirth = personElement.getElementsByTagName("Dateofbirth").item(0).getTextContent();
-	                    String email = personElement.getElementsByTagName("Email").item(0).getTextContent();
-	                    String phoneNumber = personElement.getElementsByTagName("PhoneNumber").item(0).getTextContent();
-	                    
-					
-						Passenger passenger = new Passenger(passport, name, lastname, dateOfBirth, email, phoneNumber);
-						passengers.add(passenger);
-						
-	                }
-	            }
-	        }
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-	    return passengers;
+			return passengers;
+		}
 	}
-}
-	
-	
-	
 }

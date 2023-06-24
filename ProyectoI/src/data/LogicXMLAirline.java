@@ -80,7 +80,7 @@ public class LogicXMLAirline {
 		return airlineList;
 	}
 	//Método para obtener la aerolinea con el nombre a busar en el xml
-	public Airline getAirlineFromFile(String fileName, String objectName, String attributeName, String attributeValue) {
+	public Airline getAirlineFromFile(String fileName, String attributeValue) {
 		ArrayList<Airline> airlines = readXMLFile(fileName);
 		for(Airline airline : airlines) {
 			if(airline.getName().equals(attributeValue)) {
