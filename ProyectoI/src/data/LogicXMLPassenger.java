@@ -8,6 +8,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
 import domain.Passenger;
 
 public class LogicXMLPassenger {
@@ -91,41 +92,30 @@ public class LogicXMLPassenger {
 			return passengers;
 		} else {
 			try {
-				// Cargar el archivo XML
-
 				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 				DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 				Document doc = dBuilder.parse(file);
 
 				doc.getDocumentElement().normalize();
 
-				// Obtener la lista de nodos 'person'
 				NodeList passengerList = doc.getElementsByTagName("person");
 				if (passengerList.getLength() == 0) {
 					return passengers;
 				}
-				// Recorrer los nodos 'person'
 				for (int i = 0; i < passengerList.getLength(); i++) {
 					Node personNode = passengerList.item(i);
 					if (personNode.getNodeType() == Node.ELEMENT_NODE) {
 						Element personElement = (Element) personNode;
-
-						// Obtener el elemento 'Passport' dentro del nodo 'person'
 						String passport = personElement.getElementsByTagName("Passport").item(0).getTextContent();
 
-						// Comprobar si el número de pasaporte coincide
 						if (passport.startsWith(passportNumber)) {
-							// Obtener los datos del pasajero
 							String name = personElement.getElementsByTagName("Name").item(0).getTextContent();
 							String lastname = personElement.getElementsByTagName("Lastname").item(0).getTextContent();
 							String dateOfBirth = personElement.getElementsByTagName("Dateofbirth").item(0).getTextContent();
 							String email = personElement.getElementsByTagName("Email").item(0).getTextContent();
 							String phoneNumber = personElement.getElementsByTagName("PhoneNumber").item(0).getTextContent();
-
-
 							Passenger passenger = new Passenger(passport, name, lastname, dateOfBirth, email, phoneNumber);
 							passengers.add(passenger);
-
 						}
 					}
 				}
@@ -134,5 +124,14 @@ public class LogicXMLPassenger {
 			}
 			return passengers;
 		}
+	}
+	//Método para obtener una lista de TIPO String con los pasaportes
+	public ArrayList<String> readPassengerPassportsFromXML(String fileName) {
+		ArrayList<String> passengersPassports = new ArrayList<>();
+		ArrayList<Passenger> passengers = readXMLFile(fileName);
+		for (Passenger passenger : passengers) {
+			passengersPassports.add(String.valueOf(passenger.getPassport()));
+		}
+		return passengersPassports;
 	}
 }

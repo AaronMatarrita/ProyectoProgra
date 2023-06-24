@@ -47,7 +47,7 @@ public class ControllerAFlights implements ActionListener{
 			flights = lXMLF.readXMLFile(fileName);
 		}else {
 			flights.clear();
-			Flight searchedFlight = lXMLF.getAirplaneFlightFromXML(fileName, flightNumber);
+			Flight searchedFlight = lXMLF.getFlightFromXML(fileName, flightNumber);
 			if(searchedFlight != null) {
 				flights.add(searchedFlight);
 			}

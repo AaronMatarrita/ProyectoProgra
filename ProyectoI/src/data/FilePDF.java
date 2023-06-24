@@ -76,6 +76,8 @@ public class FilePDF {
 		}
 	}
 
+	
+	
 	private void addTitle(Document document, String title) throws DocumentException {
 		Paragraph paragraph = new Paragraph(title, TITLE_FONT);
 		paragraph.setAlignment(Element.ALIGN_CENTER);

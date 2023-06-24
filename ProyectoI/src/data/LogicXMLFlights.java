@@ -116,7 +116,7 @@ public class LogicXMLFlights {
 		return String.valueOf(randomNumber);
 	}
 	//Método para obtener un Vuelo espeficico
-	public Flight getAirplaneFlightFromXML(String fileName, String attributeValue) {
+	public Flight getFlightFromXML(String fileName, String attributeValue) {
 		ArrayList<Flight> flights = readXMLFile(fileName);
 		for (Flight flight : flights) {
 			if (flight.getFlightNumber()  == Integer.parseInt(attributeValue)) {
@@ -204,7 +204,15 @@ public class LogicXMLFlights {
 				}
 			}
 		}
-
 		return false; //El vuelo esta permitido ya que NO existe otro con el mismo avión
+	}
+	//Método para obtener una lista de TIPO String con las marcas
+	public ArrayList<String> readFlightsumbersFromXML(String fileName) {
+	    ArrayList<String> flightsNumbers = new ArrayList<>();
+	    ArrayList<Flight> flights = readXMLFile(fileName);
+	    for (Flight flight : flights) {
+	        flightsNumbers.add(String.valueOf(flight.getFlightNumber()));
+	    }
+	    return flightsNumbers;
 	}
 }

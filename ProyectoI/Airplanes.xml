@@ -6,4 +6,4 @@
 		<airline>Avianca</airline>
 		<model>880</model>
 	</airplanes>
-</airplanes>
+<airplanes><id>123</id><year>2020</year><airline>Avianca</airline><model>880</model></airplanes></airplanes>
