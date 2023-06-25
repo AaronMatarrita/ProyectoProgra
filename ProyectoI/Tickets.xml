@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><Tickets>
-	
-	
-	
 	<Tickets>
 		<TicketNumber>123</TicketNumber>
 		<Passport>321</Passport>
 		<FlightNumber>256</FlightNumber>
 		<TicketType>Turista</TicketType>
 	</Tickets>
-</Tickets>
+	
+	
+<Tickets><TicketNumber>333</TicketNumber><Passport>118160537</Passport><FlightNumber>256</FlightNumber><TicketType>Economico</TicketType></Tickets><Tickets><TicketNumber>2312</TicketNumber><Passport>321</Passport><FlightNumber>494</FlightNumber><TicketType>Turista</TicketType></Tickets></Tickets>

@@ -91,6 +91,11 @@ public class ControllerAPassenger implements ActionListener{
 		String email = pF.getTEmail().getText();
 		String phoneNumber = pF.getTPhoneNumber().getText();
 
+		if(!lXMLP.isValidDate(dateOB)) {
+			pM.showMessage("Ingrese la fecha en el formato (dd/MM/yyyy)\nEjemplo 01/01/2000 ");
+			return;
+		}
+
 		pF.clean();
 		passenger = new Passenger(passport, name, lastname, dateOB, email, phoneNumber);
 		crud.addObject(fileName, objectName, passenger.getDataName(), passenger.getData());
@@ -156,7 +161,10 @@ public class ControllerAPassenger implements ActionListener{
 				newDateOB = currentPassenger.getDateofbirth();
 			}
 		}
-
+		if(!lXMLP.isValidDate(newDateOB)) {
+			pM.showMessage("Ingrese la fecha en el formato (dd/MM/yyyy)\nEjemplo 01/01/2000 ");
+			return;
+		}
 		if(newEmail.isEmpty()) {
 			if(pM.showConfirmationDialog("Desea modificar el email del pasajero?", "Modificar")){
 

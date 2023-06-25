@@ -1,7 +1,10 @@
 package data;
 
+import java.awt.Desktop;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -74,13 +77,13 @@ public class FilePDF {
 			addContent(document, "$" + price);
 			document.close();
 			System.out.println("El archivo PDF ha sido creado correctamente.");
+			printPDF("Ticket.pdf");
+			
 		} catch (DocumentException | FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
 
-	
-	
 	private void addTitle(Document document, String title) throws DocumentException {
 		Paragraph paragraph = new Paragraph(title, TITLE_FONT);
 		paragraph.setAlignment(Element.ALIGN_CENTER);
@@ -105,5 +108,21 @@ public class FilePDF {
 		LocalDateTime currentDateTime = LocalDateTime.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		return currentDateTime.format(formatter);
+	}
+	
+	private void printPDF(String filePath) {
+	    try {
+	        File file = new File(filePath);
+	        Desktop desktop = Desktop.getDesktop();
+
+	        if (desktop.isSupported(Desktop.Action.PRINT)) {
+	            desktop.print(file);
+	            System.out.println("El archivo PDF ha sido enviado a la impresora.");
+	        } else {
+	            System.err.println("La impresión no es compatible en este sistema.");
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
 }

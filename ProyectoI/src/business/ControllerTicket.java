@@ -107,7 +107,7 @@ public class ControllerTicket implements ActionListener{
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
 	private void addTickets() {
-		String passport = String.valueOf(tF.getCbFlightNumber().getSelectedItem());
+		String passport = String.valueOf(tF.getCbPassport().getSelectedItem());
 		String ticketNumber = tF.getTTicketNumber().getText();
 		String flightNumber = String.valueOf(tF.getCbFlightNumber().getSelectedItem());
 		String ticketType = (String) tF.getCBTicketType().getSelectedItem();
@@ -115,7 +115,7 @@ public class ControllerTicket implements ActionListener{
 		if (passport.isEmpty() || ticketNumber.isEmpty() || flightNumber.isEmpty()||ticketType.isEmpty()) {
 			pM.showMessage("Por favor, complete todos los campos");
 			return;
-		} else if (lXML.isAlreadyInFile(fileName, objectName, "id", ticketNumber)) {
+		} else if (lXML.isAlreadyInFile(fileName, objectName, "TicketNumber", ticketNumber)) {
 			pM.showMessage("El Tiquete ya existe");
 			return;
 		}	else if (ticketType.equals("Indefinido")) {
@@ -150,7 +150,7 @@ public class ControllerTicket implements ActionListener{
 			newTicket = pM.getData("Ingrese el nuevo numero de ticket:");
 		}
 
-		String newPassport = String.valueOf(tF.getCbFlightNumber().getSelectedItem());
+		String newPassport = String.valueOf(tF.getCbPassport().getSelectedItem());
 		String newFlightNumber = String.valueOf(tF.getCbFlightNumber().getSelectedItem());
 		String newTicketType = (String) tF.getCBTicketType().getSelectedItem();
 
@@ -206,8 +206,23 @@ public class ControllerTicket implements ActionListener{
 			return;
 		}
 		Ticket ticket = lXMLT.getTicketFromXML(fileName, ticketNumber);
+		if(ticket == null) {pM.showMessage("El ticket no existe en los datos registrados"); return;}
+		//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+
 		Passenger passenger = lXMLP.getPassengerFromXML("Passengers.xml", ticket.getPassport());
+		if(passenger == null) {pM.showMessage("El pasajero no existe en los datos registrados"); return;}
+		//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+
 		Flight flight = logFlight.getFlightFromXML("Flights.xml", String.valueOf( ticket.getFlightNumber()));
+		if(flight == null) {pM.showMessage("El vuelo no existe en los datos registrados"); return;}
+		//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+
+		Airplane airplane = logAirplane.getAirplaneFromXML("Airplanes.xml", flight.getAirplane());
+		if(airplane == null) {pM.showMessage("El avión no existe en los datos registrados"); return;}
+		//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+
+		Airline airline = logAirline.getAirlineFromFile("Airlines.xml", airplane.getAirline());
+		if(airline == null) {pM.showMessage("La aerolínea no existe en los datos registrados"); return;}
+		//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+
+		AirplaneModel airplaneModel = logAModel.getAirplaneModelFromXML("Models.xml", airplane.getAirplaneModel());
+		if(airplaneModel == null) {pM.showMessage("El modelo de avión no existe en los datos registrados"); return;}
+		//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+
 		Double price = 0.0;
 		if(ticket.getTickettype().equalsIgnoreCase("Ejecutivo")) {
 			price = flight.getBusinessClassSeatsPrice();
@@ -216,12 +231,7 @@ public class ControllerTicket implements ActionListener{
 		}else if(ticket.getTickettype().equalsIgnoreCase("Economico")) {
 			price = flight.getEconomyClassSeatsPrice();
 		}
-
-		Airplane airplane = logAirplane.getAirplaneFromXML("Airplanes.xml", flight.getAirplane());
-		Airline airline = logAirline.getAirlineFromFile("Airlines.xml", airplane.getAirline());
-		AirplaneModel airplaneModel = logAModel.getAirplaneModelFromXML("Models.xml", airplane.getAirplaneModel());
-
+		//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+
 		pdf.createTicket(ticket, passenger, airline, airplane, airplaneModel, flight, price);
-
 	}
 }
