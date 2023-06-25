@@ -133,8 +133,6 @@ public class ControllerAUser implements ActionListener {
 		} else if (user.equals("admin")) {
 			pM.showMessage("No se puede modificar el usuario administrador por defecto");
 			return;
-		}else if (pM.showConfirmationDialog("Desea modificar el nombre de usuario?", "Modificar")) {
-			newUser = pM.getData("Ingrese el nuevo nombre del usuario:");
 		}
 
 		String newPassword = uF.getTPassword().getText();

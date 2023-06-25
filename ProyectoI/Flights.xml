@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><flights>
 	<flights>
 		<FlightNumber>256</FlightNumber>
-		<DepartureCity>San Jose</DepartureCity>
-		<DepartureDate>10/09/2023</DepartureDate>
-		<DepartureTime>08:10</DepartureTime>
-		<ArrivalCity>San Jose</ArrivalCity>
-		<ArrivalDate>10/09/2023</ArrivalDate>
-		<ArrivalTime>12:00</ArrivalTime>
+		<DepartureCity>Chepe</DepartureCity>
+		<DepartureDate>07/10/2023</DepartureDate>
+		<DepartureTime>12:00</DepartureTime>
+		<ArrivalCity>Bogota</ArrivalCity>
+		<ArrivalDate>08/10/2023</ArrivalDate>
+		<ArrivalTime>04:20</ArrivalTime>
 		<Airplane>123</Airplane>
-		<BusinessClassSeatsPrice>120</BusinessClassSeatsPrice>
-		<TouristClassSeatsPrice>120</TouristClassSeatsPrice>
-		<EconomyClassSeatsPrice>120</EconomyClassSeatsPrice>
+		<BusinessClassSeatsPrice>125.0</BusinessClassSeatsPrice>
+		<TouristClassSeatsPrice>115.0</TouristClassSeatsPrice>
+		<EconomyClassSeatsPrice>95.0</EconomyClassSeatsPrice>
 	</flights>
 	<flights>
 		<FlightNumber>494</FlightNumber>
-		<DepartureCity>Limon</DepartureCity>
-		<DepartureDate>2-3-20</DepartureDate>
-		<DepartureTime>6:90</DepartureTime>
-		<ArrivalCity/>
+		<DepartureCity>Alajuela</DepartureCity>
+		<DepartureDate>10/09/2023</DepartureDate>
+		<DepartureTime>07:10</DepartureTime>
+		<ArrivalCity>Alajuela</ArrivalCity>
 		<ArrivalDate>10/09/2023</ArrivalDate>
-		<ArrivalTime>314</ArrivalTime>
-		<Airplane>120.0</Airplane>
-		<BusinessClassSeatsPrice>223.0</BusinessClassSeatsPrice>
-		<TouristClassSeatsPrice>120.0</TouristClassSeatsPrice>
-		<EconomyClassSeatsPrice>120.0</EconomyClassSeatsPrice>
+		<ArrivalTime>10:10</ArrivalTime>
+		<Airplane>223</Airplane>
+		<BusinessClassSeatsPrice>120</BusinessClassSeatsPrice>
+		<TouristClassSeatsPrice>120</TouristClassSeatsPrice>
+		<EconomyClassSeatsPrice>120</EconomyClassSeatsPrice>
 	</flights>
 </flights>

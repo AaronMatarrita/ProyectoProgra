@@ -18,7 +18,7 @@ public class Flight {
     
     public Flight(int FlightNumber, String DepartureCity, String DepartureDate,String DepartureTime, 
             String ArrivalCity, String ArrivalDate,String ArrivalTime, String Airplane, 
-            int BusinessClassSeatsPrice, int TouristClassSeatsPrice, int EconomyClassSeatsPrice) {
+            double BusinessClassSeatsPrice, double TouristClassSeatsPrice, double EconomyClassSeatsPrice) {
     	super();
         this.FlightNumber = FlightNumber;
         this.DepartureCity = DepartureCity;

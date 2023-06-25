@@ -153,15 +153,13 @@ public class ControllerTicket implements ActionListener{
 		String newPassport = String.valueOf(tF.getCbFlightNumber().getSelectedItem());
 		String newFlightNumber = String.valueOf(tF.getCbFlightNumber().getSelectedItem());
 		String newTicketType = (String) tF.getCBTicketType().getSelectedItem();
-
+		
 		if (newPassport.isEmpty()) { 
 			if(pM.showConfirmationDialog("Desea modificar el pasaporte?", "Modificar")) {
 				newPassport = pM.getData("Ingrese el nuevo pasaporte:");
-			}
-		}
-		if (newFlightNumber.isEmpty()) { 
-			if(pM.showConfirmationDialog("Desea modificar el numero de vuelo?", "Modificar")) {
-				newFlightNumber = pM.getData("Ingrese el nuevo numero de vuelo:");
+			}else {
+				newPassport = currentTicket.getPassport();
+				tF.getCbPassport().setSelectedItem(newPassport);
 			}
 		}
 		if (newTicketType.equals("Indefinido")) {
@@ -173,6 +171,7 @@ public class ControllerTicket implements ActionListener{
 				}
 			} else {
 				newTicketType = currentTicket.getTickettype();
+				tF.getCBTicketType().setSelectedItem(newTicket);
 			}
 		}
 		String[] newData = { newTicket, newPassport, newFlightNumber, newTicketType };
