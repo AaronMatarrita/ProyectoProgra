@@ -9,6 +9,7 @@ import data.LogicXMLAirplane;
 import data.LogicXMLFlights;
 import data.XMLFiles;
 import domain.Flight;
+import domain.Ticket;
 import presentation.FlightsFrame;
 import presentation.PopUpMessages;
 
@@ -113,8 +114,6 @@ public class ControllerAFlights implements ActionListener{
 			pM.showMessage("Ingrese la fecha en el formato (dd/MM/yyyy)\nEjemplo 01/01/2000 ");
 			return;
 		}
-		//No se pueden repetir vuelos con los mismos aviones en un rango de 20 horas.
-
 		fF.clean();
 		Fl = new Flight((Integer.parseInt(flightNumber)), exitCity, exitDate ,exitTime, enterCity, enterDate, enterTime, airplane, Integer.parseInt(priceEJE),
 				Integer.parseInt(priceTUR), Integer.parseInt(priceECO));
@@ -127,14 +126,119 @@ public class ControllerAFlights implements ActionListener{
 		pM.showMessage( "Vuelo agregado");
 		setTableData();
 	}
-	
+	//------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	private void searchFlight() {
 		setTableData();
 	}
-	
+	//------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	private void updateFlight() {
+		String flightNumber = fF.getTFlightNum().getText();
+		String newFlightNumber = flightNumber;
+		String exitCity = fF.getTExitCity().getText();
+		String exitDate = fF.getTExitDate().getText();
+		String exitTime = fF.getTExitTime().getText();
+		String enterCity = fF.getTExitCity().getText();
+		String enterDate = fF.getTEnterDate().getText();
+		String enterTime = fF.getTEnterTime().getText();
+		String priceEJE = fF.getTPriceEJE().getText();
+		String priceTUR = fF.getTPriceTUR().getText();
+		String priceECO = fF.getTPriceECO().getText();
+		String airplane = (String) fF.getCBAirplane().getSelectedItem();
 		
+		Flight currentFlight = lXMLF.getFlightFromXML(fileName, flightNumber);
+
+		if (flightNumber.isEmpty()) {
+			pM.showMessage( "Por favor, ingrese el numero de ticket a modificar");
+			return;
+		} else if (currentFlight == null) {
+			pM.showMessage("El Ticket no existe");
+			return;
+		}
+
+		if (exitCity.isEmpty()) { 
+			if(pM.showConfirmationDialog("Desea modificar la ciudad de salida?", "Modificar")) {
+				exitCity = pM.getData("Ingrese la nueva ciudad de salida:");
+			}
+			}else {
+				exitCity = currentFlight.getArrivalCity();
+			}
+		if (exitDate.isEmpty()) { 
+			if(pM.showConfirmationDialog("Desea modificar la fecha de salida?", "Modificar")) {
+				exitDate = pM.getData("Ingrese la nueva fecha de salida:");
+			}else {
+				exitDate = currentFlight.getArrivalDate();
+			}
+		}
+		
+		if (exitTime.isEmpty()) { 
+			if(pM.showConfirmationDialog("Desea modificar la hora de salida?", "Modificar")) {
+				exitTime = pM.getData("Ingrese la nueva hora de salida:");
+			}else {
+				exitTime = currentFlight.getArrivalTime();
+			}
+		}
+		if (enterCity.isEmpty()) { 
+			if(pM.showConfirmationDialog("Desea modificar la ciudad de llegada?", "Modificar")) {
+				enterCity = pM.getData("Ingrese la nueva ciudad de llegada:");
+			}else {
+				enterCity = currentFlight.getDepartureCity();
+			}
+		}
+		if (enterDate.isEmpty()) { 
+			if(pM.showConfirmationDialog("Desea modificar la fecha de llegada?", "Modificar")) {
+				enterDate = pM.getData("Ingrese la nueva fecha de llegada:");
+			}else {
+				enterDate = currentFlight.getDepartureDate();
+			}
+		}
+		if (enterTime.isEmpty()) { 
+			if(pM.showConfirmationDialog("Desea modificar la hora de llegada?", "Modificar")) {
+				enterTime = pM.getData("Ingrese la nueva hora de llegada:");
+			}else {
+				enterTime = currentFlight.getDepartureTime();
+			}
+		}
+		if (priceEJE.isEmpty()) { 
+			if(pM.showConfirmationDialog("Desea modificar el monto de la clase Ejecutiva?", "Modificar")) {
+				priceEJE = pM.getData("Ingrese el nuevo monto:");
+			}else {
+				priceEJE = String.valueOf(currentFlight.getBusinessClassSeatsPrice());
+			}
+		}
+		if (priceTUR.isEmpty()) { 
+			if(pM.showConfirmationDialog("Desea modificar el monto de la clase Turista?", "Modificar")) {
+				priceTUR = pM.getData("Ingrese el nuevo monto:");
+			}else {
+				priceTUR = String.valueOf(currentFlight.getTouristClassSeatsPrice());
+			}
+		}
+		if (priceECO.isEmpty()) { 
+			if(pM.showConfirmationDialog("Desea modificar el monto de la clase Economica?", "Modificar")) {
+				priceECO = pM.getData("Ingrese el nuevo monto:");
+			}else {
+				priceECO = String.valueOf(currentFlight.getEconomyClassSeatsPrice());
+			}
+		}
+		if (airplane.equals("Indefinido")) {
+			if (pM.showConfirmationDialog("¿Desea modificar el avion", "Modificar")) {
+				pM.showMessage("Por favor, seleccione el avion");
+				airplane = (String) fF.getCBAirplane().getSelectedItem();
+				if (airplane.equals("Indefinido")) {
+					return;
+				}
+			} else {
+				airplane = currentFlight.getAirplane();
+			}
+		}
+		
+		String[] newData = { flightNumber, exitCity, exitDate, exitTime, enterCity, enterDate, enterTime, priceEJE, priceTUR,priceECO,airplane };
+		crud.updateObject(fileName, objectName, "FlightNumber", newFlightNumber, currentFlight.getDataName(), newData);
+		fF.clean();
+		pM.showMessage("Vuelo modificado");
+		setTableData();
 	}
+	
+	//------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 	private void deleteFlight() {
 
