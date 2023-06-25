@@ -86,7 +86,7 @@ public class ControllerTicket implements ActionListener{
 		tF.getBClear().addActionListener(this);
 		tF.getBSearch().addActionListener(this);
 		tF.getBSaveTicket().addActionListener(this);
-	
+
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
 	@Override
@@ -153,7 +153,7 @@ public class ControllerTicket implements ActionListener{
 		String newPassport = String.valueOf(tF.getCbFlightNumber().getSelectedItem());
 		String newFlightNumber = String.valueOf(tF.getCbFlightNumber().getSelectedItem());
 		String newTicketType = (String) tF.getCBTicketType().getSelectedItem();
-		
+
 		if (newPassport.isEmpty()) { 
 			if(pM.showConfirmationDialog("Desea modificar el pasaporte?", "Modificar")) {
 				newPassport = pM.getData("Ingrese el nuevo pasaporte:");
@@ -208,11 +208,20 @@ public class ControllerTicket implements ActionListener{
 		Ticket ticket = lXMLT.getTicketFromXML(fileName, ticketNumber);
 		Passenger passenger = lXMLP.getPassengerFromXML("Passengers.xml", ticket.getPassport());
 		Flight flight = logFlight.getFlightFromXML("Flights.xml", String.valueOf( ticket.getFlightNumber()));
+		Double price = 0.0;
+		if(ticket.getTickettype().equalsIgnoreCase("Ejecutivo")) {
+			price = flight.getBusinessClassSeatsPrice();
+		}else if(ticket.getTickettype().equalsIgnoreCase("Turista")) {
+			price = flight.getTouristClassSeatsPrice();
+		}else if(ticket.getTickettype().equalsIgnoreCase("Economico")) {
+			price = flight.getEconomyClassSeatsPrice();
+		}
+
 		Airplane airplane = logAirplane.getAirplaneFromXML("Airplanes.xml", flight.getAirplane());
 		Airline airline = logAirline.getAirlineFromFile("Airlines.xml", airplane.getAirline());
 		AirplaneModel airplaneModel = logAModel.getAirplaneModelFromXML("Models.xml", airplane.getAirplaneModel());
-		
-		pdf.createTicket(ticket, passenger, airline, airplane, airplaneModel, flight);
+
+		pdf.createTicket(ticket, passenger, airline, airplane, airplaneModel, flight, price);
 
 	}
 }

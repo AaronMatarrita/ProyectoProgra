@@ -25,7 +25,7 @@ public class FilePDF {
 	private static final Font SECTION_FONT = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12);
 
 	public void createTicket(Ticket ticket, Passenger passenger, Airline airline, Airplane airplane,
-			AirplaneModel airplaneModel, Flight flight) {
+			AirplaneModel airplaneModel, Flight flight, Double price) {
 		try {
 			Document document = new Document();
 			@SuppressWarnings("unused")
@@ -62,6 +62,7 @@ public class FilePDF {
 			addContent(document, "C. Asientos económicos: " + airplaneModel.getEconomyClassSeats());
 
 			addSectionTitle(document, "Información del vuelo");
+			addContent(document, "Número de vuelo: " + flight.getFlightNumber());
 			addContent(document, "Lugar de salida: " + flight.getDepartureCity());
 			addContent(document, "Fecha de salida: " + flight.getDepartureDate());
 			addContent(document, "Hora de salida: " + flight.getDepartureTime());
@@ -69,6 +70,8 @@ public class FilePDF {
 			addContent(document, "Fecha de llegada: " + flight.getArrivalDate());
 			addContent(document, "Hora de llegada: " + flight.getArrivalTime());
 
+			addSectionTitle(document, "Precio del ticket");
+			addContent(document, "$" + price);
 			document.close();
 			System.out.println("El archivo PDF ha sido creado correctamente.");
 		} catch (DocumentException | FileNotFoundException e) {

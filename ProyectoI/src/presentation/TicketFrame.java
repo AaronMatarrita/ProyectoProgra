@@ -1,12 +1,10 @@
 package presentation;
 
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -26,7 +24,6 @@ import javax.swing.table.DefaultTableModel;
 
 import business.ControllerTicketsHistory;
 import domain.Ticket;
-import java.awt.SystemColor;
 
 @SuppressWarnings("serial")
 public class TicketFrame extends JFrame {
@@ -53,7 +50,6 @@ public class TicketFrame extends JFrame {
 	private JMenu mnFile;
 	private JMenu MNHelp;
 	private JMenuItem menuItem;
-	private JMenuItem bDownloadPDF;
 	private JLabel lTicketType;
 	private JComboBox<String> cBTicketType;
 	private JMenuItem bShowTickets;
