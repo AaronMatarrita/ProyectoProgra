@@ -12,14 +12,11 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
-import domain.Brand;
 import domain.TicketsHistory;
 
 import javax.swing.ScrollPaneConstants;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 @SuppressWarnings("serial")
 public class ShowTicketsFrame extends JFrame {
 	//Paneles
@@ -166,18 +163,18 @@ public class ShowTicketsFrame extends JFrame {
 	        data[i][5] = hticks.getDateofBirth();
 	        data[i][6] = hticks.getPhoneNumber();
 	        data[i][7] = hticks.getBuyDate();
-	        data[i][9] = hticks.getAirlineName();
-	        data[i][10] = hticks.getOperationCenter();
-	        data[i][11] = hticks.getAirplaneId();
-	        data[i][12] = hticks.getAirlineAirplane();
-	        data[i][13] = hticks.getAirplaneModel();
-	        data[i][14] = hticks.getYearAirplane();
-	        data[i][15] = hticks.getExitCity();
-	        data[i][16] = hticks.getExitDate();
-	        data[i][17] = hticks.getEnterCity();
-	        data[i][18] = hticks.getEnterDate();
-	        data[i][19] = hticks.getTicketClass();
-	        data[i][20] = hticks.getPriceTicket();
+	        data[i][8] = hticks.getAirlineName();
+	        data[i][9] = hticks.getOperationCenter();
+	        data[i][10] = hticks.getAirplaneId();
+	        data[i][11] = hticks.getAirlineAirplane();
+	        data[i][12] = hticks.getAirplaneModel();
+	        data[i][13] = hticks.getYearAirplane();
+	        data[i][14] = hticks.getExitCity();
+	        data[i][15] = hticks.getExitDate();
+	        data[i][16] = hticks.getEnterCity();
+	        data[i][17] = hticks.getEnterDate();
+	        data[i][18] = hticks.getTicketClass();
+	        data[i][19] = hticks.getPriceTicket();
 	        
 	    }
 	    dtmT.setDataVector(data, getColumnsName());

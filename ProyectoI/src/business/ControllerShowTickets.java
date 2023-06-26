@@ -58,6 +58,8 @@ public class ControllerShowTickets implements ActionListener{
 		logHticks = new LogicXMLHistoryTickets();
 		//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
 		xmlF.createXML(fileName, objectName);
+		//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
+		sF.setJTableData(logHticks.readXMLFile(fileName));
 		initializer();
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
