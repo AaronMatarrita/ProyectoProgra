@@ -13,6 +13,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import domain.AirplaneModel;
 import domain.Ticket;
 
 
@@ -86,5 +88,12 @@ public class LogicXMLTicket {
 			}
 		}
 		return null;
+	}
+	//Método para verificar la disponibilidad del espacio
+	public boolean isSeastAvaiable(AirplaneModel model) {
+		if(model.getBusinessClassSeats() >= 1 || model.getEconomyClassSeats() >= 1 || model.getTouristClassSeats() >= 1) {
+			return true;
+		}
+		return false;
 	}
 }

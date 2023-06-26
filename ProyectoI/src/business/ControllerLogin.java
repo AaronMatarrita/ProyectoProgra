@@ -31,6 +31,7 @@ public class ControllerLogin implements ActionListener{
 	    if (guiL.getBLogin() == e.getSource()) {
 	        String username = guiL.getTUser().getText();
 	        String password = String.valueOf(guiL.getJPasswordUser().getPassword());
+	        String userType = logL.getUserType("Users.xml", username);
 	        boolean verify = logL.verify("Users.xml", username, password);
 
 	        if (username.equals("admin") && password.equals("admin")) {
@@ -41,9 +42,12 @@ public class ControllerLogin implements ActionListener{
 	            guiL.dispose();
 	            new ControllerAdmin(logL.getUserType("Users.xml", username));
 	            return;
-	        } else {
+	        } else if(!verify){
 	            guiL.showMessage("Credenciales incorrectas");
 	            return;
+	        }else if(userType.equals("Inactivo")) {
+	        	guiL.showMessage("Usuario Inactivo");
+	        	return;
 	        }
 	    }
 	}

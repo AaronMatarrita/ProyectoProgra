@@ -47,6 +47,7 @@ public class UserFrame extends JFrame {
 	private JScrollPane spTUsers;
 	private Object dataTable[][];
 	private JButton bSearch;
+	private JButton bHelp;
 
 	public UserFrame(String userType) {
 		this.userType = userType;
@@ -114,6 +115,7 @@ public class UserFrame extends JFrame {
 	        setSPTableUsers(getJTableUsers());
 	        JPInfo.add(getSPTableUsers());
 	        JPInfo.add(getBSearch());
+	        JPInfo.add(getBHelp());
 			
 		}
 		return JPInfo;
@@ -333,5 +335,17 @@ public class UserFrame extends JFrame {
 			bSearch.setBounds(550, 330, 140, 40);
 		}
 		return bSearch;
+	}
+	public JButton getBHelp() {
+		if (bHelp == null) {
+			bHelp = new JButton("");
+			bHelp.setIcon(new ImageIcon(UserFrame.class.getResource("/imagesMain/imagesButtons/help-button.png")));
+			bHelp.setForeground(Color.WHITE);
+			bHelp.setFont(new Font("Roboto", Font.PLAIN, 16));
+			bHelp.setFocusable(false);
+			bHelp.setBackground(new Color(28, 28, 28));
+			bHelp.setBounds(934, 10, 40, 40);
+		}
+		return bHelp;
 	}
 }

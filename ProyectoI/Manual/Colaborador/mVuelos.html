@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Gestión de vuelos</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/mVuelosStyle.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="Images/AeroJetLogo.png" alt="Logo de la compañia">
+            <h2 class="nombre-gestión">Gestión de vuelos</h2>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link">Inicio</a>
+            <a href="manualMain.html" class="nav-link">Manual de usuario</a>
+            <a href="contacto.html" class="nav-link">Contacto</a>
+        </nav>
+    </header>
+    <main class="main">
+        <div class="container">
+
+            <h3>Pantalla principal:</h3>
+            <p>
+                Al iniciar la aplicación, se muestra la pantalla principal de la gestión de vuelos. Esta pantalla
+                permite agregar,
+                modificar y eliminar vuelos, así como consultar la lista de vuelos registrados en el
+                sistema.
+            </p>
+            <img src="Images/pVuelos.png" alt="pantalla principal vuelos">
+
+            <h2>Funcionalidades:</h2>
+            <h3>1. Agregar un vuelo</h3>
+            <p>Para agregar un vuelo, siga estos pasos:</p>
+            <ol>
+                <li>Inicie la aplicación.</li>
+                <li>Ingrese los datos en cada campo de texto (Número de vuelo, ciudad de salida, hora de salida, fecha de salida, 
+                    vuelo, ciudad de llegada, hora de llegada, fecha de llegada, 
+                    precio asientos ejecutivos, precio asientos turistas, precios asientos economicos).</li>
+                <li>Haga clic en el botón "Agregar".</li>
+                <img src="Images/añadirVuelo.png" alt="añadir avión">
+            </ol>
+            <p>Advertencias</p>
+            <li>No será posible agregar un vuelo con un número de vuelo ya existente.</li>
+            <li>No será posible agregar un avión si no se ingresan todos los datos (Número de vuelo, ciudad de salida, hora de salida, 
+                fecha de salida, avión, ciudad de llegada, hora de llegada, fecha de llegada,
+                 precio asientos ejecutivos, precio asientos turistas, precios asientos economicos).</li>
+
+            <h3>2. Consultar un vuelo</h3>
+            <p>Para consultar un vuelo, siga estos pasos:</p>
+            <ol>
+                <li>Inicie la aplicación.</li>
+                <li>Si desea consultar la información de todos los vuelos registrados, simplemente haga clic
+                    en el botón "Consultar".</li>
+                <li>Si desea consultar la información de un avión específico, ingrese la matrícula del avión en
+                    el campo de texto (Número de vuelo).</li>
+                <li>Haga clic en el botón "Consultar".</li>
+                <img src="Images/consultarVuelo.png" alt="consultar vuelo">
+            </ol>
+            <p>Advertencias</p>
+            <li>Si se introduce el número de un vuelo que no existe, no se mostrará ninguna información.</li>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2023 AeroJet International. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -28,12 +28,16 @@ public class ControllerAAirplane implements ActionListener {
 
 	private String fileName = "Airplanes.xml";
 	private String objectName = "airplanes";
+	private LogicExecuteHTML logHTML;
+	private String userType;
 
 	private PopUpMessages pM;
-	
+
 	private ArrayList<Airplane> airplanes = new ArrayList<Airplane>();
 
 	public ControllerAAirplane(String userType) {
+		this.userType = userType;
+		logHTML = new LogicExecuteHTML();
 		aF = new AirplaneFrame(userType);
 		crud = new CRUD();
 		lXML = new LogicXML();
@@ -42,7 +46,7 @@ public class ControllerAAirplane implements ActionListener {
 		lXMLA = new LogicXMLAirline();
 		logicXMLAirplane = new LogicXMLAirplane();
 		xmlF.createXML(fileName, objectName);
-		
+
 		pM = new PopUpMessages();
 		aF.fillModelComboBox(lXMLM.getAirplaneModels("Models.xml"));
 		aF.fillAirlineComboBox(lXMLA.getAirlineList("Airlines.xml"));
@@ -68,6 +72,7 @@ public class ControllerAAirplane implements ActionListener {
 		aF.getBUpdate().addActionListener(this);
 		aF.getBClear().addActionListener(this);
 		aF.getBSearch().addActionListener(this);
+		aF.getBHelp().addActionListener(this);
 	}
 
 	@Override
@@ -83,6 +88,8 @@ public class ControllerAAirplane implements ActionListener {
 			deleteAirplane();
 		}else if(aF.getBSearch() == e.getSource()) {
 			searchAirplane();
+		}else if(aF.getBHelp() == e.getSource()) {
+			help();
 		}
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
@@ -114,7 +121,7 @@ public class ControllerAAirplane implements ActionListener {
 		setTableData();
 		pM.showMessage( "Avion agregado");
 	}
-	
+
 	private void searchAirplane() {
 		setTableData();
 	}
@@ -132,10 +139,6 @@ public class ControllerAAirplane implements ActionListener {
 		}
 
 		String newAirplane = id;
-		if (pM.showConfirmationDialog("Desea modificar el nombre (id) del avión?", "Modificar")) {
-			newAirplane = pM.getData("Ingrese el nuevo nombre (id) del avión:");
-		}
-
 		String newYear = aF.getTYear().getText();
 		String newAirline = (String) aF.getCBAirline().getSelectedItem();
 		String newModel = (String) aF.getCBModel().getSelectedItem();
@@ -143,6 +146,7 @@ public class ControllerAAirplane implements ActionListener {
 		if (newYear.isEmpty()) { 
 			if(pM.showConfirmationDialog("Desea modificar el año del avión?", "Modificar")) {
 				newYear = pM.getData("Ingrese el nuevo año del avión:");
+				if(newYear == null) { pM.showMessage("Por favor, ingrese el dato solicitado"); return; }
 			}
 		}
 		if (newAirline.equals("Indefinido")) {
@@ -196,5 +200,10 @@ public class ControllerAAirplane implements ActionListener {
 			setTableData();
 			pM.showMessage("Avion eliminado");
 		}
+	}
+	//-------------------------------------------------------------------------------------------------------------------------
+	private void help() {
+		String userTypeString = userType.equals("1") ? "Administrador" : "Colaborador";
+		logHTML.helpAirplane(userTypeString);
 	}
 }

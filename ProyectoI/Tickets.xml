@@ -5,6 +5,34 @@
 		<FlightNumber>256</FlightNumber>
 		<TicketType>Turista</TicketType>
 	</Tickets>
-	
-	
-<Tickets><TicketNumber>333</TicketNumber><Passport>118160537</Passport><FlightNumber>256</FlightNumber><TicketType>Economico</TicketType></Tickets><Tickets><TicketNumber>2312</TicketNumber><Passport>321</Passport><FlightNumber>494</FlightNumber><TicketType>Turista</TicketType></Tickets></Tickets>
+	<Tickets>
+		<TicketNumber>333</TicketNumber>
+		<Passport>118160537</Passport>
+		<FlightNumber>256</FlightNumber>
+		<TicketType>Economico</TicketType>
+	</Tickets>
+	<Tickets>
+		<TicketNumber>2312</TicketNumber>
+		<Passport>321</Passport>
+		<FlightNumber>494</FlightNumber>
+		<TicketType>Turista</TicketType>
+	</Tickets>
+	<Tickets>
+		<TicketNumber>1234</TicketNumber>
+		<Passport>118160537</Passport>
+		<FlightNumber>494</FlightNumber>
+		<TicketType>Economico</TicketType>
+	</Tickets>
+	<Tickets>
+		<TicketNumber>777</TicketNumber>
+		<Passport>321</Passport>
+		<FlightNumber>256</FlightNumber>
+		<TicketType>Ejecutivo</TicketType>
+	</Tickets>
+	<Tickets>
+		<TicketNumber>7777</TicketNumber>
+		<Passport>321</Passport>
+		<FlightNumber>256</FlightNumber>
+		<TicketType>Economico</TicketType>
+	</Tickets>
+<Tickets><TicketNumber>1230</TicketNumber><Passport>321</Passport><FlightNumber>256</FlightNumber><TicketType>Turista</TicketType></Tickets><Tickets><TicketNumber>0</TicketNumber><Passport>118160537</Passport><FlightNumber>494</FlightNumber><TicketType>Ejecutivo</TicketType></Tickets></Tickets>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><models>
 	<models>
 		<modelName>880</modelName>
-		<brand>FlightFast</brand>
-		<BusinessClassSeats>120</BusinessClassSeats>
-		<TouristClassSeats>120</TouristClassSeats>
-		<EconomyClassSeats>120</EconomyClassSeats>
+		<brand>Boeing</brand>
+		<BusinessClassSeats>100</BusinessClassSeats>
+		<TouristClassSeats>89</TouristClassSeats>
+		<EconomyClassSeats>100</EconomyClassSeats>
 	</models>
 </models>

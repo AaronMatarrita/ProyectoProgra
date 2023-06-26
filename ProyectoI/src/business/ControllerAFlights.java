@@ -26,9 +26,13 @@ public class ControllerAFlights implements ActionListener{
 	private PopUpMessages pM;
 	private String fileName = "Flights.xml";
 	private String objectName = "flights";
+	private LogicExecuteHTML logHTML;
+	private String userType;
 	private ArrayList<Flight> flights = new ArrayList<Flight>();
 
 	public ControllerAFlights(String userType) {
+		this.userType = userType;
+		logHTML = new LogicExecuteHTML();
 		fF = new FlightsFrame(userType);
 		crud = new CRUD();
 		lXML = new LogicXML();
@@ -61,6 +65,7 @@ public class ControllerAFlights implements ActionListener{
 		fF.getBUpdate().addActionListener(this);
 		fF.getBClear().addActionListener(this);
 		fF.getBSearch().addActionListener(this);
+		fF.getBHelp().addActionListener(this);
 	}
 
 
@@ -79,6 +84,8 @@ public class ControllerAFlights implements ActionListener{
 			deleteFlight();
 		}else if(fF.getBSearch() == e.getSource()) {
 			searchFlight();
+		}else if(fF.getBHelp() == e.getSource()) {
+			help();
 		}
 
 	}
@@ -147,124 +154,133 @@ public class ControllerAFlights implements ActionListener{
 		Flight currentFlight = lXMLF.getFlightFromXML(fileName, flightNumber);
 		//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 		if (flightNumber.isEmpty()) {
-		    pM.showMessage("Por favor, ingrese el número de vuelo a modificar");
-		    return;
+			pM.showMessage("Por favor, ingrese el número de vuelo a modificar");
+			return;
 		} else if (currentFlight == null) {
-		    pM.showMessage("El vuelo no existe");
-		    return;
+			pM.showMessage("El vuelo no existe");
+			return;
 		}
 		//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 		if (exitCity.isEmpty()) {
-		    if (pM.showConfirmationDialog("¿Desea modificar la ciudad de salida?", "Modificar")) {
-		    	exitCity = pM.getData("Ingrese la nueva ciudad de salida:");
-		    } else {
-		    	exitCity = currentFlight.getDepartureCity();
-		        fF.getTExitCity().setText(exitCity);
-		    }
+			if (pM.showConfirmationDialog("¿Desea modificar la ciudad de salida?", "Modificar")) {
+				exitCity = pM.getData("Ingrese la nueva ciudad de salida:");
+				if(exitCity == null) { pM.showMessage("Por favor, ingrese el dato solicitado"); return; }
+			} else {
+				exitCity = currentFlight.getDepartureCity();
+				fF.getTExitCity().setText(exitCity);
+			}
 		}
 		//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 		if (exitTime.isEmpty()) {
-		    if (pM.showConfirmationDialog("¿Desea modificar la hora de salida?", "Modificar")) {
-		        exitTime = pM.getData("Ingrese la nueva hora de salida:");
-		    } else {
-		        exitTime = currentFlight.getDepartureTime();
-		        fF.getTExitTime().setText(exitTime);
-		    }
+			if (pM.showConfirmationDialog("¿Desea modificar la hora de salida?", "Modificar")) {
+				exitTime = pM.getData("Ingrese la nueva hora de salida:");
+				if(exitTime == null) { pM.showMessage("Por favor, ingrese el dato solicitado"); return; }
+			} else {
+				exitTime = currentFlight.getDepartureTime();
+				fF.getTExitTime().setText(exitTime);
+			}
 		}
 		if (!lXMLF.isValidTime(exitTime)) {
-		    pM.showMessage("Ingrese la hora en el formato de 24 horas (Hours:minutes) (xx:xx)");
-		    return;
+			pM.showMessage("Ingrese la hora en el formato de 24 horas (Hours:minutes) (xx:xx)");
+			return;
 		}
 		//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 		if (exitDate.isEmpty()) {
-		    if (pM.showConfirmationDialog("¿Desea modificar la fecha de salida?", "Modificar")) {
-		        exitDate = pM.getData("Ingrese la nueva fecha de salida:");
-		    } else {
-		        exitDate = currentFlight.getDepartureDate();
-		        fF.getTExitDate().setText(exitDate);
-		    }
+			if (pM.showConfirmationDialog("¿Desea modificar la fecha de salida?", "Modificar")) {
+				exitDate = pM.getData("Ingrese la nueva fecha de salida:");
+				if(exitDate == null) { pM.showMessage("Por favor, ingrese el dato solicitado"); return; }
+			} else {
+				exitDate = currentFlight.getDepartureDate();
+				fF.getTExitDate().setText(exitDate);
+			}
 		}
 		if (!lXMLF.isValidDate(exitDate)) {
-		    pM.showMessage("Ingrese la fecha en el formato (dd/MM/yyyy)\nEjemplo 01/01/2000");
-		    return;
+			pM.showMessage("Ingrese la fecha en el formato (dd/MM/yyyy)\nEjemplo 01/01/2000");
+			return;
 		}
 		//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 		if (enterCity.isEmpty()) {
-		    if (pM.showConfirmationDialog("¿Desea modificar la ciudad de llegada?", "Modificar")) {
-		        enterCity = pM.getData("Ingrese la nueva ciudad de llegada:");
-		    } else {
-		        enterCity = currentFlight.getArrivalCity();
-		        fF.getTEnterCity().setText(enterCity);
-		    }
+			if (pM.showConfirmationDialog("¿Desea modificar la ciudad de llegada?", "Modificar")) {
+				enterCity = pM.getData("Ingrese la nueva ciudad de llegada:");
+				if(enterCity == null) { pM.showMessage("Por favor, ingrese el dato solicitado"); return; }
+			} else {
+				enterCity = currentFlight.getArrivalCity();
+				fF.getTEnterCity().setText(enterCity);
+			}
 		}
 		//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 		if (enterTime.isEmpty()) {
-		    if (pM.showConfirmationDialog("¿Desea modificar la hora de llegada?", "Modificar")) {
-		        enterTime = pM.getData("Ingrese la nueva hora de llegada:");
-		    } else {
-		        enterTime = currentFlight.getArrivalTime();
-		        fF.getTEnterTime().setText(enterTime);
-		    }
+			if (pM.showConfirmationDialog("¿Desea modificar la hora de llegada?", "Modificar")) {
+				enterTime = pM.getData("Ingrese la nueva hora de llegada:");
+				if(enterTime == null) { pM.showMessage("Por favor, ingrese el dato solicitado"); return; }
+			} else {
+				enterTime = currentFlight.getArrivalTime();
+				fF.getTEnterTime().setText(enterTime);
+			}
 		}
 		if (!lXMLF.isValidTime(enterTime)) {
-		    pM.showMessage("Ingrese la hora en el formato de 24 horas (Hours:minutes) (xx:xx)");
-		    return;
+			pM.showMessage("Ingrese la hora en el formato de 24 horas (Hours:minutes) (xx:xx)");
+			return;
 		}
 		//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 		if (enterDate.isEmpty()) {
-		    if (pM.showConfirmationDialog("¿Desea modificar la fecha de llegada?", "Modificar")) {
-		        enterDate = pM.getData("Ingrese la nueva fecha de llegada:");
-		    } else {
-		        enterDate = currentFlight.getArrivalDate();
-		        fF.getTEnterDate().setText(enterDate);
-		    }
+			if (pM.showConfirmationDialog("¿Desea modificar la fecha de llegada?", "Modificar")) {
+				enterDate = pM.getData("Ingrese la nueva fecha de llegada:");
+				if(enterDate == null) { pM.showMessage("Por favor, ingrese el dato solicitado"); return; }
+			} else {
+				enterDate = currentFlight.getArrivalDate();
+				fF.getTEnterDate().setText(enterDate);
+			}
 		}
 		if (!lXMLF.isValidDate(enterDate)) {
-		    pM.showMessage("Ingrese la fecha en el formato (dd/MM/yyyy)\nEjemplo 01/01/2000");
-		    return;
+			pM.showMessage("Ingrese la fecha en el formato (dd/MM/yyyy)\nEjemplo 01/01/2000");
+			return;
 		}
 		//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 		if (priceEJE.isEmpty()) {
-		    if (pM.showConfirmationDialog("¿Desea modificar el monto de la clase Ejecutiva?", "Modificar")) {
-		        priceEJE = pM.getData("Ingrese el nuevo monto:");
-		    } else {
-		        priceEJE = String.valueOf(currentFlight.getBusinessClassSeatsPrice());
-		        fF.getTPriceEJE().setText(priceEJE);
-		    }
+			if (pM.showConfirmationDialog("¿Desea modificar el monto de la clase Ejecutiva?", "Modificar")) {
+				priceEJE = pM.getData("Ingrese el nuevo monto:");
+				if(priceEJE == null) { pM.showMessage("Por favor, ingrese el dato solicitado"); return; }
+			} else {
+				priceEJE = String.valueOf(currentFlight.getBusinessClassSeatsPrice());
+				fF.getTPriceEJE().setText(priceEJE);
+			}
 		}
 		if (priceTUR.isEmpty()) {
-		    if (pM.showConfirmationDialog("¿Desea modificar el monto de la clase Turista?", "Modificar")) {
-		        priceTUR = pM.getData("Ingrese el nuevo monto:");
-		    } else {
-		        priceTUR = String.valueOf(currentFlight.getTouristClassSeatsPrice());
-		        fF.getTPriceTUR().setText(priceTUR);
-		    }
+			if (pM.showConfirmationDialog("¿Desea modificar el monto de la clase Turista?", "Modificar")) {
+				priceTUR = pM.getData("Ingrese el nuevo monto:");
+				if(priceTUR == null) { pM.showMessage("Por favor, ingrese el dato solicitado"); return; }
+			} else {
+				priceTUR = String.valueOf(currentFlight.getTouristClassSeatsPrice());
+				fF.getTPriceTUR().setText(priceTUR);
+			}
 		}
 		if (priceECO.isEmpty()) {
-		    if (pM.showConfirmationDialog("¿Desea modificar el monto de la clase Económica?", "Modificar")) {
-		        priceECO = pM.getData("Ingrese el nuevo monto:");
-		    } else {
-		        priceECO = String.valueOf(currentFlight.getEconomyClassSeatsPrice());
-		        fF.getTPriceECO().setText(priceECO);
-		    }
+			if (pM.showConfirmationDialog("¿Desea modificar el monto de la clase Económica?", "Modificar")) {
+				priceECO = pM.getData("Ingrese el nuevo monto:");
+				if(priceECO == null) { pM.showMessage("Por favor, ingrese el dato solicitado"); return; }
+			} else {
+				priceECO = String.valueOf(currentFlight.getEconomyClassSeatsPrice());
+				fF.getTPriceECO().setText(priceECO);
+			}
 		}
 		//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 		if (airplane.equals("Indefinido")) {
-		    if (pM.showConfirmationDialog("¿Desea modificar el avión?", "Modificar")) {
-		        pM.showMessage("Por favor, seleccione el avión");
-		        airplane = (String) fF.getCBAirplane().getSelectedItem();
-		        if (airplane.equals("Indefinido")) {
-		            return;
-		        }
-		    } else {
-		        airplane = currentFlight.getAirplane();
-		    }
+			if (pM.showConfirmationDialog("¿Desea modificar el avión?", "Modificar")) {
+				pM.showMessage("Por favor, seleccione el avión");
+				airplane = (String) fF.getCBAirplane().getSelectedItem();
+				if (airplane.equals("Indefinido")) {
+					return;
+				}
+			} else {
+				airplane = currentFlight.getAirplane();
+			}
 		}
 		//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 		String[] newData = {
-		    flightNumber, exitCity, exitDate, exitTime,
-		    enterCity, enterDate, enterTime, airplane, 
-		    priceEJE, priceTUR, priceECO};
+				flightNumber, exitCity, exitDate, exitTime,
+				enterCity, enterDate, enterTime, airplane, 
+				priceEJE, priceTUR, priceECO};
 		crud.updateObject(fileName, objectName, "FlightNumber", newFlightNumber, currentFlight.getDataName(), newData);
 		fF.clean();
 		pM.showMessage("Vuelo modificado");
@@ -288,5 +304,10 @@ public class ControllerAFlights implements ActionListener{
 		}
 		pM.showMessage("Vuelo eliminado");
 		setTableData();
+	}
+	//-------------------------------------------------------------------------------------------------------------------------
+	private void help() {
+		String userTypeString = userType.equals("1") ? "Administrador" : "Colaborador";
+		logHTML.helpFlight(userTypeString);
 	}
 }

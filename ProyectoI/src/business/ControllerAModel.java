@@ -26,16 +26,20 @@ public class ControllerAModel implements ActionListener{
 	private PopUpMessages pM;
 	private String fileName = "Models.xml";
 	private String objectName = "models";
+	private LogicExecuteHTML logHTML;
+	private String userType;
 	private ArrayList<AirplaneModel> models = new ArrayList<AirplaneModel>();
-	
+
 	public ControllerAModel(String userType)
 	{
+		this.userType = userType;
 		mF = new ModelFrame(userType);
 		crud = new CRUD();
 		lXML = new LogicXML();
 		xmlF = new XMLFiles();
 		lXMLM = new LogicXMLModel();
 		lXMLB = new LogicXMLBrand();
+		logHTML = new LogicExecuteHTML();
 		pM = new PopUpMessages();
 		lXMLB.readBrandsFromXML("Brands.xml");
 		xmlF.createXML(fileName, objectName);
@@ -62,6 +66,7 @@ public class ControllerAModel implements ActionListener{
 		mF.getBUpdate().addActionListener(this);
 		mF.getBClear().addActionListener(this);
 		mF.getBSearch().addActionListener(this);
+		mF.getBHelp().addActionListener(this);
 	}
 
 	@Override
@@ -81,6 +86,8 @@ public class ControllerAModel implements ActionListener{
 			deleteModel();
 		}else if(mF.getBSearch() == e.getSource()) {
 			searchModel();
+		}else if(mF.getBHelp() == e.getSource()) {
+			help();
 		}
 	}
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -128,10 +135,7 @@ public class ControllerAModel implements ActionListener{
 		} else if (!lXML.isAlreadyInFile(fileName, objectName, "modelName", model)) {
 			pM.showMessage( "El modelo no existe");
 			return;
-		}else if(pM.showConfirmationDialog("Desea modificar el nombre del modelo?", "Modificar")) {
-			newModel = pM.getData("Ingrese el nuevo modelo:");
 		}
-
 		String newSeatsEje = mF.getTCEjecutive().getText();
 		String newSeatsTur = mF.getTCTurist().getText();
 		String newSeatsEco = mF.getTCEco().getText();
@@ -152,6 +156,7 @@ public class ControllerAModel implements ActionListener{
 		if(newSeatsEje.isEmpty()) { 
 			if(pM.showConfirmationDialog("Desea modificar la cantidad de asientos de clase ejecutiva?", "Modificar")) {
 				newSeatsEje = pM.getData("Ingrese la nueva cantidad de asientos:");
+				if(newSeatsEje == null) { pM.showMessage("Por favor, ingrese el dato solicitado"); return; }
 				mF.getTCEjecutive().setText(newSeatsEje);
 			}else {
 				newSeatsEje = String.valueOf(currentModel.getBusinessClassSeats());
@@ -159,8 +164,8 @@ public class ControllerAModel implements ActionListener{
 		}
 		if(newSeatsTur.isEmpty()) { 
 			if(pM.showConfirmationDialog("Desea modificar la cantidad de asientos de clase turista?", "Modificar")) {
-
 				newSeatsTur = pM.getData("Ingrese la nueva cantidad de asientos:");
+				if(newSeatsTur == null) { pM.showMessage("Por favor, ingrese el dato solicitado"); return; }
 				mF.getTCTurist().setText(newSeatsTur);
 			}else {
 				newSeatsTur = String.valueOf(currentModel.getTouristClassSeats());
@@ -169,6 +174,7 @@ public class ControllerAModel implements ActionListener{
 		if(newSeatsEco.isEmpty()) {
 			if(pM.showConfirmationDialog("Desea modificar la cantidad de asientos de clase económicos?", "Modificar")) {
 				newSeatsEco = pM.getData("Ingrese la nueva cantidad de asientos:");
+				if(newSeatsEco == null) { pM.showMessage("Por favor, ingrese el dato solicitado"); return; }
 				mF.getTCEco().setText(newSeatsEco);
 			}else {
 				newSeatsEco = String.valueOf(currentModel.getEconomyClassSeats());
@@ -205,5 +211,10 @@ public class ControllerAModel implements ActionListener{
 			setTableData();
 			pM.showMessage("Modelo eliminado");
 		}
+	}
+	//-------------------------------------------------------------------------------------------------------------------------
+	private void help() {
+		String userTypeString = userType.equals("1") ? "Administrador" : "Colaborador";
+		logHTML.helpModel(userTypeString);
 	}
 }

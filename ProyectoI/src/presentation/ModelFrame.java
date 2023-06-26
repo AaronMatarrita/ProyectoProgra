@@ -52,6 +52,7 @@ public class ModelFrame extends JFrame {
 	private JScrollPane spTAirplaneModels;
 	private Object dataTable[][];
 	private JButton bSearch;
+	private JButton bHelp;
 	
 	
 	public ModelFrame(String userType) {
@@ -123,6 +124,7 @@ public class ModelFrame extends JFrame {
 			setSPTableAirplaneModels(getJTableAirplaneModels());
 			JPInfo.add(getSPTableAirplaneModels());
 			JPInfo.add(getBSearch());
+			JPInfo.add(getBHelp());
 		}
 		return JPInfo;
 	}
@@ -373,5 +375,17 @@ public class ModelFrame extends JFrame {
 			bSearch.setBounds(550, 330, 140, 40);
 		}
 		return bSearch;
+	}
+	public JButton getBHelp() {
+		if (bHelp == null) {
+			bHelp = new JButton("");
+			bHelp.setIcon(new ImageIcon(ModelFrame.class.getResource("/imagesMain/imagesButtons/help-button.png")));
+			bHelp.setForeground(Color.WHITE);
+			bHelp.setFont(new Font("Roboto", Font.PLAIN, 16));
+			bHelp.setFocusable(false);
+			bHelp.setBackground(new Color(28, 28, 28));
+			bHelp.setBounds(934, 10, 40, 40);
+		}
+		return bHelp;
 	}
 }

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Gestión de aerolíneas</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/mAerolíneasStyle.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="Images/AeroJetLogo.png" alt="Logo de la compañia">
+            <h2 class="nombre-gestión">Gestión de aerolíneas</h2>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link">Inicio</a>
+            <a href="manualMain.html" class="nav-link">Manual de usuario</a>
+            <a href="contacto.html" class="nav-link">Contacto</a>
+        </nav>
+    </header>
+    <main class="main">
+        <div class="container">
+
+            <h3>Pantalla principal:</h3>
+            <p>
+                Al iniciar la aplicación, se muestra la pantalla principal de la gestión de aerolíneas. Esta pantalla
+                permite agregar,
+                modificar y eliminar aerolíneas, así como consultar la lista de las aerolíneas registradas en el
+                sistema.
+            </p>
+            <img src="Images/pAerolíneas.png" alt="pantalla principal modelos">
+
+            <h2>Funcionalidades:</h2>
+            <h3>1. Agregar una aerolínea</h3>
+            <p>Para agregar una aerolíneas, siga estos pasos:</p>
+            <ol>
+                <li>Inicie la aplicación.</li>
+                <li>Ingrese los datos en cada campo de texto (Nombre de la aerolínea, centro de operaciones).</li>
+                <li>Haga clic en el botón "Agregar".</li>
+                <img src="Images/añadirAerolínea.png" alt="añadir aerolínea">
+            </ol>
+            <p>Advertencias</p>
+            <li>No será posible agregar una aerolínea con un nombre ya existente.</li>
+            <li>No será posible agregar una aerolínea si no se ingresan todos los datos (Nombre de la aerolínea, centro de operaciones).</li>
+
+            <h3>2. Consultar una aerolínea</h3>
+            <p>Para consultar una aerolínea, siga estos pasos:</p>
+            <ol>
+                <li>Inicie la aplicación.</li>
+                <li>Si desea consultar la información de todos las aerolíneas registradas, simplemente haga clic
+                    en el botón "Consultar".</li>
+                <li>Si desea consultar la información de una aerolínea específica, ingrese el nombre de la aerolínea en
+                    el campo de texto (Nombre de la aerolínea).</li>
+                <li>Haga clic en el botón "Consultar".</li>
+                <img src="Images/consultarAerolínea.png" alt="consultar aerolínea">
+            </ol>
+            <p>Advertencias</p>
+            <li>Si se introduce el nombre una aerolínea que no existe, no se mostrará ninguna información.</li>
+
+            <h3>3. Modificar una aerolínea</h3>
+            <p>Para modificar una aerolínea, siga estos pasos:</p>
+            <ol>
+                <li>Inicie la aplicación.</li>
+                <li>Realice una consulta de la aerolínea que desea modificar, siguiendo los pasos mencionados
+                    anteriormente.</li>
+                <li>Ingrese los datos que desea modificar en cada campo de texto (Nombre de la aerolínea, centro de operaciones).</li>
+                <li>Haga clic en el botón "Modificar".</li>
+                <img src="Images/modificarAerolínea.png" alt="modificar modelo">
+            </ol>
+            <p>Advertencias:</p>
+            <li>No será posible modificar el nombre de una aerolínea.</li>
+            <li>Si no se introduce, se procedera a preguntar si desea modificar ese dato, si no lo desea se la información.</li>
+            <h3>4. Eliminar una aerolínea</h3>
+            <p>Para eliminar una aerolínea, siga estos pasos:</p>
+            <ol>
+                <li>Inicie la aplicación.</li>
+                <li>Realice una consulta de la aerolínea que desea eliminar, siguiendo los pasos mencionados
+                    anteriormente.</li>
+                <li>Una vez que se muestre la información de la aerolínea, haga clic en el botón "Eliminar".</li>
+                <li>Se mostrará una confirmación de eliminación, donde deberá confirmar su acción.</li>
+                <li>Una vez confirmado, la aerolínea será eliminada del sistema.</li>
+                <img src="Images/eliminarAerolínea.png" alt="eliminar aerolínea">
+            </ol>
+            <p>Advertencia:</p>
+            <li>No pueden eliminarse aerolíneas que estén asociadas a un avión.</li>
+            <li>Una vez eliminada, no se podrá recuperar la información de la aerolínea.</li>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2023 AeroJet International. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

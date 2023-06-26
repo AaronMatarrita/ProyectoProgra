@@ -24,16 +24,19 @@ public class ControllerAAirline implements ActionListener {
 
 	private String fileName = "Airlines.xml";
 	private String objectName = "airlines";
-
+	private LogicExecuteHTML logHTML;
+	private String userType;
 	private ArrayList<Airline> airlines = new ArrayList<Airline>();
-	
+
 	private PopUpMessages pM;
 
 	public ControllerAAirline(String userType) {
+		this.userType = userType;
 		aF = new AirlineFrame(userType);
 		crud = new CRUD();
 		lXML = new LogicXML();
 		xmlF = new XMLFiles();
+		logHTML = new LogicExecuteHTML();
 		logicXMLAirline = new LogicXMLAirline();
 		pM = new PopUpMessages();
 		xmlF.createXML(fileName, objectName);
@@ -45,6 +48,7 @@ public class ControllerAAirline implements ActionListener {
 		aF.getBClear().addActionListener(this);
 		aF.getBUpdate().addActionListener(this);
 		aF.getBSearch().addActionListener(this);
+		aF.getBHelp().addActionListener(this);
 	}
 
 	@Override
@@ -61,6 +65,8 @@ public class ControllerAAirline implements ActionListener {
 			deleteAirline();
 		}else if(aF.getBSearch() == e.getSource()) {
 			searchAirline();
+		}else if(aF.getBHelp() == e.getSource()) {
+			help();
 		}
 	}
 
@@ -77,7 +83,7 @@ public class ControllerAAirline implements ActionListener {
 		}
 		aF.setJTableData(airlines);
 	}
-	
+
 	private void addAirline() {
 		String airline = aF.getTAirline().getText();
 
@@ -103,7 +109,7 @@ public class ControllerAAirline implements ActionListener {
 	private void searchAirline() {
 		setTableData();
 	}
-	
+
 	private void updateAirline() {
 		String airlineName = aF.getTAirline().getText();
 		Airline  airline = logicXMLAirline.getAirlineFromFile(fileName, airlineName);
@@ -120,15 +126,17 @@ public class ControllerAAirline implements ActionListener {
 
 		if(pM.showConfirmationDialog("Desea modificar el nombre de la aerolínea?", "Modificar")) {
 			newAirlineName = pM.getData("Ingrese el nombre de la nueva aerolínea:");
+			if(newAirlineName == null) { pM.showMessage("Por favor, ingrese el dato solicitado"); return; }
 		}else {
 			newAirlineName = airline.getName();
 		}
-		
+
 		String newCountry =  aF.getTCountry().getText();
 
 		if(newCountry.isEmpty()) {
 			if(pM.showConfirmationDialog("Desea modificar el centro de operaciones de la aerolínea?", "Modificar")) {
 				newCountry = pM.getData("Ingrese el nuevo nombre del centro de operaciones de la aerolínea:");
+				if(newCountry == null) { pM.showMessage("Por favor, ingrese el dato solicitado"); return; }
 			}else {
 				newCountry = airline.getCountry();
 			}
@@ -162,5 +170,11 @@ public class ControllerAAirline implements ActionListener {
 			setTableData();
 			pM.showMessage("Aerolínea eliminada");
 		}
+	}
+
+	//-------------------------------------------------------------------------------------------------------------------------
+	private void help() {
+		String userTypeString = userType.equals("1") ? "Administrador" : "Colaborador";
+		logHTML.helpAirline(userTypeString);
 	}
 }

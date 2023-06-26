@@ -49,7 +49,7 @@ public class TicketFrame extends JFrame {
 	private JMenuBar JMenu;
 	private JMenu mnFile;
 	private JMenu MNHelp;
-	private JMenuItem menuItem;
+	private JMenuItem bHelp;
 	private JLabel lTicketType;
 	private JComboBox<String> cBTicketType;
 	private JMenuItem bShowTickets;
@@ -261,15 +261,16 @@ public class TicketFrame extends JFrame {
 			MNHelp = new JMenu("Help");
 			MNHelp.setForeground(new Color(255, 255, 255));
 			MNHelp.setFont(new Font("Roboto", Font.PLAIN, 12));
-			MNHelp.add(getMenuItem());
+			MNHelp.add(getBHelp());
 		}
 		return MNHelp;
 	}
-	public JMenuItem getMenuItem() {
-		if (menuItem == null) {
-			menuItem = new JMenuItem("New menu item");
+	public JMenuItem getBHelp() {
+		if (bHelp == null) {
+			bHelp = new JMenuItem("Help");
+			bHelp.setIcon(new ImageIcon(TicketFrame.class.getResource("/imagesMain/imagesButtons/help-button.png")));
 		}
-		return menuItem;
+		return bHelp;
 	}
 	public JMenuItem getBShowTickets() {
 		if (bShowTickets == null) {
@@ -306,10 +307,6 @@ public class TicketFrame extends JFrame {
 	public JButton getBAddTickets() {
 		if (bAddFlights == null) {
 			bAddFlights = new JButton("Agregar");
-			bAddFlights.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-				}
-			});
 			bAddFlights.setFont(new Font("Roboto", Font.PLAIN, 16));
 			bAddFlights.setIcon(new ImageIcon(FlightsFrame.class.getResource("/imagesMain/imagesButtons/add-button.png")));
 			bAddFlights.setBackground(new Color(28, 28, 28));
@@ -408,7 +405,7 @@ public class TicketFrame extends JFrame {
 			data[i][0] = ticket.getTicketNumber();
 			data[i][1] = ticket.getPassport();
 			data[i][2] = ticket.getFlightNumber();
-			data[i][3] = ticket.getTickettype();
+			data[i][3] = ticket.getTicketType();
 		}
 		dtmTFlights.setDataVector(data, getColumnsName());
 	}

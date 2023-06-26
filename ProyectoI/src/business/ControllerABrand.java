@@ -23,16 +23,20 @@ public class ControllerABrand implements ActionListener{
 
 	private String fileName = "Brands.xml";
 	private String objectName = "brands";
+	private LogicExecuteHTML logHTML;
+	private String userType;
 
 	private ArrayList<Brand> brands = new ArrayList<Brand>();
-	
+
 	private PopUpMessages pM;
 
 	public ControllerABrand(String userType) {
+		this.userType = userType;
 		bF = new BrandFrame(userType);
 		crud = new CRUD();
 		lXML = new LogicXML();
 		xmlF = new XMLFiles();
+		logHTML = new LogicExecuteHTML();
 		lXMLB = new LogicXMLBrand();
 		xmlF.createXML(fileName, objectName);
 		pM = new PopUpMessages();
@@ -59,6 +63,7 @@ public class ControllerABrand implements ActionListener{
 		bF.getBUpdate().addActionListener(this);
 		bF.getBClear().addActionListener(this);
 		bF.getBSearch().addActionListener(this);
+		bF.getBHelp().addActionListener(this);
 	}
 
 
@@ -77,6 +82,8 @@ public class ControllerABrand implements ActionListener{
 			deleteBrand();
 		}else if(bF.getBSearch() == e.getSource()) {
 			searchBrand();
+		}else if(bF.getBHelp() == e.getSource()) {
+			help();
 		}
 	}
 
@@ -103,7 +110,7 @@ public class ControllerABrand implements ActionListener{
 	private void searchBrand() {
 		setTableData();
 	}
-	
+
 	private void updateBrand() {
 		String brandName = bF.getTBrand().getText();
 		Brand currentBrand = lXMLB.getBrandFromXML(fileName, brandName);
@@ -115,16 +122,17 @@ public class ControllerABrand implements ActionListener{
 			pM.showMessage( "La Marca no existe");
 			return;
 		} 
-		
+
 		if(pM.showConfirmationDialog("Desea modificar el nombre de la marca?", "Modificar")) {
 			newBrand = pM.getData("Ingrese el nuevo nombre de la marca:");
+			if(newBrand == null) { pM.showMessage("Por favor, ingrese el dato solicitado"); return; }
 		}else {
 			newBrand = currentBrand.getBrand();
 		}
-		
+
 		String[] newData = {newBrand};
 		crud.updateObject(fileName, objectName, "brand", brandName, currentBrand.getDataName(), newData);
-		
+
 		bF.clean();
 		setTableData();
 		pM.showMessage("Marca agregada");
@@ -148,5 +156,10 @@ public class ControllerABrand implements ActionListener{
 			setTableData();
 			pM.showMessage("Marca eliminada");
 		}
+	}
+	//-------------------------------------------------------------------------------------------------------------------------
+	private void help() {
+		String userTypeString = userType.equals("1") ? "Administrador" : "Colaborador";
+		logHTML.helpBrand(userTypeString);
 	}
 }

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Usuarios</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/mUsuariosStyle.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="Images/AeroJetLogo.png" alt="Logo de la compañia">
+            <h2 class="nombre-gestión">Gestión de usuarios</h2>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link">Inicio</a>
+            <a href="manualMain.html" class="nav-link">Manual de usuario</a>
+            <a href="contacto.html" class="nav-link">Contacto</a>
+        </nav>
+    </header>
+    <main class="main">
+        <div class="container">
+
+            <h3>Pantalla principal:</h3>
+            <p>
+                Al iniciar la aplicación, se muestra la pantalla principal de la gestión de usuarios. Esta pantalla
+                permite agregar,
+                modificar y eliminar usuarios, así como consultar la lista de usuarios registrados en el sistema.
+            </p>
+            <img src="Images/pUsuarios.png" alt="pantalla principal usuarios">
+
+            <h2>Funcionalidades:</h2>
+            <h3>1. Agregar un usuario</h3>
+            <p>Para agregar un usuario, siga estos pasos:</p>
+            <ol>
+                <li>Inicie la aplicación.</li>
+                <li>Ingrese los datos en cada campo de texto (usuario, contraseña) proceda a seleccionar
+                    el tipo de usuario (Administrador, Colaborador) y el estado del usuario.
+                </li>
+                <li>Haga clic en el botón "Agregar".</li>
+                <img src="Images/añadirUsuario.png" alt="añadir usuario">
+            </ol>
+            <p>Advertencias</p>
+            <li>No sera posible añadir un usuario con un nombre ya existente.</li>
+            <li>No sera posible añadir un usuario con el nombre: admin.</li>
+            <li>No sera posible añadir un usuario si no se ingresa alguno de los datos (usuario, contraseña, tipo de usuario, estado del usuario).</li>
+
+            <h3>2. Consultar un usuario</h3>
+            <p>Para consultar un usuario, siga estos pasos:</p>
+            <ol>
+                <li>Inicie la aplicación.</li>
+                <li>Si desea consultar la información de todos los usuarios en los datos registrados,simplemente haga clic
+                    en el botón "Consultar".</li>
+                <li>Si desea consultar la información de un usuario en especifico, proceda a ingresar el nombre del usuario en el campo de texto (usuario).
+                <li>Haga clic en el botón "Consultar".</li>
+                <img src="Images/consultarUnUsuario.png" alt="consultar usuario">
+            </ol>
+            <p>Advertencias</p>
+            <li>Si se introduce el nombre de un usuario que no existe, no se mostrara ninguna información.</li>
+
+            <h3>3. Modificar un usuario</h3>
+            <p>Para modificar un usuario, siga estos pasos:</p>
+            <ol>
+                <li>Inicie la aplicación.</li>
+                <li>Ingrese los datos que desea modificar en cada campo de texto (usuario, contraseña). </li>
+                <li>Si desea modificar el tipo de usuario (Administrador, Colaborador) o el estado del usuario (Activo, Inactivo) seleccionelo.</li>
+                <li>Haga clic en el botón "Modificar".</li>
+                <img src="Images/modificarUsuario.png" alt="modificar usuario">
+            </ol>
+            <p>Advertencias</p>
+            <li>Si se introduce el nombre de un usuario que no existe, no se modificara ningun usuario</li>
+            <li>Si no se introduce o selecciona un dato, se procedera a preguntar si desea modificar ese dato, si no lo desea se la información.</li>
+
+            <h3>4. Eliminar un usuario</h3>
+            <p>Para eliminar un usuario, siga estos pasos:</p>
+            <ol>
+                <li>Inicie la aplicación.</li>
+                <li>Si desea eliminar un usuario, introduzca el nombre del usuario a eliminar en el campo de texto (usuario)</li>
+                <li>Haga clic en el botón "Eliminar".</li>
+                <img src="Images/eliminarUsuario.png" alt="eliminar usuario">
+            </ol>
+            <p>Advertencias</p>
+            <li>No es posible eliminar un usuario que no existe</li>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2023 AeroJet International. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

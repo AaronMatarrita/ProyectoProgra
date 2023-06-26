@@ -22,9 +22,13 @@ public class ControllerAPassenger implements ActionListener{
 	private String fileName = "Passengers.xml";
 	private String objectName = "person";
 	private PopUpMessages pM;
+	private LogicExecuteHTML logHTML;
+	private String userType;
 	private ArrayList<Passenger> passengers = new ArrayList<Passenger>();
 
 	public ControllerAPassenger(String userType) {
+		this.userType = userType;
+		logHTML = new LogicExecuteHTML();
 		pF = new PassengerFrame(userType);
 		crud = new CRUD();
 		lXML = new LogicXML();
@@ -54,6 +58,7 @@ public class ControllerAPassenger implements ActionListener{
 		pF.getBUpdate().addActionListener(this);
 		pF.getBClear().addActionListener(this);
 		pF.getBSearch().addActionListener(this);
+		pF.getBHelp().addActionListener(this);
 	}
 
 	@Override
@@ -69,6 +74,8 @@ public class ControllerAPassenger implements ActionListener{
 			deletePassenger();
 		}else if(pF.getBSearch() == e.getSource()) {
 			searchPassenger();
+		}else if(pF.getBHelp() == e.getSource()) {
+			help();
 		}
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
@@ -127,13 +134,6 @@ public class ControllerAPassenger implements ActionListener{
 			return;
 		}
 
-		if(pM.showConfirmationDialog("Desea modificar el pasaporte del pasajero?", "Modificar")){
-			newPassport = pM.getData("Ingrese el nuevo pasaporte del pasajero:");
-			pF.getTPassport().setText(newPassport);
-		}else {
-			newPassport = currentPassenger.getPassport();
-		}
-
 		if(newName.isEmpty()) {
 			if(pM.showConfirmationDialog("Desea modificar el nombre del pasajero?", "Modificar")) {
 				newName = pM.getData("Ingrese el nuevo nombre del pasajero:");
@@ -146,6 +146,7 @@ public class ControllerAPassenger implements ActionListener{
 		if(newLastname.isEmpty()) {
 			if(pM.showConfirmationDialog("Desea modificar los apellidos del pasajero?", "Modificar")){
 				newLastname = pM.getData("Ingrese los apellidos pasaporte del pasajero:");
+				if(newLastname == null) { pM.showMessage("Por favor, ingrese el dato solicitado"); return; }
 				pF.getTLastname().setText(newLastname);
 			}else {
 				newLastname = currentPassenger.getLastname();
@@ -156,6 +157,7 @@ public class ControllerAPassenger implements ActionListener{
 			if(pM.showConfirmationDialog("Desea modificar la fecha de nacimiento del pasajero?", "Modificar")) {
 
 				newDateOB = pM.getData("Ingrese la fecha de nacimiento del pasajero:");
+				if(newDateOB == null) { pM.showMessage("Por favor, ingrese el dato solicitado"); return; }
 				pF.getTDateOfBirth().setText(newDateOB);
 			}else {
 				newDateOB = currentPassenger.getDateofbirth();
@@ -167,8 +169,8 @@ public class ControllerAPassenger implements ActionListener{
 		}
 		if(newEmail.isEmpty()) {
 			if(pM.showConfirmationDialog("Desea modificar el email del pasajero?", "Modificar")){
-
 				newEmail = pM.getData("Ingrese el email del pasajero:");
+				if(newEmail == null) { pM.showMessage("Por favor, ingrese el dato solicitado"); return; }
 				pF.getTEmail().setText(newEmail);
 			}else {
 				newEmail = currentPassenger.getEmail();
@@ -178,6 +180,7 @@ public class ControllerAPassenger implements ActionListener{
 		if(newPhoneNumber.isEmpty()) {
 			if(pM.showConfirmationDialog("Desea modificar el número de telefono del pasajero?", "Modificar")) {
 				newPhoneNumber = pM.getData("Ingrese el número de telefono del pasajero:");
+				if(newPhoneNumber == null) { pM.showMessage("Por favor, ingrese el dato solicitado"); return; }
 				pF.getTPhoneNumber().setText(newPhoneNumber);
 			}else {
 				newPhoneNumber = currentPassenger.getPhoneNumber();
@@ -205,5 +208,10 @@ public class ControllerAPassenger implements ActionListener{
 			setTableData();
 			pM.showMessage("Pasajero eliminado");
 		}
+	}
+	//-------------------------------------------------------------------------------------------------------------------------
+	private void help() {
+		String userTypeString = userType.equals("1") ? "Administrador" : "Colaborador";
+		logHTML.helpPassenger(userTypeString);
 	}
 }

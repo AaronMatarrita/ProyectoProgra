@@ -38,11 +38,11 @@ public class Ticket {
 		this.flightNumber = flightNumber;
 	}
 	
-	public String getTickettype() {
+	public String getTicketType() {
 		return tickettype;
 	}
 
-	public void setTickettype(String tickettype) {
+	public void setTicketType(String tickettype) {
 		this.tickettype = tickettype;
 	}
 	

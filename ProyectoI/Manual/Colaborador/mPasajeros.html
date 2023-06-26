@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Gestión de Pasajeros</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/mPasajerosStyle.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="Images/AeroJetLogo.png" alt="Logo de la compañia">
+            <h2 class="nombre-gestión">Gestión de Pasajeros</h2>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link">Inicio</a>
+            <a href="manualMain.html" class="nav-link">Manual de usuario</a>
+            <a href="contacto.html" class="nav-link">Contacto</a>
+        </nav>
+    </header>
+    <main class="main">
+        <div class="container">
+
+            <h3>Pantalla principal:</h3>
+            <p>
+                Al iniciar la aplicación, se muestra la pantalla principal de la gestión de Pasajeros. Esta pantalla
+                permite agregar,
+                modificar y eliminar pasajeros, así como consultar la lista de Pasajeros registrados en el
+                sistema.
+            </p>
+            <img src="Images/pPasajeros.png" alt="pantalla principal Pasajeros">
+
+            <h2>Funcionalidades:</h2>
+            <h3>1. Agregar un pasajero</h3>
+            <p>Para agregar un pasajero, siga estos pasos:</p>
+            <ol>
+                <li>Inicie la aplicación.</li>
+                <li>Ingrese los datos en cada campo de texto (Pasajero, asientos ejecutivos, asientos turistas, asientos
+                    económicos) y seleccione la marca del avión.</li>
+                <li>Haga clic en el botón "Agregar".</li>
+                <img src="Images/añadirPasajero.png" alt="añadir Pasajero">
+            </ol>
+            <p>Advertencias</p>
+            <li>No será posible agregar un pasajero con un Número de pasaporte ya existente.</li>
+            <li>No será posible agregar un pasajero si no se ingresan todos los datos (Número de pasaporte, Número de pasaporte,
+                 apellidos, fecha de nacimiento, correo eléctronico, teléfono).</li>
+
+            <h3>2. Consultar un pasajero</h3>
+            <p>Para consultar un pasajero, siga estos pasos:</p>
+            <ol>
+                <li>Inicie la aplicación.</li>
+                <li>Si desea consultar la información de todos los pasajeros registrados, simplemente haga clic
+                    en el botón "Consultar".</li>
+                <li>Si desea consultar la información de un pasajero específico, ingrese el número de pasaporte del pasajero en
+                    el campo de texto (Número de pasaporte).</li>
+                <li>Haga clic en el botón "Consultar".</li>
+                <img src="Images/consultarPasajero.png" alt="modificar Pasajero">
+            </ol>
+            <p>Advertencias</p>
+            <li>Si se introduce el número de pasaporte de un pasajero que no existe, no se mostrará ninguna información.</li>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2023 AeroJet International. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

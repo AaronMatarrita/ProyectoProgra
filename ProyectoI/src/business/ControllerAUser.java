@@ -24,20 +24,25 @@ public class ControllerAUser implements ActionListener {
 
 	private XMLFiles xmlF;
 	private LogicXMLUser logU;
+	private LogicExecuteHTML logHTML;
 
 	private PopUpMessages pM;
 
 	private String fileName = "Users.xml";
 	private String objectName = "person";
+	
+	private String userType;
 
 	private ArrayList<User> users = new ArrayList<User>();
 
 	public ControllerAUser(String userType) {
+		this.userType = userType;
 		uF = new UserFrame(userType);
 		crud = new CRUD();
 		lXML = new LogicXML();
 		xmlF = new XMLFiles();
 		logU = new LogicXMLUser();
+		logHTML = new LogicExecuteHTML();
 		pM = new PopUpMessages();
 		xmlF.createXML(fileName, objectName);
 		initializerAction();
@@ -62,6 +67,7 @@ public class ControllerAUser implements ActionListener {
 		uF.getBUpdate().addActionListener(this);
 		uF.getBClear().addActionListener(this);
 		uF.getBSearch().addActionListener(this);
+		uF.getBHelp().addActionListener(this);
 	}
 
 	@Override
@@ -76,6 +82,8 @@ public class ControllerAUser implements ActionListener {
 			deleteUser();
 		}else if(uF.getBSearch() == e.getSource()) {
 			searchUser();
+		}else if(uF.getBHelp() == e.getSource()) {
+			help();
 		}
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
@@ -142,6 +150,7 @@ public class ControllerAUser implements ActionListener {
 		if(newPassword.isEmpty()) {
 			if(pM.showConfirmationDialog("Desea modificar la contraseña del usuario?", "Modificar")) {
 				newPassword = pM.getData("Ingrese la nueva contraseña de usuario:");
+				if(newPassword == null) { pM.showMessage("Por favor, ingrese el dato solicitado"); return; }
 				uF.getTPassword().setText(newPassword);
 			}else {
 				newPassword = currentUser.getPassword();
@@ -184,7 +193,6 @@ public class ControllerAUser implements ActionListener {
 		pM.showMessage("Usuario modificado");
 		setTableData();
 	}
-
 	//-------------------------------------------------------------------------------------------------------------------------
 	private void deleteUser() {
 		String user = uF.getTUser().getText();
@@ -207,6 +215,11 @@ public class ControllerAUser implements ActionListener {
 			setTableData();
 			pM.showMessage("Usuario eliminado");
 		}
+	}
+	//-------------------------------------------------------------------------------------------------------------------------
+	private void help() {
+		String userTypeString = userType.equals("1") ? "Administrador" : "Colaborador";
+		logHTML.helpUser(userTypeString);
 	}
 }
 
