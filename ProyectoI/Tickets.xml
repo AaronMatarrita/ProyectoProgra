@@ -1,38 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><Tickets>
-	<Tickets>
-		<TicketNumber>123</TicketNumber>
-		<Passport>321</Passport>
-		<FlightNumber>256</FlightNumber>
-		<TicketType>Turista</TicketType>
-	</Tickets>
+	
 	<Tickets>
 		<TicketNumber>333</TicketNumber>
 		<Passport>118160537</Passport>
 		<FlightNumber>256</FlightNumber>
 		<TicketType>Economico</TicketType>
 	</Tickets>
-	<Tickets>
-		<TicketNumber>2312</TicketNumber>
-		<Passport>321</Passport>
-		<FlightNumber>494</FlightNumber>
-		<TicketType>Turista</TicketType>
-	</Tickets>
-	<Tickets>
-		<TicketNumber>1234</TicketNumber>
-		<Passport>118160537</Passport>
-		<FlightNumber>494</FlightNumber>
-		<TicketType>Economico</TicketType>
-	</Tickets>
-	<Tickets>
-		<TicketNumber>777</TicketNumber>
-		<Passport>321</Passport>
-		<FlightNumber>256</FlightNumber>
-		<TicketType>Ejecutivo</TicketType>
-	</Tickets>
+	
 	<Tickets>
 		<TicketNumber>7777</TicketNumber>
 		<Passport>321</Passport>
 		<FlightNumber>256</FlightNumber>
 		<TicketType>Economico</TicketType>
 	</Tickets>
-<Tickets><TicketNumber>1230</TicketNumber><Passport>321</Passport><FlightNumber>256</FlightNumber><TicketType>Turista</TicketType></Tickets><Tickets><TicketNumber>0</TicketNumber><Passport>118160537</Passport><FlightNumber>494</FlightNumber><TicketType>Ejecutivo</TicketType></Tickets></Tickets>
+<Tickets><TicketNumber>1230</TicketNumber><Passport>321</Passport><FlightNumber>256</FlightNumber><TicketType>Turista</TicketType></Tickets><Tickets><TicketNumber>0</TicketNumber><Passport>118160537</Passport><FlightNumber>494</FlightNumber><TicketType>Ejecutivo</TicketType></Tickets><Tickets><TicketNumber>123</TicketNumber><Passport>321</Passport><FlightNumber>256</FlightNumber><TicketType>Turista</TicketType><BuyTicketDate>2023-06-26 16:43:55</BuyTicketDate></Tickets><Tickets><TicketNumber>2312</TicketNumber><Passport>321</Passport><FlightNumber>494</FlightNumber><TicketType>Turista</TicketType><BuyTicketDate>2023-06-26 16:44:35</BuyTicketDate></Tickets><Tickets><TicketNumber>1234</TicketNumber><Passport>118160537</Passport><FlightNumber>494</FlightNumber><TicketType>Economico</TicketType><BuyTicketDate>2023-06-26 16:45:04</BuyTicketDate></Tickets><Tickets><TicketNumber>777</TicketNumber><Passport>321</Passport><FlightNumber>256</FlightNumber><TicketType>Ejecutivo</TicketType><BuyTicketDate>2023-06-26 16:45:35</BuyTicketDate></Tickets></Tickets>

@@ -91,6 +91,7 @@ public class ControllerTicket implements ActionListener{
 		tF.getBSearch().addActionListener(this);
 		tF.getBSaveTicket().addActionListener(this);
 		tF.getBHelp().addActionListener(this);
+		tF.getBShowTickets().addActionListener(this);
 
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
@@ -110,14 +111,17 @@ public class ControllerTicket implements ActionListener{
 			downloadTicket();
 		}else if(tF.getBHelp() == e.getSource()) {
 			help();
+		}else if(tF.getBShowTickets() == e.getSource()) {
+			new ControllerShowTickets();
 		}
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
 	private void addTickets() {
-		String ticketNumber = tF.getTTicketNumber().getText();
 		String passport = String.valueOf(tF.getCbPassport().getSelectedItem());
+		String ticketNumber = tF.getTTicketNumber().getText();
 		String flightNumber = String.valueOf(tF.getCbFlightNumber().getSelectedItem());
 		String ticketType = (String) tF.getCBTicketType().getSelectedItem();
+		String buyticketdate = tF.getCurrentDateTime();
 
 		if (passport.isEmpty() || ticketNumber.equals("Indefinido") || flightNumber.equals("Indefinido")  ||ticketType.equals("Indefinido") ) {
 			pM.showMessage("Por favor, complete todos los campos");
@@ -130,8 +134,8 @@ public class ControllerTicket implements ActionListener{
 			return;
 		}
 		tF.clean();
-		ticket  = new Ticket(Integer.parseInt(ticketNumber), passport, Integer.parseInt(flightNumber),ticketType);
-
+		ticket  = new Ticket(Integer.parseInt(ticketNumber), passport, Integer.parseInt(flightNumber),ticketType,buyticketdate);
+		
 		Flight flight = logFlight.getFlightFromXML("Flights.xml", String.valueOf( ticket.getFlightNumber()));
 		Airplane airplane = logAirplane.getAirplaneFromXML("Airplanes.xml", flight.getAirplane());
 
@@ -162,9 +166,10 @@ public class ControllerTicket implements ActionListener{
 		}
 
 		String newTicket = numberTicket;
-		String newPassport = String.valueOf(tF.getCbPassport().getSelectedItem());
-		String newFlightNumber = String.valueOf(tF.getCbFlightNumber().getSelectedItem());
+		String newPassport = (String) tF.getCbPassport().getSelectedItem();
+		String newFlightNumber = (String) tF.getCbFlightNumber().getSelectedItem();
 		String newTicketType = (String) tF.getCBTicketType().getSelectedItem();
+		String buydate = currentTicket.getBuyTicketDate();
 
 		if (newPassport.isEmpty()) { 
 			if(pM.showConfirmationDialog("Desea modificar el pasaporte?", "Modificar")) {
@@ -184,7 +189,7 @@ public class ControllerTicket implements ActionListener{
 					return;
 				}
 			} else {
-				newTicketType = currentTicket.getTicketType();
+				newTicketType = currentTicket.getTickettype();
 				tF.getCBTicketType().setSelectedItem(newTicket);
 			}
 		}
@@ -238,11 +243,11 @@ public class ControllerTicket implements ActionListener{
 		if(airplaneModel == null) {pM.showMessage("El modelo de avión no existe en los datos registrados"); return;}
 		//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+
 		Double price = 0.0;
-		if(ticket.getTicketType().equalsIgnoreCase("Ejecutivo")) {
+		if(ticket.getTickettype().equalsIgnoreCase("Ejecutivo")) {
 			price = flight.getBusinessClassSeatsPrice();
-		}else if(ticket.getTicketType().equalsIgnoreCase("Turista")) {
+		}else if(ticket.getTickettype().equalsIgnoreCase("Turista")) {
 			price = flight.getTouristClassSeatsPrice();
-		}else if(ticket.getTicketType().equalsIgnoreCase("Economico")) {
+		}else if(ticket.getTickettype().equalsIgnoreCase("Economico")) {
 			price = flight.getEconomyClassSeatsPrice();
 		}
 		//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+
@@ -254,11 +259,11 @@ public class ControllerTicket implements ActionListener{
 				newTouristSeats = model.getTouristClassSeats(),
 				newEconomicSeats = model.getEconomyClassSeats();
 
-		if (ticket.getTicketType().equalsIgnoreCase("Ejecutivo")) {
+		if (ticket.getTickettype().equalsIgnoreCase("Ejecutivo")) {
 			newBussinessSeats -= 1;
-		} else if (ticket.getTicketType().equalsIgnoreCase("Turista")) {
+		} else if (ticket.getTickettype().equalsIgnoreCase("Turista")) {
 			newTouristSeats -= 1;
-		} else if (ticket.getTicketType().equalsIgnoreCase("Economico")) {
+		} else if (ticket.getTickettype().equalsIgnoreCase("Economico")) {
 			newEconomicSeats -= 1;
 		}
 

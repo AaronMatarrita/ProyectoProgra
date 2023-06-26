@@ -89,4 +89,17 @@ public class LogicXMLAirline {
 		}
 		return null;
 	}
+	//Método para obtener un arraylist de la aerolinea a buscar
+		public ArrayList<Airline> getArrayAirlineFromXML(String fileName, String attributeValue) {
+		    ArrayList<Airline> airlines = readXMLFile(fileName);
+		    ArrayList<Airline> matchingAirlines = new ArrayList<>();
+
+		    for (Airline airline : airlines) {
+		        if (airline.getName().equals(attributeValue)) {
+		            matchingAirlines.add(airline);
+		        }
+		    }
+		    return matchingAirlines;
+		}
+		
 }

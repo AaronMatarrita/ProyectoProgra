@@ -1,1 +1,23 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><HistoricTickets/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<HistoricTickets><HistoricTickets>
+	<TicketNumber>333</TicketNumber>
+	<PassengerPassport>118160537</PassengerPassport>
+	<Name>Aaron</Name>
+	<LastName>Matarrita Portuguez</LastName>
+	<Email>aaron@gmail.com</Email>
+	<DateOfBirth>10/09/2004</DateOfBirth>
+	<PhoneNumber>60900809</PhoneNumber>
+	<BuyTicketDate>2023-06-26 16:43:55</BuyTicketDate>
+	<AirlineName>Avianca</AirlineName>
+	<AirplaneOperationCenter>San Diego</AirplaneOperationCenter>
+	<AirplaneId>123</AirplaneId>
+	<AirplaneAirline>Avianca</AirplaneAirline>
+	<AirplaneModel>880</AirplaneModel>
+	<AirplaneYear>2020</AirplaneYear>
+	<ExitCity>Chepe</ExitCity>
+	<ExitDate>07/10/2023</ExitDate>
+	<EnterCity>Bogota</EnterCity>
+	<EnterDate>08/10/2023</EnterDate>
+	<TicketClass>Economico</TicketClass>
+	<TicketPrice>95.0</TicketPrice>
+	</HistoricTickets><HistoricTickets><TicketNumber>123</TicketNumber><PassengerPassport>321</PassengerPassport><Name>Matihas</Name><LastName>Abarca</LastName><Email>matihas@gmail.com</Email><DateOfBirth>01/06/2015</DateOfBirth><PhoneNumber>00000000</PhoneNumber><BuyTicketDate>2023-06-26 16:43:55</BuyTicketDate><AirlineName>Avianca</AirlineName><AirplaneOperationCenter>San Diego</AirplaneOperationCenter><AirplaneId>123</AirplaneId><AirplaneAirline>Avianca</AirplaneAirline><AirplaneModel>880</AirplaneModel><AirplaneYear>2020</AirplaneYear><ExitCity>Chepe</ExitCity><ExitDate>07/10/2023</ExitDate><EnterCity>Bogota</EnterCity><EnterDate>08/10/2023</EnterDate><TicketClass>Turista</TicketClass><TicketPrice>115.0</TicketPrice></HistoricTickets><HistoricTickets><TicketNumber>2312</TicketNumber><PassengerPassport>321</PassengerPassport><Name>Matihas</Name><LastName>Abarca</LastName><Email>matihas@gmail.com</Email><DateOfBirth>01/06/2015</DateOfBirth><PhoneNumber>00000000</PhoneNumber><BuyTicketDate>2023-06-26 16:44:35</BuyTicketDate><AirlineName>Avianca</AirlineName><AirplaneOperationCenter>San Diego</AirplaneOperationCenter><AirplaneId>223</AirplaneId><AirplaneAirline>Avianca</AirplaneAirline><AirplaneModel>880</AirplaneModel><AirplaneYear>2021</AirplaneYear><ExitCity>Alajuela</ExitCity><ExitDate>10/09/2023</ExitDate><EnterCity>Alajuela</EnterCity><EnterDate>10/09/2023</EnterDate><TicketClass>Turista</TicketClass><TicketPrice>120.0</TicketPrice></HistoricTickets><HistoricTickets><TicketNumber>1234</TicketNumber><PassengerPassport>118160537</PassengerPassport><Name>Aaron</Name><LastName>Matarrita Portuguez</LastName><Email>aaron@gmail.com</Email><DateOfBirth>10/09/2004</DateOfBirth><PhoneNumber>60900809</PhoneNumber><BuyTicketDate>2023-06-26 16:45:04</BuyTicketDate><AirlineName>Avianca</AirlineName><AirplaneOperationCenter>San Diego</AirplaneOperationCenter><AirplaneId>223</AirplaneId><AirplaneAirline>Avianca</AirplaneAirline><AirplaneModel>880</AirplaneModel><AirplaneYear>2021</AirplaneYear><ExitCity>Alajuela</ExitCity><ExitDate>10/09/2023</ExitDate><EnterCity>Alajuela</EnterCity><EnterDate>10/09/2023</EnterDate><TicketClass>Economico</TicketClass><TicketPrice>120.0</TicketPrice></HistoricTickets><HistoricTickets><TicketNumber>777</TicketNumber><PassengerPassport>321</PassengerPassport><Name>Matihas</Name><LastName>Abarca</LastName><Email>matihas@gmail.com</Email><DateOfBirth>01/06/2015</DateOfBirth><PhoneNumber>00000000</PhoneNumber><BuyTicketDate>2023-06-26 16:45:35</BuyTicketDate><AirlineName>Avianca</AirlineName><AirplaneOperationCenter>San Diego</AirplaneOperationCenter><AirplaneId>123</AirplaneId><AirplaneAirline>Avianca</AirplaneAirline><AirplaneModel>880</AirplaneModel><AirplaneYear>2020</AirplaneYear><ExitCity>Chepe</ExitCity><ExitDate>07/10/2023</ExitDate><EnterCity>Bogota</EnterCity><EnterDate>08/10/2023</EnterDate><TicketClass>Ejecutivo</TicketClass><TicketPrice>125.0</TicketPrice></HistoricTickets></HistoricTickets>

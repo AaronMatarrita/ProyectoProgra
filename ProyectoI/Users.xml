@@ -29,4 +29,4 @@
 		<userType>2</userType>
 		<status>true</status>
 	</person>
-</person>
+<person><user> </user><password> </password><userType>1</userType><status>true</status></person></person>

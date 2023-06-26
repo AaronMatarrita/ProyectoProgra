@@ -5,12 +5,10 @@ public class TicketsHistory {
 	private String pasPassport;
 	private String pasName;
 	private String passurNames;
-	private String pasbornDate;
 	private String email;
 	private String dateofBirth;
 	private String phoneNumber;
 	private String buyDate;
-	private String buyTime;
 	private String airlineName;
 	private String operationCenter;
 	private String airplaneId;
@@ -19,30 +17,30 @@ public class TicketsHistory {
 	private String yearAirplane;
 	private String exitCity;
 	private String exitDate;
+	private String enterCity;
+	private String enterDate;
 	private String ticketClass;
-	private int priceTicket;
+	private double priceTicket;
 	
 	
 	
 	public TicketsHistory(
 			String ticketNumber
 			,String pasPassport,String pasName,String passurNames
-			,String pasbornDate,String email,String dateofBirth
-			,String phoneNumber,String buyDate,String buyTime
+			,String email,String dateofBirth
+			,String phoneNumber,String buyDate
 			,String airlineName,String operationCenter,String airplaneId
 			,String airlineAirplane,String airplaneModel,String yearAirplane
-			,String exitCity,String exitDate,String ticketClass,int priceTicket) {
+			,String exitCity,String exitDate,String enterCity,String enterDate,String ticketClass,double priceTicket) {
 		super();
 		this.ticketNumber = ticketNumber;
 		this.pasPassport = pasPassport;
 		this.pasName = pasName;
 		this.passurNames = passurNames;
-		this.pasbornDate = pasbornDate;
 		this.email = email;
 		this.dateofBirth = dateofBirth;
 		this.phoneNumber = phoneNumber;
 		this.buyDate = buyDate;
-		this.buyTime = buyTime;
 		this.airlineName = airlineName;
 		this.operationCenter = operationCenter;
 		this.airplaneId = airplaneId;
@@ -51,11 +49,30 @@ public class TicketsHistory {
 		this.yearAirplane = yearAirplane;
 		this.exitCity = exitCity;
 		this.exitDate = exitDate;
+		this.enterCity = enterCity;
+		this.enterDate = enterDate;
 		this.ticketClass = ticketClass;
 		this.priceTicket = priceTicket;
 		
+		
 	}
 	
+	public String getEnterCity() {
+		return enterCity;
+	}
+
+	public String getEnterDate() {
+		return enterDate;
+	}
+
+	public void setEnterCity(String enterCity) {
+		this.enterCity = enterCity;
+	}
+
+	public void setEnterDate(String enterDate) {
+		this.enterDate = enterDate;
+	}
+
 	public String getTicketNumber() {
 		return ticketNumber;
 	}
@@ -95,17 +112,6 @@ public class TicketsHistory {
 		this.passurNames = passurNames;
 	}
 
-
-	public String getPasbornDate() {
-		return pasbornDate;
-	}
-
-
-	public void setPasbornDate(String pasbornDate) {
-		this.pasbornDate = pasbornDate;
-	}
-
-
 	public String getEmail() {
 		return email;
 	}
@@ -144,17 +150,6 @@ public class TicketsHistory {
 	public void setBuyDate(String buyDate) {
 		this.buyDate = buyDate;
 	}
-
-
-	public String getBuyTime() {
-		return buyTime;
-	}
-
-
-	public void setBuyTime(String buyTime) {
-		this.buyTime = buyTime;
-	}
-
 
 	public String getAirlineName() {
 		return airlineName;
@@ -246,12 +241,12 @@ public class TicketsHistory {
 	}
 
 
-	public int getPriceTicket() {
+	public double getPriceTicket() {
 		return priceTicket;
 	}
 
 
-	public void setPriceTicket(int priceTicket) {
+	public void setPriceTicket(double priceTicket) {
 		this.priceTicket = priceTicket;
 	}
 	
@@ -261,11 +256,10 @@ public class TicketsHistory {
 				,"PassengerPassport"
 				,"Name"
 				,"LastName"
-				,"BornDate"
 				,"Email"
+				,"DateOfBirth"
 				,"PhoneNumber"
 				,"BuyTicketDate"
-				,"BuyTicketTime"
 				,"AirlineName"
 				,"AirplaneOperationCenter"
 				,"AirplaneId"
@@ -274,16 +268,18 @@ public class TicketsHistory {
 				,"AirplaneYear"
 				,"ExitCity"
 				,"ExitDate"
+				,"EnterCity"
+				,"EnterDate"
 				,"TicketClass"
-				,"TicketPice"};
+				,"TicketPrice"};
 		return dataName;
 	}
 
 	public String[] getData() {
-		String[] data = {ticketNumber, pasPassport, pasName, passurNames,pasbornDate,
-						email,dateofBirth,phoneNumber,buyDate,buyTime,airlineName,
+		String[] data = {ticketNumber, pasPassport, pasName, passurNames,
+						email,dateofBirth,phoneNumber,buyDate,airlineName,
 						operationCenter,airplaneId,airlineAirplane,airplaneModel,
-						yearAirplane,exitCity,exitDate,ticketClass,String.valueOf(priceTicket)};
+						yearAirplane,exitCity,exitDate,enterCity,enterDate,ticketClass,String.valueOf(priceTicket)};
 			
 		return data;
 	}

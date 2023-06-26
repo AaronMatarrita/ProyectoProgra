@@ -5,13 +5,24 @@ public class Ticket {
 	private String passport;
 	private int flightNumber;
 	private String tickettype;
+	private String BuyTicketDate;
+
 	
-	public Ticket(int ticketNumber, String passport, int flightNumber,String tickettype) {
+	public Ticket(int ticketNumber, String passport, int flightNumber,String tickettype,String BuyTicketDate
+	) {
 		super();
 		this.ticketNumber = ticketNumber;
 		this.passport = passport;
 		this.flightNumber = flightNumber;
 		this.tickettype = tickettype;
+		this.BuyTicketDate = BuyTicketDate;
+	}
+	
+	public String getBuyTicketDate() {
+		return BuyTicketDate;
+	}
+	public void setBuyTicketDate(String buyTicketDate) {
+		BuyTicketDate = buyTicketDate;
 	}
 
 	public int getTicketNumber() {
@@ -38,22 +49,22 @@ public class Ticket {
 		this.flightNumber = flightNumber;
 	}
 	
-	public String getTicketType() {
+	public String getTickettype() {
 		return tickettype;
 	}
 
-	public void setTicketType(String tickettype) {
+	public void setTickettype(String tickettype) {
 		this.tickettype = tickettype;
 	}
 	
 	
 	public String[] getDataName() {
-		String[] dataName = {"TicketNumber", "Passport", "FlightNumber","TicketType"};
+		String[] dataName = {"TicketNumber", "Passport", "FlightNumber","TicketType","BuyTicketDate"};
 		return dataName;
 	}
 
 	public String[] getData() {
-		String[] data = {String.valueOf(ticketNumber), passport, String.valueOf(flightNumber), tickettype};
+		String[] data = {String.valueOf(ticketNumber), passport, String.valueOf(flightNumber), tickettype, BuyTicketDate};
 			
 		return data;
 	}

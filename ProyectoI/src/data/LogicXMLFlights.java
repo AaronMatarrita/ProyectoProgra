@@ -125,6 +125,18 @@ public class LogicXMLFlights {
 		}
 		return null;
 	}
+	public ArrayList<Flight> getArrayFlightFromXML(String fileName, String attributeValue) {
+	    ArrayList<Flight> flights = readXMLFile(fileName);
+	    ArrayList<Flight> matchingFlights = new ArrayList<>();
+
+	    for (Flight flight : flights) {
+	        if (flight.getFlightNumber() == Integer.parseInt(attributeValue)) {
+	            matchingFlights.add(flight);
+	        }
+	    }
+
+	    return matchingFlights;
+	}
 
 	//Método para validar el formato de las horas introducidas por el usuario
 	public boolean isValidTime(String time) {

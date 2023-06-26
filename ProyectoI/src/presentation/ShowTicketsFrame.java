@@ -13,7 +13,13 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import domain.Brand;
+import domain.TicketsHistory;
+
 import javax.swing.ScrollPaneConstants;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 @SuppressWarnings("serial")
 public class ShowTicketsFrame extends JFrame {
 	//Paneles
@@ -22,18 +28,19 @@ public class ShowTicketsFrame extends JFrame {
 	//Etiquetas
 	private JLabel lTitle;
 	// Tabla
-	private DefaultTableModel dtmTBrands;
-	private JTable jTableBrands;
+	private DefaultTableModel dtmT;
+	private JTable jTable;
 	// Scroll
-	private JScrollPane spTTickets;
+	private JScrollPane spT;
 	private Object dataTable[][];
+	private JButton bSearch;
 
     public ShowTicketsFrame() {
     	setType(Type.UTILITY);
         setForeground(new Color(0, 0, 0));
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 1000, 583);
+        setBounds(100, 100, 1349, 601);
         setLocationRelativeTo(null);
         getContentPane().setLayout(null);
         getContentPane().add(getPanel());
@@ -47,7 +54,7 @@ public class ShowTicketsFrame extends JFrame {
     public JPanel getPanel() {
         if (panel == null) {
             panel = new JPanel();
-            panel.setBounds(0, 0, 984, 586);
+            panel.setBounds(0, 0, 1333, 570);
             panel.setLayout(null);
             panel.add(getJPInfo());
         }
@@ -58,16 +65,17 @@ public class ShowTicketsFrame extends JFrame {
         if (JPInfo == null) {
             JPInfo = new JPanel();
             JPInfo.setBackground(new Color(63, 37, 170));
-            JPInfo.setBounds(0, 0, 984, 544);
+            JPInfo.setBounds(0, 0, 1333, 570);
             JPInfo.setLayout(null);
             //JLabels
             JPInfo.add(getLTitle());
 
             // JTable
-            setDTMBrands(dataTable, getColumnsName());
-            setJTableBrands(getDTMBrands());
-            setSPTableBrands(getJTableBrands());
-            JPInfo.add(getSPTableBrands());
+            setDTM(dataTable, getColumnsName());
+            setJTable(getDTM());
+            setSPTable(getJTable());
+            JPInfo.add(getSPTable());
+            JPInfo.add(getBSearch());
         }
         return JPInfo;
     }
@@ -78,56 +86,47 @@ public class ShowTicketsFrame extends JFrame {
             lTitle.setHorizontalAlignment(SwingConstants.CENTER);
             lTitle.setForeground(Color.WHITE);
             lTitle.setFont(new Font("Roboto", Font.PLAIN, 30));
-            lTitle.setBounds(320, 10, 350, 50);
+            lTitle.setBounds(491, 11, 350, 50);
         }
         return lTitle;
     }
 
-    public void setDTMBrands(Object data[][], String[] columnsName) {
-		dtmTBrands = new DefaultTableModel(data, columnsName);
+    public void setDTM(Object data[][], String[] columnsName) {
+		dtmT = new DefaultTableModel(data, columnsName);
 	}
 
-	public DefaultTableModel getDTMBrands() {
-		return dtmTBrands;
+	public DefaultTableModel getDTM() {
+		return dtmT;
 	}
 
-	public void setJTableBrands(DefaultTableModel dtmTBrands) {
-		jTableBrands = new JTable(dtmTBrands);
-		jTableBrands.getTableHeader().setFont(new Font("Roboto", Font.BOLD, 16));
-		jTableBrands.getTableHeader().setOpaque(false);
-		jTableBrands.getTableHeader().setBackground(new Color(32, 136, 203));
-		jTableBrands.getTableHeader().setForeground(new Color(255, 255, 255));
-		jTableBrands.setRowHeight(25);
+	public void setJTable(DefaultTableModel dtmT) {
+		jTable = new JTable(dtmT);
+		jTable.getTableHeader().setFont(new Font("Roboto", Font.BOLD, 16));
+		jTable.getTableHeader().setOpaque(false);
+		jTable.getTableHeader().setBackground(new Color(32, 136, 203));
+		jTable.getTableHeader().setForeground(new Color(255, 255, 255));
+		jTable.setRowHeight(25);
 		// No poder editar los valores de la tabla
-		jTableBrands.setEnabled(false);
+		jTable.setEnabled(false);
 		// No poder mover las columnas
-		jTableBrands.getTableHeader().setReorderingAllowed(false);
+		jTable.getTableHeader().setReorderingAllowed(false);
 		// No poder reducir el tamaño de las columnas
-		jTableBrands.getTableHeader().setResizingAllowed(false);
+		jTable.getTableHeader().setResizingAllowed(false);
 	}
 
-	public JTable getJTableBrands() {
-		return jTableBrands;
+	public JTable getJTable() {
+		return jTable;
 	}
 
-	public void setSPTableBrands(JTable jTableBrands) {
-		spTTickets = new JScrollPane(jTableBrands);
-		spTTickets.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		spTTickets.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		spTTickets.setBounds(10, 71, 964, 404);
+	public void setSPTable(JTable jTable) {
+		spT = new JScrollPane(jTable);
+		spT.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		spT.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		spT.setBounds(10, 72, 1313, 404);
 	}
-	
-	 //número de tiquete
-	 //todos los datos del pasajero
-	 //fecha y hora de la compra del tiquete
-	 //todos los datos de la aerolínea
-	 //todos los datos del avión
-	 //lugar y fecha salida
-	 //lugar y fecha arribo, clase de tiquete (ejecutiva, turista o económica)
-	 //tiquete (ejecutiva, turista o económica) y monto del tiquete.
-	
-	public JScrollPane getSPTableBrands() {
-		return spTTickets;
+
+	public JScrollPane getSPTable() {
+		return spT;
 	}
 
 	public String[] getColumnsName() {
@@ -139,8 +138,7 @@ public class ShowTicketsFrame extends JFrame {
 				,"Fecha nacimiento"
 				,"CorreoElectronico"
 				,"Telefono"
-				,"Fecha de la compra del tiquete"
-				,"Hora de la compra del tiquete"
+				,"Fecha y hora de la compra del tiquete"
 				,"Nombre de la Aerolinea"
 				,"Centro de operaciones de la Aerolinea"
 				,"Matricula avion"
@@ -149,21 +147,55 @@ public class ShowTicketsFrame extends JFrame {
 				,"Año del Avion"
 				,"Lugar de salida"
 				,"Fecha de salida"
+				,"Lugar de llegada"
+				,"Fecha de llegada"
 				,"Clase de Tiquete"
 				,"Monto del tiquete"};                                                                                                                      
 		return columnsName;
 	}
 	
-	public void setJTableData(List<Brand> brands) {
-	    Object[][] data = new Object[brands.size()][19];
-	    for (int i = 0; i < brands.size(); i++) {
-	    	Brand brand = brands.get(i);
-	        data[i][0] = brand.getBrand();
+	public void setJTableData(List<TicketsHistory> tickets) {
+	    Object[][] data = new Object[tickets.size()][20];
+	    for (int i = 0; i < tickets.size(); i++) {
+	    	TicketsHistory hticks = tickets.get(i);
+	        data[i][0] = hticks.getTicketNumber();
+	        data[i][1] = hticks.getPasPassport();
+	        data[i][2] = hticks.getPasName();
+	        data[i][3] = hticks.getPassurNames();
+	        data[i][4] = hticks.getEmail();
+	        data[i][5] = hticks.getDateofBirth();
+	        data[i][6] = hticks.getPhoneNumber();
+	        data[i][7] = hticks.getBuyDate();
+	        data[i][9] = hticks.getAirlineName();
+	        data[i][10] = hticks.getOperationCenter();
+	        data[i][11] = hticks.getAirplaneId();
+	        data[i][12] = hticks.getAirlineAirplane();
+	        data[i][13] = hticks.getAirplaneModel();
+	        data[i][14] = hticks.getYearAirplane();
+	        data[i][15] = hticks.getExitCity();
+	        data[i][16] = hticks.getExitDate();
+	        data[i][17] = hticks.getEnterCity();
+	        data[i][18] = hticks.getEnterDate();
+	        data[i][19] = hticks.getTicketClass();
+	        data[i][20] = hticks.getPriceTicket();
+	        
 	    }
-	    dtmTBrands.setDataVector(data, getColumnsName());
+	    dtmT.setDataVector(data, getColumnsName());
 	}
     
     public void clean() {
     	
     }
+    public JButton getBSearch() {
+		if (bSearch == null) {
+			bSearch = new JButton("Consultar");
+			bSearch.setIcon(new ImageIcon(BrandFrame.class.getResource("/imagesMain/imagesButtons/search-button.png")));
+			bSearch.setForeground(Color.WHITE);
+			bSearch.setFont(new Font("Roboto", Font.PLAIN, 16));
+			bSearch.setFocusable(false);
+			bSearch.setBackground(new Color(28, 28, 28));
+			bSearch.setBounds(581, 509, 140, 40);
+		}
+		return bSearch;
+	}
 }

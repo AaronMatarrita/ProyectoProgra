@@ -2,6 +2,8 @@ package presentation;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
-import business.ControllerTicketsHistory;
+import business.ControllerShowTickets;
 import domain.Ticket;
 
 @SuppressWarnings("serial")
@@ -134,6 +136,11 @@ public class TicketFrame extends JFrame {
 			lTitle.setBounds(320, 30, 350, 50);
 		}
 		return lTitle;
+	}
+	public String getCurrentDateTime() {
+		LocalDateTime currentDateTime = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		return currentDateTime.format(formatter);
 	}
 
 	public JLabel getLTicketNumber() {
@@ -278,7 +285,7 @@ public class TicketFrame extends JFrame {
 			bShowTickets.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 
-					new ControllerTicketsHistory();
+					new ControllerShowTickets();
 
 				}
 			});
@@ -393,19 +400,20 @@ public class TicketFrame extends JFrame {
 	}
 
 	public String[] getColumnsName() {
-		String columnsName[] = {"Numero de tiquete", "Pasaporte", "Número de vuelo", "Tipo de tiquete"};
+		String columnsName[] = {"Numero de tiquete", "Pasaporte", "Número de vuelo", "Tipo de tiquete","Fecha y hora de compra"};
 		return columnsName;
 	}
 
 	public void setJTableData(ArrayList<Ticket> tickets) {
-		Object[][] data = new Object[tickets.size()][4];
+		Object[][] data = new Object[tickets.size()][5];
 		for (int i = 0; i < tickets.size(); i++) {
 			Ticket ticket = tickets.get(i);
 
 			data[i][0] = ticket.getTicketNumber();
 			data[i][1] = ticket.getPassport();
 			data[i][2] = ticket.getFlightNumber();
-			data[i][3] = ticket.getTicketType();
+			data[i][3] = ticket.getTickettype();
+			data[i][4] = ticket.getBuyTicketDate();
 		}
 		dtmTFlights.setDataVector(data, getColumnsName());
 	}

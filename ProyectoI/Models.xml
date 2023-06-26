@@ -2,8 +2,8 @@
 	<models>
 		<modelName>880</modelName>
 		<brand>Boeing</brand>
-		<BusinessClassSeats>100</BusinessClassSeats>
-		<TouristClassSeats>89</TouristClassSeats>
-		<EconomyClassSeats>100</EconomyClassSeats>
+		<BusinessClassSeats>99</BusinessClassSeats>
+		<TouristClassSeats>87</TouristClassSeats>
+		<EconomyClassSeats>99</EconomyClassSeats>
 	</models>
 </models>

@@ -47,13 +47,15 @@ public class LogicXMLTicket {
 						Node passportNode = element.getElementsByTagName("Passport").item(0);
 						Node flightNumberNode = element.getElementsByTagName("FlightNumber").item(0);
 						Node tickettypeNode = element.getElementsByTagName("TicketType").item(0);
+						Node buydateNode = element.getElementsByTagName("BuyTicketDate").item(0);
 
-						if(ticketNumberNode != null && passportNode != null && flightNumberNode != null && tickettypeNode != null) {
+						if(ticketNumberNode != null && passportNode != null && flightNumberNode != null && tickettypeNode != null && buydateNode != null) {                     
 							
 							String ticketNumber = element.getElementsByTagName("TicketNumber").item(0).getTextContent();
 							String passport = element.getElementsByTagName("Passport").item(0).getTextContent();
 							String flightNumber = element.getElementsByTagName("FlightNumber").item(0).getTextContent();
 							String tickettype = element.getElementsByTagName("TicketType").item(0).getTextContent();
+							String buydate = element.getElementsByTagName("BuyTicketDate").item(0).getTextContent();
 							
 							boolean ticketExists = false;
 							for (Ticket existingTicket : ticketsList) {
@@ -63,7 +65,7 @@ public class LogicXMLTicket {
 								}
 							}
 							if (!ticketExists) {
-								Ticket ticket = new Ticket(Integer.parseInt(ticketNumber), passport, Integer.parseInt(flightNumber),tickettype);
+								Ticket ticket = new Ticket(Integer.parseInt(ticketNumber), passport, Integer.parseInt(flightNumber),tickettype,buydate);
 								ticketsList.add(ticket);
 							}
 						}
@@ -90,10 +92,10 @@ public class LogicXMLTicket {
 		return null;
 	}
 	//Método para verificar la disponibilidad del espacio
-	public boolean isSeastAvaiable(AirplaneModel model) {
-		if(model.getBusinessClassSeats() >= 1 || model.getEconomyClassSeats() >= 1 || model.getTouristClassSeats() >= 1) {
-			return true;
+		public boolean isSeastAvaiable(AirplaneModel model) {
+			if(model.getBusinessClassSeats() >= 1 || model.getEconomyClassSeats() >= 1 || model.getTouristClassSeats() >= 1) {
+				return true;
+			}
+			return false;
 		}
-		return false;
-	}
 }

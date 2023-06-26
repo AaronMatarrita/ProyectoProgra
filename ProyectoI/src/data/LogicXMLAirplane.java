@@ -95,4 +95,17 @@ public class LogicXMLAirplane {
 	    }
 	    return null;
 	}
+	//Metodo para obtener un ARRAYLIST de un avión en especifico
+		public ArrayList<Airplane> getArrayAirplaneFromXML(String fileName, String attributeValue) {
+		    ArrayList<Airplane> airplanes = readXMLFile(fileName);
+		    ArrayList<Airplane> matchingAirplanes = new ArrayList<>();
+
+		    for (Airplane airplane : airplanes) {
+		        if (airplane.getId().equals(attributeValue)) {
+		            matchingAirplanes.add(airplane);
+		        }
+		    }
+
+		    return matchingAirplanes;
+		}
 }
