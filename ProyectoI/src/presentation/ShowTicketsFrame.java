@@ -2,6 +2,9 @@ package presentation;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -11,6 +14,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
+//importaciones para el ordenamiento
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 
 import domain.TicketsHistory;
 
@@ -31,13 +42,14 @@ public class ShowTicketsFrame extends JFrame {
 	private JScrollPane spT;
 	private Object dataTable[][];
 	private JButton bSearch;
+	private boolean ColumnSorted = false;
 
     public ShowTicketsFrame() {
     	setType(Type.UTILITY);
         setForeground(new Color(0, 0, 0));
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 1349, 601);
+        setBounds(100, 100, 1515, 601);
         setLocationRelativeTo(null);
         getContentPane().setLayout(null);
         getContentPane().add(getPanel());
@@ -51,7 +63,7 @@ public class ShowTicketsFrame extends JFrame {
     public JPanel getPanel() {
         if (panel == null) {
             panel = new JPanel();
-            panel.setBounds(0, 0, 1333, 570);
+            panel.setBounds(0, 0, 1499, 570);
             panel.setLayout(null);
             panel.add(getJPInfo());
         }
@@ -62,7 +74,7 @@ public class ShowTicketsFrame extends JFrame {
         if (JPInfo == null) {
             JPInfo = new JPanel();
             JPInfo.setBackground(new Color(63, 37, 170));
-            JPInfo.setBounds(0, 0, 1333, 570);
+            JPInfo.setBounds(0, 0, 1504, 570);
             JPInfo.setLayout(null);
             //JLabels
             JPInfo.add(getLTitle());
@@ -83,7 +95,7 @@ public class ShowTicketsFrame extends JFrame {
             lTitle.setHorizontalAlignment(SwingConstants.CENTER);
             lTitle.setForeground(Color.WHITE);
             lTitle.setFont(new Font("Roboto", Font.PLAIN, 30));
-            lTitle.setBounds(491, 11, 350, 50);
+            lTitle.setBounds(593, 11, 350, 50);
         }
         return lTitle;
     }
@@ -108,7 +120,46 @@ public class ShowTicketsFrame extends JFrame {
 		// No poder mover las columnas
 		jTable.getTableHeader().setReorderingAllowed(false);
 		// No poder reducir el tamaño de las columnas
-		jTable.getTableHeader().setResizingAllowed(false);
+		//jTable.getTableHeader().setResizingAllowed(false);
+		
+		// Agregar MouseAdapter a los encabezados de columna
+	    jTable.getTableHeader().addMouseListener(new MouseAdapter() {
+	        @Override
+	        public void mouseClicked(MouseEvent e) {
+	            int columnIndex = jTable.getTableHeader().columnAtPoint(e.getPoint());
+	            sortTable(columnIndex);
+	        }
+	    });
+	}
+	//Ordenamiento de la tabla según la columna seleccionada:
+	public void sortTable(int columnIndex) {
+	    TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTable.getModel());
+	    jTable.setRowSorter(sorter);
+	    sorter.toggleSortOrder(columnIndex);
+	    // Obtener el tipo de datos de la columna seleccionada
+	    Class<?> columnClass = jTable.getColumnClass(columnIndex);
+
+	    // Comparador personalizado para fechas
+	    Comparator<Object> dateComparator = (date1, date2) -> {
+	        try {
+	            SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+	            Date d1 = format.parse(date1.toString());
+	            Date d2 = format.parse(date2.toString());
+	            return d1.compareTo(d2);
+	        } catch (ParseException e) {
+	            e.printStackTrace();
+	            return 0;
+	        }
+	    };
+	    // Configurar el comparador para las columnas de fechas
+	    if (columnClass == String.class) {
+	        List<Integer> dateColumns = Arrays.asList(6, 16, 18); // Índices de las columnas de fechas
+	        if (dateColumns.contains(columnIndex)) {
+	            sorter.setComparator(columnIndex, dateComparator);
+	        }
+	    }
+
+
 	}
 
 	public JTable getJTable() {
@@ -119,7 +170,7 @@ public class ShowTicketsFrame extends JFrame {
 		spT = new JScrollPane(jTable);
 		spT.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		spT.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		spT.setBounds(10, 72, 1313, 404);
+		spT.setBounds(10, 72, 1484, 404);
 	}
 
 	public JScrollPane getSPTable() {
@@ -132,8 +183,8 @@ public class ShowTicketsFrame extends JFrame {
 				,"Pasaporte del pasajero"
 				,"Nombre"
 				,"Apellidos"
+				,"Email"
 				,"Fecha nacimiento"
-				,"CorreoElectronico"
 				,"Telefono"
 				,"Fecha y hora de la compra del tiquete"
 				,"Nombre de la Aerolinea"
@@ -191,8 +242,9 @@ public class ShowTicketsFrame extends JFrame {
 			bSearch.setFont(new Font("Roboto", Font.PLAIN, 16));
 			bSearch.setFocusable(false);
 			bSearch.setBackground(new Color(28, 28, 28));
-			bSearch.setBounds(581, 509, 140, 40);
+			bSearch.setBounds(689, 487, 140, 40);
 		}
 		return bSearch;
 	}
 }
+
