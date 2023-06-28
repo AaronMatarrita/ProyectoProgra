@@ -11,9 +11,10 @@ public class ControllerAdmin implements ActionListener{
 	private String userType;
 
 	public ControllerAdmin(String userType) {
+
 		this.userType = userType;
 		// Inicializo Instancias
-		guiA = new GUIAdmin();
+		guiA = new GUIAdmin(userType);
 		initializerAction();
 	}
 

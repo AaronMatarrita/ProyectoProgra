@@ -33,9 +33,10 @@ public class GUIAdmin extends JFrame
 	private JLabel lPlaneIcon;
 	private JLabel lHour;
 	private JLabel lDate;
+	private String userType;
 
-
-	public GUIAdmin() {
+	public GUIAdmin(String userType) {
+		this.userType = userType;
 		setForeground(new Color(0, 0, 0));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,6 +68,9 @@ public class GUIAdmin extends JFrame
 			sideRightPanel.setBounds(0, 0, 210, 544);
 			sideRightPanel.setLayout(null);
 			sideRightPanel.add(getBUsers());
+			if(userType.equals("2")) {
+				bUsers.setVisible(false);	
+			}
 			sideRightPanel.add(getBBrands());
 			sideRightPanel.add(getBModels());
 			sideRightPanel.add(getBAirlines());
@@ -98,7 +102,7 @@ public class GUIAdmin extends JFrame
 			bUsers.setFocusable(false);
 			bUsers.setForeground(new Color(255, 255, 255));
 			bUsers.setFont(new Font("Roboto", Font.PLAIN, 16));
-			bUsers.setBounds(10, 81, 190, 39);
+			bUsers.setBounds(10, 75, 190, 39);
 		}
 		return bUsers;
 	}
@@ -111,7 +115,7 @@ public class GUIAdmin extends JFrame
 			bBrands.setFocusable(false);
 			bBrands.setBorder(null);
 			bBrands.setBackground(new Color(28, 28, 28));
-			bBrands.setBounds(10, 131, 190, 39);
+			bBrands.setBounds(10, 125, 190, 39);
 		}
 		return bBrands;
 	}
@@ -124,7 +128,7 @@ public class GUIAdmin extends JFrame
 			bModels.setFocusable(false);
 			bModels.setBorder(null);
 			bModels.setBackground(new Color(28, 28, 28));
-			bModels.setBounds(10, 181, 190, 39);
+			bModels.setBounds(10, 175, 190, 39);
 		}
 		return bModels;
 	}
@@ -143,7 +147,7 @@ public class GUIAdmin extends JFrame
 			bAirlines.setFocusable(false);
 			bAirlines.setBorder(null);
 			bAirlines.setBackground(new Color(28, 28, 28));
-			bAirlines.setBounds(10, 231, 190, 39);
+			bAirlines.setBounds(10, 225, 190, 39);
 		}
 		return bAirlines;
 	}
@@ -156,7 +160,7 @@ public class GUIAdmin extends JFrame
 			bAirplanes.setFocusable(false);
 			bAirplanes.setBorder(null);
 			bAirplanes.setBackground(new Color(28, 28, 28));
-			bAirplanes.setBounds(10, 281, 190, 39);
+			bAirplanes.setBounds(10, 275, 190, 39);
 		}
 		return bAirplanes;
 	}
@@ -169,7 +173,7 @@ public class GUIAdmin extends JFrame
 			bFlights.setFocusable(false);
 			bFlights.setBorder(null);
 			bFlights.setBackground(new Color(28, 28, 28));
-			bFlights.setBounds(10, 331, 190, 39);
+			bFlights.setBounds(10, 325, 190, 39);
 		}
 		return bFlights;
 	}
@@ -182,7 +186,7 @@ public class GUIAdmin extends JFrame
 			bPassengers.setFocusable(false);
 			bPassengers.setBorder(null);
 			bPassengers.setBackground(new Color(28, 28, 28));
-			bPassengers.setBounds(10, 381, 190, 39);
+			bPassengers.setBounds(10, 375, 190, 39);
 		}
 		return bPassengers;
 	}
@@ -195,7 +199,7 @@ public class GUIAdmin extends JFrame
 			bTickets.setFocusable(false);
 			bTickets.setBorder(null);
 			bTickets.setBackground(new Color(28, 28, 28));
-			bTickets.setBounds(10, 431, 190, 39);
+			bTickets.setBounds(10, 425, 190, 39);
 		}
 		return bTickets;
 	}
