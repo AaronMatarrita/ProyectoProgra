@@ -208,6 +208,7 @@ public class ControllerTicket implements ActionListener{
 		if (pM.showConfirmationDialog("¿Está seguro de eliminar el tiquete?", "Eliminar" )) {
 			tF.clean();
 			crud.deleteObject(fileName, objectName, "TicketNumber", ticket);
+			crud.deleteObject("HistoricTickets.xml", "HistoricTickets", "TicketNumber", ticket);
 			pM.showMessage("Tiquete eliminado");
 			setTableData();
 		}
