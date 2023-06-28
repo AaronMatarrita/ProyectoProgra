@@ -193,7 +193,7 @@ public class ControllerTicket implements ActionListener{
 				tF.getCBTicketType().setSelectedItem(newTicket);
 			}
 		}
-		String[] newData = { newTicket, newPassport, newFlightNumber, newTicketType };
+		String[] newData = { newTicket, newPassport, newFlightNumber, newTicketType ,buydate};
 		crud.updateObject(fileName, objectName, "TicketNumber", numberTicket, currentTicket.getDataName(), newData);
 		tF.clean();
 		pM.showMessage("Ticket modificado");
@@ -212,6 +212,7 @@ public class ControllerTicket implements ActionListener{
 		if (pM.showConfirmationDialog("¿Está seguro de eliminar el tiquete?", "Eliminar" )) {
 			tF.clean();
 			crud.deleteObject(fileName, objectName, "TicketNumber", ticket);
+			crud.deleteObject("HistoricTickets.xml", "HistoricTickets","TicketNumber", ticket);
 			pM.showMessage("Tiquete eliminado");
 			setTableData();
 		}

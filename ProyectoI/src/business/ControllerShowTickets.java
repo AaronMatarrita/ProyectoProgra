@@ -77,13 +77,13 @@ public class ControllerShowTickets implements ActionListener{
 	private void showTickets() {
 			 // ArrayLists
 	        ArrayList<String> numberTickets = new ArrayList<>();
-	        ArrayList<String> passport = new ArrayList<>();
+	       // ArrayList<String> passport = new ArrayList<>();
 	        ArrayList<Passenger> passengers;
 	        ArrayList<Flight> flights;
 	        ArrayList<Airplane> airplanes;
 	        ArrayList<Airline> airlines;
 	        ArrayList<Ticket> tickets = lXMLT.readXMLFile("Tickets.xml");
-	        List<TicketsHistory> htickets = logHticks.readXMLFile("HistoricTickets.xml");
+	        
 	        // Datos del pasajero
 	        String pasPassport = null;
 	        String pasName = null;
@@ -117,8 +117,9 @@ public class ControllerShowTickets implements ActionListener{
 	            String SnumberTickets = numberTickets.get(i);
 	            //Si el ticket no esta en el xml se anade
 				if(!lXML.isAlreadyInFile("HistoricTickets.xml", "HistoricTickets", "TicketNumber",SnumberTickets)) {
-					passport.add(ticket.getPassport()); 
-		            String Spassport = passport.get(i);
+					//passport.add(ticket.getPassport()); 
+		            String Spassport = ticket.getPassport();
+		            //System.out.println(passport.length);
 		            String ticketClass = ticket.getTickettype();
 		            buydate = ticket.getBuyTicketDate();
 		            
@@ -162,39 +163,21 @@ public class ControllerShowTickets implements ActionListener{
 		                name = ai.getName();
 		                operationCenter = ai.getCountry();
 		            }
-					
-					System.out.println(SnumberTickets);
-					System.out.println(pasPassport);
-					System.out.println(pasName);
-					System.out.println(pasLastName);
-					System.out.println(pasEmail);
-					System.out.println(pasDateofbirth);
-					System.out.println(pasphoneNumber);
-					System.out.println(buydate);
-					System.out.println(name);
-					System.out.println(operationCenter);
-					System.out.println(id);
-					System.out.println(airline);
-					System.out.println(airplaneModel);
-					System.out.println(year);
-					System.out.println(exitCity);
-					System.out.println(exitDate);
-					System.out.println(enterCity);
-					System.out.println(enterDate);
-					System.out.println(ticketClass);
-					System.out.println(ticketPrice);
-					
+
 					hticks  = new TicketsHistory(SnumberTickets,pasPassport,pasName,pasLastName,
 												pasEmail,pasDateofbirth,pasphoneNumber,buydate,
 												name,operationCenter,id,airline,airplaneModel
 												,year,exitCity,exitDate,enterCity,enterDate,ticketClass,ticketPrice);
 					
 					crud.addObject(fileName, objectName, hticks.getDataName(), hticks.getData());
-					JOptionPane.showMessageDialog(null, "Tiquete agregado");
+					//JOptionPane.showMessageDialog(null, "Tiquete agregado");
+					List<TicketsHistory> htickets = logHticks.readXMLFile("HistoricTickets.xml");
+					tickets = lXMLT.readXMLFile("Tickets.xml");
 					sF.setJTableData(htickets);
 					sF.clean(); 
+					
 				}
-			i++;
+				i++;
 		}
 			
 	}
