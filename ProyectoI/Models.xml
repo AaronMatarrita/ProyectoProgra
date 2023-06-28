@@ -5,5 +5,8 @@
 		<BusinessClassSeats>99</BusinessClassSeats>
 		<TouristClassSeats>86</TouristClassSeats>
 		<EconomyClassSeats>94</EconomyClassSeats>
+		<TotalBusinessClassSeats>99</TotalBusinessClassSeats>
+		<TotalTouristClassSeats>86</TotalTouristClassSeats>
+		<TotalEconomyClassSeats>94</TotalEconomyClassSeats>
 	</models>
 </models>

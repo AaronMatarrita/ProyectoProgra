@@ -105,6 +105,7 @@ public class ControllerAModel implements ActionListener{
 		int SeatsEje = Integer.parseInt(mF.getTCEjecutive().getText());
 		int SeatsTur = Integer.parseInt(mF.getTCTurist().getText());
 		int SeatsEco = Integer.parseInt(mF.getTCEco().getText());
+		
 		String StringBrandType = (String) mF.getCBrands().getSelectedItem();
 
 
@@ -114,7 +115,7 @@ public class ControllerAModel implements ActionListener{
 		}
 
 		mF.clean();
-		Am = new AirplaneModel(model, StringBrandType, SeatsEje ,SeatsTur, SeatsEco );
+		Am = new AirplaneModel(model, StringBrandType, SeatsEje ,SeatsTur, SeatsEco , SeatsEje ,SeatsTur, SeatsEco);
 		crud.addObject(fileName, objectName, Am.getDataName(), Am.getData());
 		setTableData();
 		pM.showMessage("Modelo agregado");

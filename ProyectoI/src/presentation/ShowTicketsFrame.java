@@ -1,6 +1,7 @@
 package presentation;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -82,9 +83,11 @@ public class ShowTicketsFrame extends JFrame {
             // JTable
             setDTM(dataTable, getColumnsName());
             setJTable(getDTM());
+            
             setSPTable(getJTable());
             JPInfo.add(getSPTable());
             JPInfo.add(getBSearch());
+            
         }
         return JPInfo;
     }
@@ -109,20 +112,18 @@ public class ShowTicketsFrame extends JFrame {
 	}
 
 	public void setJTable(DefaultTableModel dtmT) {
-		jTable = new JTable(dtmT);
-		jTable.getTableHeader().setFont(new Font("Roboto", Font.BOLD, 16));
-		jTable.getTableHeader().setOpaque(false);
-		jTable.getTableHeader().setBackground(new Color(32, 136, 203));
-		jTable.getTableHeader().setForeground(new Color(255, 255, 255));
-		jTable.setRowHeight(25);
-		// No poder editar los valores de la tabla
-		jTable.setEnabled(false);
-		// No poder mover las columnas
-		jTable.getTableHeader().setReorderingAllowed(false);
-		// No poder reducir el tamaño de las columnas
-		//jTable.getTableHeader().setResizingAllowed(false);
-		
-		// Agregar MouseAdapter a los encabezados de columna
+	    jTable = new JTable(dtmT);
+	    jTable.getTableHeader().setFont(new Font("Roboto", Font.BOLD, 16));
+	    jTable.getTableHeader().setOpaque(false);
+	    jTable.getTableHeader().setBackground(new Color(32, 136, 203));
+	    jTable.getTableHeader().setForeground(new Color(255, 255, 255));
+	    jTable.setRowHeight(25);
+	    // No poder editar los valores de la tabla
+	    jTable.setEnabled(false);
+	    // No poder mover las columnas
+	    jTable.getTableHeader().setReorderingAllowed(false);
+	    // Ajustar el ancho de las columnas al contenido
+	    jTable.doLayout();
 	    jTable.getTableHeader().addMouseListener(new MouseAdapter() {
 	        @Override
 	        public void mouseClicked(MouseEvent e) {
@@ -168,8 +169,8 @@ public class ShowTicketsFrame extends JFrame {
 
 	public void setSPTable(JTable jTable) {
 		spT = new JScrollPane(jTable);
-		spT.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		spT.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		spT.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		spT.setBounds(10, 72, 1484, 404);
 	}
 
