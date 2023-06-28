@@ -21,6 +21,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import domain.Flight;
+import com.toedter.calendar.JDateChooser;
 
 @SuppressWarnings("serial")
 public class FlightsFrame extends JFrame {
@@ -43,9 +44,7 @@ public class FlightsFrame extends JFrame {
 	//Campos de Texto
 	private JTextField tExitCity;
 	private JTextField tExitTime;
-	private JTextField tExitDate;
 	private JTextField tEnterTime;
-	private JTextField tEnterDate;
 	private JTextField tEnterCity;
 	//Tabla
 	private DefaultTableModel dtmTFlights;
@@ -66,6 +65,8 @@ public class FlightsFrame extends JFrame {
 	private JButton bHelp;
 	private JButton bReturn;
 	private JButton bShowFlights;
+	private JDateChooser tExitDate;
+	private JDateChooser tEnterDate;
 
 
 	public FlightsFrame(String userType) {
@@ -136,9 +137,7 @@ public class FlightsFrame extends JFrame {
 			//JTextFields
 			JPInfo.add(getTExitCity());
 			JPInfo.add(getTExitTime());
-			JPInfo.add(getTExitDate());
 			JPInfo.add(getTEnterTime());
-			JPInfo.add(getTEnterDate());
 			JPInfo.add(getTEnterCity());
 			//JButtons
 			JPInfo.add(getBAddFlights());
@@ -167,6 +166,8 @@ public class FlightsFrame extends JFrame {
 			JPInfo.add(getBHelp());
 			JPInfo.add(getBReturn());
 			JPInfo.add(getBShowFlights());
+			JPInfo.add(getTExitDate());
+			JPInfo.add(getTEnterDate());
 
 
 		}
@@ -281,19 +282,6 @@ public class FlightsFrame extends JFrame {
 		}
 		return tExitTime;
 	}
-	public JTextField getTExitDate() {
-		if (tExitDate == null) {
-			tExitDate = new JTextField();
-			tExitDate.setToolTipText("Formato (dd/MM/yyyy)");
-			tExitDate.setForeground(Color.WHITE);
-			tExitDate.setFont(new Font("Roboto", Font.PLAIN, 16));
-			tExitDate.setColumns(10);
-			tExitDate.setBorder(BorderFactory.createEmptyBorder());
-			tExitDate.setBackground(new Color(28, 28, 28));
-			tExitDate.setBounds(170, 250, 150, 20);
-		}
-		return tExitDate;
-	}
 	public JLabel getLExitDate() {
 		if (lExitDate == null) {
 			lExitDate = new JLabel("Fecha de salida:");
@@ -324,19 +312,6 @@ public class FlightsFrame extends JFrame {
 			tEnterTime.setBounds(500, 200, 150, 20);
 		}
 		return tEnterTime;
-	}
-	public JTextField getTEnterDate() {
-		if (tEnterDate == null) {
-			tEnterDate = new JTextField();
-			tEnterDate.setToolTipText("Formato (dd/MM/yyyy)");
-			tEnterDate.setForeground(Color.WHITE);
-			tEnterDate.setFont(new Font("Roboto", Font.PLAIN, 16));
-			tEnterDate.setColumns(10);
-			tEnterDate.setBorder(BorderFactory.createEmptyBorder());
-			tEnterDate.setBackground(new Color(28, 28, 28));
-			tEnterDate.setBounds(500, 250, 150, 20);
-		}
-		return tEnterDate;
 	}
 	public JLabel getLEnterDate() {
 		if (lEnterDate == null) {
@@ -543,14 +518,14 @@ public class FlightsFrame extends JFrame {
 	}
 	public void clean() {
 		getTEnterCity().setText("");
-		getTEnterDate().setText("");
+		getTEnterDate().setDate(null);
 		getTEnterTime().setText("");
 		getTPriceEJE().setText("");
 		getTPriceTUR().setText("");
 		getTPriceECO().setText("");
 		getCBAirplane().setSelectedItem("Indefinido");
 		getTExitCity().setText("");
-		getTExitDate().setText("");
+		getTExitDate().setDate(null);
 		getTExitTime().setText("");
 	}
 	public JButton getBHelp() {
@@ -588,5 +563,25 @@ public class FlightsFrame extends JFrame {
 			bShowFlights.setBounds(884, 10, 40, 40);
 		}
 		return bShowFlights;
+	}
+	public JDateChooser getTExitDate() {
+		if (tExitDate == null) {
+			tExitDate = new JDateChooser();
+			tExitDate.setForeground(Color.WHITE);
+			tExitDate.setFont(new Font("Roboto", Font.PLAIN, 16));
+			tExitDate.setDateFormatString("dd/MM/yyyy");
+			tExitDate.setBounds(170, 250, 150, 20);
+		}
+		return tExitDate;
+	}
+	public JDateChooser getTEnterDate() {
+		if (tEnterDate == null) {
+			tEnterDate = new JDateChooser();
+			tEnterDate.setForeground(Color.WHITE);
+			tEnterDate.setFont(new Font("Roboto", Font.PLAIN, 16));
+			tEnterDate.setDateFormatString("dd/MM/yyyy");
+			tEnterDate.setBounds(500, 250, 150, 20);
+		}
+		return tEnterDate;
 	}
 }
