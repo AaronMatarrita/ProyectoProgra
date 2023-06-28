@@ -12,9 +12,9 @@ import data.LogicXML;
 import data.LogicXMLAirline;
 import data.LogicXMLAirplane;
 import data.LogicXMLFlights;
+import data.LogicXMLHistoryFlights;
 import data.LogicXMLPassenger;
 import data.LogicXMLTicket;
-import data.LogicXMLHistoryTickets;
 import data.XMLFiles;
 import domain.Airline;
 import domain.Airplane;
@@ -22,16 +22,15 @@ import domain.Flight;
 import domain.Passenger;
 import domain.Ticket;
 import domain.TicketsHistory;
+import presentation.ShowFlightsFrame;
 
-import presentation.ShowTicketsFrame;
+public class ControllerShowFlights implements ActionListener{
 
-public class ControllerShowTickets implements ActionListener{
-
-	private String fileName = "HistoricTickets.xml";
-	private String objectName = "HistoricTickets";
+	private String fileName = "HistoricFlights.xml";
+	private String objectName = "HistoricFlights";
 
 	private XMLFiles xmlF;	
-	private ShowTicketsFrame sF;
+	private ShowFlightsFrame sF;
 	//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
 	private LogicXML lXML;
 	private LogicXMLPassenger lXMLP;
@@ -39,13 +38,13 @@ public class ControllerShowTickets implements ActionListener{
 	private LogicXMLAirline logAirline;
 	private LogicXMLFlights logFlight;
 	private LogicXMLAirplane logAirplane;
-	private LogicXMLHistoryTickets logHticks;
+	private LogicXMLHistoryFlights logHflights;
 	//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
 	private CRUD crud;
 	private TicketsHistory hticks;
 
-	public ControllerShowTickets() {
-		sF = new ShowTicketsFrame();
+	public ControllerShowFlights() {
+		sF = new ShowFlightsFrame();
 		crud = new CRUD();
 		lXML = new LogicXML();
 		xmlF = new XMLFiles();
@@ -55,11 +54,11 @@ public class ControllerShowTickets implements ActionListener{
 		lXMLP = new LogicXMLPassenger();
 		logFlight = new LogicXMLFlights();
 		logAirplane = new LogicXMLAirplane();
-		logHticks = new LogicXMLHistoryTickets();
+		logHflights = new LogicXMLHistoryFlights();
 		//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
 		xmlF.createXML(fileName, objectName);
 		//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
-		sF.setJTableData(logHticks.readXMLFile(fileName));
+		sF.setJTableData(logHflights.readXMLFile(fileName));
 		initializer();
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
@@ -71,18 +70,18 @@ public class ControllerShowTickets implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(sF.getBSearch() == e.getSource()) {
-			showTickets();
+			showFlights();
 		}
 	}
-	private void showTickets() {
+	private void showFlights() {
 			 // ArrayLists
-	        ArrayList<String> numberTickets = new ArrayList<>();
-	       // ArrayList<String> passport = new ArrayList<>();
 	        ArrayList<Passenger> passengers;
 	        ArrayList<Flight> flights;
 	        ArrayList<Airplane> airplanes;
 	        ArrayList<Airline> airlines;
 	        ArrayList<Ticket> tickets = lXMLT.readXMLFile("Tickets.xml");
+	        
+	        String fligth = (String) sF.getComboBox().getSelectedItem();
 	        
 	        // Datos del pasajero
 	        String pasPassport = null;
@@ -110,9 +109,7 @@ public class ControllerShowTickets implements ActionListener{
 	        //Ticket
 	        double ticketPrice = 0;
 	        //index
-	        int i = 0;
-	        //Ciclo for para que se haga la cantidad de tickets que hayan
-	        for (Ticket ticket : tickets) {
+	        
 	            numberTickets.add(String.valueOf(ticket.getTicketNumber()));
 	            String SnumberTickets = numberTickets.get(i);
 	            //Si el ticket no esta en el xml se anade
@@ -171,13 +168,12 @@ public class ControllerShowTickets implements ActionListener{
 					
 					crud.addObject(fileName, objectName, hticks.getDataName(), hticks.getData());
 					//JOptionPane.showMessageDialog(null, "Tiquete agregado");
+					List<TicketsHistory> htickets = logHticks.readXMLFile("HistoricTickets.xml");
 					tickets = lXMLT.readXMLFile("Tickets.xml");
-					sF.setJTableData(logHticks.readXMLFile("HistoricTickets.xml"));
+					sF.setJTableData(logHflights.readXMLFile(fileName));
 					sF.clean(); 
 					
 				}
-				i++;
-		}
 			
 	}
 	

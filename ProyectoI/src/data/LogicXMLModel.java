@@ -46,14 +46,21 @@ public class LogicXMLModel {
 						Node businessClassSeatsNode = element.getElementsByTagName("BusinessClassSeats").item(0);
 						Node touristClassSeatsNode = element.getElementsByTagName("TouristClassSeats").item(0);
 						Node economyClassSeatsNode = element.getElementsByTagName("EconomyClassSeats").item(0);
+						Node totalbusinessClassSeatsNode = element.getElementsByTagName("TotalBusinessClassSeats").item(0);
+						Node totaltouristClassSeatsNode = element.getElementsByTagName("TotalTouristClassSeats").item(0);
+						Node totaleconomyClassSeatsNode = element.getElementsByTagName("TotalEconomyClassSeats").item(0);
 
-						if (modelNameNode != null && brandNode != null && businessClassSeatsNode != null && touristClassSeatsNode != null && economyClassSeatsNode != null) {
+
+						if (modelNameNode != null && brandNode != null && businessClassSeatsNode != null && touristClassSeatsNode != null && economyClassSeatsNode != null && totalbusinessClassSeatsNode != null && totaltouristClassSeatsNode != null && totaleconomyClassSeatsNode!= null) {
 							String modelName = modelNameNode.getTextContent();
 							String brand = brandNode.getTextContent();
 							int businessClassSeats = Integer.parseInt(businessClassSeatsNode.getTextContent());
 							int touristClassSeats = Integer.parseInt(touristClassSeatsNode.getTextContent());
 							int economyClassSeats = Integer.parseInt(economyClassSeatsNode.getTextContent());
-
+							int totalbusinessClassSeats = Integer.parseInt(businessClassSeatsNode.getTextContent());
+							int totaltouristClassSeats = Integer.parseInt(touristClassSeatsNode.getTextContent());
+							int totaleconomyClassSeats = Integer.parseInt(economyClassSeatsNode.getTextContent());
+							
 							boolean modelExists = false;
 							for (AirplaneModel existingModel : airplaneModels) {
 								if (existingModel.getName().equals(modelName)) {
@@ -68,6 +75,9 @@ public class LogicXMLModel {
 								airplaneModel.setBusinessClassSeats(businessClassSeats);
 								airplaneModel.setTouristClassSeats(touristClassSeats);
 								airplaneModel.setEconomyClassSeats(economyClassSeats);
+								airplaneModel.setBusinessClassSeats(totalbusinessClassSeats);
+								airplaneModel.setTouristClassSeats(totaltouristClassSeats);
+								airplaneModel.setEconomyClassSeats(totaleconomyClassSeats);
 								airplaneModels.add(airplaneModel);
 							}
 						}

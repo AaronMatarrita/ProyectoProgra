@@ -7,17 +7,49 @@ public class AirplaneModel {
 	private int  BusinessClassSeats;
 	private int  TouristClassSeats;
 	private int  EconomyClassSeats;
+	private int  totalBusinessClassSeats;
+	private int  totalTouristClassSeats;
+	private int  totalEconomyClassSeats;
 	
 	public AirplaneModel() {}
 
 	public AirplaneModel(String Name,String Brand, int BusinessClassSeats, int TouristClassSeats,
-			int EconomyClassSeats) {
+			int EconomyClassSeats, int totalBusinessClassSeats, int totalTouristClassSeats,
+			int totalEconomyClassSeats) {
 		super();
 		this.Name = Name;
 		this.Brand = Brand;
 		this.BusinessClassSeats = BusinessClassSeats;
 		this.TouristClassSeats = TouristClassSeats;
 		this.EconomyClassSeats = EconomyClassSeats;
+		this.totalBusinessClassSeats = totalBusinessClassSeats;
+		this.totalTouristClassSeats = totalTouristClassSeats;
+		this.totalEconomyClassSeats = totalEconomyClassSeats;
+	}
+	
+	
+	public int getTotalBusinessClassSeats() {
+		return totalBusinessClassSeats;
+	}
+
+	public void setTotalBusinessClassSeats(int totalBusinessClassSeats) {
+		this.totalBusinessClassSeats = totalBusinessClassSeats;
+	}
+
+	public int getTotalTouristClassSeats() {
+		return totalTouristClassSeats;
+	}
+
+	public void setTotalTouristClassSeats(int totalTouristClassSeats) {
+		this.totalTouristClassSeats = totalTouristClassSeats;
+	}
+
+	public int getTotalEconomyClassSeats() {
+		return totalEconomyClassSeats;
+	}
+
+	public void setTotalEconomyClassSeats(int totalEconomyClassSeats) {
+		this.totalEconomyClassSeats = totalEconomyClassSeats;
 	}
 
 	public String getName() {
@@ -61,18 +93,19 @@ public class AirplaneModel {
 	}
 	
 	public String[] getDataName() {
-		String[] dataName = {"modelName", "brand", "BusinessClassSeats", "TouristClassSeats", "EconomyClassSeats"};
+		String[] dataName = {"modelName", "brand", "BusinessClassSeats", "TouristClassSeats", "EconomyClassSeats", "TotalBusinessClassSeats", "TotalTouristClassSeats", "TotalEconomyClassSeats"};
 		return dataName;
 	}
 	
 	public String[] getData() {
-		String[] data = {Name, String.valueOf(Brand) ,String.valueOf(BusinessClassSeats) ,String.valueOf(TouristClassSeats), String.valueOf(EconomyClassSeats)};
-		return data;
+		String[] data = {Name, String.valueOf(Brand) ,String.valueOf(BusinessClassSeats) ,String.valueOf(TouristClassSeats), String.valueOf(EconomyClassSeats),String.valueOf(totalBusinessClassSeats) ,String.valueOf(totalTouristClassSeats), String.valueOf(totalEconomyClassSeats)};                                          
+		return data;   
 	}
 
 	@Override
 	public String toString() {
 		return Name + "," + Brand + "," + BusinessClassSeats
-				+ "," + TouristClassSeats + "," + EconomyClassSeats;
+				+ "," + TouristClassSeats + "," + EconomyClassSeats + totalBusinessClassSeats
+				+ "," + totalTouristClassSeats + "," + totalEconomyClassSeats;
 	}
 }
