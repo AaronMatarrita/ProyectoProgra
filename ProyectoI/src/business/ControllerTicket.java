@@ -259,6 +259,9 @@ public class ControllerTicket implements ActionListener{
 		int newBussinessSeats = model.getBusinessClassSeats(),
 				newTouristSeats = model.getTouristClassSeats(),
 				newEconomicSeats = model.getEconomyClassSeats();
+		int BussinessSeats = model.getBusinessClassSeats(),
+				TouristSeats = model.getTouristClassSeats(),
+				EconomicSeats = model.getEconomyClassSeats();
 
 		if (ticket.getTickettype().equalsIgnoreCase("Ejecutivo")) {
 			newBussinessSeats -= 1;
@@ -273,7 +276,10 @@ public class ControllerTicket implements ActionListener{
 				model.getBrand(),
 				String.valueOf(newBussinessSeats),
 				String.valueOf(newTouristSeats),
-				String.valueOf(newEconomicSeats)
+				String.valueOf(newEconomicSeats),
+				String.valueOf(BussinessSeats),
+				String.valueOf(TouristSeats),
+				String.valueOf(EconomicSeats)
 		};
 
 		crud.updateObject("Models.xml", "models", "modelName", model.getName(), model.getDataName(), newData);

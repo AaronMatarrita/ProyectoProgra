@@ -66,6 +66,7 @@ public class ControllerAFlights implements ActionListener{
 		fF.getBClear().addActionListener(this);
 		fF.getBSearch().addActionListener(this);
 		fF.getBHelp().addActionListener(this);
+		fF.getBShowFlights().addActionListener(this);
 	}
 
 
@@ -86,6 +87,8 @@ public class ControllerAFlights implements ActionListener{
 			searchFlight();
 		}else if(fF.getBHelp() == e.getSource()) {
 			help();
+		}else if(fF.getBShowFlights() == e.getSource()) {
+			new ControllerShowFlights();
 		}
 
 	}

@@ -200,7 +200,8 @@ public class ControllerAModel implements ActionListener{
 			return;
 
 
-		}else if(!lXML.isAlreadyInFile("Models.xml", "models" ,"modelName", model)) 
+		}
+			else if(!lXML.isAlreadyInFile("Models.xml", "models" ,"modelName", model)) 
 		{
 			pM.showMessage( "No se puede eliminar debido a que no existe");
 			return;

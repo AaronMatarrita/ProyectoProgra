@@ -83,6 +83,7 @@ public class ControllerShowTickets implements ActionListener{
 	        ArrayList<Airplane> airplanes;
 	        ArrayList<Airline> airlines;
 	        ArrayList<Ticket> tickets = lXMLT.readXMLFile("Tickets.xml");
+	        ArrayList<TicketsHistory> htickets = (ArrayList<TicketsHistory>) logHticks.readXMLFile("HistoricTickets.xml");
 	        
 	        // Datos del pasajero
 	        String pasPassport = null;
@@ -107,6 +108,7 @@ public class ControllerShowTickets implements ActionListener{
 	        //Datos de la aerolinea
 	        String name = null;
 	        String operationCenter = null;
+	        String nTickets = null;
 	        //Ticket
 	        double ticketPrice = 0;
 	        //index
@@ -176,8 +178,13 @@ public class ControllerShowTickets implements ActionListener{
 					sF.clean(); 
 					
 				}
+				
 				i++;
-		}
+				}
+	       /* for (TicketsHistory ht : htickets) {
+	        crud.deleteObject("HistoricTickets.xml", "HistoricTickets","TicketNumber", numberTickets);
+	        }*/
+			
 			
 	}
 	

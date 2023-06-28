@@ -61,6 +61,7 @@ public class FlightsFrame extends JFrame {
 	private JComboBox<String> CBAirplane;
 	private JButton bSearch;
 	private JButton bHelp;
+	private JButton bShowFlights;
 
 
 	public FlightsFrame(String userType) {
@@ -137,6 +138,7 @@ public class FlightsFrame extends JFrame {
 			JPInfo.add(getCBAirplane());
 			JPInfo.add(getBSearch());
 			JPInfo.add(getBHelp());
+			JPInfo.add(getBShowFlights());
 
 
 		}
@@ -535,4 +537,17 @@ public class FlightsFrame extends JFrame {
 		}
 		return bHelp;
 	}
+	public JButton getBShowFlights() {
+		if (bShowFlights == null) {
+			bShowFlights = new JButton("");
+			bShowFlights.setIcon(new ImageIcon(FlightsFrame.class.getResource("/imagesMain/airplanes models.png")));
+			bShowFlights.setForeground(Color.WHITE);
+			bShowFlights.setFont(new Font("Dialog", Font.PLAIN, 16));
+			bShowFlights.setFocusable(false);
+			bShowFlights.setBackground(new Color(28, 28, 28));
+			bShowFlights.setBounds(884, 10, 40, 40);
+		}
+		return bShowFlights;
+	}
 }
+

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.FileWriter;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -15,7 +16,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import domain.FlightsHistory;
-
 
 public class LogicXMLHistoryFlights {
 	//Obtener un arrayList con de los tiquetes
@@ -106,5 +106,28 @@ public class LogicXMLHistoryFlights {
 			}
 		}
 		return flList;
+	}
+	public void deleteALLXML(String rutaArchivo) {
+	    try {
+	        File archivoXML = new File(rutaArchivo);
+	        FileWriter escritor = new FileWriter(archivoXML);
+	        escritor.write("");
+	        escritor.close();
+	        System.out.println("Contenido del archivo XML borrado correctamente.");
+	    } catch (IOException e) {
+	        System.out.println("Error al borrar el contenido del archivo XML: " + e.getMessage());
+	    }
+	}
+	
+	public FlightsHistory getFlightFromFile(String fileName, String attributeValue) {
+	    ArrayList<FlightsHistory> fls = (ArrayList<FlightsHistory>) readXMLFile(fileName);
+
+	    for (FlightsHistory fl : fls) {
+	        if (fl.getFlightNumber().equals(attributeValue)) {
+	            return fl;
+	        }
+	    }
+	    
+	    return null;
 	}
 }

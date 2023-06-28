@@ -191,8 +191,9 @@ import java.util.Arrays;
 			String columnsName[] = {
 					"Número de vuelo"
 					,"Aerolínea"
+					,"Avion"
 					,"Lugar de salida"
-					,"Fecha salida"
+					,"Fecha de salida"
 					,"Lugar de llegada"
 					,"Fecha de llegada"
 					,"Asientos EJE vendidos"
@@ -265,7 +266,7 @@ import java.util.Arrays;
 			return comboBox;
 			
 		}
-		//aF.fillAirlineComboBox(lXMLA.getAirlineList("Airlines.xml"));
+		
 		public void fillFlightsComboBox(ArrayList<String> fligths) {
 			comboBox.addItem("Indefinido");
 			for(String flight : fligths) {

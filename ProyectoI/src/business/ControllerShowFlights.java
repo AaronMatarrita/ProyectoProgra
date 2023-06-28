@@ -3,63 +3,71 @@ package business;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JOptionPane;
 
 import data.CRUD;
-import data.LogicXML;
-import data.LogicXMLAirline;
 import data.LogicXMLAirplane;
 import data.LogicXMLFlights;
 import data.LogicXMLHistoryFlights;
-import data.LogicXMLPassenger;
-import data.LogicXMLTicket;
+import data.LogicXMLModel;
 import data.XMLFiles;
-import domain.Airline;
+import data.LogicXML;
+import data.CRUD;
 import domain.Airplane;
+import domain.AirplaneModel;
 import domain.Flight;
-import domain.Passenger;
-import domain.Ticket;
-import domain.TicketsHistory;
+import domain.FlightsHistory;
+import presentation.PopUpMessages;
 import presentation.ShowFlightsFrame;
 
 public class ControllerShowFlights implements ActionListener{
 
 	private String fileName = "HistoricFlights.xml";
 	private String objectName = "HistoricFlights";
-
+	private ArrayList<FlightsHistory> fls = new ArrayList<FlightsHistory>();
+	
 	private XMLFiles xmlF;	
+	private LogicXML xmlL;
+	private CRUD cr;
 	private ShowFlightsFrame sF;
+	private PopUpMessages pM;
 	//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
-	private LogicXML lXML;
-	private LogicXMLPassenger lXMLP;
-	private LogicXMLTicket lXMLT;
-	private LogicXMLAirline logAirline;
 	private LogicXMLFlights logFlight;
 	private LogicXMLAirplane logAirplane;
 	private LogicXMLHistoryFlights logHflights;
+	private LogicXMLModel logModel;
 	//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
 	private CRUD crud;
-	private TicketsHistory hticks;
 
 	public ControllerShowFlights() {
 		sF = new ShowFlightsFrame();
 		crud = new CRUD();
-		lXML = new LogicXML();
 		xmlF = new XMLFiles();
+		xmlL = new LogicXML();
+		cr = new CRUD();
 		//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
-		lXMLT = new LogicXMLTicket();
-		logAirline = new LogicXMLAirline();
-		lXMLP = new LogicXMLPassenger();
 		logFlight = new LogicXMLFlights();
 		logAirplane = new LogicXMLAirplane();
+		logModel = new LogicXMLModel();
+		pM = new PopUpMessages();
 		logHflights = new LogicXMLHistoryFlights();
 		//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
 		xmlF.createXML(fileName, objectName);
 		//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
-		sF.setJTableData(logHflights.readXMLFile(fileName));
+		sF.fillFlightsComboBox(logFlight.readFlightsumbersFromXML("Flights.xml"));
+		setJTableData();
 		initializer();
+	}
+	private void setJTableData() {
+		if (sF.getComboBox().getSelectedItem().equals("Indefinido")) {
+			fls.clear();
+		} else {
+			fls.clear();
+			FlightsHistory searchedFl = logHflights.getFlightFromFile(fileName, String.valueOf(sF.getComboBox().getSelectedItem()));
+			if (searchedFl != null) {
+				fls.add(searchedFl);
+			}
+		}
+		sF.setJTableData(fls);
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
 	public void initializer() {
@@ -70,28 +78,23 @@ public class ControllerShowFlights implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(sF.getBSearch() == e.getSource()) {
-			showFlights();
+			if (sF.getComboBox().getSelectedItem().equals("Indefinido")) {
+				fls.clear();
+				sF.setJTableData(fls);
+				pM.showMessage("Por favor, ingrese el avion a consultar");
+			}else {
+				showFlights();
+			}
+			
 		}
 	}
 	private void showFlights() {
-			 // ArrayLists
-	        ArrayList<Passenger> passengers;
+			//ArrayLists
 	        ArrayList<Flight> flights;
 	        ArrayList<Airplane> airplanes;
-	        ArrayList<Airline> airlines;
-	        ArrayList<Ticket> tickets = lXMLT.readXMLFile("Tickets.xml");
-	        
+	        ArrayList<AirplaneModel> models;
+	        //Avion
 	        String fligth = (String) sF.getComboBox().getSelectedItem();
-	        
-	        // Datos del pasajero
-	        String pasPassport = null;
-	        String pasName = null;
-	        String pasLastName = null;
-	        String pasDateofbirth = null;
-	        String pasEmail = null;
-	        String pasphoneNumber = null;
-	        //Datos fecha y hora
-	        String buydate;
 	        //Datos del vuelo
 	        String exitCity = null;
 	        String exitDate = null;
@@ -99,84 +102,62 @@ public class ControllerShowFlights implements ActionListener{
 	        String enterDate = null;
 	        String airplane = null;
 	        //Datos del avion
-	        String id = null;
-	        String year = null;
 	        String airline = null;
 	        String airplaneModel = null;
 	        //Datos de la aerolinea
-	        String name = null;
-	        String operationCenter = null;
-	        //Ticket
-	        double ticketPrice = 0;
-	        //index
-	        
-	            numberTickets.add(String.valueOf(ticket.getTicketNumber()));
-	            String SnumberTickets = numberTickets.get(i);
-	            //Si el ticket no esta en el xml se anade
-				if(!lXML.isAlreadyInFile("HistoricTickets.xml", "HistoricTickets", "TicketNumber",SnumberTickets)) {
-					//passport.add(ticket.getPassport()); 
-		            String Spassport = ticket.getPassport();
-		            //System.out.println(passport.length);
-		            String ticketClass = ticket.getTickettype();
-		            buydate = ticket.getBuyTicketDate();
-		            
-		            passengers = lXMLP.searchPassenger(Spassport);
-		            for (Passenger pas : passengers) {
-		                pasPassport = pas.getPassport();
-		                pasName = pas.getName();
-		                pasLastName = pas.getLastname();
-		                pasDateofbirth = pas.getDateofbirth();
-		                pasEmail = pas.getEmail();
-		                pasphoneNumber = pas.getPhoneNumber();
-		            }
-		
-		            String flightNumber = String.valueOf(ticket.getFlightNumber());
-		            flights = logFlight.getArrayFlightFromXML("Flights.xml", flightNumber);
-		            for (Flight fl : flights) {
-		                exitCity = fl.getDepartureCity();
-		                exitDate = fl.getDepartureDate();
-		                enterCity = fl.getArrivalCity();
-		                enterDate = fl.getArrivalDate();
-		                airplane = fl.getAirplane();
-		                if(ticket.getTickettype().equalsIgnoreCase("Ejecutivo")) {
-			            	ticketPrice = fl.getBusinessClassSeatsPrice();
-			            }else if (ticket.getTickettype().equalsIgnoreCase("Turista")) {
-			            	ticketPrice = fl.getTouristClassSeatsPrice();
-			            }else if (ticket.getTickettype().equalsIgnoreCase("Economico")) {
-			            	ticketPrice = fl.getEconomyClassSeatsPrice();
-			            }
-		            }
-		            
-					airplanes = logAirplane.getArrayAirplaneFromXML("Airplanes.xml", airplane);
-					for (Airplane ai : airplanes) {
-		                id = ai.getId();
-		                year = ai.getYear();
-		                airline = ai.getAirline();
-		                airplaneModel = ai.getAirplaneModel();
-		            }
-
-					airlines = logAirline.getArrayAirlineFromXML("Airlines.xml", airline);
-					for (Airline ai : airlines) {
-		                name = ai.getName();
-		                operationCenter = ai.getCountry();
-		            }
-
-					hticks  = new TicketsHistory(SnumberTickets,pasPassport,pasName,pasLastName,
-												pasEmail,pasDateofbirth,pasphoneNumber,buydate,
-												name,operationCenter,id,airline,airplaneModel
-												,year,exitCity,exitDate,enterCity,enterDate,ticketClass,ticketPrice);
-					
-					crud.addObject(fileName, objectName, hticks.getDataName(), hticks.getData());
-					//JOptionPane.showMessageDialog(null, "Tiquete agregado");
-					List<TicketsHistory> htickets = logHticks.readXMLFile("HistoricTickets.xml");
-					tickets = lXMLT.readXMLFile("Tickets.xml");
-					sF.setJTableData(logHflights.readXMLFile(fileName));
-					sF.clean(); 
-					
-				}
+	        int soldEJEseats = 0;
+	        int totalEJEseats = 0;
+	    	int soldTOUseats = 0;
+	    	int totalTOUseats = 0;
+	    	int soldECOseats = 0;
+	    	int totalECOseats = 0;
+	    	double EJEprice = 0;
+	    	double TOUprice = 0;
+	    	double ECOprice = 0;
+	    	double totalflight= 0;
+	    	
+            flights = logFlight.getArrayFlightFromXML("Flights.xml", fligth);
+ 		
+            for (Flight fl : flights) {
+                exitCity = fl.getDepartureCity();
+                exitDate = fl.getDepartureDate();
+                enterCity = fl.getArrivalCity();
+                enterDate = fl.getArrivalDate();
+                airplane = fl.getAirplane();
+                EJEprice = fl.getBusinessClassSeatsPrice();
+    	    	TOUprice = fl.getTouristClassSeatsPrice();
+    	    	ECOprice = fl.getEconomyClassSeatsPrice();           
+            }
+            
+            airplanes = logAirplane.getArrayAirplaneFromXML("Airplanes.xml", airplane);
+			for (Airplane ai : airplanes) {
+                airline = ai.getAirline();
+                airplaneModel = ai.getAirplaneModel();
+            }
 			
+			models = logModel.getArrayAirplaneModelFromXML("Models.xml", airplaneModel);
+			for (AirplaneModel model : models) {
+		        totalEJEseats = model.getBusinessClassSeats();
+		    	totalTOUseats = model.getTouristClassSeats();
+		    	totalECOseats = model.getEconomyClassSeats();
+		    	int EJE= model.getTotalBusinessClassSeats();
+		    	soldEJEseats = model.getTotalBusinessClassSeats();
+		    	soldTOUseats = model.getTotalTouristClassSeats() - model.getTouristClassSeats();
+		    	soldECOseats = model.getTotalEconomyClassSeats() - model.getEconomyClassSeats();
+            }
+			
+			totalflight = (soldEJEseats*EJEprice)+(soldTOUseats*TOUprice)+(soldECOseats*ECOprice);
+			
+			FlightsHistory hflights = new FlightsHistory(fligth, airline, airplane,exitCity,
+					exitDate, enterCity, enterDate, soldEJEseats, totalEJEseats,
+					soldTOUseats,totalTOUseats, soldECOseats, totalECOseats,
+					EJEprice, TOUprice, ECOprice, totalflight);
+			
+					crud.addObject(fileName, objectName, hflights.getDataName(), hflights.getData());
+					setJTableData();
+					sF.clean(); 	
+					cr.deleteObject(fileName, objectName, "FlightNumber", fligth);
+	
 	}
-	
-	//-------------------------------------------------------------------------------------------------------------------------
-	
+
 }

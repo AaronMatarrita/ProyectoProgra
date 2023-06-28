@@ -14,6 +14,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import domain.Airplane;
 import domain.AirplaneModel;
 
 public class LogicXMLModel {
@@ -109,4 +110,16 @@ public class LogicXMLModel {
 	    }
 	    return models;
 	}
+	
+	//Metodo para obtener un ARRAYLIST de un avión en especifico
+		public ArrayList<AirplaneModel> getArrayAirplaneModelFromXML(String fileName, String attributeValue) {
+			ArrayList<AirplaneModel> models = readXMLFile(fileName);
+			ArrayList<AirplaneModel> matchingModels = new ArrayList<>();
+			   for (AirplaneModel model : models) {
+			      if (model.getName().equals(attributeValue)) {
+			         matchingModels.add(model);
+			       }
+			   }
+			   return matchingModels;
+		}
 }
