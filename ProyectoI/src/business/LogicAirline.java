@@ -41,12 +41,13 @@ public class LogicAirline {
 				Node node = nodeList.item(i);
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
 					Element element = (Element) node;
-					NodeList nameList = element.getElementsByTagName("Name");
-					NodeList countryList = element.getElementsByTagName("Country");
+					
+					Node nameNode = element.getElementsByTagName("Name").item(0);
+					Node countryNode = element.getElementsByTagName("Country").item(0);
 
-					if (nameList.getLength() > 0 && countryList.getLength() > 0) {
-						String name = nameList.item(0).getTextContent();
-						String country = countryList.item(0).getTextContent();
+					if (nameNode != null && countryNode != null) {
+						String name = nameNode.getTextContent();
+						String country = countryNode.getTextContent();
 
 						boolean airlineExists = false;
 						for (Airline existingAirline : airlines) {

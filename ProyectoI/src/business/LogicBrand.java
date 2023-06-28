@@ -38,9 +38,11 @@ public class LogicBrand {
 					Node node = brandList.item(i);
 					if (node != null && node.getNodeType() == Node.ELEMENT_NODE) {
 						Element element = (Element) node;
-						NodeList brandNameList = element.getElementsByTagName("brand");
-						if (brandNameList.getLength() > 0 && brandNameList.item(0) != null) {
-							String brandName = brandNameList.item(0).getTextContent();
+						
+						Node brandNode = element.getElementsByTagName("brand").item(0);
+						
+						if (brandNode != null) {
+							String brandName = brandNode.getTextContent();
 
 							boolean brandExists = false;
 							for (Brand existingBrand : brands) {

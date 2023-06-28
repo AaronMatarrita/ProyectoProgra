@@ -40,16 +40,17 @@ public class LogicAirplane {
 	                Node node = nodeList.item(i);
 	                if (node.getNodeType() == Node.ELEMENT_NODE) {
 	                    Element element = (Element) node;
-	                    NodeList idList = element.getElementsByTagName("id");
-	                    NodeList yearList = element.getElementsByTagName("year");
-	                    NodeList airlineList = element.getElementsByTagName("airline");
-	                    NodeList modelList = element.getElementsByTagName("model");
+	                    
+	                    Node idNode = element.getElementsByTagName("id").item(0);
+	                    Node yearNode = element.getElementsByTagName("year").item(0);
+	                    Node airlineNode = element.getElementsByTagName("airline").item(0);
+	                    Node modelNode = element.getElementsByTagName("model").item(0);
 
-	                    if (idList.getLength() > 0 && yearList.getLength() > 0 && airlineList.getLength() > 0 && modelList.getLength() > 0) {
-	                        String id = idList.item(0).getTextContent();
-	                        String year = yearList.item(0).getTextContent();
-	                        String airline = airlineList.item(0).getTextContent();
-	                        String model = modelList.item(0).getTextContent();
+	                    if (idNode != null && yearNode != null && airlineNode != null && modelNode != null) {
+	                        String id = idNode.getTextContent();
+	                        String year = yearNode.getTextContent();
+	                        String airline = airlineNode.getTextContent();
+	                        String model = modelNode.getTextContent();
 
 	                        boolean airplaneExists = false;
 	                        for (Airplane existingAirplane : airplanes) {

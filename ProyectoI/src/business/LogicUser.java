@@ -34,28 +34,38 @@ public class LogicUser {
 
 			for (int i = 0; i < nodeList.getLength(); i++) {
 				Node node = nodeList.item(i);
+
 				if (node != null && node.getNodeType() == Node.ELEMENT_NODE) {
 					Element element = (Element) node;
-					String user = element.getElementsByTagName("user").item(0).getTextContent();
-					String password = element.getElementsByTagName("password").item(0).getTextContent();
-					int userType = Integer.parseInt(element.getElementsByTagName("userType").item(0).getTextContent());
-					boolean status = Boolean.parseBoolean(element.getElementsByTagName("status").item(0).getTextContent());
 
-					boolean userExists = false;
-					for (User existingUser : users) {
-						
-						if (existingUser.getUser().equals(user)) {
-							userExists = true;
-							break;
+					Node nUser = element.getElementsByTagName("user").item(0);
+					Node nPassword = element.getElementsByTagName("password").item(0);
+					Node nUserType = element.getElementsByTagName("userType").item(0);
+					Node nStatus = element.getElementsByTagName("status").item(0);
+
+					if(nUser != null && nPassword != null && nUserType != null && nStatus != null) {
+
+						String user = nUser.getTextContent();
+						String password = nPassword.getTextContent();
+						int userType = Integer.parseInt(nUserType.getTextContent());
+						boolean status = Boolean.parseBoolean(nStatus.getTextContent());
+
+						boolean userExists = false;
+						for (User existingUser : users) {
+
+							if (existingUser.getUser().equals(user)) {
+								userExists = true;
+								break;
+							}
 						}
-					}
-					if (!userExists) {
-						User person = new User();
-						person.setUser(user);
-						person.setPassword(password);
-						person.setUserType(userType);
-						person.setStatus(status);
-						users.add(person);
+						if (!userExists) {
+							User person = new User();
+							person.setUser(user);
+							person.setPassword(password);
+							person.setUserType(userType);
+							person.setStatus(status);
+							users.add(person);
+						}
 					}
 				}
 			}
@@ -64,16 +74,16 @@ public class LogicUser {
 		}
 		return users;
 	}
-	
+	//Método para obtener un usario en especifico
 	public User getUserFromFile(String fileName, String attributeValue) {
-	    ArrayList<User> users = readXMLFile(fileName);
+		ArrayList<User> users = readXMLFile(fileName);
 
-	    for (User user : users) {
-	        if (user.getUser().equals(attributeValue)) {
-	            return user;
-	        }
-	    }
-	    
-	    return null;
+		for (User user : users) {
+			if (user.getUser().equals(attributeValue)) {
+				return user;
+			}
+		}
+
+		return null;
 	}
 }

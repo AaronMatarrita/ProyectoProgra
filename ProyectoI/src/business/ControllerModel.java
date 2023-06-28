@@ -162,7 +162,7 @@ public class ControllerModel implements ActionListener{
 		if(newSeatsEje.isEmpty()) { 
 			if(pM.showConfirmationDialog("Desea modificar la cantidad de asientos de clase ejecutiva?", "Modificar")) {
 				newSeatsEje = pM.getData("Ingrese la nueva cantidad de asientos:");
-				if(newSeatsEje == null) { pM.showMessage("Por favor, ingrese el dato solicitado"); return; }
+				if(newSeatsEje.equals("null")) { newSeatsEje = String.valueOf(currentModel.getBusinessClassSeats()); }
 				mF.getTCEjecutive().setText(newSeatsEje);
 			}else {
 				newSeatsEje = String.valueOf(currentModel.getBusinessClassSeats());
@@ -172,7 +172,7 @@ public class ControllerModel implements ActionListener{
 		if(newSeatsTur.isEmpty()) { 
 			if(pM.showConfirmationDialog("Desea modificar la cantidad de asientos de clase turista?", "Modificar")) {
 				newSeatsTur = pM.getData("Ingrese la nueva cantidad de asientos:");
-				if(newSeatsTur == null) { pM.showMessage("Por favor, ingrese el dato solicitado"); return; }
+				if(newSeatsTur.equals("null")) { newSeatsTur = String.valueOf(currentModel.getTouristClassSeats()); }
 				mF.getTCTurist().setText(newSeatsTur);
 			}else {
 				newSeatsTur = String.valueOf(currentModel.getTouristClassSeats());
@@ -182,7 +182,7 @@ public class ControllerModel implements ActionListener{
 		if(newSeatsEco.isEmpty()) {
 			if(pM.showConfirmationDialog("Desea modificar la cantidad de asientos de clase económicos?", "Modificar")) {
 				newSeatsEco = pM.getData("Ingrese la nueva cantidad de asientos:");
-				if(newSeatsEco == null) { pM.showMessage("Por favor, ingrese el dato solicitado"); return; }
+				if(newSeatsEco.equals("null")) { newSeatsEco = String.valueOf(currentModel.getEconomyClassSeats());}
 				mF.getTCEco().setText(newSeatsEco);
 			}else {
 				newSeatsEco = String.valueOf(currentModel.getEconomyClassSeats());

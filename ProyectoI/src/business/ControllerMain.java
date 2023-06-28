@@ -15,7 +15,7 @@ public class ControllerMain implements ActionListener{
 	public ControllerMain(String userType) {
 		this.userType = userType;
 		//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
-		guiM = new GUIMain();
+		guiM = new GUIMain(userType);
 		initializerAction();
 	}
 	//-------------------------------------------------------------------------------------------------------------------------

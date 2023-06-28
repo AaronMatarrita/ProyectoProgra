@@ -14,7 +14,7 @@ public class ControllerLogin implements ActionListener{
 	//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
 	XMLFiles fXML;
 	//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
-	
+
 	public ControllerLogin() {	
 		guiL = new GUILogin();
 		fXML = new XMLFiles();
@@ -27,27 +27,28 @@ public class ControllerLogin implements ActionListener{
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
 	public void actionPerformed(ActionEvent e) {
-	    if (guiL.getBLogin() == e.getSource()) {
-	        String username = guiL.getTUser().getText();
-	        String password = String.valueOf(guiL.getJPasswordUser().getPassword());
-	        String userType = logL.getUserType("Users.xml", username);
-	        boolean verify = logL.verify("Users.xml", username, password);
+		if (guiL.getBLogin() == e.getSource()) {
+			String username = guiL.getTUser().getText();
+			String password = String.valueOf(guiL.getJPasswordUser().getPassword());
+			String userType = logL.getUserType("Users.xml", username);
+			String userStatus = logL.getUserStatus("Users.xml", username);
+			boolean verify = logL.verify("Users.xml", username, password);
 
-	        if (username.equals("admin") && password.equals("admin")) {
-	            guiL.dispose();
-	            new ControllerMain(logL.getUserType("Users.xml", "1"));
-	            return;
-	        } else if (verify) {
-	            guiL.dispose();
-	            new ControllerMain(logL.getUserType("Users.xml", username));
-	            return;
-	        } else if(!verify){
-	            guiL.showMessage("Credenciales incorrectas");
-	            return;
-	        }else if(userType.equals("Inactivo")) {
-	        	guiL.showMessage("Usuario Inactivo");
-	        	return;
-	        }
-	    }
+			if (username.equals("admin") && password.equals("admin")) {
+				guiL.dispose();
+				new ControllerMain("Administrador");
+				return;
+			}else if(userStatus.equals("false") || userStatus.equals("null")) {
+				guiL.showMessage("Usuario Inactivo");
+				return;
+			} else if (verify) {
+				guiL.dispose();
+				new ControllerMain(userType);
+				return;
+			} else if(!verify){
+				guiL.showMessage("Credenciales incorrectas");
+				return;
+			}
+		}
 	}
 }

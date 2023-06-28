@@ -150,9 +150,11 @@ public class ControllerAirplane implements ActionListener {
 		if (newYear.isEmpty()) { 
 			if(pM.showConfirmationDialog("Desea modificar el año del avión?", "Modificar")) {
 				newYear = pM.getData("Ingrese el nuevo año del avión:");
-				if(newYear.equals("null")) {  newYear = currentAirplane.getYear(); }
+				if(newYear.equals("null")) {  newYear = currentAirplane.getYear(); 
+				aF.getTYear().setText(newYear);}
 			}else {
 				newYear = currentAirplane.getYear();
+				aF.getTYear().setText(newYear);
 			}
 		}
 		//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+

@@ -56,8 +56,8 @@ public class ModelFrame extends JFrame {
 	private JButton bSearch;
 	private JButton bHelp;
 	private JButton bReturn;
-	
-	
+
+
 	public ModelFrame(String userType) {
 		this.userType = userType;
 		closeProgram();
@@ -71,29 +71,29 @@ public class ModelFrame extends JFrame {
 		setVisible(true);
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
-		//Método para confirmar la salida del usuario de la aplicación
-		private void closeProgram() {
-			try {
-				this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-				addWindowListener(new WindowAdapter() {
-					@Override
-					public void windowClosing(WindowEvent e) {
-						confirmExit();
-					}
-				});
-				this.setVisible(true);
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
+	//Método para confirmar la salida del usuario de la aplicación
+	private void closeProgram() {
+		try {
+			this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+			addWindowListener(new WindowAdapter() {
+				@Override
+				public void windowClosing(WindowEvent e) {
+					confirmExit();
+				}
+			});
+			this.setVisible(true);
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
-		
-		private void confirmExit() {
-			int value = JOptionPane.showConfirmDialog(this, "¿Desea cerrar la aplicación?", "Waring", JOptionPane.YES_NO_OPTION);
-			if(value == JOptionPane.YES_OPTION) {
-				System.exit(0);
-			}
+	}
+
+	private void confirmExit() {
+		int value = JOptionPane.showConfirmDialog(this, "¿Desea cerrar la aplicación?", "Waring", JOptionPane.YES_NO_OPTION);
+		if(value == JOptionPane.YES_OPTION) {
+			System.exit(0);
 		}
-		//-------------------------------------------------------------------------------------------------------------------------
+	}
+	//-------------------------------------------------------------------------------------------------------------------------
 	public void showMessage(String message) {
 		JOptionPane.showMessageDialog(null, message);
 	}
@@ -142,8 +142,8 @@ public class ModelFrame extends JFrame {
 				bClear.setVisible(false);
 				bUpdate.setVisible(false);
 			}
-			
-			
+
+
 			// JTable
 			setDTMAirplaneModels(dataTable, getColumnsName());
 			setJTableAirplaneModels(getDTMAirplaneModels());
@@ -308,8 +308,8 @@ public class ModelFrame extends JFrame {
 		}
 		return tCEco;
 	}
-	
-	
+
+
 	public JComboBox<String> getCBrands() {
 		if (cBrands == null) {
 			cBrands = new JComboBox<String>();
@@ -324,11 +324,11 @@ public class ModelFrame extends JFrame {
 
 	public void fillBrandComboBox(ArrayList<String> brands) {
 		cBrands.addItem("Indefinido");
-	    for (String brand : brands) {
-	        cBrands.addItem(brand);
-	    }
+		for (String brand : brands) {
+			cBrands.addItem(brand);
+		}
 	}
-	
+
 	public void setDTMAirplaneModels(Object data[][], String[] columnsName) {
 		dtmTAirplaneModels = new DefaultTableModel(data, columnsName);
 	}
@@ -371,17 +371,17 @@ public class ModelFrame extends JFrame {
 	}
 
 	public void setJTableData(List<AirplaneModel> airplaneModels) {
-	    Object[][] data = new Object[airplaneModels.size()][5];
-	    for (int i = 0; i < airplaneModels.size(); i++) {
-	        AirplaneModel airplaneModel = airplaneModels.get(i);
+		Object[][] data = new Object[airplaneModels.size()][5];
+		for (int i = 0; i < airplaneModels.size(); i++) {
+			AirplaneModel airplaneModel = airplaneModels.get(i);
 
-	        data[i][0] = airplaneModel.getName();
-	        data[i][1] = airplaneModel.getBrand();
-	        data[i][2] = airplaneModel.getBusinessClassSeats();
-	        data[i][3] = airplaneModel.getTouristClassSeats();
-	        data[i][4] = airplaneModel.getEconomyClassSeats();
-	    }
-	    dtmTAirplaneModels.setDataVector(data, getColumnsName());
+			data[i][0] = airplaneModel.getName();
+			data[i][1] = airplaneModel.getBrand();
+			data[i][2] = airplaneModel.getBusinessClassSeats();
+			data[i][3] = airplaneModel.getTouristClassSeats();
+			data[i][4] = airplaneModel.getEconomyClassSeats();
+		}
+		dtmTAirplaneModels.setDataVector(data, getColumnsName());
 	}
 
 	public void clean() {

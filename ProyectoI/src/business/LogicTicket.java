@@ -51,11 +51,11 @@ public class LogicTicket {
 
 						if(ticketNumberNode != null && passportNode != null && flightNumberNode != null && tickettypeNode != null && buydateNode != null) {                     
 
-							String ticketNumber = element.getElementsByTagName("TicketNumber").item(0).getTextContent();
-							String passport = element.getElementsByTagName("Passport").item(0).getTextContent();
-							String flightNumber = element.getElementsByTagName("FlightNumber").item(0).getTextContent();
-							String tickettype = element.getElementsByTagName("TicketType").item(0).getTextContent();
-							String buydate = element.getElementsByTagName("BuyTicketDate").item(0).getTextContent();
+							String ticketNumber = ticketNumberNode.getTextContent();
+							String passport = passportNode.getTextContent();
+							String flightNumber = flightNumberNode.getTextContent();
+							String tickettype = tickettypeNode.getTextContent();
+							String buydate = buydateNode.getTextContent();
 
 							boolean ticketExists = false;
 							for (Ticket existingTicket : ticketsList) {

@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -33,18 +35,45 @@ public class GUIMain extends JFrame
 	private JLabel lPlaneIcon;
 	private JLabel lHour;
 	private JLabel lDate;
+	private String userType;
 
-
-	public GUIMain() {
+	public GUIMain(String userType) {
+		closeProgram();
+		this.userType = userType;
 		setForeground(new Color(0, 0, 0));
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 583);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
 		getContentPane().add(getPanel());
 		setVisible(true); 
 	}
+
+	//-------------------------------------------------------------------------------------------------------------------------
+	//Método para confirmar la salida del usuario de la aplicación
+	private void closeProgram() {
+		try {
+			this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+			addWindowListener(new WindowAdapter() {
+				@Override
+				public void windowClosing(WindowEvent e) {
+					confirmExit();
+				}
+			});
+			this.setVisible(true);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void confirmExit() {
+		int value = JOptionPane.showConfirmDialog(this, "¿Desea cerrar la aplicación?", "Waring", JOptionPane.YES_NO_OPTION);
+		if(value == JOptionPane.YES_OPTION) {
+			System.exit(0);
+		}
+	}
+	//-------------------------------------------------------------------------------------------------------------------------
+
 	public void showMessage(String message) {
 
 		JOptionPane.showMessageDialog(null, message);
@@ -67,6 +96,9 @@ public class GUIMain extends JFrame
 			sideRightPanel.setBounds(0, 0, 210, 544);
 			sideRightPanel.setLayout(null);
 			sideRightPanel.add(getBUsers());
+			if(userType.equals("2")) {
+				bUsers.setVisible(false);
+			}
 			sideRightPanel.add(getBBrands());
 			sideRightPanel.add(getBModels());
 			sideRightPanel.add(getBAirlines());
@@ -211,32 +243,32 @@ public class GUIMain extends JFrame
 		return lPlaneIcon;
 	}
 	public JLabel getLHour() {
-        if (lHour == null) {
-            lHour = new JLabel("Hora actual:");
-            lHour.setForeground(new Color(255, 255, 255));
-            lHour.setFont(new Font("Roboto", Font.PLAIN, 16));
-            lHour.setBounds(10, 514, 191, 19);
+		if (lHour == null) {
+			lHour = new JLabel("Hora actual:");
+			lHour.setForeground(new Color(255, 255, 255));
+			lHour.setFont(new Font("Roboto", Font.PLAIN, 16));
+			lHour.setBounds(10, 514, 191, 19);
 
-            SimpleDateFormat sdf = new SimpleDateFormat("hh:mm: a");
-            String horaActual = sdf.format(new Date());
+			SimpleDateFormat sdf = new SimpleDateFormat("hh:mm: a");
+			String horaActual = sdf.format(new Date());
 
-            lHour.setText("Hora actual: " + horaActual);
-        }
-        return lHour;
-    }
-	
+			lHour.setText("Hora actual: " + horaActual);
+		}
+		return lHour;
+	}
+
 	public JLabel getLDate() {
-        if (lDate == null) {
-            lDate = new JLabel("Fecha:");
-            lDate.setForeground(new Color(255, 255, 255));
-            lDate.setFont(new Font("Roboto", Font.PLAIN, 16));
-            lDate.setBounds(607, 514, 160, 16);
+		if (lDate == null) {
+			lDate = new JLabel("Fecha:");
+			lDate.setForeground(new Color(255, 255, 255));
+			lDate.setFont(new Font("Roboto", Font.PLAIN, 16));
+			lDate.setBounds(607, 514, 160, 16);
 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            String fechaActual = sdf.format(new Date());
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			String fechaActual = sdf.format(new Date());
 
-            lDate.setText("Fecha: " + fechaActual);
-        }
-        return lDate;
-    }
+			lDate.setText("Fecha: " + fechaActual);
+		}
+		return lDate;
+	}
 }

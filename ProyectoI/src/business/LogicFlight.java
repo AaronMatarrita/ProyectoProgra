@@ -144,11 +144,10 @@ public class LogicFlight {
 			String[] parts = time.split(":");
 			int hours = Integer.parseInt(parts[0]);
 			int minutes = Integer.parseInt(parts[1]);
-
-			if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
+			
+			if ((hours < 0 || hours > 23 || minutes < 0 || minutes > 59) || ((hours < 10 && parts[0].length() != 2) || parts[1].length() != 2)) {
 				return false;
 			}
-
 			return true;
 		} catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
 			return false;

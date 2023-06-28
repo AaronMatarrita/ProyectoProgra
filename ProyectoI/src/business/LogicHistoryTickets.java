@@ -70,30 +70,26 @@ public class LogicHistoryTickets {
 								&& exitdateNode != null && entercityNode != null && enterdateNode != null
 								&& ticketclassNode != null && ticketpriceNode != null) {
 
-							String ticketNumber = element.getElementsByTagName("TicketNumber").item(0).getTextContent();
-							String paspassport = element.getElementsByTagName("PassengerPassport").item(0)
-									.getTextContent();
-							String pasname = element.getElementsByTagName("Name").item(0).getTextContent();
-							String paslastName = element.getElementsByTagName("LastName").item(0).getTextContent();
-							String email = element.getElementsByTagName("Email").item(0).getTextContent();
-							String dateofbirth = element.getElementsByTagName("DateOfBirth").item(0).getTextContent();
-							String phonenumber = element.getElementsByTagName("PhoneNumber").item(0).getTextContent();
-							String buydate = element.getElementsByTagName("BuyTicketDate").item(0).getTextContent();
-							String airline = element.getElementsByTagName("AirlineName").item(0).getTextContent();
-							String operationCenter = element.getElementsByTagName("AirplaneOperationCenter").item(0)
-									.getTextContent();
-							String id = element.getElementsByTagName("AirplaneId").item(0).getTextContent();
-							String airplaneariline = element.getElementsByTagName("AirplaneAirline").item(0)
-									.getTextContent();
-							String airplaneModel = element.getElementsByTagName("AirplaneModel").item(0)
-									.getTextContent();
-							String airplaneYear = element.getElementsByTagName("AirplaneYear").item(0).getTextContent();
-							String exitcity = element.getElementsByTagName("ExitCity").item(0).getTextContent();
-							String exitdate = element.getElementsByTagName("ExitDate").item(0).getTextContent();
-							String entercity = element.getElementsByTagName("EnterCity").item(0).getTextContent();
-							String enterdate = element.getElementsByTagName("EnterDate").item(0).getTextContent();
-							String ticketclass = element.getElementsByTagName("TicketClass").item(0).getTextContent();
-							String ticketprice = element.getElementsByTagName("TicketPrice").item(0).getTextContent();
+							String ticketNumber = ticketNumberNode.getTextContent();
+							String paspassport = paspassportNode.getTextContent();
+							String pasname = pasnameNode.getTextContent();
+							String paslastName = paslastNameNode.getTextContent();
+							String email = emailNode.getTextContent();
+							String dateofbirth = dateofbirthNode.getTextContent();
+							String phonenumber = phonenumberNode.getTextContent();
+							String buydate = buydateNode.getTextContent();
+							String airline = airlineNode.getTextContent();
+							String operationCenter = operationCenterNode.getTextContent();
+							String id = idNode.getTextContent();
+							String airplaneariline = airplanearilineNode.getTextContent();
+							String airplaneModel = airplaneModelNode.getTextContent();
+							String airplaneYear = airplaneYearNode.getTextContent();
+							String exitcity = exitcityNode.getTextContent();
+							String exitdate = exitdateNode.getTextContent();
+							String entercity = entercityNode.getTextContent();
+							String enterdate = enterdateNode.getTextContent();
+							String ticketclass = ticketclassNode.getTextContent();
+							String ticketprice = ticketpriceNode.getTextContent();
 
 							boolean ticketExists = false;
 							for (TicketsHistory existingTicket : ticketsList) {

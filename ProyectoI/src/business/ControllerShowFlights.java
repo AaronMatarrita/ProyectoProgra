@@ -25,7 +25,7 @@ public class ControllerShowFlights implements ActionListener{
 	//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
 	private LogicFlight logFlight;
 	private LogicAirplane logAirplane;
-	private LogicXMLHistoryFlights logHflights;
+	private LogicHistoryFlights logHflights;
 	private LogicModel logModel;
 	private LogicTicket logTicket;
 	//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
@@ -40,7 +40,7 @@ public class ControllerShowFlights implements ActionListener{
 		logAirplane = new LogicAirplane();
 		logModel = new LogicModel();
 		pM = new PopUpMessages();
-		logHflights = new LogicXMLHistoryFlights();
+		logHflights = new LogicHistoryFlights();
 		logTicket = new LogicTicket();
 		//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
 		xmlF.createXML(fileName, objectName);
