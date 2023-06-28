@@ -35,7 +35,7 @@ public class ControllerLogin implements ActionListener{
 
 	        if (username.equals("admin") && password.equals("admin")) {
 	            guiL.dispose();
-	            new ControllerMain(logL.getUserType("Users.xml", "Administrador"));
+	            new ControllerMain(logL.getUserType("Users.xml", "1"));
 	            return;
 	        } else if (verify) {
 	            guiL.dispose();
