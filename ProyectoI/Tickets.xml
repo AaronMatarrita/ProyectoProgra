@@ -27,4 +27,4 @@
 		<TicketType>Ejecutivo</TicketType>
 		<BuyTicketDate>2023-06-26 16:45:35</BuyTicketDate>
 	</Tickets>
-<Tickets><TicketNumber>213123</TicketNumber><Passport>321</Passport><FlightNumber>256</FlightNumber><TicketType>Ejecutivo</TicketType><BuyTicketDate>2023-06-28 08:04:20</BuyTicketDate></Tickets></Tickets>
+<Tickets><TicketNumber>213123</TicketNumber><Passport>321</Passport><FlightNumber>256</FlightNumber><TicketType>Ejecutivo</TicketType><BuyTicketDate>2023-06-28 08:04:20</BuyTicketDate></Tickets><Tickets><TicketNumber>963258</TicketNumber><Passport>321</Passport><FlightNumber>256</FlightNumber><TicketType>Economico</TicketType><BuyTicketDate>2023-06-28 11:03:28</BuyTicketDate></Tickets></Tickets>

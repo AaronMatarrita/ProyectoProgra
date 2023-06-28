@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<HistoricTickets>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><HistoricTickets>
 	<HistoricTickets>
 		<TicketNumber>333</TicketNumber>
 		<PassengerPassport>118160537</PassengerPassport>
@@ -110,4 +109,4 @@
 		<TicketClass>Ejecutivo</TicketClass>
 		<TicketPrice>125.0</TicketPrice>
 	</HistoricTickets>
-</HistoricTickets>
+<HistoricTickets><TicketNumber>213123</TicketNumber><PassengerPassport>321</PassengerPassport><Name>Matihas</Name><LastName>Abarca</LastName><Email>mati@gmail.com</Email><DateOfBirth>01/06/2015</DateOfBirth><PhoneNumber>12345678</PhoneNumber><BuyTicketDate>2023-06-28 08:04:20</BuyTicketDate><AirlineName>Avianca</AirlineName><AirplaneOperationCenter>San Diego</AirplaneOperationCenter><AirplaneId>123</AirplaneId><AirplaneAirline>Avianca</AirplaneAirline><AirplaneModel>880</AirplaneModel><AirplaneYear>2020</AirplaneYear><ExitCity>Chepe</ExitCity><ExitDate>07/10/2023</ExitDate><EnterCity>Bogota</EnterCity><EnterDate>08/10/2023</EnterDate><TicketClass>Ejecutivo</TicketClass><TicketPrice>125.0</TicketPrice></HistoricTickets><HistoricTickets><TicketNumber>963258</TicketNumber><PassengerPassport>321</PassengerPassport><Name>Matihas</Name><LastName>Abarca</LastName><Email>mati@gmail.com</Email><DateOfBirth>01/06/2015</DateOfBirth><PhoneNumber>12345678</PhoneNumber><BuyTicketDate>2023-06-28 11:03:28</BuyTicketDate><AirlineName>Avianca</AirlineName><AirplaneOperationCenter>San Diego</AirplaneOperationCenter><AirplaneId>123</AirplaneId><AirplaneAirline>Avianca</AirplaneAirline><AirplaneModel>880</AirplaneModel><AirplaneYear>2020</AirplaneYear><ExitCity>Chepe</ExitCity><ExitDate>07/10/2023</ExitDate><EnterCity>Bogota</EnterCity><EnterDate>08/10/2023</EnterDate><TicketClass>Economico</TicketClass><TicketPrice>95.0</TicketPrice></HistoricTickets></HistoricTickets>
