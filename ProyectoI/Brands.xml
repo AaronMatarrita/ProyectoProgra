@@ -2,7 +2,5 @@
 	<brands>
 		<brand>Boeing</brand>
 	</brands>
-	<brands>
-		<brand>FlightFast</brand>
-	</brands>
-</brands>
+	
+<brands><brand>FlightFast</brand></brands></brands>

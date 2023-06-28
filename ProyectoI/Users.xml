@@ -5,21 +5,10 @@
 		<userType>1</userType>
 		<status>true</status>
 	</person>
-	<person>
-		<user>Aaron</user>
-		<password>----</password>
-		<userType>1</userType>
-		<status>false</status>
-	</person>
-	<person>
-		<user>PedroG</user>
-		<password>G_S23</password>
-		<userType>2</userType>
-		<status>true</status>
-	</person>
+	
 	<person>
 		<user>Joselu</user>
-		<password>444</password>
+		<password>1234</password>
 		<userType>1</userType>
 		<status>true</status>
 	</person>
@@ -29,4 +18,10 @@
 		<userType>2</userType>
 		<status>true</status>
 	</person>
-<person><user> </user><password> </password><userType>1</userType><status>true</status></person></person>
+	<person>
+		<user>Aaron</user>
+		<password>1234</password>
+		<userType>1</userType>
+		<status>true</status>
+	</person>
+</person>

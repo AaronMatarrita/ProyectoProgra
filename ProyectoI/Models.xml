@@ -1,3 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><models>
-	
-<models><modelName>880</modelName><brand>Boeing</brand><BusinessClassSeats>97</BusinessClassSeats><TouristClassSeats>86</TouristClassSeats><EconomyClassSeats>94</EconomyClassSeats><TotalBusinessClassSeats>97</TotalBusinessClassSeats><TotalTouristClassSeats>86</TotalTouristClassSeats><TotalEconomyClassSeats>94</TotalEconomyClassSeats></models></models>
+	<models>
+		<modelName>880</modelName>
+		<brand>Boeing</brand>
+		<BusinessClassSeats>120</BusinessClassSeats>
+		<TouristClassSeats>120</TouristClassSeats>
+		<EconomyClassSeats>120</EconomyClassSeats>
+	</models>
+</models>
