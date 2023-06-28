@@ -134,35 +134,4 @@ public class LogicPassenger {
 		}
 		return passengersPassports;
 	}
-	//Método para validar el formato de las fechas introducidas por el usuario
-		public boolean isValidDate(String date) {
-			try {
-				String[] parts = date.split("/");
-				if(parts.length != 3) {
-					return false;
-				}
-
-				int day = Integer.parseInt(parts[0]);
-				int month = Integer.parseInt(parts[1]);
-				int year = Integer.parseInt(parts[2]);
-
-				if (day < 1 || day > 31 || month < 1 || month > 12 || year < 0) {
-					return false;
-				}
-				int[] daysInMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-				if (month == 2 && isLeapYear(year)) {
-					daysInMonth[1] = 29;
-				}
-				if (day > daysInMonth[month - 1]) {
-					return false;
-				}
-
-				return true;
-			} catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-				return false;
-			}
-		}
-		private boolean isLeapYear(int year) {
-			return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
-		}
 }

@@ -2,6 +2,7 @@ package business;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import data.CRUD;
@@ -10,9 +11,11 @@ import data.XMLFiles;
 import domain.Passenger;
 import presentation.PassengerFrame;
 import presentation.PopUpMessages;
+import java.util.Date;
+
 
 public class ControllerPassenger implements ActionListener{
-	
+
 	private String fileName = "Passengers.xml";
 	private String objectName = "person";
 	//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
@@ -31,7 +34,7 @@ public class ControllerPassenger implements ActionListener{
 	private String userType;
 	private ArrayList<Passenger> passengers = new ArrayList<Passenger>();
 	//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
-	
+
 	public ControllerPassenger(String userType) {
 		this.userType = userType;
 		//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
@@ -91,34 +94,33 @@ public class ControllerPassenger implements ActionListener{
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
 	private void addPassenger() {
-		String passport = pF.getTPassport().getText();
+	    String passport = pF.getTPassport().getText();
 
-		if (passport.isEmpty() || pF.getTName().getText().isEmpty() || pF.getTLastname().getText().isEmpty() 
-				|| pF.getTDateOfBirth().getText().isEmpty() || pF.getTEmail().getText().isEmpty() 
-				|| pF.getTPhoneNumber().getText().isEmpty()) {
-			pM.showMessage("Por favor, complete todos los campos");
-			return;
-		} else if (lXML.isAlreadyInFile(fileName, objectName, "Passport", passport)) {
-			pM.showMessage("El pasaporte ya existe");
-			return;
-		}
+	    if (passport.isEmpty() || pF.getTName().getText().isEmpty() || pF.getTLastname().getText().isEmpty()
+	            || pF.getTDateOfBirth().getDate() == null || pF.getTEmail().getText().isEmpty()
+	            || pF.getTPhoneNumber().getText().isEmpty()) {
+	        pM.showMessage("Por favor, complete todos los campos");
+	        return;
+	    } else if (lXML.isAlreadyInFile(fileName, objectName, "Passport", passport)) {
+	        pM.showMessage("El pasaporte ya existe");
+	        return;
+	    }
 
-		String name = pF.getTName().getText();
-		String lastname = pF.getTLastname().getText();
-		String dateOB = pF.getTDateOfBirth().getText();
-		String email = pF.getTEmail().getText();
-		String phoneNumber = pF.getTPhoneNumber().getText();
+	    String name = pF.getTName().getText();
+	    String lastname = pF.getTLastname().getText();
 
-		if(!logPassenger.isValidDate(dateOB)) {
-			pM.showMessage("Ingrese la fecha en el formato (dd/MM/yyyy)\nEjemplo 01/01/2000 ");
-			return;
-		}
+	    Date dateOfBirth = pF.getTDateOfBirth().getDate();
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	    String dateOB = dateFormat.format(dateOfBirth);
 
-		pF.clean();
-		passenger = new Passenger(passport, name, lastname, dateOB, email, phoneNumber);
-		crud.addObject(fileName, objectName, passenger.getDataName(), passenger.getData());
-		setTableData();
-		pM.showMessage("Pasajero agregado");
+	    String email = pF.getTEmail().getText();
+	    String phoneNumber = pF.getTPhoneNumber().getText();
+
+	    pF.clean();
+	    passenger = new Passenger(passport, name, lastname, dateOB, email, phoneNumber);
+	    crud.addObject(fileName, objectName, passenger.getDataName(), passenger.getData());
+	    setTableData();
+	    pM.showMessage("Pasajero agregado");
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
 	private void searchPassenger() {
@@ -126,89 +128,93 @@ public class ControllerPassenger implements ActionListener{
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
 	private void updatePassenger() {
-		String passport = pF.getTPassport().getText();
-		Passenger currentPassenger = logPassenger.getPassengerFromXML(fileName, passport);
-		//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+
-		String newPassport = passport; 
-		String newName = pF.getTName().getText();
-		String newLastname = pF.getTLastname().getText();
-		String newDateOB = pF.getTDateOfBirth().getText();
-		String newEmail = pF.getTEmail().getText();
-		String newPhoneNumber = pF.getTPhoneNumber().getText();
-		//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+
-		if (passport.isEmpty()) {
-			pM.showMessage("Por favor, ingrese el nombre del pasajero a modificar");
-			return;
-		} else if (!lXML.isAlreadyInFile(fileName, objectName, "Passport", passport)) {
-			pM.showMessage("El pasaporte no existe");
-			return;
-		}
-		//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+
-		if(newName.isEmpty()) {
-			if(pM.showConfirmationDialog("Desea modificar el nombre del pasajero?", "Modificar")) {
-				newName = pM.getData("Ingrese el nuevo nombre del pasajero:");
-				if(newName.equals("null")) {newName = currentPassenger.getName();
-				pF.getTName().setText(newName);}
-			}else {
-				newName = currentPassenger.getName();
-				pF.getTName().setText(newName);
-			}
-		}
-		//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+
-		if(newLastname.isEmpty()) {
-			if(pM.showConfirmationDialog("Desea modificar los apellidos del pasajero?", "Modificar")){
-				newLastname = pM.getData("Ingrese los apellidos pasaporte del pasajero:");
-				if(newLastname.equals("null")) {newLastname = currentPassenger.getLastname();
-				pF.getTLastname().setText(newLastname);}
-			}else {
-				newLastname = currentPassenger.getLastname();
-				pF.getTLastname().setText(newLastname);
-			}
-		}
-		//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+
-		if(newDateOB.isEmpty()) {
-			if(pM.showConfirmationDialog("Desea modificar la fecha de nacimiento del pasajero?", "Modificar")) {
+	    String passport = pF.getTPassport().getText();
+	    Passenger currentPassenger = logPassenger.getPassengerFromXML(fileName, passport);
 
-				newDateOB = pM.getData("Ingrese la fecha de nacimiento del pasajero:");
-				if(newDateOB.equals("null")) { newDateOB = currentPassenger.getDateofbirth();
-				pF.getTDateOfBirth().setText(newDateOB);}
-			}else {
-				newDateOB = currentPassenger.getDateofbirth();
-				pF.getTDateOfBirth().setText(newDateOB);
-			}
-		}
-		if(!logPassenger.isValidDate(newDateOB)) {
-			pM.showMessage("Ingrese la fecha en el formato (dd/MM/yyyy)\nEjemplo 01/01/2000 ");
-			return;
-		}
-		//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+
-		if(newEmail.isEmpty()) {
-			if(pM.showConfirmationDialog("Desea modificar el email del pasajero?", "Modificar")){
-				newEmail = pM.getData("Ingrese el email del pasajero:");
-				if(newEmail.equals("null")) { newEmail = currentPassenger.getEmail();
-				pF.getTEmail().setText(newEmail);}
-			}else {
-				newEmail = currentPassenger.getEmail();
-				pF.getTEmail().setText(newEmail);
-			}
-		}
-		//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+
-		if(newPhoneNumber.isEmpty()) {
-			if(pM.showConfirmationDialog("Desea modificar el número de telefono del pasajero?", "Modificar")) {
-				newPhoneNumber = pM.getData("Ingrese el número de telefono del pasajero:");
-				if(newPhoneNumber.equals("null")) {newPhoneNumber = currentPassenger.getPhoneNumber();
-				pF.getTPhoneNumber().setText(newPhoneNumber); }
-			}else {
-				newPhoneNumber = currentPassenger.getPhoneNumber();
-				pF.getTPhoneNumber().setText(newPhoneNumber);
-			}
-		}
-		//+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+
-		String[] newData = {newPassport, newName, newLastname, newDateOB, newEmail, newPhoneNumber};
-		crud.updateObject(fileName, objectName, "Passport", passport, currentPassenger.getDataName(), newData);
-		pM.showMessage("Pasajero modificado");
-		setTableData();
-		pF.clean();
+	    String newPassport = passport;
+	    String newName = pF.getTName().getText();
+	    String newLastname = pF.getTLastname().getText();
+	    Date dateOfBirth = pF.getTDateOfBirth().getDate();
+	    SimpleDateFormat newDateOB = new SimpleDateFormat("dd/MM/yyyy");
+	    String newDateOfBirth = dateOfBirth != null ? newDateOB.format(dateOfBirth) : null;
+	    String newEmail = pF.getTEmail().getText();
+	    String newPhoneNumber = pF.getTPhoneNumber().getText();
+
+	    if (passport.isEmpty()) {
+	        pM.showMessage("Por favor, ingrese el pasaporte del pasajero a modificar");
+	        return;
+	    } else if (!lXML.isAlreadyInFile(fileName, objectName, "Passport", passport)) {
+	        pM.showMessage("El pasaporte no existe");
+	        return;
+	    }
+
+	    if (newName.isEmpty()) {
+	        if (pM.showConfirmationDialog("Desea modificar el nombre del pasajero?", "Modificar")) {
+	            newName = pM.getData("Ingrese el nuevo nombre del pasajero:");
+	            if (newName.equals("null")) {
+	                newName = currentPassenger.getName();
+	                pF.getTName().setText(newName);
+	            }
+	        } else {
+	            newName = currentPassenger.getName();
+	            pF.getTName().setText(newName);
+	        }
+	    }
+
+	    if (newLastname.isEmpty()) {
+	        if (pM.showConfirmationDialog("Desea modificar los apellidos del pasajero?", "Modificar")) {
+	            newLastname = pM.getData("Ingrese los apellidos del pasajero:");
+	            if (newLastname.equals("null")) {
+	                newLastname = currentPassenger.getLastname();
+	                pF.getTLastname().setText(newLastname);
+	            }
+	        } else {
+	            newLastname = currentPassenger.getLastname();
+	            pF.getTLastname().setText(newLastname);
+	        }
+	    }
+
+	    if (dateOfBirth == null) {
+	        if (pM.showConfirmationDialog("Desea modificar la fecha de nacimiento del pasajero?", "Modificar")) {
+	            pM.showMessage("Seleccione la nueva fecha de nacimiento");
+	            return;
+	        } else {
+	        	newDateOfBirth = currentPassenger.getDateofbirth();
+	            pF.getTDateOfBirth().setDate(dateOfBirth);
+	        }
+	    }
+
+	    if (newEmail.isEmpty()) {
+	        if (pM.showConfirmationDialog("Desea modificar el email del pasajero?", "Modificar")) {
+	            newEmail = pM.getData("Ingrese el email del pasajero:");
+	            if (newEmail.equals("null")) {
+	                newEmail = currentPassenger.getEmail();
+	                pF.getTEmail().setText(newEmail);
+	            }
+	        } else {
+	            newEmail = currentPassenger.getEmail();
+	            pF.getTEmail().setText(newEmail);
+	        }
+	    }
+
+	    if (newPhoneNumber.isEmpty()) {
+	        if (pM.showConfirmationDialog("Desea modificar el número de teléfono del pasajero?", "Modificar")) {
+	            newPhoneNumber = pM.getData("Ingrese el número de teléfono del pasajero:");
+	            if (newPhoneNumber.equals("null")) {
+	                newPhoneNumber = currentPassenger.getPhoneNumber();
+	                pF.getTPhoneNumber().setText(newPhoneNumber);
+	            }
+	        } else {
+	            newPhoneNumber = currentPassenger.getPhoneNumber();
+	            pF.getTPhoneNumber().setText(newPhoneNumber);
+	        }
+	    }
+
+	    String[] newData = {newPassport, newName, newLastname, newDateOfBirth, newEmail, newPhoneNumber};
+	    crud.updateObject(fileName, objectName, "Passport", passport, currentPassenger.getDataName(), newData);
+	    pM.showMessage("Pasajero modificado");
+	    setTableData();
+	    pF.clean();
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
 	private void deletePassenger() {
