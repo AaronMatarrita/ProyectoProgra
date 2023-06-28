@@ -21,6 +21,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import domain.Passenger;
+import com.toedter.calendar.JDateChooser;
 
 @SuppressWarnings("serial")
 public class PassengerFrame extends JFrame {
@@ -47,7 +48,6 @@ public class PassengerFrame extends JFrame {
 	private JScrollPane spTPassengers;
 	private Object dataTable[][];
 	private JTextField tLastname;
-	private JTextField tDateOfBirth;
 	private JLabel lEmain;
 	private JTextField tEmail;
 	private JLabel lPhoneNumber;
@@ -55,6 +55,7 @@ public class PassengerFrame extends JFrame {
 	private JButton bSearch;
 	private JButton bHelp;
 	private JButton bReturn;
+	private JDateChooser tDateofBirth;
 
 	public PassengerFrame(String userType) {
 		this.userType = userType;
@@ -139,7 +140,6 @@ public class PassengerFrame extends JFrame {
 			setSPTablePassengers(getJTablePassengers());
 			JPInfo.add(getSPTablePassengers());
 			JPInfo.add(getTLastname());
-			JPInfo.add(getTDateOfBirth());
 			JPInfo.add(getLEmain());
 			JPInfo.add(getTEmail());
 			JPInfo.add(getLPhoneNumber());
@@ -147,6 +147,7 @@ public class PassengerFrame extends JFrame {
 			JPInfo.add(getBSearch());
 			JPInfo.add(getBHelp());
 			JPInfo.add(getBReturn());
+			JPInfo.add(getTDateOfBirth());
 
 		}
 		return JPInfo;
@@ -338,18 +339,6 @@ public class PassengerFrame extends JFrame {
 		}
 		return tLastname;
 	}
-	public JTextField getTDateOfBirth() {
-		if (tDateOfBirth == null) {
-			tDateOfBirth = new JTextField();
-			tDateOfBirth.setForeground(Color.WHITE);
-			tDateOfBirth.setFont(new Font("Roboto", Font.PLAIN, 16));
-			tDateOfBirth.setColumns(10);
-			tDateOfBirth.setBorder(BorderFactory.createEmptyBorder());
-			tDateOfBirth.setBackground(new Color(28, 28, 28));
-			tDateOfBirth.setBounds(804, 150, 170, 20);
-		}
-		return tDateOfBirth;
-	}
 	public JLabel getLEmain() {
 		if (lEmain == null) {
 			lEmain = new JLabel("Correo electrónico:");
@@ -393,11 +382,24 @@ public class PassengerFrame extends JFrame {
 		return tPhoneNumber;
 	}
 
+	public JDateChooser getTDateOfBirth() {
+		if (tDateofBirth == null) {
+			tDateofBirth = new JDateChooser();
+			tDateofBirth.setForeground(Color.WHITE);
+			tDateofBirth.setFont(new Font("Roboto", Font.PLAIN, 16));
+			tPhoneNumber.setBorder(BorderFactory.createEmptyBorder());
+			tPhoneNumber.setBackground(new Color(28, 28, 28));
+			tDateofBirth.setDateFormatString("dd/MM/yyyy");
+			tDateofBirth.setBounds(804, 150, 170, 20);
+		}
+		return tDateofBirth;
+	}
+	
 	public void clean() {
 		getTPassport().setText("");
 		getTName().setText("");
 		getTLastname().setText("");
-		getTDateOfBirth().setText("");
+		getTDateOfBirth().setDate(null);
 		getTEmail().setText("");
 		getTPhoneNumber().setText("");
 	}
