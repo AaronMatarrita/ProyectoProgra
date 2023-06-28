@@ -71,6 +71,7 @@ public class GUIAdmin extends JFrame
 			if(userType.equals("2")) {
 				bUsers.setVisible(false);	
 			}
+			
 			sideRightPanel.add(getBBrands());
 			sideRightPanel.add(getBModels());
 			sideRightPanel.add(getBAirlines());
