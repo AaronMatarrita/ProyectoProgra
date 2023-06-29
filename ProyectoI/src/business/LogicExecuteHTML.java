@@ -21,48 +21,8 @@ public class LogicExecuteHTML {
 		}
 	}
 	//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-	public void help(String userType) {
-		String url = System.getProperty("user.dir") + "\\Manual\\" + userType + "\\index.html"; 
-		executeHTML(url);
-	}
-	//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-	public void helpUser(String userType) {
-		String url = System.getProperty("user.dir") + "\\Manual\\" + userType + "\\manualUsuarios.html"; 
-		executeHTML(url);
-	}
-	//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-	public void helpBrand(String userType) {
-		String url = System.getProperty("user.dir") + "\\Manual\\" + userType + "\\mMarcas.html"; 
-		executeHTML(url);
-	}
-	//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-	public void helpModel(String userType) {
-		String url = System.getProperty("user.dir") + "\\Manual\\" + userType + "\\mModelos.html"; 
-		executeHTML(url);
-	}
-	//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-	public void helpAirline(String userType) {
-		String url = System.getProperty("user.dir") + "\\Manual\\" + userType + "\\mAerolíneas.html"; 
-		executeHTML(url);
-	}
-	//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-	public void helpAirplane(String userType) {
-		String url = System.getProperty("user.dir") + "\\Manual\\" + userType + "\\mAviones.html"; 
-		executeHTML(url);
-	}
-	//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-	public void helpFlight(String userType) {
-		String url = System.getProperty("user.dir") + "\\Manual\\" + userType + "\\mVuelos.html"; 
-		executeHTML(url);
-	}
-	//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-	public void helpPassenger(String userType) {
-		String url = System.getProperty("user.dir") + "\\Manual\\" + userType + "\\mPasajeros.html"; 
-		executeHTML(url);
-	}
-	//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-	public void helpTickets(String userType) {
-		String url = System.getProperty("user.dir") + "\\Manual\\" + userType + "\\mTickets.html"; 
+	public void help(String userType, String HTMLName) {
+		String url = System.getProperty("user.dir") + "\\Manual\\" + userType + "\\" + HTMLName; 
 		executeHTML(url);
 	}
 	//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+

@@ -237,6 +237,6 @@ public class ControllerPassenger implements ActionListener{
 	//-------------------------------------------------------------------------------------------------------------------------
 	private void help() {
 		String userTypeString = userType.equals("1") ? "Administrador" : "Colaborador";
-		logHTML.helpPassenger(userTypeString);
+		logHTML.help(userTypeString, "mPasajeros.html");
 	}
 }

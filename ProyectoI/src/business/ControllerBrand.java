@@ -165,6 +165,6 @@ public class ControllerBrand implements ActionListener{
 	//-------------------------------------------------------------------------------------------------------------------------
 	private void help() {
 		String userTypeString = userType.equals("1") ? "Administrador" : "Colaborador";
-		logHTML.helpBrand(userTypeString);
+		logHTML.help(userTypeString, "mMarcas.html");
 	}
 }

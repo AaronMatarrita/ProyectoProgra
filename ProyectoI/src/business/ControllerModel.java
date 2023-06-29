@@ -221,6 +221,6 @@ public class ControllerModel implements ActionListener{
 	//-------------------------------------------------------------------------------------------------------------------------
 	private void help() {
 		String userTypeString = userType.equals("1") ? "Administrador" : "Colaborador";
-		logHTML.helpModel(userTypeString);
+		logHTML.help(userTypeString, "mModelos.html");
 	}
 }

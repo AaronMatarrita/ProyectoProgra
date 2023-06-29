@@ -37,7 +37,7 @@ public class ControllerLogin implements ActionListener{
 
 			if (username.equals("admin") && password.equals("admin")) {
 				guiL.dispose();
-				new ControllerMain("Administrador");
+				new ControllerMain("1");
 				return;
 			}else if(userStatus.equals("false") || userStatus.equals("null")) {
 				guiL.showMessage("Usuario Inactivo");

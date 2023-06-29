@@ -218,6 +218,6 @@ public class ControllerAirplane implements ActionListener {
 	//-------------------------------------------------------------------------------------------------------------------------
 	private void help() {
 		String userTypeString = userType.equals("1") ? "Administrador" : "Colaborador";
-		logHTML.helpAirplane(userTypeString);
+		logHTML.help(userTypeString, "mAviones.html");
 	}
 }

@@ -357,6 +357,6 @@ public class ControllerFlight implements ActionListener{
 	//-------------------------------------------------------------------------------------------------------------------------
 	private void help() {
 		String userTypeString = userType.equals("1") ? "Administrador" : "Colaborador";
-		logHTML.helpFlight(userTypeString);
+		logHTML.help(userTypeString, "mVuelos.html");
 	}
 }

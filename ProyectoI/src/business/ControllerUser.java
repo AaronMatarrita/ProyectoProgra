@@ -220,7 +220,7 @@ public class ControllerUser implements ActionListener{
 	//-------------------------------------------------------------------------------------------------------------------------
 	private void help() {
 		String userTypeString = userType.equals("1") ? "Administrador" : "Colaborador";
-		logHTML.helpUser(userTypeString);
+		logHTML.help(userTypeString, "manualUsuarios.html");
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
 }
